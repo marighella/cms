@@ -1,0 +1,9 @@
+$mstred: #961913;
+
+body > header {
+  background: $mstred;
+  background: linear-gradient($mstred, darken($mstred, 5%));
+  padding: 20px 0 10px;
+  text-align: center;
+  color: white;
+}

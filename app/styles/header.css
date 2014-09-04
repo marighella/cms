@@ -1,0 +1,6 @@
+body > header {
+  background: #961913;
+  background: linear-gradient(#961913, #7f1510);
+  padding: 20px 0 10px;
+  text-align: center;
+  color: white; }

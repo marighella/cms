@@ -13,30 +13,31 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    <link rel="stylesheet" href="styles/header.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="cmsApp">
+  <body ng-app="cmsApp" ng-cloak>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <header>
+      <a href="{{basepath}}" class="logo">
+        <h1 class="logo">MST CMS</h1>
+      </a>
+      <section>
+        <label>{{ user.name }}</label>
+        <img ng-show="user.avatar_url" ng-src="{{ user.avatar_url }}" alt="{{ user.login  }}">
+      </section>
+    </header>
     <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
-          <li><a ng-href="#/about">About</a></li>
-          <li><a ng-href="#">Contact</a></li>
-        </ul>
-        <h3 class="text-muted">cms</h3>
-      </div>
-
       <div ng-view=""></div>
-
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
     </div>
+    <footer>
+      <small>© Marighella, na luta por uma tecnologia popular!</small>
+    </footer>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
