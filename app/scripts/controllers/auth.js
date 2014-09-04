@@ -1,8 +1,13 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($scope) {
+  .controller('AuthCtrl', function ($rootScope, $scope, oauth) {
     $scope.authenticate =  function(){
-      window.alert('teste');
+      oauth.popup('github', function(err, res) {
+        if(err) {
+          return window.alert(err);
+        }
+        $rootScope.github = res;
+      });
     };
   });
