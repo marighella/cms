@@ -44,9 +44,9 @@ module.exports = function (grunt) {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
-      styles: {                                                                                                                                                         
+      styles: {
         files: ['<%= yeoman.app %>/sass/{,*/}*.scss'],
-        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']                                                                                                            
+        tasks: ['sass', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -381,6 +381,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'sass',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -404,6 +405,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
+    'sass',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
