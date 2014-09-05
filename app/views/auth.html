@@ -12,6 +12,7 @@
           <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.login }}</option>
         </select>
     </h1>
+    <img ng-src='{{ user.organization.avatar_url }}' class='img-thumbnail'/>
     <select class='form-control' ng-show='user.repositories'>
       <option value="">Em quais desses?</option>
       <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>

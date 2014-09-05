@@ -2,11 +2,11 @@
 
 angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $timeout, oauth, User) {
-    $scope.organization = '';
 
     $scope.getRepositories = function(organization){
       $timeout(function(){
         $scope.user.repositories = User.organization.get(organization).repositories();
+        $scope.user.organization = angular.fromJson(organization);
       },0);
     };
 
