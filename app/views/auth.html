@@ -8,16 +8,14 @@
 </div>
 <div class='jumbotron' ng-show='user'>
   <h2>
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        Qual a sua luta, companheira? <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu dropdown-icon" role="menu">
-        <li ng-repeat="org in user.orgs">
-          <img src='{{ org.avatar_url }}'/>
-          <a href="#">{{ org.login }}</a>
-        </li>
-      </ul>
-    </div>
+      <select class='form-control'
+        ng-change='getRepositories(organization)' ng-model='organization'>
+        <option value="">Qual a sua luta, companheira?</option>
+        <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.login }}</option>
+      </select>
   </h2>
+  <select class='form-control' ng-show='user.repositories'>
+    <option value="">Em quais desses?</option>
+    <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
+  </select>
 </div>

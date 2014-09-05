@@ -2,16 +2,25 @@
 
 angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $timeout, oauth, User) {
+    $scope.organization = '';
+
+    $scope.getRepositories = function(organization){
+      $timeout(function(){
+        $scope.user.repositories = User.organization.get(organization).repositories();
+      },0);
+    };
+
     $scope.authenticate =  function(){
-      oauth.popup('github', function(err, res) {
-        if(err) {
-          return window.alert(err);
+      oauth.popup('github', function(error, response) {
+        if(error) {
+          return window.alert(error);
         }
-        $rootScope.github = res;
+        $rootScope.github = response;
 
         $timeout(function(){
           $scope.user = User.info();
-          $scope.user.orgs = User.organizations();
+          $scope.user.organizations = User.organization.list();
+          $scope.user.repositories = [];
         },0);
       });
     };
