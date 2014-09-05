@@ -1,6 +1,22 @@
 // bower:scss
 // endbower
 
+
+.dropdown-icon > li {
+  display: inline-block;
+
+  img {
+    width: 16px;
+    height: 16px;
+    float: left;
+  }
+
+  a {
+    float: left;
+    clear: none;
+  }
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
