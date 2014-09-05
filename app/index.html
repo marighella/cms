@@ -13,6 +13,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
     <link rel="stylesheet" href="styles/footer.css">
     <link rel="stylesheet" href="styles/header.css">
     <!-- endbuild -->
@@ -24,13 +25,7 @@
 
     <!-- Add your site or application content here -->
     <header>
-      <a href="{{basepath}}" class="logo">
-        <h1 class="logo">MST CMS</h1>
-      </a>
-      <section>
-        <label>{{ user.name }}</label>
-        <img ng-show="user.avatar_url" ng-src="{{ user.avatar_url }}" alt="{{ user.login  }}">
-      </section>
+      <img ng-src="images/logo.png" class="img-rounded" />
     </header>
     <div class="container">
       <div ng-view=""></div>

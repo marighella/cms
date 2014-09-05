@@ -1,21 +1,20 @@
-<div class='jumbotron' ng-hide='user'>
-  <h2>Está no ar a Rádio Libertadora!</h2>
+<div class='page-header auth' >
   <p>
-    <button ng-click='authenticate()' class='btn btn-default'>
+    <button ng-click='authenticate()' class='btn btn-default' ng-hide='user'>
       <img src='https://oauth.io/api/providers/github/logo' /> Entrar
     </button>
   </p>
-</div>
-<div class='jumbotron' ng-show='user'>
-  <h2>
-      <select class='form-control'
-        ng-change='getRepositories(organization)' ng-model='organization'>
-        <option value="">Qual a sua luta, companheira?</option>
-        <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.login }}</option>
-      </select>
-  </h2>
-  <select class='form-control' ng-show='user.repositories'>
-    <option value="">Em quais desses?</option>
-    <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
-  </select>
+  <main ng-show='user'>
+    <h1>
+        <select class='form-control'
+          ng-change='getRepositories(organization)' ng-model='organization'>
+          <option value="">Qual a sua luta, companheira?</option>
+          <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.login }}</option>
+        </select>
+    </h1>
+    <select class='form-control' ng-show='user.repositories'>
+      <option value="">Em quais desses?</option>
+      <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
+    </select>
+  </main>
 </div>

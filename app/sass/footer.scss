@@ -1,13 +1,14 @@
-$brand-primary: #DA251C;
 $mstgreen: darkgreen;
 $mstred: #961913;
 $body-bg: white;
 $gray-light: lighten(#222, 60%);   // #999
 $gray-lighter: lighten(#222, 93.5%); // #eee 
+$mstred: #CF1223;
+
 
 body > footer {
   width: 100%;
-  background-color: darken($brand-primary, 15%);
+  background-color: #C10613;
   box-shadow: inset 0 5px 5px -5px black;
   padding: 20px 0 20px;
   color: $gray-lighter;

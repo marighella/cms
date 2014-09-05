@@ -1,9 +1,16 @@
-$mstred: #961913;
 
 body > header {
-  background: $mstred;
-  background: linear-gradient($mstred, darken($mstred, 5%));
-  padding: 20px 0 10px;
-  text-align: center;
   color: white;
+  text-align: center;
+  background-image: url('../images/background.jpg');
+  background-repeat: repeat-x;
+  padding-bottom: 1px;
+
+  a.logo {
+    text-decoration: initial;
+  }
+
+  img {
+    width: 350px;
+  }
 }
