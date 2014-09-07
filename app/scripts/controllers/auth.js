@@ -5,15 +5,11 @@ angular.module('cmsApp')
 
     $scope.getRepositories = function(organization){
       if(!!organization){
-        $timeout(function(){
-          $scope.user.repositories = Organization.get(organization).repositories();
-          $scope.user.organization = angular.fromJson(organization);
-        },0);
+        $scope.user.repositories = Organization.get(organization).repositories();
+        $scope.user.organization = angular.fromJson(organization);
       }else{
-        $timeout(function(){
-          $scope.user.organization = undefined;
-          $scope.user.repositories = [];
-        },0);
+        $scope.user.organization = undefined;
+        $scope.user.repositories = [];
       }
     };
 
