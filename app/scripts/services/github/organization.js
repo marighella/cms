@@ -26,7 +26,7 @@ angular.module('cmsApp')
       full_name: 'movimento-sem-terra/site-novo'
     },{
       id: 17912445,
-      name: 'site-novo',
+      name: 'tabloides',
       full_name: 'movimento-sem-terra/site-novo'
     }];
 
