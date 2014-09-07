@@ -4,10 +4,14 @@ angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $timeout, _, oauth, User) {
 
     $scope.getRepositories = function(organization){
-      $timeout(function(){
-        $scope.user.repositories = User.organization.get(organization).repositories();
-        $scope.user.organization = angular.fromJson(organization);
-      },0);
+      if(!!organization){
+        $timeout(function(){
+          $scope.user.repositories = User.organization.get(organization).repositories();
+          $scope.user.organization = angular.fromJson(organization);
+        },0);
+      }else{
+        $scope.user = {};
+      }
     };
 
     $scope.authenticate =  function(){
