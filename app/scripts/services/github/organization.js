@@ -34,7 +34,7 @@ angular.module('cmsApp')
       id: 7000646,
       login: 'movimento-sem-terra',
       name: 'Movimento dos Trabalhadores Rurais Sem Terra',
-      avatar_url: 'https://avatars.githubusercontent.com/u/8516140?v=2'
+      avatar_url: 'https://avatars.githubusercontent.com/u/7000646?v=2'
     },{
       id: 8516140,
       login: 'brasil-de-fato',
