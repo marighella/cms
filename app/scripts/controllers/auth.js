@@ -10,7 +10,10 @@ angular.module('cmsApp')
           $scope.user.organization = angular.fromJson(organization);
         },0);
       }else{
-        $scope.user = {};
+        $timeout(function(){
+          $scope.user.organization = undefined;
+          $scope.user.repositories = [];
+        },0);
       }
     };
 
