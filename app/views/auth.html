@@ -9,13 +9,13 @@
         <select class='form-control'
           ng-change='getRepositories(organization)' ng-model='organization'>
           <option value="">Qual a sua luta, companheira?</option>
-          <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.login }}</option>
+          <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.name }}</option>
         </select>
     </h1>
-    <img ng-src='{{ user.organization.avatar_url }}' class='img-thumbnail'/>
     <select class='form-control' ng-show='user.repositories'>
       <option value="">Em quais desses?</option>
       <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
     </select>
+    <img ng-src='{{ user.organization.avatar_url }}' ng-show='user.organization'  class='img-thumbnail'/>
   </main>
 </div>
