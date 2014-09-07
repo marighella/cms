@@ -9,7 +9,7 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('organization', function (_) {
+  .factory('Organization', function (_) {
      var resultList =  [{
           login: 'brasil-de-fato',
           id: 8516140,

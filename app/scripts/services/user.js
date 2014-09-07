@@ -9,13 +9,22 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('User', function(organization) {
+  .factory('User', function(_, Organization) {
+
     return {
       info: function() {
-        return {
+
+        var organizations = _.map(Organization.list(), function(element){
+          return Organization.get().org(element.id);
+        });
+
+        var result = {
           name: 'Rodrigo',
+          organizations: organizations,
+          repositories: []
         };
+
+        return result;
       },
-      organization: organization
     };
   });

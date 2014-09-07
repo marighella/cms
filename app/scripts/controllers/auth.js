@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, _, oauth, User) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, oauth, User, Organization) {
 
     $scope.getRepositories = function(organization){
       if(!!organization){
         $timeout(function(){
-          $scope.user.repositories = User.organization.get(organization).repositories();
+          $scope.user.repositories = Organization.get(organization).repositories();
           $scope.user.organization = angular.fromJson(organization);
         },0);
       }else{
@@ -20,16 +20,8 @@ angular.module('cmsApp')
           return window.alert(error);
         }
         $rootScope.github = response;
-        var user = User.info();
-        user.repositories = [];
-        var organizations = User.organization.list();
-        organizations = _.map(organizations, function(element){
-          return User.organization.get().org(element.id);
-        });
-
-        user.organizations = organizations;
-
         $timeout(function(){
+          var user = User.info();
           $scope.user = user;
         },0);
       });
