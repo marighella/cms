@@ -12,7 +12,9 @@
           <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.name }}</option>
         </select>
     </h1>
-    <select class='form-control' ng-show='user.repositories'>
+    <select class='form-control'
+      ng-change='finish(repository)'
+      ng-show='user.repositories'>
       <option value="">Em quais desses?</option>
       <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
     </select>

@@ -1,7 +1,14 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, oauth, User, Organization) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Organization) {
+    $scope.finish = function(repository){
+      if(!!repository){
+        $scope.user.repository = repository;
+        $rootScope.user = $scope.user;
+        $location.path('/post/search');
+      }
+    };
 
     $scope.getRepositories = function(organization){
       if(!!organization){

@@ -23,6 +23,10 @@ angular
         templateUrl: 'views/auth.html',
         controller: 'AuthCtrl'
       })
+      .when('/post/search', {
+        templateUrl: 'views/post/search.html',
+        controller: 'PostSearchCtrl'
+      })
       .otherwise({
         redirectTo: '/auth'
       });
