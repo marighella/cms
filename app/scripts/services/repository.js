@@ -8,11 +8,11 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('Repository', function (GithubContent) {
+  .factory('Repository', function (Github) {
 
     var post = {
       list: function(){
-        return GithubContent.posts;
+        return Github.content.posts;
       }
     };
 
