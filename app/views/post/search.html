@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr data-ng-repeat="post in posts">
+    <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
       <td>{{post.sha}}</td>
       <td>{{post.name}}</td>
       <td>
@@ -18,3 +18,10 @@
     </tr>
   </tbody>
 </table>
+<pager
+total-items="posts.length"
+items-per-page="maxSize"
+ng-model="currentPage"
+previous-text='<< Anterior'
+next-text='Próximo >>'>
+</pager>
