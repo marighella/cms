@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Organization) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Repository) {
     $scope.finish = function(repository){
       if(!!repository){
         $scope.user.repository = repository;
@@ -12,7 +12,7 @@ angular.module('cmsApp')
 
     $scope.getRepositories = function(organization){
       if(!!organization){
-        $scope.user.repositories = Organization.get(organization).repositories();
+        $scope.user.repositories = Repository.organization.get(organization).repositories();
         $scope.user.organization = angular.fromJson(organization);
       }else{
         $scope.user.organization = undefined;

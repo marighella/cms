@@ -17,6 +17,7 @@ angular.module('cmsApp')
     };
 
     return {
-      post: post
+      post: post,
+      organization: Github.organization
     };
   });

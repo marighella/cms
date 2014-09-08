@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: PostsearchCtrl', function () {
+describe('Controller: PostSearchCtrl', function () {
 
   // load the controller's module
   beforeEach(module('cmsApp'));
@@ -11,7 +11,7 @@ describe('Controller: PostsearchCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    PostsearchCtrl = $controller('PostsearchCtrl', {
+    PostsearchCtrl = $controller('PostSearchCtrl', {
       $scope: scope
     });
   }));
