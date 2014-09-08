@@ -3,7 +3,7 @@
     <tr>
       <th>SHA</th>
       <th>Título</th>
-      <th>Ações</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -11,7 +11,9 @@
       <td>{{post.sha}}</td>
       <td>{{post.name}}</td>
       <td>
-        <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-warning">EDITAR</a>
+        <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default">
+          <span class='glyphicon glyphicon-pencil'></span> Editar
+        </a>
       </td>
     </tr>
   </tbody>

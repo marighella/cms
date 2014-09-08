@@ -12,7 +12,7 @@ angular.module('cmsApp')
 
     var post = {
       list: function(){
-        return Github.content.posts;
+        return Github.content.posts();
       }
     };
 

@@ -18,7 +18,9 @@ describe('Service: Repository', function () {
   describe('content from github', function (){
     beforeEach(inject(function (_GithubContent_) {
       var content = _GithubContent_;
-      content.posts = [1,2,3];
+      content.posts = function (){
+        return [1,2,3];
+      };
     }));
 
     it('should return a list of posts', function (){
