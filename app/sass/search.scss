@@ -2,4 +2,20 @@
   table td a{
     float: right;
   }
+
+  ul {
+    li{
+      a {
+        font-size: medium;
+        font-weight: bold;
+      }
+    }
+    li.disabled {
+        display: none;
+    }
+  }
+}
+
+@media screen and (min-width: 350px) {
+  
 }

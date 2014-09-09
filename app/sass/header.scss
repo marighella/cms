@@ -12,6 +12,14 @@ body > header {
   }
 
   img {
-    width: 350px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 350px) {
+  body > header {
+    img {
+      width: 30%;
+    }
   }
 }
