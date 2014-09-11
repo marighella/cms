@@ -21,15 +21,18 @@ angular.module('cmsApp')
     };
 
     $scope.authenticate =  function(){
-      oauth.popup('github', function(error, response) {
+        $timeout(function(){
+          $scope.user = User.info();
+        },0);
+    /* oauth.popup('github', function(error, response) {
         if(error) {
           return window.alert(error);
         }
         $rootScope.github = response;
         $timeout(function(){
-          var user = User.info();
-          $scope.user = user;
+          $scope.user = User.info();
         },0);
       });
+      */
     };
   });

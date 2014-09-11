@@ -16,7 +16,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'dynform'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -27,6 +28,10 @@ angular
       .when('/post/search', {
         templateUrl: 'views/post/search.html',
         controller: 'PostSearchCtrl'
+      })
+      .when('/post', {
+        templateUrl: 'views/post/create.html',
+        controller: 'PostCreateCtrl'
       })
       .otherwise({
         redirectTo: '/auth'
