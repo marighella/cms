@@ -16,7 +16,11 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'mgcrea.ngStrap.datepicker',
+    'mgcrea.ngStrap.tooltip',
+    'mgcrea.ngStrap.helpers.dateParser',
+    'mgcrea.ngStrap.timepicker',
   ])
   .config(function ($routeProvider) {
     $routeProvider
