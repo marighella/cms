@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: PostcreatectrlCtrl', function () {
+describe('Controller: PostCreateCtrl', function () {
 
   // load the controller's module
   beforeEach(module('cmsApp'));
@@ -11,12 +11,8 @@ describe('Controller: PostcreatectrlCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    PostcreatectrlCtrl = $controller('PostcreatectrlCtrl', {
+    PostcreatectrlCtrl = $controller('PostCreateCtrl', {
       $scope: scope
     });
   }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
-  });
 });
