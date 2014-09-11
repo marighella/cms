@@ -6,4 +6,16 @@
     }
   }
 
+  input {
+    &[name="video"],
+    &[name="cover"] {
+      margin-bottom: 10px;
+
+      img {
+        height: 100%;
+        border-style: solid;
+        border-width: 2px;
+      }
+    }
+  }
 }

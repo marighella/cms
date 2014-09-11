@@ -26,9 +26,9 @@
       placeholder="{{ field.placeholder  }}"
       ng-pattern='{{ field.pattern }}'
       />
-      <img id='coverImage' class="img-thumbnail"
+      <img class="img-thumbnail"
       ng-src="{{ entity[field.name] }}"
-      ng-show='post.metadata.images_hd' /><br/>
+      ng-show="entity[field.name]"/>
     </div>
 
     <div ng-switch-when="video">
