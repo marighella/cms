@@ -9,11 +9,18 @@
  */
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($scope) {
+
+    $scope.save =  function(form){
+      form.$submitted = true;
+    };
+
     // entity to edit
     $scope.entity = {
       video: 'http://www.youtube.com/watch?v=UViv0FQJrgo',
       cover: 'http://farm6.staticflickr.com/5552/14934144587_2c2b186d58_n.jpg',
-      date: '2014-09-10T11:52:11-03:00'
+      date: '2014-09-10T11:52:11-03:00',
+      description: 'testando',
+      country: '0'
     };
 
     // fields description of entity
@@ -51,6 +58,7 @@ angular.module('cmsApp')
     {
       name: 'country',
       title: 'Country',
+      required: true,
       type: {
         view: 'select',
         options: [
@@ -63,6 +71,7 @@ angular.module('cmsApp')
     {
       name: 'description',
       title: 'Description',
+      required: true,
       placeholder: 'Preencha isso aqui',
       type: {
         view: 'textarea'
