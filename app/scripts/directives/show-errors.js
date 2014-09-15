@@ -9,7 +9,6 @@ angular.module('cmsApp').
     link: function (scope, el, attrs, formCtrl) {
       // find the text box element, which has the 'name' attribute
       var inputEl   = el[0].querySelector('input, select, textarea');
-      console.log(el[0], inputEl);
       // convert the native text box element to an angular element
       //
       var inputNgEl = angular.element(inputEl);
@@ -21,7 +20,10 @@ angular.module('cmsApp').
       inputNgEl.bind('blur', function() {
         console.log(inputName);
 
-        el.toggleClass('has-error', formCtrl[inputName].$invalid);
+        var toggle = formCtrl[inputName].$invalid;
+
+        window.$(el.parent().get(0)).toggleClass('has-error', toggle);
+        el.toggleClass('has-error', toggle);
       });
     }
   };
