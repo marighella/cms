@@ -16,8 +16,15 @@ angular.module('cmsApp')
       }
     };
 
+    var repositorie = {
+      get: function(repositorie){
+        return Github.content.skelleton(repositorie);
+      }
+    };
+
     return {
       post: post,
-      organization: Github.organization
+      organization: Github.organization,
+      skelleton: repositorie
     };
   });

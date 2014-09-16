@@ -5,6 +5,7 @@ angular.module('cmsApp')
     $scope.finish = function(repository){
       if(!!repository){
         $scope.user.repository = repository;
+        $scope.user.skelleton = Repository.skelleton.get(repository);
         $rootScope.user = $scope.user;
         $location.path('/post/search');
       }

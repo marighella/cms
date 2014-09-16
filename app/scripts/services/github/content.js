@@ -10,6 +10,128 @@
 angular.module('cmsApp')
   .factory('GithubContent', function () {
     return {
+      skelleton: function(repositorie){
+        console.log('Pegando o esqueleto do: ', repositorie);
+
+        return [
+          {
+          name: 'date',
+          pattern: '',
+          icon: 'fa-calendar',
+          title: 'Data e hora da noticia',
+          required: true,
+          type: {
+            view: 'date'
+          }
+        },
+        {
+          name: 'hat',
+          title: 'Chapéu',
+          required: false,
+          placeholder: 'Informe o chapéu',
+          type: {
+            view: 'textarea'
+          }
+        },
+        {
+          name: 'title',
+          title: 'Título da noticia',
+          required: true,
+          placeholder: 'Informe o titulo',
+          type: {
+            view: 'textarea'
+          }
+        },
+        {
+          name: 'support_line',
+          title: 'Linha fina',
+          required: true,
+          placeholder: 'Informe o titulo',
+          type: {
+            view: 'textarea'
+          }
+        },
+        {
+          name: 'menu',
+          title: 'Editorias',
+          required: true,
+          type: {
+            view: 'select',
+            options: [
+              {name: 'agricultura camponesa', id: 'agricultura camponesa'},
+              {name: 'agronegócio', id: 'agronegócio'},
+              {name: 'direitos humanos', id: 'direitos humanos'},
+              {name: 'educação, cultura e comunicação', id: 'educação, cultura e comunicação'},
+              {name: 'lutas e mobilizações', id: 'lutas e mobilizações'},
+              {name: 'solidariedade internacional', id: 'solidariedade'},
+              {name: 'meio ambiente', id: 'meio ambiente'},
+              {name: 'projeto popular', id: 'projeto popular'},
+              {name: 'reforma agrária', id: 'reforma agrária'},
+              {name: 'transgênicos', id: 'transgênicos'},
+              {name: 'nossa produção', id: 'nossa-producao'},
+              {name: 'poemas e poesias', id: 'poemas-e-poesias'},
+              {name: 'lutadores do povo', id: 'lutadores-do-povo'}
+            ]
+          }
+        },
+        {
+          name: 'section',
+          title: 'Sessão',
+          required: false,
+          type: {
+            view: 'select',
+            options: [
+              {name: 'Capa', id: 'cover'},
+              {name: 'Destaque', id: 'featured-news'},
+              {name: 'Vídeo', id: 'tv'}
+            ]
+          }
+        },
+        {
+          name: 'label',
+          title: 'Gênero',
+          required: false,
+          type: {
+            view: 'select',
+            options: [
+              {name: 'Artigo', id: 'articles'},
+              {name: 'Entrevista', id: 'interviews'},
+              {name: 'Reportagens Especiais', id: 'special-stories'}
+            ]
+          }
+        },
+        {
+          name: 'video',
+          pattern: '',
+          icon: 'fa-youtube',
+          title: 'Youtube',
+          placeholder: 'Coloque o link para o video no Youtube',
+          required: true,
+          type: {
+            view: 'video'
+          },
+          need: {
+            field: 'section',
+            equal: 'tv'
+          }
+        },
+        {
+          name: 'cover',
+          pattern: '',
+          icon: 'fa-picture-o',
+          title: 'Imagem de Capa',
+          required: true,
+          type: {
+            view: 'cover'
+          },
+          need: {
+            field: 'section',
+            notEqual: 'tv'
+          }
+        }
+        ];
+      },
+
       posts: function () {
         return [
           {

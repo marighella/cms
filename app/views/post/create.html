@@ -27,7 +27,7 @@
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
         ng-pattern="{{ field.pattern }}"
-        ng-required="{{ field.required }}"
+        dynamic-required="field"
         />
         <img class="img-thumbnail"
         ng-src="{{ entity[field.name] }}"
@@ -41,7 +41,7 @@
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
         ng-pattern="{{ field.pattern }}"
-        ng-required="{{ field.required }}"
+        dynamic-required="field"
         />
         <youtube ng-show="entity[field.name]" url="{{ entity[field.name] }}"></youtube>
       </div>
@@ -61,7 +61,7 @@
           dynamic-name="field.name"
           ng-model="entity[field.name]"
           ng-options="item.id as item.name for item in field.type.options"
-          ng-required="{{ field.required }}"
+          dynamic-required="field"
           class="form-control">
           <option value="">-- Nenhum --</option>
         </select>
