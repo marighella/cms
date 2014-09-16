@@ -104,7 +104,7 @@ angular.module('cmsApp')
           name: 'video',
           pattern: '',
           icon: 'fa-youtube',
-          title: 'Youtube',
+          title: 'Video de capa',
           placeholder: 'Coloque o link para o video no Youtube',
           required: true,
           type: {
