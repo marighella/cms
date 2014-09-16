@@ -58,19 +58,19 @@ angular.module('cmsApp')
           type: {
             view: 'select',
             options: [
-              {name: 'agricultura camponesa', id: 'agricultura camponesa'},
-              {name: 'agronegócio', id: 'agronegócio'},
-              {name: 'direitos humanos', id: 'direitos humanos'},
-              {name: 'educação, cultura e comunicação', id: 'educação, cultura e comunicação'},
-              {name: 'lutas e mobilizações', id: 'lutas e mobilizações'},
-              {name: 'solidariedade internacional', id: 'solidariedade'},
-              {name: 'meio ambiente', id: 'meio ambiente'},
-              {name: 'projeto popular', id: 'projeto popular'},
-              {name: 'reforma agrária', id: 'reforma agrária'},
-              {name: 'transgênicos', id: 'transgênicos'},
-              {name: 'nossa produção', id: 'nossa-producao'},
-              {name: 'poemas e poesias', id: 'poemas-e-poesias'},
-              {name: 'lutadores do povo', id: 'lutadores-do-povo'}
+              {id: 'agricultura camponesa', name: 'agricultura camponesa'},
+              {id: 'agronegócio', name: 'agronegócio'},
+              {id: 'direitos humanos', name: 'direitos humanos'},
+              {id: 'educação, cultura e comunicação', name: 'educação, cultura e comunicação'},
+              {id: 'lutas e mobilizações', name: 'lutas e mobilizações'},
+              {id: 'solidariedade', name: 'solidariedade internacional'},
+              {id: 'meio ambiente', name: 'meio ambiente'},
+              {id: 'projeto popular', name: 'projeto popular'},
+              {id: 'reforma agrária', name: 'reforma agrária'},
+              {id: 'transgênicos', name: 'transgênicos'},
+              {id: 'nossa-producao', name: 'nossa produção'},
+              {id: 'poemas-e-poesias', name: 'poemas e poesias'},
+              {id: 'lutadores-do-povo', name: 'lutadores do povo'}
             ]
           }
         },
@@ -112,7 +112,8 @@ angular.module('cmsApp')
           },
           need: {
             field: 'section',
-            equal: 'tv'
+            equal: true,
+            value: 'tv'
           }
         },
         {
@@ -126,7 +127,8 @@ angular.module('cmsApp')
           },
           need: {
             field: 'section',
-            notEqual: 'tv'
+            equal: false,
+            value: 'tv'
           }
         }
         ];

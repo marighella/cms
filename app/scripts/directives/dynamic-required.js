@@ -11,15 +11,18 @@ angular.module('cmsApp')
     return {
       restrict:'A',
       terminal:true,
+      priority:1000,
       link: function postLink(scope, element, attrs) {
         var field = scope.$eval(attrs.dynamicRequired);
+        var need = field.need;
 
-        if(field.need){
-         if(field.need.equal){
-           element.attr('ng-required', 'entity.section === \'tv\'');
-         }else if(field.need.notEqual){
-           element.attr('ng-required', 'entity.section !== \'tv\'');
-         }
+        if(need){
+           var requiredField = need.field;
+           var requiredValue = need.value;
+           var condition     = (need.equal) ? '===' : '!==';
+           var query = ['entity.',requiredField,condition,'\'',requiredValue,'\''].join('');
+
+           element.attr('ng-required', query);
         }else {
            element.attr('ng-required', 'field.required');
         }
