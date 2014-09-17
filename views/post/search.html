@@ -1,1 +1,31 @@
-<div class="search"> <a href="#/post" class="btn btn-default btn-block"> <span class="glyphicon glyphicon-play"></span> <strong>Nova Notícia</strong> </a> <table class="table table-striped"> <thead> <tr> <th>Notícia <th>   <tbody> <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize"> <td>{{post.name}} <td> <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default"> <span class="glyphicon glyphicon-pencil"></span> Editar </a>    </table> <pager total-items="posts.length" items-per-page="maxSize" ng-model="currentPage" previous-text="<< Anterior" next-text="Próxima >>"> </pager> </div>
+<div class='search'>
+  <a href="#/post" class="btn btn-default btn-block">
+    <span class="glyphicon glyphicon-play"></span>
+    <strong>Nova Notícia</strong>
+  </a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Notícia</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
+        <td>{{post.name}}</td>
+        <td>
+          <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default">
+            <span class='glyphicon glyphicon-pencil'></span> Editar
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pager
+  total-items="posts.length"
+  items-per-page="maxSize"
+  ng-model="currentPage"
+  previous-text='<< Anterior'
+  next-text='Próxima >>'>
+  </pager>
+</div>
