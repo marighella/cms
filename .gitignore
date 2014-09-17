@@ -5,3 +5,4 @@ dist
 bower_components
 app/styles/*
 .grunt/
+app/scripts/config.js
