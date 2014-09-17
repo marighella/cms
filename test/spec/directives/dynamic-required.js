@@ -12,9 +12,39 @@ describe('Directive: dynamicRequired', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<dynamic-required></dynamic-required>');
+  it('should put default required when do not have field "need"', inject(function ($compile) {
+
+    scope.field = {
+    
+    };
+    element = angular.element('<input dynamic-required="field"/>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the dynamicRequired directive');
+    expect(element.attr('ng-required')).toBe('field.required');
+  }));
+
+  it('should put need expression', inject(function ($compile) {
+    scope.field = {
+      need: {
+        field: 'section',
+        equal: true,
+        value: 'tv'
+      }
+    };
+    element = angular.element('<input dynamic-required="field"/>');
+    element = $compile(element)(scope);
+    expect(element.attr('ng-required')).toBe('entity.section===\'tv\'');
+  }));
+
+  it('should put need expression ', inject(function ($compile) {
+    scope.field = {
+      need: {
+        field: 'section',
+        equal: false,
+        value: 'tv'
+      }
+    };
+    element = angular.element('<input dynamic-required="field"/>');
+    element = $compile(element)(scope);
+    expect(element.attr('ng-required')).toBe('entity.section!==\'tv\'');
   }));
 });
