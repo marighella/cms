@@ -2,13 +2,13 @@
 /* jshint undef:false */
 
 angular.module('cmsApp')
-  .directive('ckEditor', function () {
+  .directive('ckEditor', function (ENV) {
     return {
       require : '?ngModel',
       link : function($scope, element, attr, ngModel) {
         var ck = window.CKEDITOR.replace(element[0]);
 
-        CKEDITOR.plugins.addExternal('youtube', '/ckeditor-plugins/youtube/', 'plugin.js');
+        CKEDITOR.plugins.addExternal('youtube', ENV.basepath+'/ckeditor-plugins/youtube/', 'plugin.js');
 
         ck.config.extraPlugins = 'youtube,justify,image2';
         ck.config.language = 'pt-BR';

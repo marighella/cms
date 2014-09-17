@@ -30,7 +30,8 @@
     "time-grunt": "^0.3.1",
     "grunt-gh-pages": "~0.9.1",
     "karma-phantomjs-launcher": "~0.1.4",
-    "karma-jasmine": "~0.1.5"
+    "karma-jasmine": "~0.1.5",
+    "grunt-ng-constant": "~1.0.0"
   },
   "engines": {
     "node": ">=0.10.0"

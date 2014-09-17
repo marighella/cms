@@ -72,6 +72,31 @@ module.exports = function (grunt) {
         ]
       }
     },
+    ngconstant: {
+      // Options for all targets
+      options: {
+        space: '',
+        wrap: '/*jshint quotmark:double */\n\n"use strict";\n\n{%= __ngModule %}',
+        name: 'config',
+        dest: '<%= yeoman.app %>/scripts/config.js'
+      },
+      development: {
+        constants: {
+          ENV: {
+            name: 'development',
+            basepath: '',
+          }
+        }
+      },
+      production: {
+        constants: {
+          ENV: {
+            name: 'production',
+            basepath: '/cms',
+          }
+        }
+      }
+    },
     sass: {
       dist: {
         files: [{
@@ -162,7 +187,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      constants: '<%= yeoman.app %>/scripts/config.js'
     },
 
     // Add vendor prefixed styles
@@ -390,8 +416,10 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'clean:constants',
       'wiredep',
       'sass',
+      'ngconstant:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -406,6 +434,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
+    'clean:constants',
+    'ngconstant:development',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -414,6 +444,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'clean:constants',
+    'ngconstant:production',
     'wiredep',
     'sass',
     'useminPrepare',
