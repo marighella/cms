@@ -11,6 +11,7 @@
 angular
   .module('cmsApp', [
     'ngAnimate',
+    'config',
     'ngCookies',
     'ngResource',
     'ngRoute',
