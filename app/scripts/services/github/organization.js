@@ -9,50 +9,50 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('GithubOrganization', function (_) {
-     var resultList =  [{
-          login: 'brasil-de-fato',
-          id: 8516140,
-          avatar_url: 'https://avatars.githubusercontent.com/u/8516140?v=2'
-        },{
-          login:'movimento-sem-terra',
-          id: 7000646,
-          avatar_url: 'https://avatars.githubusercontent.com/u/7000646?v=2'
-        }];
+  .factory('GithubOrganization', function ($q, _, Resource) {
 
-    var resultRepos = [{
-      id: 17912445,
-      name: 'site-novo',
-      full_name: 'movimento-sem-terra/site-novo'
-    },{
-      id: 17912445,
-      name: 'tabloides',
-      full_name: 'movimento-sem-terra/site-novo'
-    }];
+    function listOrganizations(){
+      var listOrgDeferred = $q.defer();
+      var listOrgPromisse = listOrgDeferred.promise;
+      var github = Resource.github;
 
-    var resultOrg = [{
-      id: 7000646,
-      login: 'movimento-sem-terra',
-      name: 'Movimento dos Trabalhadores Rurais Sem Terra',
-      avatar_url: 'https://avatars.githubusercontent.com/u/7000646?v=2'
-    },{
-      id: 8516140,
-      login: 'brasil-de-fato',
-      name: 'Brasil de Fato',
-      avatar_url: 'https://avatars.githubusercontent.com/u/8516140?v=2'
-    }];
+
+      github.get('user/orgs').then(function(data){
+        listOrgDeferred.resolve(data);
+      });
+
+      listOrgPromisse.then(function(listOrg){
+        _.each(listOrg, function(element, index){
+          var orgDeferred = $q.defer();
+          var orgPromisse = orgDeferred.promise;
+
+          github.get('orgs/'+element.login).then(function(data){
+            orgDeferred.resolve(data);
+          });
+
+          orgPromisse.then(function(data){
+            angular.extend(listOrg[index], data);
+          });
+        });
+
+
+        return listOrg;
+      });
+
+      return listOrgPromisse;
+    }
 
     return {
       list: function() {
-        return resultList;
+        return listOrganizations();
       },
       get: function(){
         return {
           repositories: function(){
-            return resultRepos; 
+            return [];
           },
           org: function(id){
-            return _.find(resultOrg, function(element){
+            return _.find([], function(element){
               return (element.id === id);
             });
           }

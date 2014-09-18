@@ -10,7 +10,9 @@
           ng-change='getRepositories(organization)'
           ng-model='organization'>
           <option value="">Qual a sua luta, companheira?</option>
-          <option ng-repeat='organization in user.organizations' value="{{ organization }}">{{ organization.name }}</option>
+          <option ng-repeat='organization in user.organizations' value="{{ organization }}">
+          {{ organization.name || organization.login }}
+          </option>
         </select>
     </h1>
     <select class='form-control'

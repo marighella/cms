@@ -9,10 +9,11 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('Github', function (GithubOrganization, GithubContent) {
+  .factory('Github', function (GithubOrganization, GithubContent, GithubUser) {
 
     return {
       organization: GithubOrganization,
-      content: GithubContent
+      content: GithubContent,
+      user: GithubUser
     };
   });

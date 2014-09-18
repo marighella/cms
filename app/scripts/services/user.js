@@ -13,18 +13,25 @@ angular.module('cmsApp')
 
     return {
       info: function() {
-
-        var organizations = _.map(Github.organization.list(), function(element){
-          return Github.organization.get().org(element.id);
-        });
+        var userPromise = Github.user.getAuth();
+        var organizationsPromisse = Github.organization.list();
 
         var result = {
-          name: 'Rodrigo',
-          organizations: organizations,
+          info: '',
+          organizations: [],
           repositories: []
         };
 
+        userPromise.then(function(value){
+          result.info = value;
+        });
+
+        organizationsPromisse.then(function(value){
+          console.log('aaaa',value);
+          result.organizations = value;
+        });
+
         return result;
-      },
+      }
     };
   });

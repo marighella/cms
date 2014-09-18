@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Repository) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Resource, Repository) {
     $scope.finish = function(repository){
       if(!!repository){
         $scope.user.repository = repository;
@@ -22,18 +22,15 @@ angular.module('cmsApp')
     };
 
     $scope.authenticate =  function(){
-        $timeout(function(){
-          $scope.user = User.info();
-        },0);
-    /* oauth.popup('github', function(error, response) {
+      oauth.popup('github', function(error, response) {
         if(error) {
           return window.alert(error);
         }
-        $rootScope.github = response;
+
+        Resource.github = response;
         $timeout(function(){
           $scope.user = User.info();
         },0);
       });
-      */
     };
   });
