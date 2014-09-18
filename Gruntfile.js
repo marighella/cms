@@ -380,6 +380,12 @@ module.exports = function (grunt) {
           src: ['**/*']
         }]
       },
+      ckeditor: {
+        expand: true,
+        cwd: 'bower_components/ckeditor',
+        dest: '<%= yeoman.app %>/ckeditor',
+        src: ['**/*']
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -422,6 +428,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'clean:constants',
+      'copy:ckeditor',
       'wiredep',
       'sass',
       'ngconstant:development',
