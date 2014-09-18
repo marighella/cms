@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('cmsApp')
   .filter('startFrom', function() {
     return function(input, start) {
