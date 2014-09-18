@@ -76,7 +76,7 @@ module.exports = function (grunt) {
       // Options for all targets
       options: {
         space: '',
-        wrap: '/*jshint quotmark:double */\n\n"use strict";\n\n{%= __ngModule %}',
+        wrap: '\'use strict\';\n\n{%= __ngModule %}',
         name: 'config',
         dest: '<%= yeoman.app %>/scripts/config.js'
       },

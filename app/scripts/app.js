@@ -10,6 +10,7 @@
  */
 angular
   .module('cmsApp', [
+    'config',
     'ngAnimate',
     'ngCookies',
     'ngResource',
