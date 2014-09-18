@@ -7,3 +7,4 @@ app/styles/*
 .grunt/
 app/scripts/config.js
 **/*.swp
+app/ckeditor/
