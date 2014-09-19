@@ -13,6 +13,9 @@ angular.module('cmsApp')
     var post = {
       list: function(user, filter){
         return Github.content.posts(user, filter);
+      },
+      get: function(post){
+        return Github.content.post(post);
       }
     };
 

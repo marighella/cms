@@ -1,4 +1,5 @@
 'use strict';
+/*jshint camelcase: false */
 
 /**
  * @ngdoc service
@@ -8,7 +9,7 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('GithubContent', function ($q, Resource, DateUtil) {
+  .factory('GithubContent', function ($q, Resource, PostUtil, DateUtil) {
     return {
       skelleton: function(repositorie){
         console.log('Pegando o esqueleto do: ', repositorie);
@@ -133,9 +134,20 @@ angular.module('cmsApp')
         }
         ];
       },
+      post: function (post) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var github = Resource.github;
 
+        github.get(post.git_url).then(function(data){
+          var post = PostUtil.load(data.content);
+
+          return deferred.resolve(post);
+        });
+        
+        return promise;
+      },
       posts: function (user, filter) {
-        /*jshint camelcase: false */
         var deferred = $q.defer();
         var promise = deferred.promise;
         var github = Resource.github;

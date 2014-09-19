@@ -17,7 +17,8 @@
     "angular-bootstrap": "~0.11.0",
     "angular-strap": "~2.1.0",
     "font-awesome": "~4.2.0",
-    "angular-i18n": "~1.2.24"
+    "angular-i18n": "~1.2.24",
+    "js-yaml": "~3.2.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

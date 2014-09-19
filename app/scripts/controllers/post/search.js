@@ -16,9 +16,21 @@ angular.module('cmsApp')
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear()
     };
+    $scope.pageChanged = function(){
+      var start = ($scope.currentPage - 1) * $scope.maxSize;
+      var limit = $scope.maxSize;
+      var postsOnPage = $scope.posts.slice(start, start+limit);
+
+      postsOnPage.forEach(function(element){
+        Repository.post.get(element).then(function(result){
+          angular.extend(element, result);
+        });
+      });
+    };
 
     Repository.post.list($rootScope.user, $scope.filter).then(function(result){
       $scope.posts = result;
+      $scope.pageChanged();
     });
 
   });

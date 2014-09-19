@@ -23,4 +23,12 @@ angular.module('cmsApp')
 
       return $filter('date')(date,'yyyy/MM');
     };
+
+    this.fromISO8601 = function(dateISO){
+      return {
+        toMilliseconds: function(){
+          return new Date(dateISO).getTime();
+        }
+      };
+    };
   });
