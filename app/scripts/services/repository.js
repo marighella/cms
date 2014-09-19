@@ -11,8 +11,8 @@ angular.module('cmsApp')
   .factory('Repository', function (Github) {
 
     var post = {
-      list: function(user){
-        return Github.content.posts(user);
+      list: function(user, filter){
+        return Github.content.posts(user, filter);
       }
     };
 
