@@ -4,8 +4,9 @@ angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Resource, Repository) {
     $scope.finish = function(repository){
       if(!!repository){
-        $scope.user.repository = repository;
-        $scope.user.skelleton = Repository.skelleton.get(repository);
+        var obj = angular.fromJson(repository);
+        $scope.user.repository = obj;
+        $scope.user.skelleton = Repository.skelleton.get(obj);
         $rootScope.user = $scope.user;
         $location.path('/post/search');
       }

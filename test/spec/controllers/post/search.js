@@ -9,8 +9,16 @@ describe('Controller: PostSearchCtrl', function () {
     scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function ($controller, $rootScope, Repository) {
     scope = $rootScope.$new();
+    Repository.post = {
+      list: function(){
+        return {
+          then: function(){
+          }
+        };
+      }
+    };
     PostsearchCtrl = $controller('PostSearchCtrl', {
       $scope: scope
     });
