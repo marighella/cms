@@ -27,7 +27,6 @@ angular.module('cmsApp')
         });
 
         organizationsPromisse.then(function(value){
-          console.log('aaaa',value);
           result.organizations = value;
         });
 

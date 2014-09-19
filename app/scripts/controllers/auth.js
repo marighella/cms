@@ -12,12 +12,17 @@ angular.module('cmsApp')
     };
 
     $scope.getRepositories = function(organization){
+      $scope.user.organization = undefined;
+      $scope.user.repositories = [];
+
       if(!!organization){
-        $scope.user.repositories = Repository.organization.get(organization).repositories();
-        $scope.user.organization = angular.fromJson(organization);
-      }else{
-        $scope.user.organization = undefined;
-        $scope.user.repositories = [];
+        var obj = angular.fromJson(organization);
+        $scope.user.organization = obj;
+
+        Repository.organization.get(obj)
+          .repositories().then(function(result){
+            $scope.user.repositories = result;
+          });
       }
     };
 

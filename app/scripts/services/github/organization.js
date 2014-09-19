@@ -11,6 +11,29 @@
 angular.module('cmsApp')
   .factory('GithubOrganization', function ($q, _, Resource) {
 
+    function getOrganization(organization){
+      var orgDeferred = $q.defer();
+      var orgPromisse = orgDeferred.promise;
+      var github = Resource.github;
+
+      github.get('orgs/'+organization.login).then(function(data){
+        return orgDeferred.resolve(data);
+      });
+      return orgPromisse;
+    }
+
+    function listRepositories(organization){
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+      var github = Resource.github;
+
+      github.get('orgs/'+organization.login+'/repos').then(function(data){
+        return deferred.resolve(data);
+      });
+
+      return promise;
+    }
+
     function listOrganizations(){
       var listOrgDeferred = $q.defer();
       var listOrgPromisse = listOrgDeferred.promise;
@@ -23,18 +46,12 @@ angular.module('cmsApp')
 
       listOrgPromisse.then(function(listOrg){
         _.each(listOrg, function(element, index){
-          var orgDeferred = $q.defer();
-          var orgPromisse = orgDeferred.promise;
-
-          github.get('orgs/'+element.login).then(function(data){
-            orgDeferred.resolve(data);
-          });
+          var orgPromisse = getOrganization(element);
 
           orgPromisse.then(function(data){
             angular.extend(listOrg[index], data);
           });
         });
-
 
         return listOrg;
       });
@@ -46,15 +63,13 @@ angular.module('cmsApp')
       list: function() {
         return listOrganizations();
       },
-      get: function(){
+      get: function(organization){
         return {
           repositories: function(){
-            return [];
+            return listRepositories(organization);
           },
-          org: function(id){
-            return _.find([], function(element){
-              return (element.id === id);
-            });
+          org: function(){
+            return getOrganization(organization);
           }
         };
       }
