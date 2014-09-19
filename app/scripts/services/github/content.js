@@ -8,7 +8,7 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('GithubContent', function ($q, Resource) {
+  .factory('GithubContent', function ($q, Resource, DateUtil) {
     return {
       skelleton: function(repositorie){
         console.log('Pegando o esqueleto do: ', repositorie);
@@ -134,11 +134,13 @@ angular.module('cmsApp')
         ];
       },
 
-      posts: function (user) {
+      posts: function (user, filter) {
+        /*jshint camelcase: false */
         var deferred = $q.defer();
         var promise = deferred.promise;
         var github = Resource.github;
-        var address = ['repos',user.repository.full_name,'contents/_posts/2014/01'].join('/');
+        var yearMonth = DateUtil.format(filter.year, filter.month);
+        var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth].join('/');
 
         github.get(address).then(function(data){
           return deferred.resolve(data);
