@@ -50,6 +50,9 @@ angular.module('cmsApp')
         });
 
         return promise;
+      },
+      save: function(post) {
+        console.log(post);
       }
     };
   });

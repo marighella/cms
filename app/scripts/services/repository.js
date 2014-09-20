@@ -16,6 +16,9 @@ angular.module('cmsApp')
       },
       get: function(post){
         return Github.content.post(post);
+      },
+      save: function(post){
+        return Github.content.save(post);
       }
     };
 
