@@ -1,5 +1,5 @@
 'use strict';
-/* globals escape */
+/* globals escape, unescape */
 
 /**
  * @ngdoc service
@@ -43,6 +43,12 @@ angular.module('cmsApp')
       post.createdTime = DateUtil.fromISO8601(post.metadata.date).toMilliseconds();
 
       return post;
+    };
+    this.serialize = function(post){
+      post.metadata.date = DateUtil.toISO8601(post.metadata.date);
+
+      var compiled = ['---', window.jsyaml.dump(post.metadata), '---', post.body].join('\n');
+      return unescape(encodeURIComponent(compiled));
     };
     this.generateFileName =  function(post) {
       if(!!post.name){
