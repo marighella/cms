@@ -40,4 +40,13 @@ angular
       .otherwise({
         redirectTo: '/auth'
       });
-  });
+  })
+  .run(['$rootScope', '$location', 'Resource', function ($rootScope, $location, Resource) {
+    $rootScope.$on('$locationChangeStart', function () {
+      $rootScope.error = null;
+      if (!Resource.github) {
+        $location.path('/auth').replace();
+        return false;
+      }
+    });
+  }]);
