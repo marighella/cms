@@ -14,6 +14,9 @@
       <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
         <td>
           {{ post.metadata.title }}
+          <span ng-hide='post.metadata'>
+            <i class="fa fa-cog fa-spin" ></i>
+          </span>
         </td>
         <td>
           <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default">
