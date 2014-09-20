@@ -22,9 +22,12 @@ angular.module('cmsApp')
       var postsOnPage = $scope.posts.slice(start, start+limit);
 
       postsOnPage.forEach(function(element){
-        Repository.post.get(element).then(function(result){
-          angular.extend(element, result);
-        });
+        if(!element.metadata){
+          Repository.post.get(element).then(function(result){
+            angular.extend(element, result);
+            console.log(element);
+          });
+        }
       });
     };
 

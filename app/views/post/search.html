@@ -12,7 +12,9 @@
     </thead>
     <tbody>
       <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
-        <td>{{post.title}}</td>
+        <td>
+          {{ post.metadata.title }}
+        </td>
         <td>
           <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default">
             <span class='glyphicon glyphicon-pencil'></span> Editar
