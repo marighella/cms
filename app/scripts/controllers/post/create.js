@@ -16,6 +16,7 @@ angular.module('cmsApp')
 
     // entity to edit
     $scope.entity = {
+      date: (new Date()).toString(),
       body: ''
     };
 
