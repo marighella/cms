@@ -6,8 +6,11 @@ angular.module('cmsApp')
       if(!!repository){
         var obj = angular.fromJson(repository);
         $scope.user.repository = obj;
-        $scope.user.skelleton = Repository.skelleton.get(obj);
         $rootScope.user = $scope.user;
+
+        Repository.skelleton.get($scope.user).then(function(result){
+          $rootScope.user.skelleton = angular.fromJson(result);
+        });
         $location.path('/post/search');
       }
     };

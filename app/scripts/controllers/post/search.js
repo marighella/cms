@@ -25,7 +25,6 @@ angular.module('cmsApp')
         if(!element.metadata){
           Repository.post.get(element).then(function(result){
             angular.extend(element, result);
-            console.log(element);
           });
         }
       });

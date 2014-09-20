@@ -10,6 +10,9 @@
  */
 angular.module('cmsApp')
   .service('PostUtil', function PostUtil(DateUtil) {
+    this.decodeContent = function(content){
+      return decodeURIComponent(escape(atob(content)));
+    };
     this.load = function(content){
       var post = {};
       var parts = decodeURIComponent(escape(atob(content))).split('---');
