@@ -51,8 +51,20 @@ angular.module('cmsApp')
 
         return promise;
       },
-      save: function(post) {
-        console.log(post);
+      save: function(user, post) {
+        var github = Resource.github;
+        var obj = PostUtil.serialize(post);
+        var commit = JSON.stringify({
+          content: btoa(obj),
+          message: 'commit from cms'
+        });
+        var yearMonth = DateUtil.format(2014, 10);
+        var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth, post.filename].join('/');
+
+        github.put(address, {
+          data: commit,
+          cache: false
+        });
       }
     };
   });

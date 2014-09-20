@@ -16,9 +16,10 @@ angular.module('cmsApp')
         metadata: $scope.entity,
         body: $scope.body
       };
-      post = PostUtil.generateFileName(post);
+      post.filename = PostUtil.generateFileName(post);
+      post.metadata.published = false;
 
-      Repository.post.save(post);
+      Repository.post.save($rootScope.user, post);
     };
 
     // entity to edit
