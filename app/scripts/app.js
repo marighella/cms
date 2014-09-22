@@ -17,6 +17,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ngTagsInput',
     'ui.bootstrap',
     'mgcrea.ngStrap.datepicker',
     'mgcrea.ngStrap.tooltip',

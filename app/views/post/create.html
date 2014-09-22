@@ -77,6 +77,15 @@
           <option value="">-- Nenhum --</option>
         </select>
       </div>
+      <div ng-switch-when="tagging" show-errors>
+        <tags-input
+          ng-model="entity[field.name]"
+          dynamic-name="field.name"
+          display-property="tag"
+          class='tag-input'
+          placeholder="{{ field.placeholder }}">
+        </tags-input>
+      </div>
   </div>
   <div class='form-group'>
     <textarea ck-editor ng-model="body">
