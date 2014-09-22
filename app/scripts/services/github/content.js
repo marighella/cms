@@ -52,7 +52,6 @@ angular.module('cmsApp')
         return promise;
       },
       save: function(user, post) {
-        var github = Resource.github;
         var obj = PostUtil.serialize(post);
         var commit = JSON.stringify({
           content: btoa(obj),
@@ -61,10 +60,18 @@ angular.module('cmsApp')
         var yearMonth = DateUtil.format(2014, 10);
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth, post.filename].join('/');
 
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        var github = Resource.github;
+
         github.put(address, {
           data: commit,
           cache: false
+        }).then(function(data){
+          return deferred.resolve(data);
         });
+
+        return promise;
       }
     };
   });
