@@ -15,9 +15,11 @@ angular.module('cmsApp')
       var year = $routeParams.year;
       var month = $routeParams.month;
       var sha = $routeParams.sha;
-      $scope.state = 'saving';
+
+      $scope.$broadcast('submited');
 
       if(!form.$invalid){
+        $scope.state = 'saving';
         var post = PostUtil.prepareDraftPost($scope.entity, $scope.body, $scope.filename);
 
         Repository.post.save($rootScope.user, post, year, month, sha)

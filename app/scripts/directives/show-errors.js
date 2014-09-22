@@ -13,6 +13,9 @@ angular.module('cmsApp').
       var inputName = inputNgEl.attr('name');
 
       var toggleClass = function(){
+        if(!formCtrl[inputName]){
+          return;
+        }
         var toggle = formCtrl[inputName].$invalid;
 
         window.$(el.parent().get(0)).toggleClass('has-error', toggle);
@@ -21,6 +24,10 @@ angular.module('cmsApp').
 
       // only apply the has-error class after the user leaves the text box
       inputNgEl.bind('blur', function() {
+        toggleClass();
+      });
+
+      scope.$on('submited', function() {
         toggleClass();
       });
     }
