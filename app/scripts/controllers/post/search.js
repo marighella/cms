@@ -31,7 +31,7 @@ angular.module('cmsApp')
     };
 
     Repository.post.list($rootScope.user, $scope.filter).then(function(result){
-      $scope.posts = result;
+      $scope.posts = result.reverse();
       $scope.pageChanged();
     });
 
