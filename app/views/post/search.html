@@ -1,5 +1,5 @@
 <div class='search'>
-  <a href="#/post" class="btn btn-default btn-block">
+  <a href="#/post/{{ filter.year }}/{{ filter.month }}" class="btn btn-default btn-block">
     <span class="glyphicon glyphicon-play"></span>
     <strong>Nova Notícia</strong>
   </a>
@@ -19,7 +19,7 @@
           </span>
         </td>
         <td>
-          <a href="#/post/{{ post.year }}/{{ post.month  }}/{{ post.name }}" class="btn btn-default">
+          <a href="#/post/{{ filter.year }}/{{ filter.month  }}/{{ post.sha }}/{{ post.url }}" class="btn btn-default">
             <span class='glyphicon glyphicon-pencil'></span> Editar
           </a>
         </td>

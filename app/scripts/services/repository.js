@@ -17,8 +17,8 @@ angular.module('cmsApp')
       get: function(post){
         return Github.content.post(post);
       },
-      save: function(user, post){
-        return Github.content.save(user, post);
+      save: function(user, post, year, month, sha){
+        return Github.content.save(user, post, year, month, sha);
       }
     };
 

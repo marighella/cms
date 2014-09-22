@@ -29,7 +29,7 @@ angular.module('cmsApp')
         var promise = deferred.promise;
         var github = Resource.github;
 
-        github.get(post.git_url).then(function(data){
+        github.get(post.url).then(function(data){
           var post = PostUtil.load(data.content);
 
           return deferred.resolve(post);
@@ -45,19 +45,22 @@ angular.module('cmsApp')
         var promise = deferred.promise;
         var github = Resource.github;
 
-        github.get(address).then(function(data){
+        github.get(address, {
+          cache: false
+        }).then(function(data){
           return deferred.resolve(data);
         });
 
         return promise;
       },
-      save: function(user, post) {
+      save: function(user, post, year, month, sha) {
         var obj = PostUtil.serialize(post);
         var commit = JSON.stringify({
+          sha: sha,
           content: btoa(obj),
           message: 'commit from cms'
         });
-        var yearMonth = DateUtil.format(2014, 10);
+        var yearMonth = DateUtil.format(year, month);
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth, post.filename].join('/');
 
         var deferred = $q.defer();
@@ -67,6 +70,8 @@ angular.module('cmsApp')
         github.put(address, {
           data: commit,
           cache: false
+        }).error(function(status, message){
+          console.log(status, message);
         }).then(function(data){
           return deferred.resolve(data);
         });

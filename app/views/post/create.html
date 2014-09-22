@@ -1,8 +1,8 @@
-<form name="postForm" nonvalidate>
+<form name="postForm" nonvalidate ng-init='load()'>
   <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
     ng-disabled="state != 'saved'">
     <span class="fa fa-eye-slash"></span>
-    <strong ng-show="state != 'saving'">Salvar em rascunho!</strong>
+    <strong ng-show="state != 'saving'">Mandar para o rascunho!</strong>
     <strong ng-show="state == 'saving'">Salvando...
       <i class="fa fa-cog fa-spin" ></i>
     </strong>
