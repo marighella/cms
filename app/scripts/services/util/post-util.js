@@ -51,8 +51,8 @@ angular.module('cmsApp')
       return unescape(encodeURIComponent(compiled));
     };
     this.generateFileName =  function(post) {
-      if(!!post.name){
-        return post.name;
+      if(!!post.filename){
+        return post.filename;
       }
       var fileName = post.metadata.title.toLowerCase();
       fileName = removeSpecialChar(fileName);
@@ -60,10 +60,11 @@ angular.module('cmsApp')
 
       return formatDate(post)+'-'+fileName+'.md';
     };
-    this.prepareDraftPost = function(metadata, body){
+    this.prepareDraftPost = function(metadata, body, filename){
       var post = {
         metadata: metadata,
-        body: body
+        body: body,
+        filename: filename
       };
       post.filename = this.generateFileName(post);
       post.metadata.published = false;

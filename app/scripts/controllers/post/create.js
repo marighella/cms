@@ -18,7 +18,7 @@ angular.module('cmsApp')
       $scope.state = 'saving';
 
       if(!form.$invalid){
-        var post = PostUtil.prepareDraftPost($scope.entity, $scope.body);
+        var post = PostUtil.prepareDraftPost($scope.entity, $scope.body, $scope.filename);
 
         Repository.post.save($rootScope.user, post, year, month, sha)
         .then(function(){
@@ -37,6 +37,7 @@ angular.module('cmsApp')
         Repository.post.get(post).then(function(post){
           $scope.entity = post.metadata;
           $scope.body   = post.body;
+          $scope.filename = post.filename;
         });
       }
     };

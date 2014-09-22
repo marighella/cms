@@ -45,11 +45,11 @@ describe('Service: PostUtil', function () {
     });
 
     it('should return post name if it exists', function() {
-      var post = {name: 'test post'};
+      var post = {filename: 'test post'};
 
       var filename = PostUtil.generateFileName(post);
 
-      expect(filename).toBe(post.name);
+      expect(filename).toBe(post.filename);
     });
 
     it('should generate the filename for a new post', function() {

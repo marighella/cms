@@ -32,6 +32,8 @@ angular.module('cmsApp')
         github.get(post.url).then(function(data){
           var post = PostUtil.load(data.content);
 
+          post.filename = data.name;
+
           return deferred.resolve(post);
         });
         
