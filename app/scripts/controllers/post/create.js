@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, PostUtil, Repository) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, PostUtil, Repository) {
     $scope.state = 'saved';
 
     $scope.draft = function(form){
@@ -17,9 +17,9 @@ angular.module('cmsApp')
         var post = PostUtil.prepareDraftPost($scope.entity, $scope.body);
 
         Repository.post.save($rootScope.user, post)
-        .then(function(data){
-          console.log(data);
+        .then(function(){
           $scope.state = 'saved';
+          $location.path('/post/search');
         });
       }
     };
