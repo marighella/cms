@@ -1,7 +1,11 @@
 <form name="postForm" nonvalidate>
-  <button ng-click="draft(postForm)" class="btn btn-default btn-block">
+  <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
+    ng-disabled="state != 'saved'">
     <span class="fa fa-eye-slash"></span>
-    <strong>Salvar em rascunho!</strong>
+    <strong ng-show="state != 'saving'">Salvar em rascunho!</strong>
+    <strong ng-show="state == 'saving'">Salvando...
+      <i class="fa fa-cog fa-spin" ></i>
+    </strong>
   </button>
   <div class='form-group create'
     ng-repeat="field in fields"
