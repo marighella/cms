@@ -1,4 +1,4 @@
-<form name="postForm" nonvalidate ng-init='load()'>
+<form name="postForm" nonvalidate ng-init='load()' class='create'>
   <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
     ng-disabled="state != 'saved'">
     <span class="fa fa-eye-slash"></span>
@@ -7,7 +7,7 @@
       <i class="fa fa-cog fa-spin" ></i>
     </strong>
   </button>
-  <div class='form-group create'
+  <div class='form-group'
     ng-repeat="field in fields"
     ng-switch on="field.type.view">
     <label class='control-label' for='{{ field.name }}'>
