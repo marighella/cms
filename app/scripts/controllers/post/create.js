@@ -9,17 +9,19 @@
  */
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($rootScope, $scope, PostUtil, Repository) {
+    $scope.state = 'saved';
 
     $scope.draft = function(form){
-      form.$submitted = true;
-      var post = {
-        metadata: $scope.entity,
-        body: $scope.body
-      };
-      post.filename = PostUtil.generateFileName(post);
-      post.metadata.published = false;
+      $scope.state = 'saving';
+      if(!form.$invalid){
+        var post = PostUtil.prepareDraftPost($scope.entity, $scope.body);
 
-      Repository.post.save($rootScope.user, post);
+        Repository.post.save($rootScope.user, post)
+        .then(function(data){
+          console.log(data);
+          $scope.state = 'saved';
+        });
+      }
     };
 
     // entity to edit

@@ -15,6 +15,30 @@ describe('Service: PostUtil', function () {
     expect(!!PostUtil).toBe(true);
   });
 
+  describe('prepare post to save on draft mode', function (){
+    beforeEach(inject(function (_PostUtil_) {
+      PostUtil = _PostUtil_;
+
+      PostUtil.generateFileName = function(){
+        return '2014-03-04-ola-ola-ola.md';
+      };
+    }));
+
+    it('should exists', function (){
+      expect(!!PostUtil.prepareDraftPost).toBeTruthy();
+    });
+
+    it('should return post with published set as false', function() {
+      var metadata = {};
+      var body = '';
+
+      var post = PostUtil.prepareDraftPost(metadata, body);
+
+      expect(post.metadata.published).toBe(false);
+      expect(post.filename).toBe('2014-03-04-ola-ola-ola.md');
+    });
+  });
+
   describe('the format title name', function (){
     it('should exists', function (){
       expect(!!PostUtil.generateFileName).toBeTruthy();
