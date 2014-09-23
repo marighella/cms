@@ -9,6 +9,7 @@
         <th>Data/hora</th>
         <th>Notícia</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,8 @@
           <span ng-hide='post.metadata'>
             <i class="fa fa-cog fa-spin" ></i>
           </span>
+        </td>
+        <td>
           <span ng-show='post.metadata'>
             <i class="fa fa-eye" ng-show='post.metadata.published' title='noticia publicada'></i>
             <i class="fa fa-eye-slash" ng-show='!post.metadata.published' title='noticia em rascunho'></i>

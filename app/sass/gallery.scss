@@ -7,6 +7,11 @@
     margin-bottom: 5px;
     float: none;
     height: 250px;
+
+  }
+
+  .upload {
+    background-color: #468CBB;
   }
 
   .nav {
@@ -31,14 +36,20 @@
       }
     }
   }
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .slider {
     height: 250px;
     text-align: none;
 
     .nav {
       width: 43%;
       float: left;
+    }
+
+    .upload {
+      margin-left: 5px;
     }
 
     .slide {

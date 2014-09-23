@@ -69,4 +69,5 @@ angular.module('cmsApp')
       {src: 'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_n.jpg', desc: 'Image 05'},
       {src: 'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_n.jpg', desc: 'Image 06'}
     ];
+
   });
