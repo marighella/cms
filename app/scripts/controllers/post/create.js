@@ -58,6 +58,7 @@ angular.module('cmsApp')
     };
 
     $scope.body = '';
+    $scope.fields = $rootScope.user.skelleton;
 
     // Set of Photos
     $scope.photos = [
@@ -68,31 +69,4 @@ angular.module('cmsApp')
       {src: 'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_c.jpg', desc: 'Image 05'},
       {src: 'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_c.jpg', desc: 'Image 06'}
     ];
-    // initial image index
-    $scope._Index = 0;
-
-    // if a current image is the same as requested image
-    $scope.isActive = function (index) {
-      return $scope._Index === index;
-    };
-
-    // show prev image
-    $scope.showPrev = function () {
-      $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
-    };
-
-    // show next image
-    $scope.showNext = function () {
-      $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
-    };
-
-    // show a certain image
-    $scope.showPhoto = function (index) {
-      $scope._Index = index;
-    };
-
-
-
-    // fields description of entity
-    $scope.fields = $rootScope.user.skelleton;
   });

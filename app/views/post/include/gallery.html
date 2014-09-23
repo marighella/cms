@@ -1,0 +1,11 @@
+<!-- slider container -->
+<div class="slider"  ng-init="_index = 0">
+  <!-- enumerate all photos -->
+  <img ng-repeat="photo in photos" class="slide" ng-show="_index === $index" ng-src="{{ photo.src }}" />
+  <!-- extra navigation controls -->
+  <ul class="nav">
+    <li ng-repeat="photo in photos" ng-class="{'active': ( _index === $index ) }">
+      <img src="{{ photo.src }}" alt="{{ photo.desc }}" title="{{ photo.desc }}" ng-click="$parent._index = $index;" />
+    </li>
+  </ul>
+</div>
