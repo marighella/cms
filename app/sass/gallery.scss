@@ -10,15 +10,12 @@
 
   }
 
-  .upload {
-    background-color: #468CBB;
-  }
-
   .nav {
     width: 100%;
     float: none;
 
     li {
+      opacity: 0.6;
       border: 2px solid #AAAAAA;
       border-radius: 1px;
       cursor: pointer;
@@ -29,6 +26,7 @@
       width: 80px;
 
       &.active {
+        opacity: 1;
         border: 5px solid #FFFFFF;
       }
       img {
@@ -46,10 +44,7 @@
     .nav {
       width: 43%;
       float: left;
-    }
-
-    .upload {
-      margin-left: 5px;
+      margin-right: 10px;
     }
 
     .slide {
