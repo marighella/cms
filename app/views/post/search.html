@@ -24,6 +24,10 @@
           <span ng-hide='post.metadata'>
             <i class="fa fa-cog fa-spin" ></i>
           </span>
+          <span ng-show='post.metadata'>
+            <i class="fa fa-eye" ng-show='post.metadata.published' title='noticia publicada'></i>
+            <i class="fa fa-eye-slash" ng-show='!post.metadata.published' title='noticia em rascunho'></i>
+          </span>
         </td>
         <td>
           <a href="#/post/{{ filter.year }}/{{ filter.month  }}/{{ post.sha }}/{{ post.url }}" class="btn btn-default">
