@@ -9,9 +9,9 @@
  */
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository) {
-    $scope.state = 'saved';
+    $scope.state = 'default';
 
-    $scope.draft = function(form){
+    function save(form, publish){
       var year = $routeParams.year;
       var month = $routeParams.month;
       var sha = $routeParams.sha;
@@ -19,15 +19,23 @@ angular.module('cmsApp')
       $scope.$broadcast('submited');
 
       if(!form.$invalid){
-        $scope.state = 'saving';
-        var post = PostUtil.prepareDraftPost($scope.entity, $scope.body, $scope.filename);
+        $scope.state = (publish) ? 'publishing' : 'saving';
+        var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, publish);
 
         Repository.post.save($rootScope.user, post, year, month, sha)
         .then(function(){
-          $scope.state = 'saved';
+          $scope.state = 'default';
           $location.path('/post/search');
         });
       }
+    }
+
+    $scope.draft = function(form){
+      save(form,false);
+    };
+
+    $scope.publish = function(form){
+      save(form,true);
     };
 
     $scope.load = function(){

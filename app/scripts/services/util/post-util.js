@@ -60,14 +60,14 @@ angular.module('cmsApp')
 
       return formatDate(post)+'-'+fileName+'.md';
     };
-    this.prepareDraftPost = function(metadata, body, filename){
+    this.preparePost = function(metadata, body, filename, toPublish){
       var post = {
         metadata: metadata,
         body: body,
         filename: filename
       };
       post.filename = this.generateFileName(post);
-      post.metadata.published = false;
+      post.metadata.published = (toPublish === true);
 
       return post;
     };

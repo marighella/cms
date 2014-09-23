@@ -25,14 +25,14 @@ describe('Service: PostUtil', function () {
     }));
 
     it('should exists', function (){
-      expect(!!PostUtil.prepareDraftPost).toBeTruthy();
+      expect(!!PostUtil.preparePost).toBeTruthy();
     });
 
     it('should return post with published set as false', function() {
       var metadata = {};
       var body = '';
 
-      var post = PostUtil.prepareDraftPost(metadata, body);
+      var post = PostUtil.preparePost(metadata, body);
 
       expect(post.metadata.published).toBe(false);
       expect(post.filename).toBe('2014-03-04-ola-ola-ola.md');
