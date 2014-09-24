@@ -9,7 +9,7 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('PostUtil', function PostUtil(DateUtil) {
+  .service('PostUtil', function PostUtil(DateUtil, _) {
     function removeSpecialChar(string) {
       return string.replace(/[^\w\s]/gi, '');
     }
@@ -71,5 +71,22 @@ angular.module('cmsApp')
       post.metadata.published = (toPublish === true);
 
       return post;
+    };
+    this.prepareListOfFiles =  function(metadata, coverImageField){
+      var files = [];
+
+      if(coverImageField){
+        var cover = _.find(metadata.files, function(element){
+          return element.type === 'cover';
+        });
+
+        if(!cover){
+          cover = { thumbnail: metadata[coverImageField], desc: 'cover', type: 'cover' };
+          files.push(cover);
+        }
+      }
+
+      files.push(metadata.files);
+      return _.flatten(files);
     };
   });

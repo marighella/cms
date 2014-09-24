@@ -39,6 +39,53 @@ describe('Service: PostUtil', function () {
     });
   });
 
+  describe('the way to work with of file', function (){
+    it('should exists', function (){
+      expect(!!PostUtil.prepareListOfFiles).toBeTruthy();
+    });
+
+    it('should cover image inside array of files', function() {
+      var post = { imagesHd: 'image.jpg'};
+      var coverImageField = 'imagesHd';
+
+      var listOfFiles = PostUtil.prepareListOfFiles(post, coverImageField);
+
+      var result = {thumbnail: 'image.jpg', desc: 'cover', type: 'cover'};
+      expect(listOfFiles[0]).toEqual(result);
+    });
+
+    it('should return list of files on metadata', function() {
+      var post = { files: [{thumbnail: '1.jpg', desc: 'image', type: 'image'}] };
+      var listOfFiles = PostUtil.prepareListOfFiles(post);
+
+      var result = {thumbnail: '1.jpg', desc: 'image', type: 'image'};
+      expect(listOfFiles[0]).toEqual(result);
+    });
+
+    it('should return list of files on metadata', function() {
+      var post = { cover: 'img.jpg', files: [{thumbnail: '1.jpg', desc: 'image', type: 'image'}] };
+      var listOfFiles = PostUtil.prepareListOfFiles(post, 'cover');
+
+      var result = [{thumbnail: 'img.jpg', desc: 'cover', type: 'cover'},
+      {thumbnail: '1.jpg', desc: 'image', type: 'image'}];
+
+      result.forEach(function(element){
+        expect(listOfFiles).toContain(element);
+      });
+    });
+
+    it('should not add cover twice', function() {
+      var post = { cover: 'img.jpg',
+                   files: [
+                     { thumbnail: '1.jpg', desc: 'image', type: 'image'},
+                     { thumbnail: 'img.jpg', desc: 'image', type: 'cover'}
+                   ] };
+      var listOfFiles = PostUtil.prepareListOfFiles(post, 'cover');
+
+      expect(listOfFiles.length).toBe(2);
+    });
+  });
+
   describe('the format title name', function (){
     it('should exists', function (){
       expect(!!PostUtil.generateFileName).toBeTruthy();

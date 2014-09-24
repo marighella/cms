@@ -5,17 +5,17 @@
       <i class="fa fa-upload"></i>
       Adicionar Imagem
     </button>
-    <li ng-repeat="photo in photos" ng-class="{'active': ( _index === $index ) }">
-      <img src="{{ photo }}" alt="{{ photo.desc }}" title="{{ photo.desc }}" ng-click="$parent._index = $index;" />
+    <li ng-repeat="file in files" ng-class="{'active': ( _index === $index ) }">
+      <img src="{{ file.thumbnail }}" alt="{{ file.desc }}" title="{{ file.desc }}" ng-click="$parent._index = $index;" />
     </li>
   </ul>
 
-  <div class='slide'  ng-show='photos'>
-    <img ng-src="{{ photo }}" ng-repeat="photo in photos" ng-show="_index === $index"/>
+  <div class='slide'  ng-show='files'>
+    <img ng-src="{{ file.thumbnail }}" ng-repeat="file in files" ng-show="_index === $index"/>
     <label>
       <input type="checkbox"
-             ng-checked='photos[_index] === $parent.cover'
-             ng-click='$parent.cover = photos[_index]'>
+             ng-checked='files[_index].thumbnail === $parent.cover'
+             ng-click='$parent.cover = files[_index]'>
              Imagem como capa
     </label>
   </div>
