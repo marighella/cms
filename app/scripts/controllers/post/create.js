@@ -36,7 +36,7 @@ angular.module('cmsApp')
 
       if(!form.$invalid){
         $scope.state = (publish) ? 'publishing' : 'saving';
-        var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.photos, publish);
+        var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
         post.metadata[$scope.coverField.name] = $scope.cover;
 
         Repository.post.save($rootScope.user, post, year, month, sha)
@@ -65,7 +65,7 @@ angular.module('cmsApp')
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
-          $scope.photos  = post.metadata.files;
+          $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
 
           $scope.cover = post.metadata[$scope.coverField.name];
         });
