@@ -10,6 +10,12 @@
     }
   }
 
+  .alert-cover {
+    label {
+       color: #a94442;
+    }
+  }
+
   input {
     &[name="video"],
     &[name="cover"] {

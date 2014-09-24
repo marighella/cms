@@ -1,12 +1,4 @@
 <form name="postForm" nonvalidate ng-init='load()' class='create'>
-  <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
-    ng-disabled="state != 'default'">
-    <span class="fa fa-eye-slash"></span>
-    <strong ng-show="state == 'default'">Mandar para o rascunho!</strong>
-    <strong ng-show="state == 'saving'">Salvando...
-      <i class="fa fa-cog fa-spin" ></i>
-    </strong>
-  </button>
 
   <div ng-include="'views/post/include/dynamic-inputs.html'"/>
   <div class='form-group'>
@@ -15,12 +7,16 @@
   </div>
   <div ng-include="'views/post/include/gallery.html'"/>
 
+  <div class='alert-cover' ng-show='cover === "" '>
+    <label>Não se esqueça de colocar uma imagem como capa!</label>
+    <input type='text' ng-model='cover' name='cover' required ng-hide='true'/>
+  </div>
 
-  <button ng-click="publish(postForm)" class="btn btn-default btn-block publish"
+  <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
     ng-disabled="state != 'default'">
-    <span class="fa fa-eye"></span>
-    <strong ng-show="state == 'default'">Publicar e ir a luta!</strong>
-    <strong ng-show="state == 'publishing'">Publicando...
+    <span class="fa fa-eye-slash"></span>
+    <strong ng-show="state == 'default'">Mandar para o rascunho!</strong>
+    <strong ng-show="state == 'saving'">Salvando...
       <i class="fa fa-cog fa-spin" ></i>
     </strong>
   </button>

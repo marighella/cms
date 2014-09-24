@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, _) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository) {
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),
@@ -16,6 +16,13 @@ angular.module('cmsApp')
     $scope.body = '';
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton;
+    $scope.fields.every(function(element){
+      if( element.type.view === 'cover'){
+        $scope.coverField = element;
+        return false;
+      }
+      return true;
+    });
 
     function save(form, publish){
       var year = $routeParams.year;
@@ -56,12 +63,7 @@ angular.module('cmsApp')
           $scope.body   = post.body;
           $scope.filename = post.filename;
 
-          var coverField = _.find($scope.fields, function(element){
-            return element.type.view === 'cover';
-          });
-
-          $scope.cover = post.metadata[coverField.name];
-          $scope.coverField = coverField;
+          $scope.cover = post.metadata[$scope.coverField.name];
         });
       }
     };
