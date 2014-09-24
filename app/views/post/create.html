@@ -10,7 +10,8 @@
   <div class='form-group'
     ng-repeat="field in fields"
     ng-switch on="field.type.view">
-    <label class='control-label' for='{{ field.name }}'>
+    <label class='control-label' for='{{ field.name }}'
+      ng-hide='field.type.view === "cover"'>
       <i class="fa {{ field.icon }}"></i>
       {{ field.title }}
     </label>
@@ -27,20 +28,6 @@
           ng-model="entity[field.name]"
           data-autoclose="1" placeholder="Time" bs-timepicker>
         </div>
-      </div>
-
-      <div ng-switch-when="cover" show-errors>
-        <input type="text"
-        dynamic-name="field.name"
-        class="form-control"
-        ng-model="entity[field.name]"
-        placeholder="{{ field.placeholder }}"
-        ng-pattern="{{ field.pattern }}"
-        dynamic-required="field"
-        />
-        <img class="img-thumbnail"
-        ng-src="{{ entity[field.name] }}"
-        ng-show="entity[field.name]"/>
       </div>
 
       <div ng-switch-when="video" show-errors>

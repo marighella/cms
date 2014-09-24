@@ -8,8 +8,14 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, _) {
     $scope.state = 'default';
+    $scope.entity = {
+      date: (new Date()).toString(),
+    };
+    $scope.body = '';
+    $scope.cover = '';
+    $scope.fields = $rootScope.user.skelleton;
 
     function save(form, publish){
       var year = $routeParams.year;
@@ -21,6 +27,7 @@ angular.module('cmsApp')
       if(!form.$invalid){
         $scope.state = (publish) ? 'publishing' : 'saving';
         var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, publish);
+        post.metadata[$scope.coverField.name] = $scope.cover;
 
         Repository.post.save($rootScope.user, post, year, month, sha)
         .then(function(){
@@ -48,26 +55,25 @@ angular.module('cmsApp')
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
+
+          var coverField = _.find($scope.fields, function(element){
+            return element.type.view === 'cover';
+          });
+
+          $scope.cover = post.metadata[coverField.name];
+          $scope.coverField = coverField;
         });
       }
     };
 
-    // entity to edit
-    $scope.entity = {
-      date: (new Date()).toString(),
-    };
-
-    $scope.body = '';
-    $scope.fields = $rootScope.user.skelleton;
-
     // Set of Photos
     $scope.photos = [
-      {src: 'http://farm9.staticflickr.com/8042/7918423710_e6dd168d7c_n.jpg', desc: 'Image 01'},
-      {src: 'http://farm9.staticflickr.com/8449/7918424278_4835c85e7a_n.jpg', desc: 'Image 02'},
-      {src: 'http://farm9.staticflickr.com/8457/7918424412_bb641455c7_n.jpg', desc: 'Image 03'},
-      {src: 'http://farm9.staticflickr.com/8179/7918424842_c79f7e345c_n.jpg', desc: 'Image 04'},
-      {src: 'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_n.jpg', desc: 'Image 05'},
-      {src: 'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_n.jpg', desc: 'Image 06'}
+      'http://farm9.staticflickr.com/8042/7918423710_e6dd168d7c_n.jpg',
+      'http://farm9.staticflickr.com/8449/7918424278_4835c85e7a_n.jpg',
+      'http://farm9.staticflickr.com/8457/7918424412_bb641455c7_n.jpg',
+      'http://farm9.staticflickr.com/8179/7918424842_c79f7e345c_n.jpg',
+      'http://farm9.staticflickr.com/8315/7918425138_b739f0df53_n.jpg',
+      'http://farm9.staticflickr.com/8461/7918425364_fe6753aa75_n.jpg'
     ];
 
   });
