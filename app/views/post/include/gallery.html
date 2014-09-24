@@ -10,7 +10,7 @@
     </li>
   </ul>
 
-  <div class='slide'>
+  <div class='slide'  ng-show='photos'>
     <img ng-src="{{ photo }}" ng-repeat="photo in photos" ng-show="_index === $index"/>
     <label>
       <input type="checkbox"
