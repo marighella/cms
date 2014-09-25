@@ -21,7 +21,7 @@
 
   <div class='slide'>
     <img ng-src="{{ file.small }}" ng-repeat="file in files" ng-show="_index === $index"/>
-    <label>
+    <label ng-show='files.length > 0'>
       <input type="checkbox"
              ng-checked='files[_index].thumbnail === $parent.cover'
              ng-click='$parent.cover = files[_index]'>
