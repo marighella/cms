@@ -47,6 +47,10 @@ angular.module('cmsApp')
       }
     }
 
+    $scope.$on('upload-file', function(event, args) {
+      $scope.files.push(args.file);
+    });
+
     $scope.draft = function(form){
       save(form,false);
     };

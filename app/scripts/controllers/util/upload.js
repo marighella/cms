@@ -3,12 +3,6 @@
 angular.module('cmsApp')
   .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
 
-    $scope.images = [];
-
-    $scope.$on('filesLoaded', function(event, args) {
-      $scope.images = args;
-    });
-
     var FormDataObject = function(data) {
       var fd = new FormData();
       angular.forEach(data, function(value, key) {
@@ -32,6 +26,7 @@ angular.module('cmsApp')
             'myfile': file
           }
         }).success(function(data) {
+          $rootScope.$broadcast('upload-file', { file: data, type: 'image' });
           console.log(data);
         }).error(function(error) {
           console.log(error);
