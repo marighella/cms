@@ -36,7 +36,7 @@ angular.module('cmsApp')
 
           return deferred.resolve(post);
         });
-        
+
         return promise;
       },
       posts: function (user, filter) {

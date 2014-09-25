@@ -1,4 +1,5 @@
 'use strict';
+/*jshint camelcase: false */
 
 angular.module('cmsApp')
   .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
@@ -13,6 +14,7 @@ angular.module('cmsApp')
 
     $scope.uploadImage = function(files) {
       var IMAGE_SERVICE_URL = 'http://mst-image-service.herokuapp.com/upload';
+      $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
         $http({
           url: IMAGE_SERVICE_URL,
@@ -27,7 +29,6 @@ angular.module('cmsApp')
           }
         }).success(function(data) {
           $rootScope.$broadcast('upload-file', { file: data, type: 'image' });
-          console.log(data);
         }).error(function(error) {
           console.log(error);
         });

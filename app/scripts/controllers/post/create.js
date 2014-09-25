@@ -17,6 +17,7 @@ angular.module('cmsApp')
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton;
     $scope.files = [];
+    $scope.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
 
 
     $scope.fields.every(function(element){
@@ -49,6 +50,12 @@ angular.module('cmsApp')
 
     $scope.$on('upload-file', function(event, args) {
       $scope.files.push(args.file);
+      $scope.upload.done = $scope.upload.done + 1;
+    });
+
+    $scope.$on('prepared-to-upload', function(event, args) {
+      $scope.upload.length = args.length;
+      $scope.upload.done = 0;
     });
 
     $scope.draft = function(form){
