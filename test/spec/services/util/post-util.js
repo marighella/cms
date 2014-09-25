@@ -50,24 +50,24 @@ describe('Service: PostUtil', function () {
 
       var listOfFiles = PostUtil.prepareListOfFiles(post, coverImageField);
 
-      var result = {thumbnail: 'image.jpg', desc: 'cover', type: 'cover'};
+      var result = {thumbnail: 'image.jpg', small: 'image.jpg'};
       expect(listOfFiles[0]).toEqual(result);
     });
 
     it('should return list of files on metadata', function() {
-      var post = { files: [{thumbnail: '1.jpg', desc: 'image', type: 'image'}] };
+      var post = { files: [{thumbnail: '1.jpg', small: '1.jpg'}] };
       var listOfFiles = PostUtil.prepareListOfFiles(post);
 
-      var result = {thumbnail: '1.jpg', desc: 'image', type: 'image'};
+      var result = {thumbnail: '1.jpg', small: '1.jpg'};
       expect(listOfFiles[0]).toEqual(result);
     });
 
     it('should return list of files on metadata', function() {
-      var post = { cover: 'img.jpg', files: [{thumbnail: '1.jpg', desc: 'image', type: 'image'}] };
+      var post = { cover: 'img.jpg', files: [{thumbnail: '1.jpg', small: '1.jpg'}] };
       var listOfFiles = PostUtil.prepareListOfFiles(post, 'cover');
 
-      var result = [{thumbnail: 'img.jpg', desc: 'cover', type: 'cover'},
-      {thumbnail: '1.jpg', desc: 'image', type: 'image'}];
+      var result = [{thumbnail: 'img.jpg', small: 'img.jpg'},
+      {thumbnail: '1.jpg', small: '1.jpg'}];
 
       result.forEach(function(element){
         expect(listOfFiles).toContain(element);
@@ -77,8 +77,8 @@ describe('Service: PostUtil', function () {
     it('should not add cover twice', function() {
       var post = { cover: 'img.jpg',
                    files: [
-                     { thumbnail: '1.jpg', desc: 'image', type: 'image'},
-                     { thumbnail: 'img.jpg', desc: 'image', type: 'cover'}
+                     { thumbnail: '1.jpg', small: '1.jpg'},
+                     { thumbnail: 'img.jpg', small: 'img.jpg'}
                    ] };
       var listOfFiles = PostUtil.prepareListOfFiles(post, 'cover');
 

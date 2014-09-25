@@ -77,11 +77,11 @@ angular.module('cmsApp')
 
       if(coverImageField){
         var cover = _.find(metadata.files, function(element){
-          return element.type === 'cover';
+          return element.small ===  metadata[coverImageField];
         });
 
         if(!cover){
-          cover = { thumbnail: metadata[coverImageField], desc: 'cover', type: 'cover' };
+          cover = { thumbnail: metadata[coverImageField], small: metadata[coverImageField] };
           files.push(cover);
         }
       }
