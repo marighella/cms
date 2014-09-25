@@ -9,7 +9,7 @@ angular.module('cmsApp')
       link: function(scope, el){
         el.bind('change', function(event){
           var files = event.target.files;
-          scope.$parent.uploadImage(files);
+          scope.uploadImage(files);
           event.target.value = '';
         });
       }

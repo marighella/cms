@@ -16,7 +16,7 @@ angular.module('cmsApp')
     $scope.body = '';
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton;
-    $scope.photos = [];
+    $scope.files = [];
 
 
     $scope.fields.every(function(element){

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function (_, $scope, Image, $timeout) {
+  .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
 
     $scope.images = [];
 
@@ -9,24 +9,33 @@ angular.module('cmsApp')
       $scope.images = args;
     });
 
-    function createImg(data){
-      return {
-        link : data.link,
-        thumbnail: data.thumbnail,
-        title: data.title
-      };
-    }
+    var FormDataObject = function(data) {
+      var fd = new FormData();
+      angular.forEach(data, function(value, key) {
+        fd.append(key, value);
+      });
+      return fd;
+    };
 
     $scope.uploadImage = function(files) {
-      files.forEach(function(file){
-        if (!!file) {
-          Image.send(file)
-          .success(function(data) {
-            console.log(data);
-          }).error(function(error, status) {
-            console.log(error);
-          });
-        }
+      var IMAGE_SERVICE_URL = 'http://mst-image-service.herokuapp.com/upload';
+      _.each(files, function(file){
+        $http({
+          url: IMAGE_SERVICE_URL,
+          method: 'POST',
+          transformRequest: FormDataObject,
+          headers: {
+            'Content-Type': undefined
+          },
+          data : {
+            'token': Resource.github.access_token,
+            'myfile': file
+          }
+        }).success(function(data) {
+          console.log(data);
+        }).error(function(error) {
+          console.log(error);
+        });
       });
     };
 
