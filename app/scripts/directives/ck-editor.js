@@ -97,6 +97,7 @@ angular.module('cmsApp')
           instance.on('pasteState',   setModelData);
           instance.on('change',       setModelData);
           instance.on('blur',         setModelData);
+          instance.on('drop',         setModelData);
           //instance.on('key',          setModelData); // for source view
 
           instance.on('instanceReady', function() {
@@ -106,6 +107,19 @@ angular.module('cmsApp')
             });
 
             instance.document.on('keyup', setModelData);
+            instance.document.on('drop', function (ev) {
+              var dataTransfer = ev.data.$.dataTransfer;
+              var regex = /<img.*src="(.*)"/g;
+              var matches = regex.exec(dataTransfer.getData( 'text/html' ));
+              if(matches) {
+                ev.data.preventDefault();
+                var src = matches[1];
+                var to_paste = '<img src="' + src + '" />';
+                instance.insertHtml( to_paste );
+
+                return false;
+              }
+            });
           });
           instance.on('customConfigLoaded', function() {
             configLoaderDef.resolve();
