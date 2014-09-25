@@ -1,14 +1,22 @@
 <!-- slider container -->
 <div class="slider"  ng-init="_index = 0">
   <ul class="nav">
-    <input type="file" name="upload" id="upload" multiple upload />
+
+    <div class="upload btn btn-default btn-block ">
+      <span>
+        <i class="fa fa-upload"></i>
+        Adicionar arquivo
+      </span>
+      <input type="file" name="upload" id="upload" multiple upload />
+    </div>
+
     <li ng-repeat="file in files" ng-class="{'active': ( _index === $index ) }">
       <img src="{{ file.thumbnail }}" alt="{{ file.desc }}" title="{{ file.desc }}" ng-click="$parent._index = $index;" />
     </li>
   </ul>
 
   <div class='slide'>
-    <img ng-src="{{ file.thumbnail }}" ng-repeat="file in files" ng-show="_index === $index"/>
+    <img ng-src="{{ file.small }}" ng-repeat="file in files" ng-show="_index === $index"/>
     <label>
       <input type="checkbox"
              ng-checked='files[_index].thumbnail === $parent.cover'
