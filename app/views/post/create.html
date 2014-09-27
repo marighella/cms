@@ -46,6 +46,17 @@
         </textarea>
       </div>
 
+      <div ng-switch-when="text" show-errors>
+        <input type="text"
+          dynamic-name="field.name"
+          class="form-control"
+          ng-model="entity[field.name]"
+          ng-required="{{ field.required }}"
+          placeholder="{{ field.placeholder }}"
+          dynamic-required="field">
+        </input>
+      </div>
+
       <div ng-switch-when="select" show-errors>
         <select
           dynamic-name="field.name"
