@@ -26,13 +26,15 @@ angular.module('cmsApp')
     $timeout(checkLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
+      var instance = CKEDITOR.instances.editor1;
+      var paste = '<strong>Algo deu errado :/</strong>';
       if(obj.small){
-        var instance = CKEDITOR.instances.editor1;
-
-        var to_paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
-        instance.insertHtml( to_paste );
+        paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
+      }else if(obj.link){
+        paste = '<a href="'+obj.link+'">'+obj.title+'</a>';
       }
-
+      instance.insertHtml( paste );
+      instance.focus();
     };
   }])
   .directive('ckEditor', function ($q, $timeout, ENV) {
