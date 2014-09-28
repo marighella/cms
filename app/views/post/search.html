@@ -28,8 +28,8 @@
         </td>
         <td>
           <span ng-show='post.metadata'>
-            <i class="fa fa-eye" ng-show='post.metadata.published' title='noticia publicada'></i>
-            <i class="fa fa-eye-slash" ng-show='!post.metadata.published' title='noticia em rascunho'></i>
+            <span class="label label-default" ng-show='!post.metadata.published' >Rascunho</span>
+            <span class="label label-primary" ng-show='post.metadata.published' >Publicada</span>
           </span>
         </td>
         <td>
