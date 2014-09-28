@@ -15,7 +15,7 @@
     </div>
 
     <li ng-repeat="file in files" ng-class="{'active': ( _index === $index ) }">
-      <img src="{{ file.thumbnail }}" alt="{{ file.desc }}" title="{{ file.desc }}" ng-click="$parent._index = $index;" />
+      <img src="{{ file.thumbnail }}" alt="{{ file.title }}" title="{{ file.title }}" ng-click="$parent._index = $index;" />
     </li>
   </ul>
 
