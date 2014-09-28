@@ -11,6 +11,14 @@
 
     img {
       max-width: 360px;
+      cursor: pointer;
+
+      &:hover {
+        -moz-box-shadow: 0 0 60px #ccc;
+        -webkit-box-shadow: 0 0 60px #ccc;
+        box-shadow: 0 0 60px #ccc;
+      }
+
     }
   }
 

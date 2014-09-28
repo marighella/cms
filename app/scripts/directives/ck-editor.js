@@ -6,7 +6,7 @@
 
 var $defer, loaded;
 angular.module('cmsApp')
-  .run(['$q', '$timeout', function($q, $timeout) {
+  .run(['$rootScope','$q', '$timeout', function($rootScope, $q, $timeout) {
     $defer = $q.defer();
 
     if (angular.isUndefined(window.CKEDITOR)) {
@@ -24,6 +24,16 @@ angular.module('cmsApp')
     }
     CKEDITOR.on('loaded', checkLoaded);
     $timeout(checkLoaded, 100);
+
+    $rootScope.insertImageCKEditor = function(obj){
+      if(obj.small){
+        var instance = CKEDITOR.instances.editor1;
+
+        var to_paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
+        instance.insertHtml( to_paste );
+      }
+
+    };
   }])
   .directive('ckEditor', function ($q, $timeout, ENV) {
     return {
