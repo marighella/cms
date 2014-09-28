@@ -28,7 +28,12 @@ angular.module('cmsApp')
       return true;
     });
 
-    function save(form, publish){
+    $scope.save = function(form, action){
+      if(action !== 'publish' && action !== 'draft'){
+        return;
+      }
+      var publish = (action === 'publish');
+
       var year = $routeParams.year;
       var month = $routeParams.month;
       var sha = $routeParams.sha;
@@ -46,7 +51,7 @@ angular.module('cmsApp')
           $location.path('/post/search');
         });
       }
-    }
+    };
 
     $scope.$on('upload-file', function(event, args) {
       $scope.files.push(args.file);
@@ -58,13 +63,6 @@ angular.module('cmsApp')
       $scope.upload.done = 0;
     });
 
-    $scope.draft = function(form){
-      save(form,false);
-    };
-
-    $scope.publish = function(form){
-      save(form,true);
-    };
 
     $scope.load = function(){
       var post = {

@@ -4,6 +4,15 @@
     margin-bottom: 10px;
   }
 
+  .draft {
+   .action {
+     width: 95%;
+   }
+   .action-caret {
+     width: 5%;
+   }
+  }
+
   .datepicker {
     button {
       border: 0;

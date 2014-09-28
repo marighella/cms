@@ -90,19 +90,30 @@
     <input type='text' ng-model='cover' name='cover' required ng-hide='true'/>
   </div>
 
-  <button ng-click="draft(postForm)" class="btn btn-default btn-block draft"
-    ng-disabled="state != 'default'">
-    <strong ng-show="state == 'default'">Mandar para o rascunho!</strong>
-    <strong ng-show="state == 'saving'">Salvando...
+  <button class="btn btn-default btn-block draft" ng-disabled="true" ng-show="state != 'default'">
+    <strong>Trabalhando...
       <i class="fa fa-cog fa-spin" ></i>
     </strong>
   </button>
 
-  <button ng-click="publish(postForm)" class="btn btn-default btn-block draft"
-    ng-disabled="state != 'default'">
-    <strong ng-show="state == 'default'">Publicar no site!</strong>
-    <strong ng-show="state == 'saving'">Publicando...
-      <i class="fa fa-cog fa-spin" ></i>
-    </strong>
-  </button>
+  <div class="btn-group btn-block draft" ng-hide="state != 'default'">
+    <button type="button" class="btn btn-default action" ng-click='save(postForm, action)'>
+      Terminou? E agora nós vamos
+      <span ng-show='!action || action === "nothing" '>...</span>
+      <strong ng-show='action === "publish"'>Publicar!</strong>
+      <strong ng-show='action === "draft"'>Salvar!</strong>
+    </button>
+    <button type="button" class="btn btn-default dropdown-toggle action-caret" data-toggle="dropdown">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a ng-click='action = "nothing"'>Ainda estou na duvida...</a></li>
+      <li class="divider"></li>
+      <li><a ng-click='action = "draft"'>Mandar para o <span class="label label-default">rascunho</span> e terminar depois</a></li>
+      <li><a ng-click='action = "publish"'><span class="label label-primary">Publicar</span> e levar o conhecimento ao povo!</a></li>
+    </ul>
+  </div>
+
+
 </form>
