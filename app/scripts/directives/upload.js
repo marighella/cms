@@ -12,6 +12,10 @@ angular.module('cmsApp')
           scope.uploadFiles(files);
           event.target.value = '';
         });
+
+        scope.$on('$destroy', function() {
+          el.unbind('change');
+        });
       }
     };
   });

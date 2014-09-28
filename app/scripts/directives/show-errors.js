@@ -30,6 +30,10 @@ angular.module('cmsApp').
       scope.$on('submited', function() {
         toggleClass();
       });
+
+      scope.$on('$destroy', function() {
+        el.unbind('submited blur');
+      });
     }
   };
 });
