@@ -1,9 +1,10 @@
 <form name="postForm" nonvalidate ng-init='load()' class='create'>
   <div class='form-group'
     ng-repeat="field in fields"
-    ng-switch on="field.type.view">
+    ng-switch on="field.type.view"
+    ng-hide='field.type.view === "cover"'>
     <label class='control-label' for='{{ field.name }}'
-      ng-hide='field.type.view === "cover"'>
+      dynamic-show='field'>
       <i class="fa {{ field.icon }}"></i>
       {{ field.title }}
     </label>
@@ -22,7 +23,7 @@
         </div>
       </div>
 
-      <div ng-switch-when="video" show-errors>
+      <div ng-switch-when="video" show-errors dynamic-show='field'>
         <input type="text"
         dynamic-name="field.name"
         class="form-control"
@@ -34,7 +35,7 @@
         <youtube ng-show="entity[field.name]" url="{{ entity[field.name] }}"></youtube>
       </div>
 
-      <div ng-switch-when="textarea" show-errors>
+      <div ng-switch-when="textarea" show-errors dynamic-show='field'>
         <textarea type="text"
           dynamic-name="field.name"
           class="form-control"
@@ -46,7 +47,7 @@
         </textarea>
       </div>
 
-      <div ng-switch-when="text" show-errors>
+      <div ng-switch-when="text" show-errors dynamic-show='field'>
         <input type="text"
           dynamic-name="field.name"
           class="form-control"
@@ -57,7 +58,7 @@
         </input>
       </div>
 
-      <div ng-switch-when="select" show-errors>
+      <div ng-switch-when="select" show-errors dynamic-show='field'>
         <select
           dynamic-name="field.name"
           ng-model="entity[field.name]"
@@ -67,7 +68,7 @@
           <option value="">-- Nenhum --</option>
         </select>
       </div>
-      <div ng-switch-when="tagging" show-errors>
+      <div ng-switch-when="tagging" show-errors dynamic-show='field'>
         <tags-input
           ng-model="entity[field.name]"
           dynamic-name="field.name"
