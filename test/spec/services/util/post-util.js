@@ -15,6 +15,33 @@ describe('Service: PostUtil', function () {
     expect(!!PostUtil).toBe(true);
   });
 
+  describe('load post from markdown', function (){
+    beforeEach(inject(function (_PostUtil_) {
+      PostUtil = _PostUtil_;
+
+      PostUtil.decodeContent = function(c){
+        return c;
+      };
+    }));
+
+    it('should load text', function(){
+      var md = '---\ntitle: Rodrigo\n---Texto em HTML com dash';
+      var post = PostUtil.load(md);
+
+      expect(post.metadata.title).toBe('Rodrigo');
+      expect(post.body).toBe('Texto em HTML com dash');
+    });
+
+    it('should load text with triple dash inside body', function(){
+      var md = '---\ntitle: Rodrigo\n---Texto em HTML com dash\n---\nFim do Texto';
+      var post = PostUtil.load(md);
+
+      expect(post.metadata.title).toBe('Rodrigo');
+      expect(post.body).toBe('Texto em HTML com dash\n---\nFim do Texto');
+    });
+  });
+
+
   describe('prepare post to save on draft mode', function (){
     beforeEach(inject(function (_PostUtil_) {
       PostUtil = _PostUtil_;

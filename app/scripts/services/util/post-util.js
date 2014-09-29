@@ -27,19 +27,18 @@ angular.module('cmsApp')
       return today.toISOString().split('T')[0];
     }
 
-
-
-
-
     this.decodeContent = function(content){
       return decodeURIComponent(escape(atob(content)));
     };
     this.load = function(content){
       var post = {};
-      var parts = decodeURIComponent(escape(atob(content))).split('---');
+      var parts = this.decodeContent(content).split('---');
+      parts = _.compact(parts);
+      var metadata = parts.shift();
+      var body  = parts.join('---');
 
-      post.body = parts.pop().replace(/^\n/, '');
-      post.metadata = window.jsyaml.load(parts.pop());
+      post.body = body.replace(/^\n/, '');
+      post.metadata = window.jsyaml.load(metadata);
       post.createdTime = DateUtil.fromISO8601(post.metadata.date).toMilliseconds();
 
       return post;

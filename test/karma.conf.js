@@ -32,6 +32,7 @@ module.exports = function(config) {
       'bower_components/angular-strap/dist/angular-strap.min.js',
       'bower_components/ng-tags-input/ng-tags-input.js',
       'bower_components/underscore/underscore.js',
+      'bower_components/js-yaml/dist/js-yaml.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
