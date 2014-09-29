@@ -32,7 +32,6 @@
         ng-pattern="{{ field.pattern }}"
         dynamic-required="field"
         />
-        <youtube ng-show="entity[field.name]" url="{{ entity[field.name] }}"></youtube>
       </div>
 
       <div ng-switch-when="textarea" show-errors dynamic-show='field'>
