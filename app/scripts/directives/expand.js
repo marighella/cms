@@ -24,8 +24,12 @@ angular.module('cmsApp')
         scope.$watch(function(){
           return el[0].value;
         }, function(){
-            expandInput();
-          });
+          expandInput();
+        });
+
+        scope.$on('$destroy', function() {
+          el.unbind('keyup');
+        });
       }
     };
   });
