@@ -1,5 +1,6 @@
 'use strict';
 /* jshint undef:false */
+/* jshint camelcase: false */
 /*
  * code font: https://github.com/esvit/ng-ckeditor/blob/master/ng-ckeditor.js
  */
@@ -26,7 +27,7 @@ angular.module('cmsApp')
     $timeout(checkLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
-      var instance = CKEDITOR.instances.editor1;
+      var instance = CKEDITOR.instances.editor_loko;
       var paste = '<strong>Algo deu errado :/</strong>';
       if(obj.small){
         paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
@@ -49,7 +50,6 @@ angular.module('cmsApp')
         var onLoad = function () {
           var options = {
             toolbar: 'full',
-            /*jshint camelcase: false */
             toolbar_full: [
               { name: 'basicstyles',
                 items: [ 'Bold', 'Italic', 'Strike', 'Underline' ] },
