@@ -1,0 +1,24 @@
+<button class="btn btn-default btn-block draft" ng-disabled="true" ng-show="state != 'default'">
+  <strong>Trabalhando...
+    <i class="fa fa-cog fa-spin" ></i>
+  </strong>
+</button>
+
+<div class="btn-group btn-block options" ng-hide="state != 'default'">
+  <button type="button" class="btn btn-default action" ng-click='save(postForm, action)'>
+    Terminou? E agora nós vamos
+    <span ng-show='!action || action === "nothing" '>...</span>
+    <span ng-show='action === "publish"' class="label label-default">Rascunho</span>
+    <span ng-show='action === "draft"' class="label label-primary">Publicar</span>
+  </button>
+  <button type="button" class="btn btn-default dropdown-toggle action-caret" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a ng-click='action = "nothing"' class='nothing' >Ainda estou na duvida...</a></li>
+    <li class="divider"></li>
+    <li><a ng-click='action = "draft"' class='draft'>Mandar para o <span class="label label-default">rascunho</span> e terminar depois</a></li>
+    <li><a ng-click='action = "publish"' class='publish'><span class="label label-primary">Publicar</span> e levar o conhecimento ao povo!</a></li>
+  </ul>
+</div>
