@@ -15,11 +15,7 @@ angular.module('cmsApp')
     }
 
     function replaceSpaceWithDash(string) {
-
-      var result = string.replace(/[ ]([a-zA-Z0-9])/g, function (match, firstGroup) {
-        return '-' + firstGroup;
-      });
-
+      var result = string.replace(/\s+/g, '-');
       return result;
     }
     function formatDate(post) {
