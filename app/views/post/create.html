@@ -85,9 +85,9 @@
   <div ng-include="'views/post/include/gallery.html'">
   </div>
 
-  <div class='alert-cover' ng-show='!cover'>
+  <div class='alert-cover' dynamic-show='coverField'>
     <label>Não se esqueça de colocar uma imagem como capa!</label>
-    <input type='text' ng-model='cover' name='cover' required ng-hide='true'/>
+    <input type='text' ng-model='cover' name='cover' dynamic-required="coverField" ng-hide='true'/>
   </div>
 
   <button class="btn btn-default btn-block draft" ng-disabled="true" ng-show="state != 'default'">
