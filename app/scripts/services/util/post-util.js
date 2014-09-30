@@ -41,7 +41,6 @@ angular.module('cmsApp')
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);
-
       var compiled = ['---', window.jsyaml.dump(post.metadata), '---', post.body].join('\n');
       return unescape(encodeURIComponent(compiled));
     };
@@ -62,6 +61,7 @@ angular.module('cmsApp')
         filename: filename
       };
       post.filename = this.generateFileName(post);
+      post.metadata.layout = 'post';
       post.metadata.files = files;
       post.metadata.published = (toPublish === true);
 

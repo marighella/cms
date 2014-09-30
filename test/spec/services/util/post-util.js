@@ -41,6 +41,27 @@ describe('Service: PostUtil', function () {
     });
   });
 
+  describe('default params on metadata', function (){
+    beforeEach(inject(function (_PostUtil_) {
+      PostUtil = _PostUtil_;
+
+      PostUtil.generateFileName = function(){
+        return '2014-03-04-ola-ola-ola.md';
+      };
+    }));
+
+    it('should add default layout', function() {
+      var metadata = {
+          date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+          title: 'test titulo de post'
+      };
+      var body = '';
+
+      var post = PostUtil.preparePost(metadata, body);
+
+      expect(post.metadata.layout).toBe('post');
+    });
+  });
 
   describe('prepare post to save on draft mode', function (){
     beforeEach(inject(function (_PostUtil_) {
@@ -66,7 +87,7 @@ describe('Service: PostUtil', function () {
     });
   });
 
-  describe('the way to work with of file', function (){
+  describe('the way to work with files', function (){
     it('should exists', function (){
       expect(!!PostUtil.prepareListOfFiles).toBeTruthy();
     });
