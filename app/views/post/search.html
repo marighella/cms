@@ -1,8 +1,34 @@
 <div class='search'>
-  <a href="#/post/{{ filter.year }}/{{ filter.month }}" class="btn btn-default btn-block">
-    <span class="glyphicon glyphicon-play"></span>
-    <strong>Nova Notícia</strong>
-  </a>
+
+  <div class='form-group'>
+    <a href="#/post/{{ filter.year }}/{{ filter.month }}" class="btn btn-default btn-block">
+      <span class="glyphicon glyphicon-play"></span>
+      <strong>Nova Notícia</strong>
+    </a>
+  </div>
+
+  <div class="form-inline">
+    <div class="form-group">
+      <div year-drop offset="-4" range="0"></div>
+    </div>
+    <div class="form-group">
+      <select ng-model='filter.month' class='form-control' ng-change='find()'>
+        <option value='0'>Janeiro</option>
+        <option value='1'>Fevereiro</option>
+        <option value='2'>Março</option>
+        <option value='3'>Abril</option>
+        <option value='4'>Maio</option>
+        <option value='5'>Junho</option>
+        <option value='6'>Julho</option>
+        <option value='7'>Agosto</option>
+        <option value='8'>Setembro</option>
+        <option value='9'>Outubro</option>
+        <option value='10'>Novembro</option>
+        <option value='11'>Dezembro</option>
+      </select>
+    </div>
+  </div>
+
   <table class="table table-striped">
     <thead>
       <tr>

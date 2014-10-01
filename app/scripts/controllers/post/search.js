@@ -30,9 +30,13 @@ angular.module('cmsApp')
       });
     };
 
-    Repository.post.list($rootScope.user, $scope.filter).then(function(result){
-      $scope.posts = result.reverse();
-      $scope.pageChanged();
-    });
+    $scope.find = function(){
+      Repository.post.list($rootScope.user, $scope.filter).then(function(result){
+        $scope.posts = result.reverse();
+        $scope.pageChanged();
+      });
+    };
+
+    $scope.find();
 
   });
