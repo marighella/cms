@@ -30,7 +30,7 @@
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
         ng-pattern="{{ field.pattern }}"
-        dynamic-required="field"
+        dynamic-required field="field"
         />
       </div>
 
@@ -53,7 +53,7 @@
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
           placeholder="{{ field.placeholder }}"
-          dynamic-required="field">
+          dynamic-required field="field">
         </input>
       </div>
 
@@ -62,7 +62,7 @@
           dynamic-name="{{ field.name }}"
           ng-model="entity[field.name]"
           ng-options="item.id as item.name for item in field.type.options"
-          dynamic-required="field"
+          dynamic-required field="field"
           class="form-control">
           <option value="">-- Nenhum --</option>
         </select>
@@ -87,7 +87,7 @@
 
   <div class='alert-cover' dynamic-show field="coverField">
     <label>Não se esqueça de colocar uma imagem como capa!</label>
-    <input type='text' ng-model='cover' name='cover' dynamic-required="coverField" ng-hide='true'/>
+    <input type='text' ng-model='cover' name='cover' dynamic-required field="coverField" ng-hide='true'/>
   </div>
 
   <div ng-include="'views/post/include/button-action.html'">

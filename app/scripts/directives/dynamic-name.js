@@ -16,6 +16,7 @@ angular.module('cmsApp')
     link: {
       post: function postLink(scope, element, attrs){
         element.attr('name', attrs.dynamicName);
+        element.removeAttr('dynamic-name');
         $compile(element)(scope);
       }
     }

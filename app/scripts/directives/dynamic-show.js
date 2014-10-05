@@ -14,7 +14,7 @@ angular.module('cmsApp')
         field: '=field'
       },
       link: {
-        post: function (scope, element, attrs) {
+        post: function (scope, element) {
 
           var field = scope.field || false;
           if(!field){
@@ -33,6 +33,7 @@ angular.module('cmsApp')
           }
 
           element.removeAttr('dynamic-show');
+
           $compile(element)(scope);
         }
       }

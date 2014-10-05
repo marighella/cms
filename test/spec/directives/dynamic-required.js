@@ -16,9 +16,9 @@ describe('Directive: dynamicRequired', function () {
     it('should put default required when do not have field "need"', inject(function ($compile) {
 
       scope.field = {
-      
+
       };
-      element = angular.element('<input dynamic-required="field"/>');
+      element = angular.element('<input dynamic-required field="field"/>');
       element = $compile(element)(scope);
       expect(element.attr('ng-required')).toBe('field.required');
     }));
@@ -31,7 +31,7 @@ describe('Directive: dynamicRequired', function () {
           value: 'tv'
         }
       };
-      element = angular.element('<input dynamic-required="field"/>');
+      element = angular.element('<input dynamic-required field="field"/>');
       element = $compile(element)(scope);
       expect(element.attr('ng-required')).toBe('entity.section===\'tv\'');
     }));
@@ -44,7 +44,7 @@ describe('Directive: dynamicRequired', function () {
           value: 'tv'
         }
       };
-      element = angular.element('<input dynamic-required="field"/>');
+      element = angular.element('<input dynamic-required field="field"/>');
       element = $compile(element)(scope);
       expect(element.attr('ng-required')).toBe('entity.section!==\'tv\'');
     }));
