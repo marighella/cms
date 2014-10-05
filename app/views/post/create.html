@@ -25,7 +25,7 @@
 
       <div ng-switch-when="video" show-errors dynamic-show='field'>
         <input type="text"
-        dynamic-name="field.name"
+        dynamic-name="{{ field.name }}"
         class="form-control"
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
@@ -36,7 +36,7 @@
 
       <div ng-switch-when="textarea" show-errors dynamic-show='field'>
         <textarea type="text"
-          dynamic-name="field.name"
+          dynamic-name="{{ field.name }}"
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
@@ -48,7 +48,7 @@
 
       <div ng-switch-when="text" show-errors dynamic-show='field'>
         <input type="text"
-          dynamic-name="field.name"
+          dynamic-name="{{ field.name }}"
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
@@ -59,7 +59,7 @@
 
       <div ng-switch-when="select" show-errors dynamic-show='field'>
         <select
-          dynamic-name="field.name"
+          dynamic-name="{{ field.name }}"
           ng-model="entity[field.name]"
           ng-options="item.id as item.name for item in field.type.options"
           dynamic-required="field"
@@ -70,7 +70,7 @@
       <div ng-switch-when="tagging" show-errors dynamic-show='field'>
         <tags-input
           ng-model="entity[field.name]"
-          dynamic-name="field.name"
+          dynamic-name="{{ field.name }}"
           display-property="tag"
           class='tag-input'
           placeholder="{{ field.placeholder }}">
