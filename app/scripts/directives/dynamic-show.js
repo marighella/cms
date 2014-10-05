@@ -14,6 +14,9 @@ angular.module('cmsApp')
       priority:1000,
       link: function postLink(scope, element, attrs) {
         var field = scope.$eval(attrs.dynamicShow);
+        if(!field){
+          return;
+        }
         var need = field.need;
 
         if(need){
