@@ -23,20 +23,19 @@
         </div>
       </div>
 
-      <div ng-switch-when="video" show-errors dynamic-show='field'>
+      <div ng-switch-when="video" show-errors dynamic-field='field'>
         <input type="text"
-        dynamic-name="field.name"
         class="form-control"
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
         ng-pattern="{{ field.pattern }}"
-        dynamic-required="field"
+        dynamic-field="field"
         />
       </div>
 
-      <div ng-switch-when="textarea" show-errors dynamic-show='field'>
+      <div ng-switch-when="textarea" show-errors dynamic-field='field'>
         <textarea type="text"
-          dynamic-name="field.name"
+          dynamic-field="field"
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
@@ -46,31 +45,29 @@
         </textarea>
       </div>
 
-      <div ng-switch-when="text" show-errors dynamic-show='field'>
+      <div ng-switch-when="text" show-errors dynamic-field='field'>
         <input type="text"
-          dynamic-name="field.name"
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
           placeholder="{{ field.placeholder }}"
-          dynamic-required="field">
+          dynamic-field="field">
         </input>
       </div>
 
-      <div ng-switch-when="select" show-errors dynamic-show='field'>
+      <div ng-switch-when="select" show-errors dynamic-field='field'>
         <select
-          dynamic-name="field.name"
           ng-model="entity[field.name]"
           ng-options="item.id as item.name for item in field.type.options"
-          dynamic-required="field"
+          dynamic-field="field"
           class="form-control">
           <option value="">-- Nenhum --</option>
         </select>
       </div>
-      <div ng-switch-when="tagging" show-errors dynamic-show='field'>
+      <div ng-switch-when="tagging" show-errors dynamic-field='field'>
         <tags-input
           ng-model="entity[field.name]"
-          dynamic-name="field.name"
+          dynamic-field="field"
           display-property="tag"
           class='tag-input'
           placeholder="{{ field.placeholder }}">
@@ -85,9 +82,9 @@
   <div ng-include="'views/post/include/gallery.html'">
   </div>
 
-  <div class='alert-cover' dynamic-show='coverField'>
+  <div class='alert-cover' dynamic-field='coverField'>
     <label>Não se esqueça de colocar uma imagem como capa!</label>
-    <input type='text' ng-model='cover' name='cover' dynamic-required="coverField" ng-hide='true'/>
+    <input type='text' ng-model='cover' name='cover' dynamic-field="coverField" ng-hide='true'/>
   </div>
 
   <div ng-include="'views/post/include/button-action.html'">
