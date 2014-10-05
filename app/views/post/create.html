@@ -4,7 +4,7 @@
     ng-switch on="field.type.view"
     ng-hide='field.type.view === "cover"'>
     <label class='control-label' for='{{ field.name }}'
-      dynamic-show='field'>
+      dynamic-show field="field">
       <i class="fa {{ field.icon }}"></i>
       {{ field.title }}
     </label>
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div ng-switch-when="video" show-errors dynamic-show='field'>
+      <div ng-switch-when="video" show-errors dynamic-show field="field">
         <input type="text"
         dynamic-name="{{ field.name }}"
         class="form-control"
@@ -34,7 +34,7 @@
         />
       </div>
 
-      <div ng-switch-when="textarea" show-errors dynamic-show='field'>
+      <div ng-switch-when="textarea" show-errors dynamic-show field="field">
         <textarea type="text"
           dynamic-name="{{ field.name }}"
           class="form-control"
@@ -46,7 +46,7 @@
         </textarea>
       </div>
 
-      <div ng-switch-when="text" show-errors dynamic-show='field'>
+      <div ng-switch-when="text" show-errors dynamic-show field="field">
         <input type="text"
           dynamic-name="{{ field.name }}"
           class="form-control"
@@ -57,7 +57,7 @@
         </input>
       </div>
 
-      <div ng-switch-when="select" show-errors dynamic-show='field'>
+      <div ng-switch-when="select" show-errors dynamic-show field="field">
         <select
           dynamic-name="{{ field.name }}"
           ng-model="entity[field.name]"
@@ -67,7 +67,7 @@
           <option value="">-- Nenhum --</option>
         </select>
       </div>
-      <div ng-switch-when="tagging" show-errors dynamic-show='field'>
+      <div ng-switch-when="tagging" show-errors dynamic-show field="field">
         <tags-input
           ng-model="entity[field.name]"
           dynamic-name="{{ field.name }}"
@@ -85,7 +85,7 @@
   <div ng-include="'views/post/include/gallery.html'">
   </div>
 
-  <div class='alert-cover' dynamic-show='coverField'>
+  <div class='alert-cover' dynamic-show field="coverField">
     <label>Não se esqueça de colocar uma imagem como capa!</label>
     <input type='text' ng-model='cover' name='cover' dynamic-required="coverField" ng-hide='true'/>
   </div>
