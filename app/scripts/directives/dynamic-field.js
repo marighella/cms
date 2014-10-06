@@ -20,27 +20,15 @@ angular.module('cmsApp')
         var requiredField = need.field;
         var requiredValue = need.value;
         var condition     = (need.equal) ? '===' : '!==';
-        var query = ['entity.',requiredField,condition,'\'',requiredValue,'\''].join('');
 
+
+        var query = ['entity.',requiredField,condition,'\'',requiredValue,'\''].join('');
         element.attr('ng-required', query);
+        element.attr('ng-show', query);
       }else {
         element.attr('ng-required', 'field.required');
       }
     }
-
-    function addDynamicShow(element, field){
-      var need = field.need;
-
-      if(need){
-        var requiredField = need.field;
-        var requiredValue = need.value;
-        var condition     = (need.equal) ? '===' : '!==';
-        var query = ['entity.',requiredField,condition,'\'',requiredValue,'\''].join('');
-
-        element.attr('ng-show', query);
-      }
-    }
-
   
     return {
       restrict:'A',
@@ -52,7 +40,6 @@ angular.module('cmsApp')
         if(field){
           addDynamicName(element, field);
           addDynamicRequired(element, field);
-          addDynamicShow(element, field);
 
           element.removeAttr('dynamic-field');
           $compile(element)(scope);
