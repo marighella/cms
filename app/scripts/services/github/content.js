@@ -10,50 +10,44 @@
  */
 angular.module('cmsApp')
   .factory('GithubContent', function ($q, Resource, PostUtil, DateUtil) {
+    function promiseGithub(address, then){
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+      var github = Resource.github;
+      then = then || function(data){return data;};
+
+      github.get(address,{
+          cache: false
+      }).then(function(data){
+        return deferred.resolve(then(data));
+      });
+
+      return promise;
+    }
+
     return {
       skelleton: function(user){
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var github = Resource.github;
         var address = ['repos',user.repository.full_name,'contents/skelleton.json?ref=master'].join('/');
+        var then = function(data){
+          return PostUtil.decodeContent(data.content);
+        };
 
-        github.get(address, { type: 'GET' }).then(function(data){
-          var skelleton = PostUtil.decodeContent(data.content);
-          return deferred.resolve(skelleton);
-        });
-
-        return promise;
+        return promiseGithub(address, then);
       },
       post: function (post) {
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var github = Resource.github;
-
-        github.get(post.url).then(function(data){
+        var then = function(data){
           var post = PostUtil.load(data.content);
-
           post.filename = data.name;
+          return post;
+        };
 
-          return deferred.resolve(post);
-        });
-
-        return promise;
+        return promiseGithub(post.url, then);
       },
       posts: function (user, filter) {
         var yearMonth = DateUtil.format(filter.year, filter.month);
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth].join('/');
 
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        var github = Resource.github;
-
-        github.get(address, {
-          cache: false
-        }).then(function(data){
-          return deferred.resolve(data);
-        });
-
-        return promise;
+        return promiseGithub(address);
       },
       save: function(user, post, year, month, sha) {
         var obj = PostUtil.serialize(post);
