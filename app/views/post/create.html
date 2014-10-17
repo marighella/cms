@@ -10,16 +10,16 @@
     </label>
 
       <div class="form-inline datepicker" ng-switch-when="date">
-        <div class="form-group">
+        <div class="form-group" show-errors dynamic-field="field">
           <input type="text" size="10" class="form-control"
           ng-model="entity[field.name]"
            data-date-format="dd/MM/yyyy"
-          data-autoclose="1" placeholder="Date" data-max-date='today' bs-datepicker>
+          data-autoclose="1" placeholder="Date" data-max-date='today' bs-datepicker dynamic-field="field">
         </div>
-        <div class="form-group">
+        <div class="form-group" show-errors dynamic-field="field">
           <input type="text" size="8" class="form-control"
           ng-model="entity[field.name]"
-          data-autoclose="1" placeholder="Time" bs-timepicker>
+          data-autoclose="1" placeholder="Time" bs-timepicker dynamic-field="field">
         </div>
       </div>
 
