@@ -44,19 +44,20 @@ angular.module('cmsApp')
         return promiseGithub(post.url, then);
       },
       posts: function (user, filter) {
-        var yearMonth = DateUtil.format(filter.year, filter.month);
+        var yearMonth = DateUtil.format(new Date(filter.year, filter.month));
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth].join('/');
 
         return promiseGithub(address);
       },
-      save: function(user, post, year, month, sha) {
+      save: function(user, post, sha) {
         var obj = PostUtil.serialize(post);
         var commit = JSON.stringify({
           sha: sha,
           content: btoa(obj),
           message: 'commit from cms'
         });
-        var yearMonth = DateUtil.format(year, month);
+
+        var yearMonth = DateUtil.format(post.metadata.date);
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth, post.filename].join('/');
 
         var deferred = $q.defer();

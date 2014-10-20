@@ -36,11 +36,11 @@ describe('Service: DateUtil', function () {
       expect(!!DateUtil.format).toBeTruthy();
     });
 
-    it('should transform year and month on string', function (){
+    it('should transform date on year/month string', function (){
       var year = 2009;
       var month = 8;
 
-      expect(DateUtil.format(year, month)).toBe('2009/09');
+      expect(DateUtil.format(new Date(year, month))).toBe('2009/09');
     });
   });
 });

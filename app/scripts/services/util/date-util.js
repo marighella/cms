@@ -35,11 +35,8 @@ angular.module('cmsApp')
         return (new Date()).getFullYear();
       }
     };
-
-    this.format = function(year, month){
-      var date = new Date(year, month);
-
-      return $filter('date')(date,'yyyy/MM');
+    this.format = function(date){
+      return $filter('date')(new Date(date),'yyyy/MM');
     };
 
     this.toISO8601 = function(date){

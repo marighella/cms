@@ -33,9 +33,7 @@ angular.module('cmsApp')
         return;
       }
       var publish = (action === 'publish');
-
-      var year = $routeParams.year;
-      var month = $routeParams.month;
+      
       var sha = $routeParams.sha;
 
       $scope.$broadcast('submited');
@@ -45,7 +43,7 @@ angular.module('cmsApp')
         var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
         post.metadata[$scope.coverField.name] = $scope.cover;
 
-        Repository.post.save($rootScope.user, post, year, month, sha)
+        Repository.post.save($rootScope.user, post, sha)
         .then(function(){
           $scope.state = 'default';
           $location.path('/post/search');
