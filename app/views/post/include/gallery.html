@@ -25,7 +25,7 @@
     <label ng-show='files.length > 0 && files[_index].small'>
       <input type="checkbox"
              ng-checked='files[_index].small === $parent.cover'
-             ng-click='$parent.cover = files[_index].small'>
+             ng-click='toggleCover(files[_index].small)'>
              Imagem como capa
     </label>
   </div>

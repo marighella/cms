@@ -78,4 +78,13 @@ angular.module('cmsApp')
         });
       }
     };
+
+    $scope.toggleCover = function(newCover) {
+      if ($scope.cover === newCover) {
+        $scope.cover = null;
+        return;
+      } 
+
+      $scope.cover = newCover;
+    };
   });
