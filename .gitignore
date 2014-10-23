@@ -11,3 +11,4 @@ app/ckeditor/
 .DS_Store
 app/.DS_Store
 app/ckeditor-plugins/.DS_Store
+npm-debug.log
