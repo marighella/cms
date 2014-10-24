@@ -48,6 +48,8 @@ angular.module('cmsApp')
           $scope.state = 'default';
           $location.path('/post/search');
         });
+      }else if(typeof $scope.body === 'undefined'){
+        $('#cke_editor_loko').addClass('ckeditor-error');
       }
     };
 
