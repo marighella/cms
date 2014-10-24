@@ -12,7 +12,7 @@ angular.module('cmsApp')
     $scope.posts = [];
     $scope.maxSize = 5;
     $scope.currentPage = 1;
-    $scope.user = $rootScope.user;
+    $scope.ready = false;
     $scope.filter = {
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear()
@@ -31,10 +31,24 @@ angular.module('cmsApp')
       });
     };
 
+    $scope.loadSkelleton = function(){
+      Repository.skelleton.get($scope.user).then(function(result){
+        $rootScope.user.skelleton = angular.fromJson(result);
+        $scope.ready = true;
+      });
+    };
+
     $scope.create = function(){
       var year = $scope.filter.year;
       var month = $scope.filter.month;
       $location.path('/post/'+year+'/'+month);
+    };
+
+    $scope.edit = function(post){
+      var year = $scope.filter.year;
+      var month = $scope.filter.month;
+
+      $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
     };
 
     $scope.find = function(){
@@ -45,5 +59,5 @@ angular.module('cmsApp')
     };
 
     $scope.find();
-
+    $scope.loadSkelleton();
   });

@@ -3,19 +3,19 @@
   <div class='form-group'>
     <button ng-click="create()"
       class="btn btn-default btn-block"
-      ng-disabled="!user.skelleton">
+      ng-disabled="!ready">
 
 
-      <span class="glyphicon glyphicon-play" ng-show='user.skelleton'>
+      <span class="glyphicon glyphicon-play" ng-show='ready'>
       </span>
-      <strong ng-show='user.skelleton'>
+      <strong ng-show='ready'>
         Nova Notícia
       </strong>
 
-      <span ng-hide='user.skelleton'>
+      <span ng-hide='ready'>
         <i class="fa fa-cog fa-spin" ></i>
       </span>
-      <strong ng-hide='user.skelleton'>
+      <strong ng-hide='ready'>
         Carregando informações adicionais, só um momento companheira!
       </strong>
     </button>
@@ -73,9 +73,11 @@
           </span>
         </td>
         <td>
-          <a href="#/post/{{ filter.year }}/{{ filter.month  }}/{{ post.sha }}/{{ post.url }}" class="btn btn-default">
+          <button ng-click="edit(post)"
+            class="btn btn-default"
+            ng-disabled='!ready'>
             <span class='glyphicon glyphicon-pencil'></span> Editar
-          </a>
+          </button>
         </td>
       </tr>
     </tbody>

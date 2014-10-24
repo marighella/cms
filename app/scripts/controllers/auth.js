@@ -8,9 +8,6 @@ angular.module('cmsApp')
         $scope.user.repository = obj;
         $rootScope.user = $scope.user;
 
-        Repository.skelleton.get($scope.user).then(function(result){
-          $rootScope.user.skelleton = angular.fromJson(result);
-        });
         $location.path('/post/search');
       }
     };
