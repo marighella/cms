@@ -8,10 +8,11 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostSearchCtrl', function ($rootScope, $scope, DateUtil, Repository) {
+  .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, Repository) {
     $scope.posts = [];
     $scope.maxSize = 5;
     $scope.currentPage = 1;
+    $scope.user = $rootScope.user;
     $scope.filter = {
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear()
@@ -28,6 +29,12 @@ angular.module('cmsApp')
           });
         }
       });
+    };
+
+    $scope.create = function(){
+      var year = $scope.filter.year;
+      var month = $scope.filter.month;
+      $location.path('/post/'+year+'/'+month);
     };
 
     $scope.find = function(){

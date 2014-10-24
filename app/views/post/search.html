@@ -1,10 +1,24 @@
 <div class='search'>
 
   <div class='form-group'>
-    <a href="#/post/{{ filter.year }}/{{ filter.month }}" class="btn btn-default btn-block">
-      <span class="glyphicon glyphicon-play"></span>
-      <strong>Nova Notícia</strong>
-    </a>
+    <button ng-click="create()"
+      class="btn btn-default btn-block"
+      ng-disabled="!user.skelleton">
+
+
+      <span class="glyphicon glyphicon-play" ng-show='user.skelleton'>
+      </span>
+      <strong ng-show='user.skelleton'>
+        Nova Notícia
+      </strong>
+
+      <span ng-hide='user.skelleton'>
+        <i class="fa fa-cog fa-spin" ></i>
+      </span>
+      <strong ng-hide='user.skelleton'>
+        Carregando informações adicionais, só um momento companheira!
+      </strong>
+    </button>
   </div>
 
   <div class="form-inline">
