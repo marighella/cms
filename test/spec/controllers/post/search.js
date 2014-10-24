@@ -11,6 +11,8 @@ describe('Controller: PostSearchCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, Repository) {
     scope = $rootScope.$new();
+    scope.user = {};
+
     Repository.post = {
       list: function(){
         return {
@@ -19,8 +21,17 @@ describe('Controller: PostSearchCtrl', function () {
         };
       }
     };
+    Repository.skelleton = {
+      get: function(){
+        return {
+          then: function(){
+          }
+        };
+      }
+    };
     PostsearchCtrl = $controller('PostSearchCtrl', {
-      $scope: scope
+      $scope: scope,
+      $rootScope: scope
     });
   }));
 
