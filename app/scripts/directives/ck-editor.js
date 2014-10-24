@@ -33,7 +33,7 @@ angular.module('cmsApp')
       if(obj.small){
         paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
       }else if(obj.link){
-        link_name = prompt("Digite o texto do link", obj.title) || obj.title;
+        link_name = prompt('Digite o texto do link', obj.title) || obj.title;
         paste = '<a href="'+obj.link+'">'+ link_name+'</a>';
       }
       instance.insertHtml( paste );
