@@ -7,7 +7,7 @@
  * # dynamicRequired
  */
 angular.module('cmsApp')
-  .directive('dynamicField', function ($compile) {
+  .directive('dynamicField', function ($compile, _) {
 
     function addDynamicName(element, field){
       element.attr('name', field.name);
@@ -15,26 +15,21 @@ angular.module('cmsApp')
 
     function addDynamicRequired(element, field){
       var need = field.need;
-      var queries = [];
-      var values =[];
 
       if(need){
         var requiredField = need.field;
-        if(typeof need.value === "string")
-          values.push(need.value);    
-        else 
-          values = need.value;
+        var queries = [];
+        var values = _.flatten([need.value]);
 
-        for(var i=0; i < values.length; i++){
-          var requiredValue = values[i];
+        values.forEach(function(element){
+          var requiredValue = element;
           var condition     = (need.equal) ? '===' : '!==';
-          queries[i] = ['entity.',requiredField,condition,'\'',requiredValue,'\''].join('');
-        }
+          queries.push(['entity.', requiredField, condition, '\'', requiredValue, '\''].join(''));
+        });
        
         var query = queries.join('&&');
         element.attr('ng-required', query);
         element.attr('ng-show', query);
-      
       }else {
         element.attr('ng-required', 'field.required');
       }
