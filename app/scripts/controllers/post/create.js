@@ -69,7 +69,11 @@ angular.module('cmsApp')
       $scope.upload.done = 0;
     });
 
-
+    $scope.remove_image = function (image_index){
+      if(confirm("Deseja realmente remover este item?")){
+       $scope.files.splice(image_index, 1);
+      }
+    }
     $scope.load = function(){
       var post = {
         url: $routeParams.url
@@ -81,7 +85,6 @@ angular.module('cmsApp')
           $scope.body   = post.body;
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
-
           $scope.cover = post.metadata[$scope.coverField.name];
         });
       }

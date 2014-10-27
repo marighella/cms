@@ -48,12 +48,15 @@
       opacity: 0.6;
       border: 2px solid #AAAAAA;
       border-radius: 1px;
-      cursor: pointer;
       display: inline-block;
       margin: 0 8px;
       margin-top: 5px;
       position: relative;
       width: 80px;
+
+      img {
+        cursor: pointer;
+      }
 
       &.active {
         opacity: 1;
