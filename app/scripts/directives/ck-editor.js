@@ -58,7 +58,7 @@ angular.module('cmsApp')
             toolbar: 'full',
             toolbar_full: [
               { name: 'basicstyles',
-                items: [ 'Bold', 'Italic', 'Strike', 'Underline', 'audio' ] },
+                items: [ 'Bold', 'Italic', 'Strike', 'Underline' ] },
                 { name: 'paragraph', items: [ 'BulletedList', 'NumberedList', 'Blockquote' ] },
                 { name: 'editing', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
                 { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ]},

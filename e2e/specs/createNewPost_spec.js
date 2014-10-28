@@ -4,7 +4,6 @@ describe('create a new post',function(){
     var createPostPage = require('../pages/create_post.js');
     var helper = require("../helper.js");
     var searchPostsPage = require('../pages/posts.js');
-  
 
     beforeEach(function() {
       browser.sleep(2000);
@@ -14,9 +13,7 @@ describe('create a new post',function(){
       //helper.clear(createPostPage.timeField);
     });
 
-    iit('should add a new draft with valid data', function(){   
-      postData.TITLE = postData.TITLE+"aaaa";
-      createPostPage.postDraft();
+    it('should add a new draft with valid data', function(){
       createPostPage.fillAllDetails(postData, postData.SECTION);
       createPostPage.postDraft();
       browser.sleep(2*1000);
@@ -24,7 +21,7 @@ describe('create a new post',function(){
       searchPostsPage.selectMonth("Janeiro");
       browser.sleep(2000);
       expect(searchPostsPage.getColumnText(1)).toEqual(postData.TITLE);
-      expect(searchPostsPage.getColumnText(2)).toEqual("Rascunho");  
+      expect(searchPostsPage.getColumnText(2)).toEqual("Rascunho");
     });
 
     it('should add new draft with video', function(){
@@ -43,8 +40,8 @@ describe('create a new post',function(){
       browser.sleep(1*1000);
       expect(createPostPage.getCheckedSection()).toEqual(postData.SECTIONVIDEO);
       expect(createPostPage.videoField.getAttribute('value')).toEqual(postData.VIDEO);
-      browser.navigate().back(); 
-    });   
+      browser.navigate().back();
+    });
 
 });
 

@@ -1,5 +1,13 @@
 exports.config={
  seleniumAddress:"http://localhost:4444/wd/hub",
+ // Do not start a Selenium Standalone sever - only run this using chrome.
+ chromeOnly: true,
+ chromeDriver: '/usr/local/bin/chromedriver',
+ // Capabilities to be passed to the webdriver instance.
+ capabilities: {
+   'browserName': 'chrome'
+ },
+
  specs: ['specs/*_spec.js'],
  jasmineNodeOpts: {
    // If true, display spec names.

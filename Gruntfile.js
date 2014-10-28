@@ -133,7 +133,6 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          port: 9001,
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -416,6 +415,13 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    protractor: {
+      options: {
+        configFile: 'e2e/protractor.conf.js'
+      },
+      run: {}
     }
   });
 
@@ -478,5 +484,13 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('e2etest', [
+    'clean:constants',
+    'ngconstant:development',
+    'concurrent:server',
+    'connect:test',
+    'protractor:run'
   ]);
 };

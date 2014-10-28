@@ -33,7 +33,6 @@ angular.module('cmsApp')
         return;
       }
       var publish = (action === 'publish');
-      
       var sha = $routeParams.sha;
 
       $scope.$broadcast('submited');
@@ -48,8 +47,6 @@ angular.module('cmsApp')
           $scope.state = 'default';
           $location.path('/post/search');
         });
-      }else if(typeof $scope.body === 'undefined'){
-        $('#cke_editor_loko').addClass('ckeditor-error');
       }
     };
 

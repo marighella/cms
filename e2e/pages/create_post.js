@@ -1,21 +1,30 @@
 var PostPage = function () {
   this.helper = require('../helper.js');
+
+  // Dynamic fields
+  this.dateField = element(by.css('.date'));
+  this.timeField = element(by.css('.time'));
+  this.hatField =  element(by.id('hat'));
+  this.titleField = element(by.id('title'));
+  this.videoField = element(by.id('video'));
+  this.supportLineField = element(by.id('support_line'));
+  this.menuField = element(by.id('menu'));
+  this.menuElement = element(by.css('#menu option:checked'));
+  this.sectionField = element(by.id('section'));
+  this.sectionElement = element(by.css('#section option:checked'));
+
+  // Actions links
+  this.dropdownCaretButton =  element(by.css('button.action-caret'));
+  this.draftLink = element(by.css('a.draft'));
+  this.publishLink = element(by.css('a.publish'));
+  this.actionButton = element(by.css('button.action'));
   this.fileToUploadField = $('input[type="file"]');
-  this.dateField = element(by.name('date'));
-  this.timeField = element(by.name('time'));
-  this.hatField =  element(by.css('[name="hat"]'));
-  this.titleField = element(by.css('[name="title"]'));
-  this.supportLineField = element(by.css('[name="support_line"]'));
-  this.menuField = element(by.css('[name="menu"]'));
-  this.sectionField = element(by.name('section'));
+
+  // Specia fields
   this.tagField = element(by.model("newTag.text"));
-  this.videoField = element(by.css('[name="video"]'));
   this.imageCheckBoxField = element(by.css('[class="image_checkbox"]'));
-  this.dropdownCaretButton =  element(by.css('[class="btn btn-default dropdown-toggle action-caret"]'));
-  this.draftLink = element(by.css('[class="draft"]'));
-  this.publishLink = element(by.css('[class="publish"]'));
-  this.actionButton = element(by.css('[class="btn btn-default action"]'));
-  this.allInputFields = element.all(by.css('input, textarea')); 
+  this.allInputFields = element.all(by.css('input, textarea'));
+
   this.fillFileToUpload = function (fileToUpload){
     this.fileToUploadField.sendKeys(fileToUpload);
   }
@@ -63,25 +72,23 @@ var PostPage = function () {
   }
   this.fillAllDetails = function (postData, SECTION){
     this.fillDate(postData.DATE);
-   // this.fillTime(postData.TIME);
     this.fillHat(postData.HAT);
-    this.fillFileToUpload(postData.FILETOUPLOAD);
     this.fillTitle(postData.TITLE);
     this.fillSupportLine(postData.SUPPORTLINE);
     this.fillMenu(postData.MENU);
     this.fillSection(SECTION);
     this.fillTag(postData.TAG);
-    this.helper.waitUntilIsDisplayed(protractor.getInstance(), this.imageCheckBoxField, 14000);
-    this.checkImageCheckBox();
   }
   this.postDraft = function(){
     this.clickDropdownCaretButton();
     this.clickDraftLink();
+    browser.sleep(1000);
     this.clickActionButton();
   }
   this.publish = function(){
     this.clickDropdownCareButton();
     this.clickPublishLink();
+    browser.sleep(1000);
     this.clickActionButton();
   }
   this.cleanFields = function(numberOfFields){
@@ -91,10 +98,10 @@ var PostPage = function () {
     });
   }
   this.getCheckedSection = function(){
-    return element(by.css('[name="section"')).$("option:checked").getText();
+    return this.sectionElement.getText();
   }
   this.getCheckedMenu = function(){
-    return this.menuField.$("option:checked").getText();
+    return this.menuElement.getText();
   }
 };
 

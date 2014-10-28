@@ -11,13 +11,13 @@
 
       <div class="form-inline datepicker" ng-switch-when="date">
         <div class="form-group" show-errors dynamic-field="field">
-          <input type="text" size="10" class="form-control"
+          <input type="text" size="10" class="form-control date"
           ng-model="entity[field.name]"
-           data-date-format="dd/MM/yyyy"
+          data-date-format="dd/MM/yyyy"
           data-autoclose="1" placeholder="Date" data-max-date='today' bs-datepicker dynamic-field="field">
         </div>
         <div class="form-group" show-errors dynamic-field="field">
-          <input type="text" size="8" class="form-control"
+          <input type="text" size="8" class="form-control time"
           ng-model="entity[field.name]"
           data-autoclose="1" placeholder="Time" bs-timepicker dynamic-field="field">
         </div>
@@ -25,6 +25,7 @@
 
       <div ng-switch-when="video" show-errors dynamic-field='field'>
         <input type="text"
+        ng-attr-id='{{ field.name }}'
         class="form-control"
         ng-model="entity[field.name]"
         placeholder="{{ field.placeholder }}"
@@ -36,6 +37,7 @@
       <div ng-switch-when="textarea" show-errors dynamic-field='field'>
         <textarea type="text"
           dynamic-field="field"
+          ng-attr-id='{{ field.name }}'
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
@@ -47,6 +49,7 @@
 
       <div ng-switch-when="text" show-errors dynamic-field='field'>
         <input type="text"
+        ng-attr-id='{{ field.name }}'
           class="form-control"
           ng-model="entity[field.name]"
           ng-required="{{ field.required }}"
@@ -58,6 +61,7 @@
       <div ng-switch-when="select" show-errors dynamic-field='field'>
         <select
           ng-model="entity[field.name]"
+          ng-attr-id='{{ field.name }}'
           ng-options="item.id as item.name for item in field.type.options"
           dynamic-field="field"
           class="form-control">
@@ -75,7 +79,7 @@
       </div>
   </div>
   <div class='form-group'>
-    <textarea id='editor_loko' ck-editor ng-model="body" ng-required="true"> 
+    <textarea id='editor_loko' ck-editor ng-model="body">
     </textarea>
   </div>
 

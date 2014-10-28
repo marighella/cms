@@ -12,6 +12,6 @@ angular.module('cmsApp')
         }
         scope.selected = currentYear;
       },
-      template: '<select ng-model="filter.year" class="form-control" ng-change="find()" ng-options="y for y in years"></select>'
+      template: '<select ng-model="filter.year" class="form-control year" ng-change="find()" ng-options="y for y in years"></select>'
     };
   });
