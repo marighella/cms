@@ -19,6 +19,7 @@ angular.module('cmsApp')
     $scope.files = [];
     $scope.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
 
+
     $scope.fields.every(function(element){
       if( element.type.view === 'cover'){
         $scope.coverField = element;
@@ -30,24 +31,15 @@ angular.module('cmsApp')
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
         return;
-      } 
-
-      var ckeditor =  $('#cke_editor_loko');
-      var classCkeditorError = 'ckeditor-error';
+      }
       var publish = (action === 'publish');
+      
       var sha = $routeParams.sha;
 
       $scope.$broadcast('submited');
-      if(action === 'publish' &&  $scope.body == null){
-        ckeditor.addClass(classCkeditorError);
-        return; 
-      }else{
-        ckeditor.removeClass(classCkeditorError);
-      }
 
       if(!form.$invalid){
         $scope.state = (publish) ? 'publishing' : 'saving';
-
         var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
         post.metadata[$scope.coverField.name] = $scope.cover;
 
@@ -56,6 +48,8 @@ angular.module('cmsApp')
           $scope.state = 'default';
           $location.path('/post/search');
         });
+      }else if(typeof $scope.body === 'undefined'){
+        $('#cke_editor_loko').addClass('ckeditor-error');
       }
     };
 
