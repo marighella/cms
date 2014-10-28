@@ -13,6 +13,7 @@ angular.module('cmsApp')
     if (angular.isUndefined(window.CKEDITOR)) {
       throw new Error('CKEDITOR not found');
     }
+    CKEDITOR.config.allowedContent = true;
     CKEDITOR.disableAutoInline = true;
     function checkLoaded() {
       if (CKEDITOR.status === 'loaded') {
@@ -35,8 +36,11 @@ angular.module('cmsApp')
       }else if(obj.link){
         link_name = prompt('Digite o texto do link', obj.title) || obj.title;
         paste = '<a href="'+obj.link+'">'+ link_name+'</a>';
+        if(obj.title.indexOf('.mp3') > -1){
+          paste += '<br/> <audio src="'+obj.link+'" type="audio/mpeg" controls="controls">'+ link_name+'</audio>';
+        }
       }
-      instance.insertHtml( paste );
+      instance.insertHtml( paste, 'unfiltered_html' );
       instance.focus();
     };
   }])
@@ -54,7 +58,7 @@ angular.module('cmsApp')
             toolbar: 'full',
             toolbar_full: [
               { name: 'basicstyles',
-                items: [ 'Bold', 'Italic', 'Strike', 'Underline' ] },
+                items: [ 'Bold', 'Italic', 'Strike', 'Underline', 'audio' ] },
                 { name: 'paragraph', items: [ 'BulletedList', 'NumberedList', 'Blockquote' ] },
                 { name: 'editing', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
                 { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ]},
@@ -74,7 +78,8 @@ angular.module('cmsApp')
 
           var instance = CKEDITOR.replace(element[0], options);
           CKEDITOR.plugins.addExternal('youtube', ENV.basepath+'/ckeditor-plugins/youtube/', 'plugin.js');
-          instance.config.extraPlugins = 'youtube,justify,image2';
+          CKEDITOR.plugins.addExternal('audio', ENV.basepath+'/ckeditor-plugins/audio/', 'plugin.js');
+          instance.config.extraPlugins = 'youtube,justify,image2,audio';
           instance.config.language = 'pt-BR';
           var configLoaderDef = $q.defer();
 
