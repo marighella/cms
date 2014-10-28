@@ -1,9 +1,9 @@
 describe('create a new post',function(){
     var ptor = protractor.getInstance();
-    var postData = require('../Data/post.js');
-    var createPostPage = require('../pages/create_post.js');
+    var postData = require('../data/post.js');
+    var createPostPage = require('../pages/post/create.js');
+    var searchPostsPage = require('../pages/post/search.js');
     var helper = require("../helper.js");
-    var searchPostsPage = require('../pages/posts.js');
 
     beforeEach(function() {
       browser.sleep(2000);

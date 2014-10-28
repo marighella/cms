@@ -20,20 +20,22 @@ exports.config={
    defaultTimeoutInterval: 30000
  },
  onPrepare:function(){
-   var loginPage = require("./pages/login_page.js");
-   var organizationsPage = require("./pages/organizations.js");
+   var loginPage = require("./pages/auth/login.js");
+   var organizationsPage = require("./pages/auth/organization.js");
    var helper = require("./helper.js");
+
    var URL = "http://0.0.0.0:9000/#/auth";
    var EMAIL = "e2etest";
    var PASSWORD = "mypassw0rd123";
-   var ptor = protractor.getInstance();
+   var ORGANIZATION = 'Movimento-sem-t';
+   var REPOSITORY = 'mst';
+
    browser.get(URL);
+
    loginPage.autenticate(EMAIL, PASSWORD);
-   browser.sleep(2000);
-   organizationsPage.selectOrganization('Movimento-sem-t');
-   helper.waitUntilIsDisplayed(ptor, organizationsPage.repositoryDropDown, 3000);
-   organizationsPage.selectRepository('mst');
+   organizationsPage.fill(ORGANIZATION, REPOSITORY);
  },
+
  capabilities: {
     browserName: 'chrome',
     'chromeOptions': {

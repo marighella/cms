@@ -1,15 +1,15 @@
 describe('edit an existing post',function(){
   var ptor = protractor.getInstance();
-  var createPostPage = require('../pages/create_post.js'); 
+  var postData = require("../data/post.js");
+  var createPostPage = require('../pages/post/create.js');
+  var searchPostsPage = require("../pages/post/search.js");
   var helper = require("../helper.js");
-  var searchPostsPage = require("../pages/posts.js");
-  var postData = require("../Data/post.js");
   var oldTitle;
   var oldHat;
   var oldSupportLine;
   var oldMenu;
-   
-  beforeEach(function(){ 
+
+  beforeEach(function(){
     browser.sleep(2000);
     searchPostsPage.selectYear('2010');
     searchPostsPage.selectMonth('Março');
@@ -18,7 +18,7 @@ describe('edit an existing post',function(){
     helper.waitUntilIsDisplayed(ptor, createPostPage.hatField, 2*1000);
   });
 
-  it('should edit an existing post', function(){ 
+  it('should edit an existing post', function(){
     browser.sleep(1000);
     oldTitle= createPostPage.titleField.getAttribute('value');
     oldHat = createPostPage.hatField.getAttribute('value' );
@@ -45,7 +45,7 @@ describe('edit an existing post',function(){
     expect(createPostPage.supportLineField.getAttribute('value')).toEqual(postData.SUPPORTLINE);
     expect(createPostPage.getCheckedMenu()).toEqual(postData.MENU);
   });
-    
+
   afterEach(function(){
     helper.clear(createPostPage.hatField);
     helper.clear(createPostPage.titleField);

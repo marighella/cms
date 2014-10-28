@@ -1,5 +1,5 @@
 var PostPage = function () {
-  this.helper = require('../helper.js');
+  this.helper = require('../../helper.js');
 
   // Dynamic fields
   this.dateField = element(by.css('.date'));

@@ -1,12 +1,12 @@
 <div class='page-header auth' >
   <p>
-    <button ng-click='authenticate()' class='btn btn-default' ng-hide='user'>
+    <button ng-click='authenticate()' class='btn btn-default login' ng-hide='user'>
       <img src='https://oauth.io/api/providers/github/logo' /> Entrar
     </button>
   </p>
   <main ng-show='user'>
     <h1>
-        <select class='form-control'
+        <select class='form-control organization'
           ng-change='getRepositories(organization)'
           ng-model='organization'>
           <option value="">Qual a sua luta, companheira?</option>
@@ -15,7 +15,7 @@
           </option>
         </select>
     </h1>
-    <select class='form-control'
+    <select class='form-control repository'
       ng-change='finish(repository)'
       ng-model='repository'
       ng-show='user.repositories'>
