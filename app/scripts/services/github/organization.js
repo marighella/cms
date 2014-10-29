@@ -46,10 +46,12 @@ angular.module('cmsApp')
 
       listOrgPromisse.then(function(listOrg){
         _.each(listOrg, function(element, index){
+          element.ready = false;
           var orgPromisse = getOrganization(element);
 
           orgPromisse.then(function(data){
             angular.extend(listOrg[index], data);
+            element.ready = true;
           });
         });
 

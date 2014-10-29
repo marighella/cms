@@ -6,14 +6,17 @@
   </p>
   <main ng-show='user'>
     <h1>
-        <select class='form-control organization'
-          ng-change='getRepositories(organization)'
-          ng-model='organization'>
-          <option value="">Qual a sua luta, companheira?</option>
-          <option ng-repeat='organization in user.organizations' value="{{ organization }}">
-          {{ organization.name || organization.login }}
-          </option>
-        </select>
+      <select class='form-control organization'
+        ng-change='getRepositories(organization)'
+        ng-model='organization'>
+        <option value="">Qual a sua luta, companheira?</option>
+        <option ng-repeat='organization in user.organizations' value="{{ organization }}">
+        {{ organization.name || organization.login }}
+        </option>
+      </select>
+      <span class='wait organization' ng-hide='user.organizations[0].ready'>
+        <i class="fa fa-cog fa-spin" ></i>
+      </span>
     </h1>
     <select class='form-control repository'
       ng-change='finish(repository)'
