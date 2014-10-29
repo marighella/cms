@@ -1,27 +1,44 @@
 var SearchPostsPage = function (){
-  this.monthField = element(by.css('.month'));
-  this.yearField = element(by.css('.year'));
-  this.newPostButton = element(by.css('[class="btn btn-default btn-block"]'));
-  this.elementsFirstRow = element.all(by.repeater('post in posts').row(0)).all(by.tagName('td'));
+  var helper = require('../../helper.js');
+  var fields = {
+    month : element(by.css('.month')),
+    year : element(by.css('.year'))
+  };
+  var buttons = {
+    create: element(by.css('button.create'))
+  };
+  var table = {
+    first_post: {
+      title: element(by.css('table > tbody > tr:first-child > td:nth-child(1) > span')),
+      status:  element(by.css('table > tbody > tr:first-child > td:nth-child(2) > span')),
+      edit_action:  element(by.css('table > tbody > tr:first-child > td:nth-child(3) > button'))
+    }
+  };
+
+  var table = function(row,column){
+    var elements = element.all(by.repeater('post in posts').row(row)).all(by.tagName('td'));
+    return elements.then(function(cols){
+      return cols[column].getText();
+    });
+  };
+
 
   this.createNewPost = function(){
-    this.newPostButton.click();
+    buttons.create.click();
   }
-  this.getColumnText = function (number){
-    return this.elementsFirstRow.then(function(cols){
-      return cols[number].getText();
-    });
+  this.getPost = function(row, column){
+    return table(row, column);
+  };
+
+  this.edit = function(post_row){
+    return edit_action.click();
   }
-  this.clickEdit = function(){
-    return this.elementsFirstRow.then(function (cols){
-      return cols[3].element(by.css('.btn')).click();
-    });
-  }
+
   this.selectMonth = function(month){
-    this.monthField.sendKeys(month);
+    helper.fill(fields.month, month);
   }
   this.selectYear = function(year){
-    this.yearField.sendKeys(year);
+    helper.fill(fields.year, year);
   }
 }
 module.exports = new SearchPostsPage();
