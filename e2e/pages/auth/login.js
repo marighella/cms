@@ -5,7 +5,7 @@ var LoginPage = function () {
     password: element(by.name('password'))
   };
   var buttons = {
-    github: element(by.css('.auth-form-body .button')),
+    github: element(by.css('input[type="submit"]')),
     login: element(by.css('.login'))
   };
 
@@ -32,8 +32,9 @@ var LoginPage = function () {
     visitPage();
 
     browser.wait(function(){
-      return fields.email;
-    }, 2000);
+      return fields.email.isPresent();
+    }, 10000);
+
 
     helper.fill(fields.email, email);
     helper.fill(fields.password, password);
