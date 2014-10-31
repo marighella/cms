@@ -10,7 +10,7 @@ describe('create a new post',function(){
       searchPostsPage.createNewPost();
     });
 
-    iit('should add a new draft with valid data', function(){
+    it('should add a new draft with valid data', function(){
 
       createPostPage.waitExists();
       createPostPage.clearDate();
@@ -24,28 +24,7 @@ describe('create a new post',function(){
       browser.sleep(2000);
 
       expect(searchPostsPage.getPost(0,1)).toEqual(postData.TITLE);
-      //expect(getColumnText(2)).toEqual("Rascunho");
-    });
-
-    it('should add new draft with video', function(){
-      postData.TITLE = postData.TITLE+"video";
-      createPostPage.fillAllDetails(postData, postData.SECTIONVIDEO);
-      createPostPage.postDraft();
-      createPostPage.fillVideo(postData.VIDEO);
-      createPostPage.postDraft();
-      browser.sleep(2*1000);
-      searchPostsPage.selectYear("2010");
-      searchPostsPage.selectMonth("Janeiro");
-      browser.sleep(2*1000);
-      expect(searchPostsPage.getColumnText(1)).toEqual(postData.TITLE);
-      expect(searchPostsPage.getColumnText(2)).toEqual("Rascunho");
-      searchPostsPage.clickEdit();
-      browser.sleep(1*1000);
-      expect(createPostPage.getCheckedSection()).toEqual(postData.SECTIONVIDEO);
-      expect(createPostPage.videoField.getAttribute('value')).toEqual(postData.VIDEO);
-      browser.navigate().back();
-    });
-
+   });
 });
 
 
