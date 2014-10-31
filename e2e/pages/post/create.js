@@ -1,107 +1,86 @@
 var PostPage = function () {
-  this.helper = require('../../helper.js');
+  var helper = require('../../helper.js');
+  var fields = {
+    date: element(by.css('.date')),
+    time: element(by.css('.time')),
+    hat:  element(by.id('hat')),
+    title: element(by.id('title')),
+    video: element(by.id('video')),
+    support_line: element(by.id('support_line')),
+    menu: element(by.id('menu')),
+    section: element(by.id('section')),
+    tag: element(by.model("newTag.text"))
+  };
+  var selected_options = {
+    menu: element(by.css('#menu option:checked')),
+    section: element(by.css('#section option:checked'))
+  };
+  var actions = {
+    save_options: element(by.css('button.action-caret')),
+    draft: element(by.css('a.draft')),
+    publish: element(by.css('a.publish')),
+    save: element(by.css('button.action')),
+    upload: $('input[type="file"]'),
+    cover_image: element(by.css('image_checkbox'))
+  };
 
-  // Dynamic fields
-  this.dateField = element(by.css('.date'));
-  this.timeField = element(by.css('.time'));
-  this.hatField =  element(by.id('hat'));
-  this.titleField = element(by.id('title'));
-  this.videoField = element(by.id('video'));
-  this.supportLineField = element(by.id('support_line'));
-  this.menuField = element(by.id('menu'));
-  this.menuElement = element(by.css('#menu option:checked'));
-  this.sectionField = element(by.id('section'));
-  this.sectionElement = element(by.css('#section option:checked'));
-
-  // Actions links
-  this.dropdownCaretButton =  element(by.css('button.action-caret'));
-  this.draftLink = element(by.css('a.draft'));
-  this.publishLink = element(by.css('a.publish'));
-  this.actionButton = element(by.css('button.action'));
-  this.fileToUploadField = $('input[type="file"]');
-
-  // Specia fields
-  this.tagField = element(by.model("newTag.text"));
-  this.imageCheckBoxField = element(by.css('[class="image_checkbox"]'));
   this.allInputFields = element.all(by.css('input, textarea'));
 
-  this.fillFileToUpload = function (fileToUpload){
-    this.fileToUploadField.sendKeys(fileToUpload);
-  }
-  this.fillHat = function (hat){
-    this.hatField.sendKeys(hat);
-  }
-  this.fillDate = function(date){
-    this.dateField.sendKeys(date);
-  }
-  this.fillTime = function(time){
-    this.timeField.sendKeys(time);
-  }
-  this.fillTitle = function (title){
-    this.titleField.sendKeys(title);
-  }
-  this.fillSupportLine = function (supportLine){
-    this.supportLineField.sendKeys(supportLine);
-  }
-  this.fillMenu = function (menu){
-    this.menuField.sendKeys(menu);
-  }
-  this.fillSection = function (section) {
-    this.sectionField.sendKeys(section);
-  }
-  this.fillTag = function (tag) {
-    this.tagField.sendKeys(tag);
-  }
-  this.fillVideo = function (video) {
-    this.videoField.sendKeys(video);
-  }
   this.checkImageCheckBox = function (){
-    this.imageCheckBoxField.click();
+    actions.cover_image.click();
   }
   this.clickDropdownCaretButton = function (){
-    this.dropdownCaretButton.click();
+    actions.save_options.click();
   }
   this.clickDraftLink = function (){
-    this.draftLink.click();
+    actions.draft.click();
   }
   this.clickPublishLink = function(){
-    this.publishLink.click();
+    actions.publish.click();
   }
   this.clickActionButton = function (){
-    this.actionButton.click();
+    actions.save.click();
   }
-  this.fillAllDetails = function (postData, SECTION){
-    this.fillDate(postData.DATE);
-    this.fillHat(postData.HAT);
-    this.fillTitle(postData.TITLE);
-    this.fillSupportLine(postData.SUPPORTLINE);
-    this.fillMenu(postData.MENU);
-    this.fillSection(SECTION);
-    this.fillTag(postData.TAG);
+  this.fillAllDetails = function (postData){
+    helper.fill(fields.date, postData.DATE);
+    helper.fill(fields.hat, postData.HAT);
+    helper.fill(fields.title, postData.TITLE);
+    helper.fill(fields.support_line, postData.SUPPORTLINE);
+    helper.fill(fields.menu, postData.MENU);
+    helper.fill(fields.section, postData.SECTION);
+    helper.fill(fields.tag, postData.TAG);
   }
+
+  this.waitExists = function(){
+    browser.wait(function(){
+      return fields.date.isPresent();
+    }, 10000);
+  }
+
+  this.clearDate = function(){
+    helper.clear(fields.date);
+  }
+
   this.postDraft = function(){
     this.clickDropdownCaretButton();
     this.clickDraftLink();
     browser.sleep(1000);
     this.clickActionButton();
   }
+
   this.publish = function(){
     this.clickDropdownCareButton();
     this.clickPublishLink();
     browser.sleep(1000);
     this.clickActionButton();
   }
-  this.cleanFields = function(numberOfFields){
-    this.allInputFields.each(function(item, i){
-      if(i<numberOfFields)
-        item.clear();
-    });
-  }
+
   this.getCheckedSection = function(){
-    return this.sectionElement.getText();
+    return selected_options.section.getText();
   }
+
   this.getCheckedMenu = function(){
-    return this.menuElement.getText();
+    return selected_options.menu.getText();
   }
 };
 

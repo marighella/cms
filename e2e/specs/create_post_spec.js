@@ -6,16 +6,18 @@ describe('create a new post',function(){
     var helper = require("../helper.js");
 
     beforeEach(function() {
-      browser.sleep(2000);
+      searchPostsPage.waitExists();
       searchPostsPage.createNewPost();
-      helper.clear(createPostPage.dateField);
     });
 
     iit('should add a new draft with valid data', function(){
-      createPostPage.fillAllDetails(postData, postData.SECTION);
+
+      createPostPage.waitExists();
+      createPostPage.clearDate();
+      createPostPage.fillAllDetails(postData);
       createPostPage.postDraft();
 
-      browser.sleep(2000);
+      searchPostsPage.waitExists();
       searchPostsPage.selectYear("2010");
       searchPostsPage.selectMonth("Janeiro");
 

@@ -24,6 +24,10 @@ var SearchPostsPage = function (){
 
 
   this.createNewPost = function(){
+    browser.wait(function(){
+      return buttons.create.isDisplayed();
+    }, 10000);
+    browser.sleep(100);
     buttons.create.click();
   }
   this.getPost = function(row, column){
@@ -39,6 +43,11 @@ var SearchPostsPage = function (){
   }
   this.selectYear = function(year){
     helper.fill(fields.year, year);
+  }
+  this.waitExists = function(){
+    browser.wait(function(){
+      return buttons.create.isPresent();
+    }, 10000);
   }
 }
 module.exports = new SearchPostsPage();
