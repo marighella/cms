@@ -27,7 +27,7 @@ angular.module('cmsApp')
           queries.push(['entity.', requiredField, condition, '\'', requiredValue, '\''].join(''));
         });
        
-        var query = queries.join('&&');
+        var query = queries.join((need.equal) ? '||' : '&&');
         element.attr('ng-required', query);
         element.attr('ng-show', query);
       }else {
