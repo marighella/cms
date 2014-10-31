@@ -1,5 +1,4 @@
 describe('create a new post',function(){
-    var ptor = protractor.getInstance();
     var postData = require('../data/post.js');
     var createPostPage = require('../pages/post/create.js');
     var searchPostsPage = require('../pages/post/search.js');

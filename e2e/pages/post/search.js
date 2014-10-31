@@ -7,21 +7,19 @@ var SearchPostsPage = function (){
   var buttons = {
     create: element(by.css('button.create'))
   };
-  var table = {
+  var table_result = {
     first_post: {
-      title: element(by.css('table > tbody > tr:first-child > td:nth-child(1) > span')),
-      status:  element(by.css('table > tbody > tr:first-child > td:nth-child(2) > span')),
-      edit_action:  element(by.css('table > tbody > tr:first-child > td:nth-child(3) > button'))
+      title: element(by.css('table > tbody > tr:first-child > td:nth-child(2) > span')),
+      status:  element(by.css('table > tbody > tr:first-child > td:nth-child(3) > span')),
+      edit_action:  element(by.css('table > tbody > tr:first-child > td:nth-child(4) > button'))
     }
   };
-
   var table = function(row,column){
     var elements = element.all(by.repeater('post in posts').row(row)).all(by.tagName('td'));
     return elements.then(function(cols){
       return cols[column].getText();
     });
   };
-
 
   this.createNewPost = function(){
     browser.wait(function(){
@@ -34,8 +32,8 @@ var SearchPostsPage = function (){
     return table(row, column);
   };
 
-  this.edit = function(post_row){
-    return edit_action.click();
+  this.edit = function(){
+    return table_result.first_post.edit_action.click();
   }
 
   this.selectMonth = function(month){

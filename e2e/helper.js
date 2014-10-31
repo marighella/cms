@@ -16,6 +16,10 @@ var Helper = (function () {
   }, timeMax);
  }
 
+ this.random = function (value){
+  return value + (new Date()).getTime();
+ }
+
  this.fill = function(element, value){
    this.wait(element);
    element.sendKeys(value);

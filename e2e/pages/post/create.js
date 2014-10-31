@@ -26,6 +26,10 @@ var PostPage = function () {
 
   this.allInputFields = element.all(by.css('input, textarea'));
 
+  this.getFields = function(){
+    return fields;
+  }
+
   this.checkImageCheckBox = function (){
     actions.cover_image.click();
   }
