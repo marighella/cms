@@ -7,6 +7,7 @@ exports.config={
  capabilities: {
    'browserName': 'chrome'
  },
+ baseUrl: 'http://127.0.0.1:9000',
 
  specs: ['specs/*_spec.js'],
  jasmineNodeOpts: {

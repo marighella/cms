@@ -24,7 +24,7 @@ angular.module('cmsApp')
             'Content-Type': undefined
           },
           data : {
-            'token': Resource.github.access_token,
+            'organization': $rootScope.user.organization.id,
             'myfile': file
           }
         }).success(function(data) {
