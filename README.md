@@ -9,6 +9,28 @@ O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociai
 
 É um Gerenciador de Conteúdo (CMS) baseado em software livre e no conceito da tecnologia popular - tecnologia do povo para o povo. Pensada e construída nestes termos, a plataforma objetiva trabalhar com os desafios e características de iniciativas populares. Para tal, pretende ser leve, simples e deixar que os usuários foquem apenas na produção do conteúdo.
 
+## Como desenvolver?
+Instale o [NPM](https://github.com/npm/npm) e [Grunt](http://gruntjs.com/installing-grunt).
+
+### Instalando dependências
+Então execute:
+
+``
+$ npm install
+``
+
+``
+$ bower install
+``
+### Executando local
+``
+$ grunt serve
+``
+
+A aplicação será executada no endereço http://localhost:9000.
+
+
+
 ## Como funciona?
 
 O Gerenciador de Conteúdo (CMS) Marighella foi construído em AngularJS e é hospedado no Github Pages. Através da Github API, o conteúdo gerado é submetido para um repositório no Github através de um commit. Esse repositório, por sua vez, contém o Jekyll, marcações (HTML + CSS) e todas as postagens.
