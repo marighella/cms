@@ -1,8 +1,11 @@
 # CMS - Marighella
 
-## O que é?
+![Carolos Marighella]
+(http://marighella.github.io/cms/images/logo.f86a5930.png)
 
 O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociais e organizações populares através da tecnologia. O nome é uma homenagem ao revolucionário Carlos Marighella, o negro guerrilheiro que balançou o Brasil ao lutar contra as opressões sobre o povo.
+
+## O que é?
 
 É um Gerenciador de Conteúdo (CMS) baseado em software livre e no conceito da tecnologia popular - tecnologia do povo para o povo. Pensada e construída nestes termos, a plataforma objetiva trabalhar com os desafios e características de iniciativas populares. Para tal, pretende ser leve, simples e deixar que os usuários foquem apenas na produção do conteúdo.
 
@@ -17,3 +20,9 @@ Para a publicação deste conteúdo, também usamos o Github Pages. Através do 
 Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantemente. Como vocês podem imaginar, o desafio é grande! Colaboração é a chave para nos manter-mos relevantse para mais e mais movimentos/organizações sociais.
 
 Queremos (e precisamos) de ajuda para trabalhar no Marighella. Se você tem interesse em nos ajudar, em tirar alguma dúvida, em pegar mais contexto, fique a vontade para nos contactar. Qualquer um dos desenvolvedores deste repositório irá respondê-lo.
+
+## Gerenciamento de Projeto [![Stories in Ready](https://badge.waffle.io/marighella/cms.png?label=ready&title=Ready)](https://waffle.io/marighella/cms)
+
+[![Throughput Graph](https://graphs.waffle.io/marighella/cms/throughput.svg)](https://waffle.io/marighella/cms/metrics)
+
+Para controle das funcionalidades, bugs, revisão de código e afins é utilizado o waffle que trabalha em cima das issues do github, e disponibiliza um painel para um controle maior.
