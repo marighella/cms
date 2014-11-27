@@ -32,7 +32,7 @@ angular.module('cmsApp')
       var paste = '<strong>Algo deu errado :/</strong>';
       var link_name = obj.title;
       if(obj.small){
-        paste = '<img src="' + obj.small + '" alt="'+obj.title+'" />';
+        paste = '<img src="' + obj.link + '" alt="'+obj.title+'" />';
       }else if(obj.link){
         link_name = prompt('Digite o texto do link', obj.title) || obj.title;
         paste = '<a href="'+obj.link+'">'+ link_name+'</a>';
