@@ -39,9 +39,14 @@ Para a publicação deste conteúdo, também usamos o Github Pages. Através do 
 
 ## Como colaborar?
 
-Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantemente. Como vocês podem imaginar, o desafio é grande! Colaboração é a chave para nos manter-mos relevantse para mais e mais movimentos/organizações sociais.
+Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantemente. Como vocês podem imaginar, o desafio é grande! Colaboração é a chave para nos manter-mos relevantes para mais e mais movimentos/organizações sociais.
 
 Queremos (e precisamos) de ajuda para trabalhar no Marighella. Se você tem interesse em nos ajudar, em tirar alguma dúvida, em pegar mais contexto, fique a vontade para nos contactar. Qualquer um dos desenvolvedores deste repositório irá respondê-lo.
+
+## Discussões [![Gitter chat](https://badges.gitter.im/marighella/cms.png)](https://gitter.im/RubyCastsBrasil/RubyCastsBrasil)
+
+Para discussões relacionadas ao projeto, é utilizado o [gitter](https://gitter.im) que disponibiliza
+um chat em tempo real.
 
 ## Gerenciamento de Projeto [![Stories in Ready](https://badge.waffle.io/marighella/cms.png?label=ready&title=Ready)](https://waffle.io/marighella/cms)
 
