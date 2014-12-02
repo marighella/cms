@@ -1,4 +1,5 @@
 # CMS - Marighella
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/marighella/cms?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ![Carolos Marighella]
 (http://marighella.github.io/cms/images/logo.f86a5930.png)
