@@ -41,8 +41,9 @@ angular.module('cmsApp')
       return post;
     };
     this.getYearMonthCreated = function(post){
+      /*jshint camelcase: false */
       var date = new Date(DateUtil.now.getYear(), DateUtil.now.getMonth());
-      return  DateUtil.format(post.createdDate || date);
+      return  DateUtil.format(post.created_date || date);
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);
@@ -60,6 +61,7 @@ angular.module('cmsApp')
       return formatDate(post)+'-'+fileName+'.md';
     };
     this.preparePost = function(metadata, body, filename, files, toPublish){
+      /*jshint camelcase: false */
       var post = {
         metadata: metadata,
         body: body,
@@ -69,7 +71,7 @@ angular.module('cmsApp')
       post.filename = this.generateFileName(post);
       post.metadata.layout = 'post';
       post.metadata.files = files;
-      post.metadata.createdDate =  post.metadata.createdDate || DateUtil.toISO8601(new Date());
+      post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
       return post;
     };

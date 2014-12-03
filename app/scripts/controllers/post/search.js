@@ -47,7 +47,6 @@ angular.module('cmsApp')
     $scope.edit = function(post){
       var year = $scope.filter.year;
       var month = $scope.filter.month;
-      $scope.action = 'edit'
       $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
     };
 

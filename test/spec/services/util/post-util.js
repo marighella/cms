@@ -28,7 +28,7 @@ describe('Service: PostUtil', function () {
     });
 
     it('should get year and month from a existent post', function(){
-      var post = {createdDate: '2012-01-14' };
+      var post = {created_date: '2012-01-14' };
       expect(PostUtil.getYearMonthCreated(post)).toBe('2012/01');
     });
 
@@ -94,11 +94,11 @@ describe('Service: PostUtil', function () {
 
     it('should get created date from a existing post', function (){
       var metadata= {
-        createdDate: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+        created_date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
         title: 'test titulo de post'
       };
       var post = PostUtil.preparePost(metadata,' ');
-      expect(post.metadata.createdDate).toBe('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)');
+      expect(post.metadata.created_date).toBe('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)');
     });
 
     it('should get created date from a new post', function (){
@@ -107,7 +107,7 @@ describe('Service: PostUtil', function () {
         title: 'test titulo de post'
       };
       var post = PostUtil.preparePost(metadata,' ');
-      expect(post.metadata.createdDate).toBe('Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)');
+      expect(post.metadata.created_date).toBe('Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)');
     });
 
     it('should exists', function (){

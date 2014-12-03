@@ -36,7 +36,7 @@ describe('Service: GithubContent', function () {
 
   it( 'deve salvar na mesma pasta de origem da data de criação', function(){
     var user = {repository: {full_name: 'Gabas'}};
-    var post = {filename: 'arquivo.md', createdDate: '2014-01-30'};
+    var post = {filename: 'arquivo.md', created_date: '2014-01-30'};
     var sha = 'abcd3';
     var promise = Content.save(user, post, sha );
     promise.then(function (address){

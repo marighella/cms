@@ -75,7 +75,6 @@ angular.module('cmsApp')
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
-          debugger
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
         });
