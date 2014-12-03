@@ -14,7 +14,25 @@ describe('Service: PostUtil', function () {
   it('should do something', function () {
     expect(!!PostUtil).toBe(true);
   });
+  describe('catch year and month from created date', function (){
+    beforeEach(inject(function (_DateUtil_) {
+        _DateUtil_.now = {
+          getYear: function(){ return 2001; },
+          getMonth: function(){ return 0; }
+        };
+      })
+    );
+    it('should get currently year and month to a new post', function(){
+      var post = {};
+      expect(PostUtil.getYearMonthCreated(post)).toBe('2001/01');
+    });
 
+    it('should get year and month from a existent post', function(){
+      var post = {createdDate: '2012-01-14' };
+      expect(PostUtil.getYearMonthCreated(post)).toBe('2012/01');
+    });
+
+  });
   describe('load post from markdown', function (){
     beforeEach(inject(function (_PostUtil_) {
       PostUtil = _PostUtil_;
@@ -64,13 +82,33 @@ describe('Service: PostUtil', function () {
   });
 
   describe('prepare post to save on draft mode', function (){
-    beforeEach(inject(function (_PostUtil_) {
+    var DateUtil;
+    beforeEach(inject(function (_PostUtil_, _DateUtil_) {
       PostUtil = _PostUtil_;
+      DateUtil = _DateUtil_;
 
       PostUtil.generateFileName = function(){
         return '2014-03-04-ola-ola-ola.md';
       };
     }));
+
+    it('should get created date from a existing post', function (){
+      var metadata= {
+        createdDate: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+        title: 'test titulo de post'
+      };
+      var post = PostUtil.preparePost(metadata,' ');
+      expect(post.metadata.createdDate).toBe('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)');
+    });
+
+    it('should get created date from a new post', function (){
+      DateUtil.toISO8601= function (){ return 'Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)';};
+      var metadata= {
+        title: 'test titulo de post'
+      };
+      var post = PostUtil.preparePost(metadata,' ');
+      expect(post.metadata.createdDate).toBe('Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)');
+    });
 
     it('should exists', function (){
       expect(!!PostUtil.preparePost).toBeTruthy();

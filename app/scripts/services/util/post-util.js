@@ -18,6 +18,7 @@ angular.module('cmsApp')
       var result = string.replace(/\s+/g, '-');
       return result;
     }
+
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];
@@ -38,6 +39,10 @@ angular.module('cmsApp')
       post.createdTime = DateUtil.fromISO8601(post.metadata.date).toMilliseconds();
 
       return post;
+    };
+    this.getYearMonthCreated = function(post){
+      var date = new Date(DateUtil.now.getYear(), DateUtil.now.getMonth());
+      return  DateUtil.format(post.createdDate || date);
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);
@@ -60,11 +65,12 @@ angular.module('cmsApp')
         body: body,
         filename: filename
       };
+
       post.filename = this.generateFileName(post);
       post.metadata.layout = 'post';
       post.metadata.files = files;
+      post.metadata.createdDate =  post.metadata.createdDate || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
-
       return post;
     };
     this.prepareListOfFiles =  function(metadata, coverImageField){

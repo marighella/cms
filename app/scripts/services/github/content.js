@@ -57,7 +57,7 @@ angular.module('cmsApp')
           message: 'commit from cms'
         });
 
-        var yearMonth = DateUtil.format(new Date());
+        var yearMonth = PostUtil.getYearMonthCreated(post);
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth, post.filename].join('/');
 
         var deferred = $q.defer();

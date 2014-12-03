@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, DateUtil) {
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),
@@ -75,6 +75,7 @@ angular.module('cmsApp')
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
+          debugger
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
         });
@@ -85,7 +86,7 @@ angular.module('cmsApp')
       if ($scope.cover === newCover) {
         $scope.cover = null;
         return;
-      } 
+      }
 
       $scope.cover = newCover;
     };
