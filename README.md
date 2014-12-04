@@ -43,7 +43,7 @@ Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantemen
 
 Queremos (e precisamos) de ajuda para trabalhar no Marighella. Se você tem interesse em nos ajudar, em tirar alguma dúvida, em pegar mais contexto, fique a vontade para nos contactar. Qualquer um dos desenvolvedores deste repositório irá respondê-lo.
 
-## Discussões [![Gitter chat](https://badges.gitter.im/marighella/cms.png)](https://gitter.im/RubyCastsBrasil/RubyCastsBrasil)
+## Discussões [![Gitter chat](https://badges.gitter.im/marighella/cms.png)](https://gitter.im/marighella/cms)
 
 Para discussões relacionadas ao projeto, é utilizado o [gitter](https://gitter.im) que disponibiliza
 um chat em tempo real.
