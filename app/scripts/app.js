@@ -46,7 +46,7 @@ angular
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', 'Resource', function ($rootScope, $location, Resource, ENV) {
+  .run(['$rootScope', '$location', 'Resource','ENV', function ($rootScope, $location, Resource, ENV) {
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
       if (!Resource.github) {
