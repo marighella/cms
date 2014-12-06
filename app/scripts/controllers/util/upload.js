@@ -35,4 +35,19 @@ angular.module('cmsApp')
       });
     };
 
+    $scope.$on('upload-file', function(event, args) {
+      $scope.files.push(args.file);
+      $scope.upload.done = $scope.upload.done + 1;
+    });
+
+    $scope.$on('prepared-to-upload', function(event, args) {
+      $scope.upload.length = args.length;
+      $scope.upload.done = 0;
+    });
+
+    $scope.removeImage = function (imageIndex){
+      if(window.confirm('Deseja realmente remover este item?')){
+       $scope.files.splice(imageIndex, 1);
+      }
+    };
   });

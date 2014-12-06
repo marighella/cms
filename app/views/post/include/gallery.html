@@ -16,7 +16,7 @@
 
     <li ng-repeat="file in files" ng-class="{'active': ( _index === $index ) }">
       <img src="{{ file.thumbnail }}" alt="{{ file.title }}" title="{{ file.title }}" ng-click="$parent._index = $index;" />
-      <button class='btn btn-xs btn-danger btn-delete-thumb' ng-click="remove_image($index)">X</button>
+      <button class='btn btn-xs btn-danger btn-delete-thumb' ng-click="removeImage($index)">X</button>
     </li>
   </ul>
 

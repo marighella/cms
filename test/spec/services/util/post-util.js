@@ -1,4 +1,5 @@
 'use strict';
+/*jshint camelcase: false */
 
 describe('Service: PostUtil', function () {
 
