@@ -17,6 +17,7 @@ describe('Service: GithubContent', function () {
     DateUtil = _DateUtil_;
 
     _PostUtil_.serialize = function (){ return 'ola mundo'; };
+    Resource.isProduction = true;
     Resource.github = {
       put: function(address){
         var then = function(callback){

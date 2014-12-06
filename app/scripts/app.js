@@ -46,7 +46,7 @@ angular
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', 'Resource', function ($rootScope, $location, Resource) {
+  .run(['$rootScope', '$location', 'Resource', function ($rootScope, $location, Resource, ENV) {
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
       if (!Resource.github) {
@@ -54,4 +54,6 @@ angular
         return false;
       }
     });
+
+    Resource.isProduction = (ENV.name === 'production');
   }]);

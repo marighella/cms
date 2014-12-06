@@ -24,6 +24,9 @@ angular.module('cmsApp')
       return today.toISOString().split('T')[0];
     }
 
+    this.downloadMarkdown = function(post){
+      window.open('data:text/markdown;charset=utf-8,' + post);
+    };
     this.decodeContent = function(content){
       return decodeURIComponent(escape(atob(content)));
     };

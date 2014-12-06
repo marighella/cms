@@ -64,14 +64,19 @@ angular.module('cmsApp')
         var promise = deferred.promise;
         var github = Resource.github;
 
-        github.put(address, {
-          data: commit,
-          cache: false
-        }).error(function(status, message){
-          console.log(status, message);
-        }).then(function(data){
-          return deferred.resolve(data);
-        });
+        if(Resource.isProduction){
+          github.put(address, {
+            data: commit,
+            cache: false
+          }).error(function(status, message){
+            console.log(status, message);
+          }).then(function(data){
+            return deferred.resolve(data);
+          });
+        }else{
+          PostUtil.downloadMarkdown(obj);
+          deferred.resolve();
+        }
 
         return promise;
       }

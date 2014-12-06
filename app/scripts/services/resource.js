@@ -5,6 +5,7 @@ angular.module('cmsApp')
   .factory('Resource', function() {
 
     return {
-      github: ''
+      github: '',
+      isProduction: false
     };
   });
