@@ -64,7 +64,7 @@ angular.module('cmsApp')
         var promise = deferred.promise;
         var github = Resource.github;
 
-        if(Resource.isProduction){
+        if(!!Resource.isProduction){
           github.put(address, {
             data: commit,
             cache: false
