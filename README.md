@@ -10,10 +10,15 @@ O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociai
 É um Gerenciador de Conteúdo (CMS) baseado em software livre e no conceito da tecnologia popular - tecnologia do povo para o povo. Pensada e construída nestes termos, a plataforma objetiva trabalhar com os desafios e características de iniciativas populares. Para tal, pretende ser leve, simples e deixar que os usuários foquem apenas na produção do conteúdo.
 
 ## Como desenvolver?
-Instale o [NPM](https://github.com/npm/npm) e [Grunt](http://gruntjs.com/installing-grunt).
+
+### Pré-requisitos:
+* [ruby](https://www.ruby-lang.org/en/installation/)
+* [sass](http://sass-lang.com/install)
+* [node.js](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager)
+* [bower](http://bower.io/#install-bower)
+* [grunt-cli](http://gruntjs.com/getting-started)
 
 ### Instalando dependências
-Então execute:
 
 ``
 $ npm install
