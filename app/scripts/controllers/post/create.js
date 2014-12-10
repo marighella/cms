@@ -17,7 +17,6 @@ angular.module('cmsApp')
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton;
     $scope.files = [];
-    $scope.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
 
     $scope.fields.every(function(element){
       if( element.type.view === 'cover'){
@@ -26,6 +25,16 @@ angular.module('cmsApp')
       }
       return true;
     });
+
+    $scope.$on('upload-file', function(event, args) {
+      $scope.files.push(args.file);
+    });
+
+    $scope.removeImage = function (imageIndex){
+      if(window.confirm('Deseja realmente remover este item?')){
+         $scope.files.splice(imageIndex, 1);
+      }
+    };
 
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){

@@ -72,7 +72,7 @@ angular.module('cmsApp')
             ],
             disableNativeSpellChecker: false,
             uiColor: '#FAFAFA',
-            height: '400px',
+            height: '600px',
             width: '100%'
           };
 
