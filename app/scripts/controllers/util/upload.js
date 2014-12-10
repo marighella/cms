@@ -3,6 +3,8 @@
 
 angular.module('cmsApp')
   .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
+    this.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
+    $scope.upload = this.upload;
 
     var FormDataObject = function(data) {
       var fd = new FormData();
@@ -35,8 +37,7 @@ angular.module('cmsApp')
       });
     };
 
-    $scope.$on('upload-file', function(event, args) {
-      $scope.files.push(args.file);
+    $scope.$on('upload-file', function() {
       $scope.upload.done = $scope.upload.done + 1;
     });
 
@@ -45,9 +46,4 @@ angular.module('cmsApp')
       $scope.upload.done = 0;
     });
 
-    $scope.removeImage = function (imageIndex){
-      if(window.confirm('Deseja realmente remover este item?')){
-       $scope.files.splice(imageIndex, 1);
-      }
-    };
   });
