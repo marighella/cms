@@ -10,21 +10,27 @@
 
     img {
       max-width: 360px;
-      cursor: pointer;
 
-      &:hover {
-        -moz-box-shadow: 0 0 60px #ccc;
-        -webkit-box-shadow: 0 0 60px #ccc;
-        box-shadow: 0 0 60px #ccc;
+      &.disable {
+        cursor: initial;
       }
 
+      &.enable {
+        cursor: pointer;
+
+        &:hover {
+          -moz-box-shadow: 0 0 60px #ccc;
+          -webkit-box-shadow: 0 0 60px #ccc;
+          box-shadow: 0 0 60px #ccc;
+        }
+      }
     }
   }
 
   .upload {
     position: relative;
     overflow: hidden;
-    margin: 10px;
+    margin: 0 0 10px 0;
   }
 
   .upload input[type="file"] {
@@ -85,7 +91,7 @@
 
       img {
         display: block;
-        margin: 0 auto;
+        float: right;
       }
     }
   }

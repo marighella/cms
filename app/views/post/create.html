@@ -86,9 +86,10 @@
   <div ng-include="'views/post/include/gallery.html'">
   </div>
 
-  <div class='alert-cover' dynamic-field='coverField'>
-    <label ng-hide="cover">Não se esqueça de colocar uma imagem como capa!</label>
-    <input type='text' ng-model='cover' name='cover' dynamic-field="coverField"/>
+    <div class='alert-cover' dynamic-field='coverField'>
+      <label ng-hide="cover">Não se esqueça de colocar uma imagem como capa!</label>
+      <input type='text' ng-model='cover' name='cover' dynamic-field="coverField"/>
+    </div>
   </div>
 
   <div ng-include="'views/post/include/button-action.html'">
