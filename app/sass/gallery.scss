@@ -79,9 +79,12 @@
     text-align: none;
 
     .nav {
-      width: 43%;
+      width: 45%;
       float: left;
-      margin-right: 10px;
+
+      small { 
+        display: block;
+      }
     }
 
     .slide {
@@ -92,6 +95,10 @@
       img {
         display: block;
         float: right;
+
+        &.enable, &.disable {
+          max-width: 180px;
+        }
       }
     }
   }
