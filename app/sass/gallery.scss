@@ -7,7 +7,6 @@
   .slide {
     margin-bottom: 5px;
     float: none;
-    min-height: 250px;
 
     img {
       max-width: 360px;
@@ -71,7 +70,6 @@
 
 @media (min-width: 768px) {
   .slider {
-    height: 250px;
     text-align: none;
 
     .nav {

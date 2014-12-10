@@ -21,7 +21,7 @@
   </ul>
 
   <div class='slide'>
-    <small>Clique na imagem para adicionar na noticia!</small>
+    <small ng-show='files.length > 0'>Clique na imagem para adicionar na noticia!</small>
     <img ng-src="{{ file.small || file.thumbnail }}" ng-repeat="file in files" ng-click='insertImageCKEditor(file)' ng-show="_index === $index"/>
     <label ng-show='files.length > 0 && files[_index].small'>
       <input type="checkbox" class="image_checkbox"
