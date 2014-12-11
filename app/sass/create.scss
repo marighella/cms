@@ -1,3 +1,5 @@
+$invalid-red: #a94442;
+
 .create {
   width: 100%;
   display: inline-block;
@@ -5,7 +7,7 @@
   .metadata {
     width: 35%;
     float: left;
-  } 
+  }
   .body {
     width: 65%;
     padding-left: 25px;
@@ -31,11 +33,39 @@
 
   .alert-cover {
     label {
-       color: #a94442;
+       color: $invalid-red;
     }
     input {
       display: none;
     }
+  }
+
+  span.valid, span.invalid {
+    display: none;
+  }
+  
+  .invalid-format ~ span{
+    color: $invalid-red;
+    &.valid {
+      display: none;
+    }
+    &.invalid {
+      display: block;
+    }
+  }
+
+  .valid-format ~ span{
+    color: green;
+    &.valid {
+      display: block;
+    }
+    &.invalid {
+      display: none;
+    }
+  }
+
+  .form-control-feedback {
+    top: 10px;
   }
 
   input {
