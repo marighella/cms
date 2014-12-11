@@ -13,17 +13,6 @@ describe('Service: YoutubeLinkUtil', function () {
     expect(!!YoutubeLinkUtil).toBe(true);
   });
 
-  describe('#getEmbed ', function() {
-    it('should get embed from youtube link', function(){
-      var youtube = 'https://www.youtube.com/watch?v=hnKzRMqmPEo';
-      var expectedEmbed =  '<p style="text-align: center;"><iframe allowfullscreen="" name="coverVideo" frameborder="0" height="360" src="//www.youtube.com/embed/' +
-                          'hnKzRMqmPEo' +
-                          '" width="640"></iframe></p>';
-      var embed = YoutubeLinkUtil.link(youtube).getEmbed();
-      expect(embed).toBe(expectedEmbed);
-    });
-  });
-
   describe('#getLinkId ', function() {
     it('should get id from many kind of links', function(){
 
