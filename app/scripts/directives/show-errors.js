@@ -12,20 +12,20 @@ angular.module('cmsApp').
       var inputNgEl = angular.element(inputEl);
       var inputName = inputNgEl.attr('name');
 
+      var toggleClassByElement = function(element, toggle){
+        window.$(element.parent().get(0)).toggleClass('has-error', toggle);
+        element.toggleClass('has-error', toggle);
+      };
+
       var toggleClass = function(){
         if(!formCtrl[inputName]){
           return;
         }
         var toggle = formCtrl[inputName].$invalid;
-
-        window.$(el.parent().get(0)).toggleClass('has-error', toggle);
-        el.toggleClass('has-error', toggle);
+        
+        toggleClassByElement(el, toggle);
       };
 
-      var toggleClassByElement = function(element, toggle){
-        window.$(element.parent().get(0)).toggleClass('has-error', toggle);
-        element.toggleClass('has-error', toggle);
-      };
       // only apply the has-error class after the user leaves the text box
       inputNgEl.bind('blur', function() {
         toggleClass();
