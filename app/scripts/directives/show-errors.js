@@ -22,6 +22,10 @@ angular.module('cmsApp').
         el.toggleClass('has-error', toggle);
       };
 
+      var toggleClassByElement = function(element, toggle){
+        window.$(element.parent().get(0)).toggleClass('has-error', toggle);
+        element.toggleClass('has-error', toggle);
+      };
       // only apply the has-error class after the user leaves the text box
       inputNgEl.bind('blur', function() {
         toggleClass();
@@ -29,6 +33,10 @@ angular.module('cmsApp').
 
       scope.$on('submited', function() {
         toggleClass();
+      });
+
+      scope.$on('toggle-show-errors', function(event, element, toggle) {
+        toggleClassByElement(element, toggle);
       });
 
       scope.$on('$destroy', function() {
