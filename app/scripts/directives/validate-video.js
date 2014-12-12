@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp').
-  directive('validateVideo', function(YoutubeLinkUtil) {
+  directive('validateVideo', function(YoutubeLinkUtil, VimeoLinkUtil) {
   return {
     restrict: 'A',
     require: '^?form',
@@ -13,23 +13,44 @@ angular.module('cmsApp').
         }
         formCtrl[inputName].$setValidity('video-url-format',valid);
       };
-      var getValidUrl = function(url){
+      var getValidYoutubeUrl = function(url){
         return YoutubeLinkUtil.link(url).getValidUrl();
       };
+      var getValidVimeoUrl = function(url){
+        return VimeoLinkUtil.link(url).getValidUrl();
+      };
+
+      var checkPatternYoutube = function(url){
+        var pattern = YoutubeLinkUtil.pattern();
+        var valid = !!pattern.exec(url);
+
+        return valid;
+      };
+
+      var checkPatternVimeo = function(url){
+        var pattern = VimeoLinkUtil.pattern();
+        var valid = !!pattern.exec(url);
+
+        return valid;
+      };
+
 
       el.bind('blur', function() {
         var url = el.val();
-        var pattern = YoutubeLinkUtil.pattern();
-        var valid = !!pattern.exec(url);
         var inputName = el.attr('name');
+        var validYoutube = checkPatternYoutube(url);
+        var validVimeo   = checkPatternVimeo(url);
+        var valid        = validYoutube || validVimeo;
 
         el.toggleClass('invalid-format', !valid);
         el.toggleClass('valid-format', valid);
 
         setInputValid(inputName, valid);
 
-        if(valid){
-          el.val(getValidUrl(url));
+        if(validYoutube){
+          el.val(getValidYoutubeUrl(url));
+        }else if(validVimeo){
+          el.val(getValidVimeoUrl(url));
         }
       });
 
