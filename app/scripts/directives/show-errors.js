@@ -35,10 +35,6 @@ angular.module('cmsApp').
         toggleClass();
       });
 
-      scope.$on('toggle-show-errors', function(event, element, toggle) {
-        toggleClassByElement(element, toggle);
-      });
-
       scope.$on('$destroy', function() {
         el.unbind('submited blur');
       });

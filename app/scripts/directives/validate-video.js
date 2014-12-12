@@ -23,7 +23,6 @@ angular.module('cmsApp').
         el.toggleClass('invalid-format', invalid);
         el.toggleClass('valid-format', !invalid);
 
-        scope.$broadcast('toggle-show-errors', el, invalid);
         setInputValid(inputName, !invalid);
       });
 
