@@ -13,17 +13,24 @@ angular.module('cmsApp').
         }
         formCtrl[inputName].$setValidity('video-url-format',valid);
       };
+      var getValidUrl = function(url){
+        return YoutubeLinkUtil.link(url).getValidUrl();
+      };
 
       el.bind('blur', function() {
         var url = el.val();
         var pattern = YoutubeLinkUtil.pattern();
-        var invalid = !pattern.exec(url);
+        var valid = !!pattern.exec(url);
         var inputName = el.attr('name');
 
-        el.toggleClass('invalid-format', invalid);
-        el.toggleClass('valid-format', !invalid);
+        el.toggleClass('invalid-format', !valid);
+        el.toggleClass('valid-format', valid);
 
-        setInputValid(inputName, !invalid);
+        setInputValid(inputName, valid);
+
+        if(valid){
+          el.val(getValidUrl(url));
+        }
       });
 
       scope.$on('$destroy', function() {

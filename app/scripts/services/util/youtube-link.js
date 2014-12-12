@@ -11,6 +11,13 @@ angular.module('cmsApp')
       return YOUTUBE_REGEX.exec(url)[1];
     }
 
+    function getDefaultUrlToVideo(videoUrl){
+      var VALID_URL = 'www.youtube.com/watch?v=';
+      var id        = videoFromUrl(videoUrl);
+
+      return VALID_URL + id;
+    }
+
     var factory = {
       pattern: function(){
         return YOUTUBE_REGEX;
@@ -19,6 +26,9 @@ angular.module('cmsApp')
         return {
           getId: function(){
             return videoFromUrl(youtubeUrl);
+          },
+          getValidUrl: function(){
+            return getDefaultUrlToVideo(youtubeUrl);
           }
         };
       }
