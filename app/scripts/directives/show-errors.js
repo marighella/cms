@@ -6,6 +6,7 @@ angular.module('cmsApp').
   return {
     restrict: 'A',
     require:  '^form',
+    priority: -100,
     link: function (scope, el, attrs, formCtrl) {
       // find the text box element, which has the 'name' attribute
       var inputEl   = el[0].querySelector('input, select, textarea');
