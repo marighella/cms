@@ -4,12 +4,11 @@
 angular.module('cmsApp').
   directive('showErrors', function() {
   return {
-    restrict: 'A',
+    restrict: 'EA',
     require:  '^form',
-    priority: -100,
-    link: function (scope, el, attrs, formCtrl) {
+    priority: 100,
+    link: function (scope, inputEl, attrs, formCtrl) {
       // find the text box element, which has the 'name' attribute
-      var inputEl   = el[0].querySelector('input, select, textarea');
       var inputNgEl = angular.element(inputEl);
       var inputName = inputNgEl.attr('name');
 
@@ -24,7 +23,7 @@ angular.module('cmsApp').
         }
         var toggle = formCtrl[inputName].$invalid;
         
-        toggleClassByElement(el, toggle);
+        toggleClassByElement(inputEl, toggle);
       };
 
       // only apply the has-error class after the user leaves the text box
@@ -37,7 +36,7 @@ angular.module('cmsApp').
       });
 
       scope.$on('$destroy', function() {
-        el.unbind('submited blur');
+        inputEl.unbind('submited blur');
       });
     }
   };
