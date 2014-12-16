@@ -87,6 +87,7 @@ angular.module('cmsApp')
     $scope.find = function(){
       Repository.post.list($rootScope.user, $scope.filter).then(function(result){
         $scope.posts = result.reverse();
+        $scope.search();
         $scope.pageChanged();
       });
     };
