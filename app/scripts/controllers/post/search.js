@@ -8,19 +8,53 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, Repository) {
+  .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, PostUtil, Repository) {
     $scope.posts = [];
     $scope.maxSize = 5;
     $scope.currentPage = 1;
     $scope.ready = false;
     $scope.filter = {
       month: DateUtil.now.getMonth(),
-      year: DateUtil.now.getYear()
+      year: DateUtil.now.getYear(),
+      title: '' 
     };
+
+    $scope.canStartFilter = function(){
+      return $scope.filter.title.length > 3 ;
+    };
+
+    $scope.search = function(){
+      if(!$scope.canStartFilter()){
+        return;
+      }
+      var titleSlug = PostUtil.formatName($scope.filter.title); 
+      var result  = [];
+
+      $scope.posts.forEach(function(element){
+        if(element.name.match(titleSlug)){
+          result.push(element);
+        }
+      });
+
+      $scope.filteredPosts = result;
+      $scope.pageChanged();
+    };
+
+    $scope.getPosts = function(){
+      if($scope.canStartFilter()){
+        return $scope.filteredPosts;
+      }
+      return $scope.posts;
+    };
+
     $scope.pageChanged = function(){
       var start = ($scope.currentPage - 1) * $scope.maxSize;
       var limit = $scope.maxSize;
       var postsOnPage = $scope.posts.slice(start, start+limit);
+
+      if($scope.canStartFilter()){
+        postsOnPage = $scope.filteredPosts.slice(start, start+limit);
+      }
 
       postsOnPage.forEach(function(element){
         if(!element.metadata){

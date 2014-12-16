@@ -57,11 +57,14 @@ angular.module('cmsApp')
       if(!!post.filename){
         return post.filename;
       }
-      var fileName = post.metadata.title.toLowerCase();
+      return formatDate(post)+'-'+this.formatName(post.metadata.title)+'.md';
+    };
+    this.formatName = function(title){
+      var fileName = title.toLowerCase();
       fileName = removeSpecialChar(fileName);
       fileName = replaceSpaceWithDash(fileName);
 
-      return formatDate(post)+'-'+fileName+'.md';
+      return fileName;
     };
     this.preparePost = function(metadata, body, filename, files, toPublish){
       /*jshint camelcase: false */
