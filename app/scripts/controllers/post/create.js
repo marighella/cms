@@ -8,14 +8,14 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil) {
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),
     };
     $scope.body = '';
     $scope.cover = '';
-    $scope.fields = $rootScope.user.skelleton;
+    $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
 
     $scope.fields.every(function(element){
@@ -46,6 +46,7 @@ angular.module('cmsApp')
       $scope.$broadcast('submited');
 
       if(!form.$invalid){
+        $scope.entity.video_thumbnail = $scope.getVideoThumbnail($scope.entity.video);
         $scope.state = (publish) ? 'publishing' : 'saving';
         var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
         post.metadata[$scope.coverField.name] = $scope.cover;
@@ -81,5 +82,12 @@ angular.module('cmsApp')
       }
 
       $scope.cover = newCover;
+    };
+
+    $scope.getVideoThumbnail = function(videoUrl) {
+      if (videoUrl) {
+        var videoId =  YoutubeLinkUtil.link(videoUrl).getId();
+        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+      }
     };
   });
