@@ -10,15 +10,6 @@
  */
 angular.module('cmsApp')
   .service('PostUtil', function PostUtil(DateUtil, _) {
-    function removeSpecialChar(string) {
-      return string.replace(/[^\w\s]/gi, '');
-    }
-
-    function replaceSpaceWithDash(string) {
-      var result = string.replace(/\s+/g, '-');
-      return result;
-    }
-
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];
@@ -60,11 +51,7 @@ angular.module('cmsApp')
       return formatDate(post)+'-'+this.formatName(post.metadata.title)+'.md';
     };
     this.formatName = function(title){
-      var fileName = title.toLowerCase();
-      fileName = removeSpecialChar(fileName);
-      fileName = replaceSpaceWithDash(fileName);
-
-      return fileName;
+      return getSlug(title);
     };
     this.preparePost = function(metadata, body, filename, files, toPublish){
       /*jshint camelcase: false */

@@ -19,7 +19,8 @@
     "font-awesome": "~4.2.0",
     "angular-i18n": "~1.2.24",
     "js-yaml": "~3.2.2",
-    "ng-tags-input": "~2.1.1"
+    "ng-tags-input": "~2.1.1",
+    "speakingurl": "~0.18.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

@@ -204,13 +204,13 @@ describe('Service: PostUtil', function () {
       var post = {
         metadata: {
           date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
-          title: '%#\'test titulo de post^'
+          title: '%#\'test titulo de post com áéíóúã^'
         }
       };
 
       var filename = PostUtil.generateFileName(post);
 
-      expect(filename).toBe('2014-07-15-test-titulo-de-post.md');
+      expect(filename).toBe('2014-07-15-test-titulo-de-post-com-aeioua.md');
     });
 
     it('should remove space before number from title to generate the filename', function() {
@@ -224,7 +224,7 @@ describe('Service: PostUtil', function () {
 
       var filename = PostUtil.generateFileName(post);
 
-      expect(filename).toBe('2014-07-15-ol-2012-como-vai-3-de-voces.md');
+      expect(filename).toBe('2014-07-15-ola-2012-como-vai-3-de-voces.md');
     });
 
     it('should remove any number of white spaces to generate the filename', function() {
@@ -238,7 +238,7 @@ describe('Service: PostUtil', function () {
 
       var filename = PostUtil.generateFileName(post);
 
-      expect(filename).toBe('2014-09-30-alta-nos-aluguis-a-principal-responsvel-por-falta-de-moradia.md');
+      expect(filename).toBe('2014-09-30-alta-nos-alugueis-e-a-principal-responsavel-por-falta-de-moradia.md');
     });
   });
 
