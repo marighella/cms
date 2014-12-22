@@ -18,6 +18,13 @@ angular.module('cmsApp')
       return VALID_URL + id;
     }
 
+    function getVideoThumbnailUrl(videoUrl){
+      if (videoUrl) {
+        var videoId =  videoFromUrl(videoUrl);
+        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+      }
+    }
+
     var factory = {
       pattern: function(){
         return VIMEO_REGEX;
@@ -29,6 +36,9 @@ angular.module('cmsApp')
           },
           getValidUrl: function(){
             return getDefaultUrlToVideo(url);
+          },
+          getVideoThumbnailUrl: function(){
+            return getVideoThumbnailUrl(youtubeUrl);
           }
         };
       }

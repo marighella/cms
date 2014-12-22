@@ -26,5 +26,11 @@ describe('Controller: PostCreateCtrl', function () {
       var videoThumbnail = scope.getVideoThumbnailUrl(videoUrl);
       expect(videoThumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
     });
+
+    it('should get vimeo thumbnail url', function (){
+      var videoUrl = 'http://vimeo.com/channels/staffpicks/115068830';
+      var videoThumbnail = scope.getVideoThumbnailUrl(videoUrl);
+      expect(videoThumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
+    });
   });
 });
