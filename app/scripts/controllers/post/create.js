@@ -46,7 +46,7 @@ angular.module('cmsApp')
       $scope.$broadcast('submited');
 
       if(!form.$invalid){
-        $scope.entity.video_thumbnail = $scope.getVideoThumbnail($scope.entity.video);
+        $scope.entity.video_thumbnail = $scope.getVideoThumbnailUrl($scope.entity.video);
         $scope.state = (publish) ? 'publishing' : 'saving';
         var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
         post.metadata[$scope.coverField.name] = $scope.cover;
@@ -84,10 +84,7 @@ angular.module('cmsApp')
       $scope.cover = newCover;
     };
 
-    $scope.getVideoThumbnail = function(videoUrl) {
-      if (videoUrl) {
-        var videoId =  YoutubeLinkUtil.link(videoUrl).getId();
-        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
-      }
+    $scope.getVideoThumbnailUrl = function(videoUrl) {
+      return YoutubeLinkUtil.link(videoUrl).getVideoThumbnailUrl();
     };
   });
