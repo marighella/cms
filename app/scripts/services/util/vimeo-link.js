@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('VimeoLinkUtil', function () {
+  .factory('VimeoLinkUtil', function ($http, $q) {
     var VIMEO_REGEX = /(player\.)?vimeo\.com(\/video)?\/(\d+)/;
 
     function videoFromUrl(url){
@@ -20,15 +20,15 @@ angular.module('cmsApp')
 
     function getVideoThumbnailUrl(videoUrl){
       if (videoUrl) {
-        var videoId =  videoFromUrl(videoUrl);
+        var deferred = $q.defer();
+        var promise = deferred.promise;
 
-        var responsePromise = $http.jsonp( 'http://vimeo.com/api/v2/video/' + videoId + '.json');
-
-        responsePromise.success(function(data) {
-          console.dir(data);
-
-          return "ccc";
+        $http.get('http://vimeo.com/api/oembed.json?url=' + videoUrl)
+        .success(function(data) {
+          return deferred.resolve(data.thumbnail_url);
         });
+
+        return promise;
       }
     }
 

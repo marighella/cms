@@ -9,11 +9,28 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('PostUtil', function PostUtil(DateUtil, _) {
+  .service('PostUtil', function PostUtil($http, $q, DateUtil, _, YoutubeLinkUtil, VimeoLinkUtil) {
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];
     }
+
+    function getVideoThumbnailUrl(videoUrl) {
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+
+      if(YoutubeLinkUtil.link(videoUrl).getValidUrl()){
+        deferred.resolve(YoutubeLinkUtil.link(videoUrl).getVideoThumbnailUrl());
+      }
+      else if(VimeoLinkUtil.link(videoUrl).getValidUrl()){
+        $http.get('http://vimeo.com/api/oembed.json?url=' + videoUrl)
+        .success(function(data) {
+          return deferred.resolve(data.thumbnail_url);
+        });
+      }
+
+      return promise;
+    };
 
     this.downloadMarkdown = function(post){
       window.open('data:text/markdown;charset=utf-8,' + post);
@@ -53,8 +70,11 @@ angular.module('cmsApp')
     this.formatName = function(title){
       return getSlug(title);
     };
-    this.preparePost = function(metadata, body, filename, files, toPublish){
+    this.preparePost = function(metadata, body, filename, files, toPublish, videoUrl){
       /*jshint camelcase: false */
+      var deferred = $q.defer();
+      var promise = deferred.promise;
+
       var post = {
         metadata: metadata,
         body: body,
@@ -66,8 +86,16 @@ angular.module('cmsApp')
       post.metadata.files = files;
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
-      return post;
+
+      getVideoThumbnailUrl(videoUrl)
+        .then(function(videoThumbnail){
+          post.metadata.video_thumbnail = videoThumbnail;
+          return deferred.resolve(post);
+        });
+
+      return promise;
     };
+
     this.prepareListOfFiles =  function(metadata, coverImageField){
       var files = [];
 

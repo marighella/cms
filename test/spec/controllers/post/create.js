@@ -19,18 +19,4 @@ describe('Controller: PostCreateCtrl', function () {
       $rootScope: scope
     });
   }));
-
-  describe('section video', function (){
-    it('should get youtube thumbnail url', function (){
-      var videoUrl = 'http://www.youtube.com/watch?v=KQQrHH4RrNc';
-      var videoThumbnail = scope.getVideoThumbnailUrl(videoUrl);
-      expect(videoThumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
-    });
-
-    it('should get vimeo thumbnail url', function (){
-      var videoUrl = 'http://vimeo.com/channels/staffpicks/115068830';
-      var videoThumbnail = scope.getVideoThumbnailUrl(videoUrl);
-      expect(videoThumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
-    });
-  });
 });
