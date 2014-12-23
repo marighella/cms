@@ -21,7 +21,14 @@ angular.module('cmsApp')
     function getVideoThumbnailUrl(videoUrl){
       if (videoUrl) {
         var videoId =  videoFromUrl(videoUrl);
-        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+
+        var responsePromise = $http.jsonp( 'http://vimeo.com/api/v2/video/' + videoId + '.json');
+
+        responsePromise.success(function(data) {
+          console.dir(data);
+
+          return "ccc";
+        });
       }
     }
 
@@ -35,10 +42,11 @@ angular.module('cmsApp')
             return videoFromUrl(url);
           },
           getValidUrl: function(){
-            return getDefaultUrlToVideo(url);
+            if (VIMEO_REGEX.test(url)) { return getDefaultUrlToVideo(url); }
+            else { return false; }
           },
           getVideoThumbnailUrl: function(){
-            return getVideoThumbnailUrl(youtubeUrl);
+            return getVideoThumbnailUrl(url);
           }
         };
       }
