@@ -15,6 +15,39 @@ describe('Service: PostUtil', function () {
   it('should do something', function () {
     expect(!!PostUtil).toBe(true);
   });
+
+  describe('section video', function (){
+    var httpBackend;
+
+    beforeEach(inject(function ($httpBackend) {
+      httpBackend = $httpBackend;
+    }));
+
+    it('should get youtube thumbnail url', function (){
+      var videoUrl = 'http://www.youtube.com/watch?v=KQQrHH4RrNc';
+
+      var promise = PostUtil.preparePost({}, '', '', [], false, videoUrl);
+      promise.then(function(post){
+        expect(post.metadata.video_thumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
+      });
+    });
+
+    it('should get vimeo thumbnail url', function (){
+      var videoUrl = 'http://vimeo.com/6489674';
+
+      httpBackend.whenGET('http://vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
+        thumbnail_url: 'http://image.mockada/000.jpg'
+      });
+
+      var promise = PostUtil.preparePost({}, '', '', [], false, videoUrl);
+      promise.then(function(post){
+        expect(post.metadata.video_thumbnail).toBe('http://image.mockada/000.jpg');
+      });
+
+      httpBackend.flush();
+    });
+  });
+
   describe('catch year and month from created date', function (){
     beforeEach(inject(function (_DateUtil_) {
         _DateUtil_.now = {
@@ -76,9 +109,10 @@ describe('Service: PostUtil', function () {
       };
       var body = '';
 
-      var post = PostUtil.preparePost(metadata, body);
-
-      expect(post.metadata.layout).toBe('post');
+      var promise = PostUtil.preparePost(metadata, body);
+      promise.then(function(post){
+        expect(post.metadata.layout).toBe('post');
+      });
     });
   });
 
@@ -98,8 +132,10 @@ describe('Service: PostUtil', function () {
         created_date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
         title: 'test titulo de post'
       };
-      var post = PostUtil.preparePost(metadata,' ');
-      expect(post.metadata.created_date).toBe('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)');
+      var promise = PostUtil.preparePost(metadata,' ');
+      promise.then(function(post){
+        expect(post.metadata.created_date).toBe('Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)');
+      });
     });
 
     it('should get created date from a new post', function (){
@@ -107,8 +143,10 @@ describe('Service: PostUtil', function () {
       var metadata= {
         title: 'test titulo de post'
       };
-      var post = PostUtil.preparePost(metadata,' ');
-      expect(post.metadata.created_date).toBe('Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)');
+      var promise = PostUtil.preparePost(metadata,' ');
+      promise.then(function(post){
+        expect(post.metadata.created_date).toBe('Tue Jul 20 2012 14:13:34 GMT-0300 (BRT)');
+      });
     });
 
     it('should exists', function (){
@@ -119,10 +157,11 @@ describe('Service: PostUtil', function () {
       var metadata = {};
       var body = '';
 
-      var post = PostUtil.preparePost(metadata, body);
-
-      expect(post.metadata.published).toBe(false);
-      expect(post.filename).toBe('2014-03-04-ola-ola-ola.md');
+      var promise = PostUtil.preparePost(metadata, body);
+      promise.then(function(post){
+        expect(post.metadata.published).toBe(false);
+        expect(post.filename).toBe('2014-03-04-ola-ola-ola.md');
+      });
     });
   });
 

@@ -35,7 +35,8 @@ angular.module('cmsApp')
             return videoFromUrl(youtubeUrl);
           },
           getValidUrl: function(){
-            return getDefaultUrlToVideo(youtubeUrl);
+            if (YOUTUBE_REGEX.test(youtubeUrl)) { return getDefaultUrlToVideo(youtubeUrl); }
+            else { return false; }
           },
           getVideoThumbnailUrl: function(){
             return getVideoThumbnailUrl(youtubeUrl);

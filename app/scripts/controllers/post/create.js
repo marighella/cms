@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil) {
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),
@@ -18,12 +18,13 @@ angular.module('cmsApp')
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
 
-    $scope.fields.every(function(element){
+    $scope.fields.forEach(function(element){
       if( element.type.view === 'cover'){
         $scope.coverField = element;
-        return false;
       }
-      return true;
+      else if(element.type.view === 'video'){
+        $scope.videoField = element;
+      }
     });
 
     $scope.$on('upload-file', function(event, args) {
@@ -46,15 +47,17 @@ angular.module('cmsApp')
       $scope.$broadcast('submited');
 
       if(!form.$invalid){
-        $scope.entity.video_thumbnail = $scope.getVideoThumbnailUrl($scope.entity.video);
         $scope.state = (publish) ? 'publishing' : 'saving';
-        var post = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish);
-        post.metadata[$scope.coverField.name] = $scope.cover;
+        var videoUrl = $scope.entity[$scope.videoField.name];
+        var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
+        promise.then(function(post){
+          post.metadata[$scope.coverField.name] = $scope.cover;
 
-        Repository.post.save($rootScope.user, post, sha)
-        .then(function(){
-          $scope.state = 'default';
-          $location.path('/post/search');
+          Repository.post.save($rootScope.user, post, sha)
+          .then(function(){
+            $scope.state = 'default';
+            $location.path('/post/search');
+          });
         });
       }
     };
@@ -90,9 +93,5 @@ angular.module('cmsApp')
       }
 
       $scope.cover = newCover;
-    };
-
-    $scope.getVideoThumbnailUrl = function(videoUrl) {
-      return YoutubeLinkUtil.link(videoUrl).getVideoThumbnailUrl();
     };
   });
