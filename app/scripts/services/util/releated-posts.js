@@ -32,9 +32,7 @@ angular.module('cmsApp')
         finished = (header === argsLength);
       }
 
-      console.log(result);
-      var agroups = _.flatten(_.compact(result));
-    
+      var agroups = _.flatten(result);
 
       return _.countBy(agroups);
     };

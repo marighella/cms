@@ -26,13 +26,18 @@ describe('Service: ReleatedPosts', function () {
       })
     );
     it('should get the posts with more relevance to a set of tags', function(){
+      var tags = ['Manga','Banana','Cianureto'];
+      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':1, 'dois':1, 'tres': 1});
+    });
+
+    it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca'];
-      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':2});
+      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':1});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca','Cianureto'];
-      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':3,'tres':2});
+      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':3,'tres':1});
     });
   });
 });
