@@ -59,7 +59,15 @@ angular.module('cmsApp')
       }
     };
 
+    var loadTagsFile = function(){
+      Repository.tagsFile.get($scope.user).then(function(result){
+        $rootScope.user.tags = angular.fromJson(result);
+        console.log($rootScope.user.tags);
+      });
+    };
+
     $scope.load = function(){
+      loadTagsFile();
       var post = {
         url: $routeParams.url
       };

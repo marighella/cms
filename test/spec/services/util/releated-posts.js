@@ -25,6 +25,7 @@ describe('Service: ReleatedPosts', function () {
 
       })
     );
+
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Manga','Banana','Cianureto'];
       expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':1, 'dois':1, 'tres': 1});

@@ -34,6 +34,14 @@ angular.module('cmsApp')
 
         return promiseGithub(address, then);
       },
+      tagsFile: function(user){
+        var address = ['repos',user.repository.full_name,'contents/tags.json?ref=gh-pages'].join('/');
+        var then = function(data){
+          return PostUtil.decodeContent(data.content);
+        };
+
+        return promiseGithub(address, then);
+      },
       post: function (post) {
         var then = function(data){
           var post = PostUtil.load(data.content);

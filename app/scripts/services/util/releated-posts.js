@@ -8,7 +8,7 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('ReleatedPosts', function PostUtil(Repository, _) {
+  .service('ReleatedPosts', function ReleatedPostsUtil(Repository, _) {
     var intersection = function(array){
       if (!array) {
         return [];

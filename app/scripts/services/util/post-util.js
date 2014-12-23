@@ -9,7 +9,7 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('PostUtil', function PostUtil(DateUtil, _) {
+  .service('PostUtil', function PostUtil(DateUtil, ReleatedPosts, _) {
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];
@@ -66,6 +66,9 @@ angular.module('cmsApp')
       post.metadata.files = files;
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
+
+      var tags = _.map(metadata.tags, function(e){ return e.tag;} );
+
       return post;
     };
     this.prepareListOfFiles =  function(metadata, coverImageField){

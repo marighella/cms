@@ -22,15 +22,21 @@ angular.module('cmsApp')
       }
     };
 
-    var repositorie = {
-      get: function(repositorie){
-        return Github.content.skelleton(repositorie);
+    var skelleton = {
+      get: function(user){
+        return Github.content.skelleton(user);
+      }
+    };
+    var tags = {
+      get: function(user){
+        return Github.content.tagsFile(user);
       }
     };
 
     return {
       post: post,
       organization: Github.organization,
-      skelleton: repositorie
+      skelleton: skelleton,
+      tagsFile: tags
     };
   });
