@@ -23,10 +23,7 @@ angular.module('cmsApp')
         deferred.resolve(YoutubeLinkUtil.link(videoUrl).getVideoThumbnailUrl());
       }
       else if(VimeoLinkUtil.link(videoUrl).getValidUrl()){
-        $http.get('http://vimeo.com/api/oembed.json?url=' + videoUrl)
-        .success(function(data) {
-          return deferred.resolve(data.thumbnail_url);
-        });
+        deferred.resolve(VimeoLinkUtil.link(videoUrl).getVideoThumbnailUrl());
       }
 
       return promise;
