@@ -20,43 +20,52 @@ angular.module('cmsApp')
     };
 
     $scope.canStartFilter = function(){
-      return $scope.filter.title.length > 3 ;
+      return $scope.searchValue &&  $scope.searchValue.length > 3;
     };
 
-    $scope.search = function(){
+    $scope.disableFilters = function(){
+      $('.filters select').attr('disabled','disabled');
+      $('#clearButton').show();
+    };
+
+    $scope.enableFilters = function(){
+      $('.filters select').removeAttr('disabled');
+      $('#clearButton').hide();
+    };
+    $scope.clearSearch = function(){
+      $scope.searchValue = '';
+      $scope.search();
+    };
+
+    $scope.search = function(searchValue){
       if(!$scope.canStartFilter()){
+        $scope.enableFilters();
+        $scope.find();
         return;
       }
-      var titleSlug = PostUtil.formatName($scope.filter.title); 
+      $scope.disableFilters();
       var result  = [];
-
-      $scope.posts.forEach(function(element){
-        if(element.name.match(titleSlug)){
-          result.push(element);
-        }
+      Repository.post.search(searchValue, $scope.user.repository).then(function(response){
+        result = response.items;
+        result =  result.sort(function(a,b){
+          return new Date(b.name.substring(0,10)) - new Date(a.name.substring(0,10));
+        });
+        $scope.updateView(result);
       });
-
-      $scope.filteredPosts = result;
-      $scope.pageChanged();
     };
 
-    $scope.getPosts = function(){
-      if($scope.canStartFilter()){
-        return $scope.filteredPosts;
-      }
-      return $scope.posts;
+
+    $scope.updateView = function(posts){
+      $scope.currentPage = 1;
+      $scope.posts = posts || $scope.posts;
+      $scope.loadElements();
     };
 
-    $scope.pageChanged = function(){
+    $scope.loadElements = function(){
       var start = ($scope.currentPage - 1) * $scope.maxSize;
       var limit = $scope.maxSize;
-      var postsOnPage = $scope.posts.slice(start, start+limit);
-
-      if($scope.canStartFilter()){
-        postsOnPage = $scope.filteredPosts.slice(start, start+limit);
-      }
-
-      postsOnPage.forEach(function(element){
+      var toLoad = $scope.posts.slice(start, start+limit);
+      toLoad.forEach(function(element){
         if(!element.metadata){
           Repository.post.get(element).then(function(result){
             angular.extend(element, result);
@@ -86,9 +95,7 @@ angular.module('cmsApp')
 
     $scope.find = function(){
       Repository.post.list($rootScope.user, $scope.filter).then(function(result){
-        $scope.posts = result.reverse();
-        $scope.search();
-        $scope.pageChanged();
+        $scope.updateView(result.reverse());
       });
     };
 

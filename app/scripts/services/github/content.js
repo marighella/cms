@@ -15,7 +15,6 @@ angular.module('cmsApp')
       var promise = deferred.promise;
       var github = Resource.github;
       then = then || function(data){return data;};
-
       github.get(address,{
           cache: false
       }).then(function(data){
@@ -46,7 +45,11 @@ angular.module('cmsApp')
       posts: function (user, filter) {
         var yearMonth = DateUtil.format(new Date(filter.year, filter.month));
         var address = ['repos',user.repository.full_name,'contents/_posts', yearMonth].join('/');
-
+        return promiseGithub(address);
+      },
+      search: function(value, repository){
+        var address = ["search/code?q=", value, "+filename:", getSlug(value),"+repo:", repository.full_name].join("")
+        address += "&sort=updated&order=desc"
         return promiseGithub(address);
       },
       save: function(user, post, sha) {

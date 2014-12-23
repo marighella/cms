@@ -35,7 +35,7 @@ describe('Service: GithubContent', function () {
     expect(!!Content).toBe(true);
   });
 
-  it( 'deve salvar na mesma pasta de origem da data de criação', function(){
+  it( 'should save in the same folder of creation', function(){
     var user = {repository: {full_name: 'Gabas'}};
     var post = {filename: 'arquivo.md', created_date: '2014-01-30'};
     var sha = 'abcd3';
@@ -45,4 +45,5 @@ describe('Service: GithubContent', function () {
     });
     rootScope.$digest();
   });
+  
 });

@@ -19,6 +19,9 @@ angular.module('cmsApp')
       },
       save: function(user, post, year, month, sha){
         return Github.content.save(user, post, year, month, sha);
+      },
+      search: function(value, repository){
+        return Github.content.search(value, repository);
       }
     };
 
