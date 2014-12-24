@@ -1,0 +1,9 @@
+<form novalidate ng-submit="submit()">
+  <div class="form-group">
+    <input ng-model="searchValue" type="text" placeholder="Pesquise por título" class="form-control" />
+    <a class='btn btn-danger' ng-show="submited"  ng-click="clearSearch()"> 
+      <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+    </a>
+  </div>
+</form>
+

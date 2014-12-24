@@ -23,30 +23,15 @@ angular.module('cmsApp')
       return $scope.searchValue &&  $scope.searchValue.length > 3;
     };
 
-    $scope.disableFilters = function(){
-      $('.filters select').attr('disabled','disabled');
-      $('#clearButton').show();
-    };
-
-    $scope.enableFilters = function(){
-      $('.filters select').removeAttr('disabled');
-      $('#clearButton').hide();
-    };
-    $scope.clearSearch = function(){
-      $scope.searchValue = '';
-      $scope.search();
-    };
-
-    $scope.search = function(searchValue){
+    $scope.search = function(){
       if(!$scope.canStartFilter()){
-        $scope.enableFilters();
         $scope.find();
         return;
       }
-      $scope.disableFilters();
       var result  = [];
-      Repository.post.search(searchValue, $scope.user.repository).then(function(response){
+      Repository.post.search($scope.searchValue, $scope.user.repository).then(function(response){
         result = response.items;
+        //TODO: Move sorte to service
         result =  result.sort(function(a,b){
           return new Date(b.name.substring(0,10)) - new Date(a.name.substring(0,10));
         });

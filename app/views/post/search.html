@@ -41,17 +41,7 @@
         <option value='11'>Dezembro</option>
       </select>
     </div>
-    <div class="form-group">
-      <form novalidate ng-submit="search(searchValue)">
-        <div class="form-group">
-          <input ng-model="searchValue" type="text" placeholder="Pesquise por título" class="form-control" />
-          <a class='btn btn-danger' style='display:none' id="clearButton" ng-click="clearSearch()"> 
-            <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
+    <div class='form-group' search-form search-value="searchValue" submit="search()"></div>
 
   <table class="table table-striped">
     <thead>
