@@ -1,5 +1,5 @@
 'use strict';
-/* globals escape, unescape */
+/* globals escape, unescape, getSlug */
 
 /**
  * @ngdoc service
@@ -9,7 +9,8 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('PostUtil', function PostUtil($http, $q, ReleatedPosts,DateUtil, _, YoutubeLinkUtil, VimeoLinkUtil) {
+  .service('PostUtil', function PostUtil($http, $q, DateUtil, _, YoutubeLinkUtil, VimeoLinkUtil) {
+    
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];
@@ -86,10 +87,7 @@ angular.module('cmsApp')
       post.metadata.files = files;
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
-
-      var tags = _.map(metadata.tags, function(e){ return e.tag;} );
       
-      console.log(tags);
       
       getVideoThumbnailUrl(videoUrl)
         .then(function(videoThumbnail){

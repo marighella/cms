@@ -17,28 +17,28 @@ describe('Service: ReleatedPosts', function () {
   });
 
   describe('give a tag-posts file and a set of tags', function (){
-    beforeEach(inject(function (_Repository_) {
-        _Repository_.tagsFile = {'Banana':['dois','tres', 'sete'],
-                                 'Cianureto':['tres','sete'],
-                                 'Manga':['dois','quatro'],
-                                 'Maca':['quatro', 'seis', 'sete']};
+    var tagsWithPosts;
 
-      })
-    );
+    beforeEach(function () {
+      tagsWithPosts = {'Banana':['dois','tres', 'sete'],
+        'Cianureto':['tres','sete'],
+        'Manga':['dois','quatro'],
+        'Maca':['quatro', 'seis', 'sete']};
+    });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Manga','Banana','Cianureto'];
-      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':1, 'dois':1, 'tres': 1});
+      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1, 'dois':1, 'tres': 1});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca'];
-      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':1});
+      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca','Cianureto'];
-      expect(ReleatedPosts.getPostsByTags(tags)).toEqual({'sete':3,'tres':1});
+      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':3,'tres':1});
     });
   });
 });

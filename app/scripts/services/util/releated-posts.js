@@ -8,7 +8,7 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('ReleatedPosts', function ReleatedPostsUtil(Repository, _) {
+  .service('ReleatedPosts', function ReleatedPostsUtil(_) {
     var intersection = function(array){
       if (!array) {
         return [];
@@ -37,13 +37,9 @@ angular.module('cmsApp')
       return _.countBy(agroups);
     };
 
-    this.getPostsByTags = function(tags){
-      var tagsJson = Repository.tagsFile;
-      var allPosts = _.values(_.pick(tagsJson, tags));
-
-
+    this.getPostsByTags = function(selectedTags, allTagsWithPosts){
+      var allPosts = _.values(_.pick(allTagsWithPosts, selectedTags));
       var result = intersection.apply(this, allPosts);
-      
 
       return result;
     };

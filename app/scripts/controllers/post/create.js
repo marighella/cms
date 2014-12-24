@@ -8,7 +8,16 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, ReleatedPosts, _) {
+    var getReleatedPosts = function(tags){
+      tags = _.map(tags, function(e){ return e.tag;} );
+      var tagsFile = $rootScope.user.tags;
+
+      var releatedPosts = ReleatedPosts.getPostsByTags(tags, tagsFile);
+
+      return releatedPosts;
+    };
+
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),
@@ -51,7 +60,9 @@ angular.module('cmsApp')
         var videoUrl = $scope.entity[$scope.videoField.name];
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
+          /*jshint camelcase: false */
           post.metadata[$scope.coverField.name] = $scope.cover;
+          post.metadata.releated_posts = getReleatedPosts(post.metadata.tags); 
 
           Repository.post.save($rootScope.user, post, sha)
           .then(function(){
