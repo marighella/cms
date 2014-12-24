@@ -21,7 +21,8 @@ angular.module('cmsApp')
     function getVideoThumbnailUrl(videoUrl){
       if (videoUrl) {
         var videoId =  videoFromUrl(videoUrl);
-        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+
+        return 'http://img.youtube.com/vi/' + videoId + '/0.jpg';
       }
     }
 
