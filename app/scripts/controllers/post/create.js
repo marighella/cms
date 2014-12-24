@@ -9,12 +9,10 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, ReleatedPosts, _) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, ReleatedPosts, _) {
     var getReleatedPosts = function(tags){
       tags = _.map(tags, function(e){ return getSlug(e.tag);} );
-
-      var tagsFile = $rootScope.user.tags;
-
+      var tagsFile = $rootScope.user.postsGroupByTag;
       var releatedPosts = ReleatedPosts.getPostsByTags(tags, tagsFile);
 
       return releatedPosts;
@@ -28,6 +26,21 @@ angular.module('cmsApp')
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
+    $scope.autocomplete = {
+      tags: function(query){
+        var deferred = $q.defer();
+        var keys = $rootScope.user.tags;
+        var tags = _.map(keys, function(e){
+          if(e.match(query)){
+            return {tag: e};
+          }
+          return false;
+        });
+        deferred.resolve(_.compact(tags));
+
+        return deferred.promise;
+      }
+    };
 
     $scope.fields.forEach(function(element){
       if( element.type.view === 'cover'){
@@ -77,8 +90,9 @@ angular.module('cmsApp')
 
     var loadTagsFile = function(){
       Repository.tagsFile.get($scope.user).then(function(result){
-        $rootScope.user.tags = angular.fromJson(result);
-        console.log($rootScope.user.tags);
+        var tagsFile = angular.fromJson(result);
+        $rootScope.user.tags = _.keys(tagsFile);
+        $rootScope.user.postsGroupByTag = tagsFile;
       });
     };
 
