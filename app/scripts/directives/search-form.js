@@ -20,7 +20,9 @@ var directive = function(){
       require : '?searchValue',
       scope: {
         submit: '&',
-        searchValue: '='
+        searchValue: '=',
+        filter: '=',
+        changeDate: '&'
       },
       templateUrl: '/views/post/include/search-form.html',
       link: link
