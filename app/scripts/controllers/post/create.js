@@ -1,4 +1,5 @@
 'use strict';
+/* globals getSlug */
 
 /**
  * @ngdoc function
@@ -10,7 +11,8 @@
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, ReleatedPosts, _) {
     var getReleatedPosts = function(tags){
-      tags = _.map(tags, function(e){ return e.tag;} );
+      tags = _.map(tags, function(e){ return getSlug(e.tag);} );
+
       var tagsFile = $rootScope.user.tags;
 
       var releatedPosts = ReleatedPosts.getPostsByTags(tags, tagsFile);
