@@ -48,9 +48,15 @@ angular.module('cmsApp')
         return promiseGithub(address);
       },
       search: function(value, repository){
-        var address = ["search/code?q=", value, "+filename:", getSlug(value),"+repo:", repository.full_name].join("")
-        address += "&sort=updated&order=desc"
-        return promiseGithub(address);
+        var address = ['search/code?q=', value, '+filename:', getSlug(value),'+repo:', repository.full_name].join('');
+        address += '&sort=updated&order=desc';
+        var then = function (data){
+          data.items =  data.items.sort(function(a,b){
+            return new Date(b.name.substring(0,10)) - new Date(a.name.substring(0,10));
+          });
+          return data;
+        };
+        return promiseGithub(address, then);
       },
       save: function(user, post, sha) {
         var obj = PostUtil.serialize(post);

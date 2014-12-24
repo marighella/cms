@@ -31,10 +31,6 @@ angular.module('cmsApp')
       var result  = [];
       Repository.post.search($scope.searchValue, $scope.user.repository).then(function(response){
         result = response.items;
-        //TODO: Move sorte to service
-        result =  result.sort(function(a,b){
-          return new Date(b.name.substring(0,10)) - new Date(a.name.substring(0,10));
-        });
         $scope.updateView(result);
       });
     };
