@@ -5,6 +5,11 @@ angular.module('cmsApp')
     var currentYear = new Date().getFullYear();
     return {
       require : '?ngModel',
+      scope: {
+        filter: '=',
+        change: '&',
+        disabled: '='
+      },
       link: function(scope,element,attrs){
         scope.years = [];
         for (var i = +attrs.offset; i < +attrs.range + 1; i++){
@@ -12,6 +17,6 @@ angular.module('cmsApp')
         }
         scope.selected = currentYear;
       },
-      template: '<select ng-model="filter.year" class="form-control year" ng-change="find()" ng-options="y for y in years"></select>'
+      template: '<select ng-model="filter.year" ng-disabled="disabled" class="form-control year" ng-change="change()" ng-options="y for y in years"></select>'
     };
   });
