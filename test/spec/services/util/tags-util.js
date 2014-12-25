@@ -1,19 +1,19 @@
 'use strict';
 /*jshint camelcase: false */
 
-describe('Service: ReleatedPosts', function () {
+describe('Service: TagsUtil', function () {
 
   // load the service's module
   beforeEach(module('cmsApp'));
 
   // instantiate service
-  var ReleatedPosts;
-  beforeEach(inject(function (_ReleatedPosts_) {
-    ReleatedPosts = _ReleatedPosts_;
+  var TagsUtil;
+  beforeEach(inject(function (_TagsUtil_) {
+    TagsUtil = _TagsUtil_;
   }));
 
   it('should do something', function () {
-    expect(!!ReleatedPosts).toBe(true);
+    expect(!!TagsUtil).toBe(true);
   });
 
   describe('give a tag-posts file and a set of tags', function (){
@@ -28,17 +28,17 @@ describe('Service: ReleatedPosts', function () {
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Manga','Banana','Cianureto'];
-      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1, 'dois':1, 'tres': 1});
+      expect(TagsUtil.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1, 'dois':1, 'tres': 1});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca'];
-      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1});
+      expect(TagsUtil.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca','Cianureto'];
-      expect(ReleatedPosts.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':3,'tres':1});
+      expect(TagsUtil.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':3,'tres':1});
     });
   });
 });

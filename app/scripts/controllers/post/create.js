@@ -9,11 +9,11 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, ReleatedPosts, _) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, TagsUtil, _) {
     var getReleatedPosts = function(tags){
       tags = _.map(tags, function(e){ return getSlug(e.tag);} );
       var tagsFile = $rootScope.user.postsGroupByTag;
-      var releatedPosts = ReleatedPosts.getPostsByTags(tags, tagsFile);
+      var releatedPosts = TagsUtil.getPostsByTags(tags, tagsFile);
 
       return releatedPosts;
     };
