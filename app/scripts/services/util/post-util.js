@@ -25,6 +25,8 @@ angular.module('cmsApp')
       }
       else if(VimeoLinkUtil.link(videoUrl).getValidUrl()){
         deferred.resolve(VimeoLinkUtil.link(videoUrl).getVideoThumbnailUrl());
+      }else{
+        deferred.resolve('');
       }
 
       return promise;
@@ -85,10 +87,12 @@ angular.module('cmsApp')
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
       
-      
+ 
       getVideoThumbnailUrl(videoUrl)
         .then(function(videoThumbnail){
-          post.metadata.video_thumbnail = videoThumbnail;
+          if(!!videoThumbnail){
+            post.metadata.video_thumbnail = videoThumbnail;
+          }
           return deferred.resolve(post);
         });
 
