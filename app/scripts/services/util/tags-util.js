@@ -8,7 +8,7 @@
  * Service in the cmsApp.
  */
 angular.module('cmsApp')
-  .service('TagsUtil', function TagsUtil(_) {
+  .factory('TagsUtil', function($q, _) {
     var intersection = function(array){
       if (!array) {
         return [];
@@ -36,11 +36,37 @@ angular.module('cmsApp')
 
       return _.countBy(agroups);
     };
+    var tagsFile = {};
+    var allTags  = {};
 
-    this.getPostsByTags = function(selectedTags, allTagsWithPosts){
-      var allPosts = _.values(_.pick(allTagsWithPosts, selectedTags));
+    var search = function(query){
+      var deferred = $q.defer();
+      var tags = _.map(allTags, function(e){
+        if(e.match(query)){
+          return {tag: e};
+        }
+        return false;
+      });
+      deferred.resolve(_.compact(tags));
+
+      return deferred.promise;
+    };
+
+    var getPostsByTags = function(selectedTags){
+      var postsByTag = _.pick(tagsFile, selectedTags);
+      var allPosts = _.values(postsByTag);
       var result = intersection.apply(this, allPosts);
 
       return result;
     };
+
+    var factory = function(file){
+      tagsFile = file;
+      allTags  = _.keys(tagsFile);
+      return {
+        search: search,
+        getPostsByTags: getPostsByTags
+      };
+    };
+    return factory;
   });
