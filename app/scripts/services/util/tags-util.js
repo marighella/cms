@@ -57,6 +57,17 @@ angular.module('cmsApp')
       var allPosts = _.values(postsByTag);
       var result = intersection.apply(this, allPosts);
 
+      if(_.keys(result).length < 3){
+
+
+        var newerByTag = {};
+        _.each(postsByTag, function(element){
+          newerByTag[element[0]] = 0;
+        });
+
+        result = _.extend(newerByTag, result);
+      }
+
       return result;
     };
 

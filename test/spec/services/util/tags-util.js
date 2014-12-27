@@ -29,12 +29,14 @@ describe('Service: TagsUtil', function () {
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Manga','Banana','Cianureto'];
-      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1, 'dois':1, 'tres': 1});
+      expect(factory.getPostsByTags(tags, tagsWithPosts))
+        .toEqual(jasmine.objectContaining({'sete':1, 'dois':1, 'tres': 1}));
     });
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca'];
-      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1});
+      expect(factory.getPostsByTags(tags, tagsWithPosts))
+        .toEqual(jasmine.objectContaining({'sete':1}));
     });
 
     it('should get at least 3 result', function(){
@@ -44,7 +46,8 @@ describe('Service: TagsUtil', function () {
 
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca','Cianureto'];
-      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':3,'tres':1});
+      expect(factory.getPostsByTags(tags, tagsWithPosts))
+        .toEqual(jasmine.objectContaining({'sete':3,'tres':1}));
     });
   });
 });
