@@ -28,9 +28,13 @@ angular.module('cmsApp')
 
       return promise;
     }
+    function compilePost(post){
+      return encodeURIComponent(['---', window.jsyaml.dump(post.metadata), '---', post.body].join('\n'));
+    }
 
     this.downloadMarkdown = function(post){
-      window.open('data:text/markdown;charset=utf-8,' + post);
+      window.open('data:application/octet-stream;charset=utf-8,filename='+post.filename+','+ compilePost(post),
+                 post.filename);
     };
     this.decodeContent = function(content){
       return decodeURIComponent(escape(atob(content)));
@@ -55,8 +59,7 @@ angular.module('cmsApp')
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);
-      var compiled = ['---', window.jsyaml.dump(post.metadata), '---', post.body].join('\n');
-      return unescape(encodeURIComponent(compiled));
+      return unescape(compilePost(post));
     };
     this.generateFileName =  function(post) {
       if(!!post.filename){
