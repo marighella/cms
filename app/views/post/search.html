@@ -95,7 +95,7 @@
   </pager>
 
   <figure>
-    <img src="{{ organization.avatar_url }}" alt="{{ organization.name }}">
-    <figcaption>{{ organization.name }}</figcaption>
+    <img src="{{ organization.avatar_url }}" alt="{{ organization.name || organization.login }}">
+    <figcaption>{{ organization.name || organization.login }}</figcaption>
   </figure>
 </div>
