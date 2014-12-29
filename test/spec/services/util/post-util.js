@@ -35,7 +35,7 @@ describe('Service: PostUtil', function () {
     it('should get vimeo thumbnail url', function (){
       var videoUrl = 'http://vimeo.com/6489674';
 
-      httpBackend.whenGET('http://vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
+      httpBackend.whenGET('//vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
         thumbnail_url: 'http://image.mockada/000.jpg'
       });
 

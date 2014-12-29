@@ -23,8 +23,9 @@ angular.module('cmsApp')
         var deferred = $q.defer();
         var promise = deferred.promise;
 
-        $http.get('http://vimeo.com/api/oembed.json?url=' + videoUrl)
+        $http.get('//vimeo.com/api/oembed.json?url=' + videoUrl)
         .success(function(data) {
+            /*jshint camelcase: false */
           return deferred.resolve(data.thumbnail_url);
         });
 

@@ -15,7 +15,7 @@ angular.module('cmsApp')
     };
 
     $scope.uploadFiles = function(files) {
-      var IMAGE_SERVICE_URL = 'http://mst-image-service.herokuapp.com/upload';
+      var IMAGE_SERVICE_URL = '//mst-image-service.herokuapp.com/upload';
       $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
         $http({
