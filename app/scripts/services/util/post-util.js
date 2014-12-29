@@ -1,5 +1,5 @@
 'use strict';
-/* globals escape, unescape */
+/* globals escape, unescape, getSlug */
 
 /**
  * @ngdoc service
@@ -27,7 +27,7 @@ angular.module('cmsApp')
       }
 
       return promise;
-    };
+    }
 
     this.downloadMarkdown = function(post){
       window.open('data:text/markdown;charset=utf-8,' + post);
