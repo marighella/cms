@@ -12,6 +12,11 @@ angular.module('cmsApp')
       }
     };
 
+    if (typeof $scope.user != 'undefined') {
+      $scope.user.organization = undefined;
+      $scope.user.repositories = [];
+    }
+
     $scope.getRepositories = function(organization){
       $scope.user.organization = undefined;
       $scope.user.repositories = [];
