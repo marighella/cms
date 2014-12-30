@@ -20,13 +20,25 @@ O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociai
 
 ### Instalando dependências
 
+
+Instalando os pacotes NodeJS
+
 ``
 $ npm install
 ``
 
+Instalando os pacotes do Frontend do projeto via Bower
+
 ``
 $ bower install
 ``
+
+Atualizando o Webdriver Manager do Protractor
+
+``
+$ ./node_modules/protractor/bin/webdriver-manager update
+``
+
 ### Executando local
 ``
 $ grunt serve
