@@ -1,3 +1,7 @@
+/* globals element, by */
+
+'use strict';
+
 var LoginPage = function () {
   var helper = require('../../helper.js');
   var fields =  {
@@ -41,7 +45,7 @@ var LoginPage = function () {
 
     authenticationOnGithub();
     closePage();
-  }
+  };
 };
 
 module.exports = new LoginPage();
