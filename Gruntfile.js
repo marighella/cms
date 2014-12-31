@@ -285,20 +285,20 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    imagemin: {
-      dist: {
-        options: {
-          cache: false,
-          force: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: ['{,*/}*.{png,gif,jpg,jpeg}', '!background.jpg'],
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
+    // imagemin: {
+    //  dist: {
+    //    options: {
+    //      cache: false,
+    //      force: true
+    //    },
+    //    files: [{
+    //      expand: true,
+    //      cwd: '<%= yeoman.app %>/images',
+    //      src: ['{,*/}*.{png,gif,jpg,jpeg}', '!background.jpg'],
+    //      dest: '<%= yeoman.dist %>/images'
+    //    }]
+    //  }
+    // },
 
     svgmin: {
       dist: {
@@ -362,8 +362,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/,**/}*.html',
-            'images/{,*/}*.{webp}',
-            'images/background.jpg',
+            'images/{,*/,**/}*.{webp,png,jpg,jpeg}',
             'fonts/*',
             'ckeditor-plugins/**/*'
           ]
@@ -409,7 +408,7 @@ module.exports = function (grunt) {
       dist: [
         'copy:styles',
         'htmlmin',
-        'imagemin',
+        //'imagemin',
         'svgmin'
       ]
     },
