@@ -294,7 +294,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>/images',
-          src: ['{,*/}*.{png,gif,jpg,jpeg}'],
+          src: ['{,*/}*.{png,gif,jpg,jpeg}', '!background.jpg'],
           dest: '<%= yeoman.dist %>/images'
         }]
       }
@@ -363,6 +363,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/,**/}*.html',
             'images/{,*/}*.{webp}',
+            'images/background.jpg',
             'fonts/*',
             'ckeditor-plugins/**/*'
           ]
