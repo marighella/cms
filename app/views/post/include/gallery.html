@@ -1,8 +1,20 @@
 <!-- slider container -->
-<div class="slider"  ng-init="_index = 0">
+<div class="slider"  ng-init="_index = 0" ng-controller="UploadCtrl as uploadCtrl">
   <ul class="nav thumb-list">
 
-    <div class="upload btn btn-default btn-block" ng-disable="upload.working()" ng-controller="UploadCtrl as uploadCtrl">
+    <div class="flickr btn btn-default btn-block">
+      <span ng-if="!uploadCtrl.flickr.isLogged()">
+        Clique para logar no flickr
+      </span>
+      <span ng-show="uploadCtrl.flickr.isLogged()">
+        Adicionar imagens
+        <input type="file" name="upload" id="upload" ng-disable="uploadCtrl.upload.working()" multiple upload />
+      </span>
+
+      <img src='https://s.yimg.com/pw/images/goodies/white-flickr.png' ng-disabled="!uploadCtrl.flickr.isLogged()">
+    </div>
+
+    <div class="upload btn btn-default btn-block" ng-disable="upload.working()">
       <span ng-hide="uploadCtrl.upload.working()">
         <i class="fa fa-upload"></i>
         Adicionar arquivo

@@ -15,14 +15,17 @@ angular.module('cmsApp')
     };
 
     var uploadFlickr = function(flickrAuth, files){
-      var URL = 'https://up.flickr.com/services/upload/';
+      var URL = 'services/upload/';
+
 
       _.each(files, function(file){
-        flickrAuth.post(URL,{
-          transformRequest: FormDataObject,
-          'photo': file,
-          'title': 'teste marighella',
-          'description': 'CMS - Carlos Marighella Service'
+
+        var fd = new FormDataObject({'photo': file, 'description': 'From CMS'});    
+
+        flickrAuth.post(URL, {
+          data: fd,
+          processData: false,
+          contentType: false
         }).done(function(result){
           console.log(result);
         });
@@ -35,7 +38,6 @@ angular.module('cmsApp')
         oauth.initialize('ajba6gVGrmvbHNoXFnBTUbidAZ8');
         oauth.popup('flickr', function(error, success){
           $rootScope.user.flickr = success;
-        }).done(function(){
           uploadFlickr($rootScope.user.flickr, files);
         });
       }else{
