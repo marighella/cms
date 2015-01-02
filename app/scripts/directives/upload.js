@@ -5,11 +5,13 @@ angular.module('cmsApp')
     return {
       restrict: 'A',
       controller: 'UploadCtrl',
-      scope: {},
+      scope: {
+        service: '='
+      },
       link: function(scope, el){
         el.bind('change', function(event){
           var files = event.target.files;
-          scope.uploadFiles(files);
+          scope.uploadFiles(files, scope.service);
           event.target.value = '';
         });
 
