@@ -2,7 +2,7 @@
 /*jshint camelcase: false */
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
+  .controller('UploadCtrl', function ($scope, oauth, $rootScope, _ /* , $http, $rootScope, Resource, _ */) {
     this.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
     $scope.upload = this.upload;
 
@@ -14,8 +14,38 @@ angular.module('cmsApp')
       return fd;
     };
 
+    var uploadFlickr = function(flickrAuth, files){
+      var URL = 'https://up.flickr.com/services/upload/';
+
+      _.each(files, function(file){
+        flickrAuth.post(URL,{
+          transformRequest: FormDataObject,
+          'photo': file,
+          'title': 'teste marighella',
+          'description': 'CMS - Carlos Marighella Service'
+        }).done(function(result){
+          console.log(result);
+        });
+      });
+    }; 
+
     $scope.uploadFiles = function(files) {
-      var IMAGE_SERVICE_URL = '//mst-image-service.herokuapp.com/upload';
+
+      if(!$rootScope.user.flickr){
+        oauth.initialize('ajba6gVGrmvbHNoXFnBTUbidAZ8');
+        oauth.popup('flickr', function(error, success){
+          $rootScope.user.flickr = success;
+        }).done(function(){
+          uploadFlickr($rootScope.user.flickr, files);
+        });
+      }else{
+        uploadFlickr($rootScope.user.flickr, files);
+      }
+
+      $rootScope.$broadcast('prepared-to-upload', { length: files.length });
+    
+      return files;
+    /*  var IMAGE_SERVICE_URL = '//mst-image-service.herokuapp.com/upload';
       $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
         $http({
@@ -34,7 +64,7 @@ angular.module('cmsApp')
         }).error(function(error) {
           console.log(error);
         });
-      });
+      });*/
     };
 
     $scope.$on('upload-file', function() {
