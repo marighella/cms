@@ -21,7 +21,8 @@ angular.module('cmsApp')
     function getVideoThumbnailUrl(videoUrl){
       if (videoUrl) {
         var videoId =  videoFromUrl(videoUrl);
-        return "http://img.youtube.com/vi/" + videoId + "/0.jpg";
+
+        return 'http://img.youtube.com/vi/' + videoId + '/0.jpg';
       }
     }
 
@@ -35,7 +36,8 @@ angular.module('cmsApp')
             return videoFromUrl(youtubeUrl);
           },
           getValidUrl: function(){
-            return getDefaultUrlToVideo(youtubeUrl);
+            if (YOUTUBE_REGEX.test(youtubeUrl)) { return getDefaultUrlToVideo(youtubeUrl); }
+            else { return false; }
           },
           getVideoThumbnailUrl: function(){
             return getVideoThumbnailUrl(youtubeUrl);

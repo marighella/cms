@@ -16,6 +16,24 @@
   }
 }
 
+figure {
+  margin-bottom: 20px;
+
+  img {
+    width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    border-radius: 50%;
+  }
+
+  figcaption {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+  }
+}
+
 @media screen and (min-width: 350px) {
   
 }

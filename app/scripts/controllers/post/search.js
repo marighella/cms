@@ -19,6 +19,8 @@ angular.module('cmsApp')
       title: '' 
     };
 
+    $scope.organization = $rootScope.user.organization;
+
     $scope.canStartFilter = function(){
       return $scope.searchValue &&  $scope.searchValue.length > 3;
     };

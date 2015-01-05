@@ -83,7 +83,7 @@ angular.module('cmsApp')
             return deferred.resolve(data);
           });
         }else{
-          PostUtil.downloadMarkdown(obj);
+          PostUtil.downloadMarkdown(post);
           deferred.resolve();
         }
 

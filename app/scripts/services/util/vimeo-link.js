@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('VimeoLinkUtil', function () {
+  .factory('VimeoLinkUtil', function ($http, $q) {
     var VIMEO_REGEX = /(player\.)?vimeo\.com(\/video)?\/(\d+)/;
 
     function videoFromUrl(url){
@@ -18,6 +18,21 @@ angular.module('cmsApp')
       return VALID_URL + id;
     }
 
+    function getVideoThumbnailUrl(videoUrl){
+      if (videoUrl) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+
+        $http.get('//vimeo.com/api/oembed.json?url=' + videoUrl)
+        .success(function(data) {
+            /*jshint camelcase: false */
+          return deferred.resolve(data.thumbnail_url);
+        });
+
+        return promise;
+      }
+    }
+
     var factory = {
       pattern: function(){
         return VIMEO_REGEX;
@@ -28,7 +43,11 @@ angular.module('cmsApp')
             return videoFromUrl(url);
           },
           getValidUrl: function(){
-            return getDefaultUrlToVideo(url);
+            if (VIMEO_REGEX.test(url)) { return getDefaultUrlToVideo(url); }
+            else { return false; }
+          },
+          getVideoThumbnailUrl: function(){
+            return getVideoThumbnailUrl(url);
           }
         };
       }
