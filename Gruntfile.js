@@ -285,20 +285,16 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    // imagemin: {
-    //  dist: {
-    //    options: {
-    //      cache: false,
-    //      force: true
-    //    },
-    //    files: [{
-    //      expand: true,
-    //      cwd: '<%= yeoman.app %>/images',
-    //      src: ['{,*/}*.{png,gif,jpg,jpeg}', '!background.jpg'],
-    //      dest: '<%= yeoman.dist %>/images'
-    //    }]
-    //  }
-    // },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
 
     svgmin: {
       dist: {
@@ -343,11 +339,11 @@ module.exports = function (grunt) {
     },
 
     // Replace Google CDN references
-  // cdnify: {
-    //  dist: {
-      //  html: ['<%= yeoman.dist %>/*.html']
-     // }
-   // },
+    cdnify: {
+      dist: {
+        html: ['<%= yeoman.dist %>/*.html']
+      }
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -362,7 +358,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/,**/}*.html',
-            'images/{,*/,**/}*.{webp,png,jpg,jpeg}',
+            'images/{,*/}*.{webp}',
             'fonts/*',
             'ckeditor-plugins/**/*'
           ]
@@ -408,8 +404,8 @@ module.exports = function (grunt) {
       dist: [
         'copy:styles',
         'htmlmin',
-        //'imagemin',
-     //   'svgmin'
+        'imagemin',
+        'svgmin'
       ]
     },
 
@@ -476,7 +472,9 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'cdnify',
     'cssmin',
+    'uglify',
     'filerev',
     'usemin',
     'htmlmin'
@@ -494,7 +492,9 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
+    'cdnify',
     'cssmin',
+    'uglify',
     'filerev',
     'usemin',
     'htmlmin'
