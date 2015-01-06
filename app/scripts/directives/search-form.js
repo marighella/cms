@@ -10,7 +10,7 @@ var directive = function(){
         filter: '=',
         changeDate: '&'
       },
-      templateUrl: '/views/post/include/search-form.html',
+      templateUrl: 'views/post/include/search-form.html',
       link: function(scope, el){
         scope.clearSearch = function(){
           scope.filter.title= '';
