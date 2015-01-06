@@ -10,7 +10,7 @@ angular.module('cmsApp')
   };
 
   return {
-      restrict: 'AE',
+      restrict: 'E',
       require : '?filter',
       scope: {
         filter: '=',
