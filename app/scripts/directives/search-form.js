@@ -1,13 +1,14 @@
 'use strict';
 
-var directive = function(){
+angular.module('cmsApp')
+  .directive('searchForm',  function(){
   var filter = {
     year: '',
     month: '',
     title: '',
     search: function(){}
   };
-  //
+
   return {
       restrict: 'AE',
       require : '?filter',
@@ -29,7 +30,4 @@ var directive = function(){
         });
       }
     };
-};
-
-angular.module('cmsApp')
-  .directive('searchForm', directive);
+  });
