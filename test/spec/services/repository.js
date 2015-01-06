@@ -16,7 +16,9 @@ describe('Service: Repository', function () {
   });
 
   describe('content from github', function (){
+    var Content;
     beforeEach(inject(function (_GithubContent_) {
+      Content = _GithubContent_;
       var content = _GithubContent_;
       content.posts = function (){
         return [1,2,3];
@@ -24,8 +26,9 @@ describe('Service: Repository', function () {
     }));
 
     it('should return a list of posts', function (){
-      expect(Repository.post.list().length).toBe(3);
+      expect(Repository.content.list().length).toBe(3);
     });
+
   });
 
 });

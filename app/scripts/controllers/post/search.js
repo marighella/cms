@@ -4,7 +4,7 @@
  * @ngdoc function
  * @name cmsApp.controller:PostsearchCtrl
  * @description
- * # PostsearchCtrl
+ * #.content.earchCtrl
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
@@ -16,51 +16,36 @@ angular.module('cmsApp')
     $scope.filter = {
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear(),
-      title: '' 
+      title: ''
     };
 
     $scope.organization = $rootScope.user.organization;
-
     $scope.canStartFilter = function(){
-      return $scope.filter.title.length > 3 ;
+      return $scope.filter.title &&  $scope.filter.title.length > 3;
     };
 
     $scope.search = function(){
-      if(!$scope.canStartFilter()){
-        return;
-      }
-      var titleSlug = PostUtil.formatName($scope.filter.title); 
       var result  = [];
-
-      $scope.posts.forEach(function(element){
-        if(element.name.match(titleSlug)){
-          result.push(element);
-        }
+      Repository.content.search($rootScope.repository, $scope.filter).then(function(response){
+        result = response.items;
+        $scope.updateView(result);
       });
-
-      $scope.filteredPosts = result;
-      $scope.pageChanged();
     };
 
-    $scope.getPosts = function(){
-      if($scope.canStartFilter()){
-        return $scope.filteredPosts;
-      }
-      return $scope.posts;
+
+    $scope.updateView = function(posts){
+      $scope.currentPage = 1;
+      $scope.posts = posts || $scope.posts;
+      $scope.loadElements();
     };
 
-    $scope.pageChanged = function(){
+    $scope.loadElements = function(){
       var start = ($scope.currentPage - 1) * $scope.maxSize;
       var limit = $scope.maxSize;
-      var postsOnPage = $scope.posts.slice(start, start+limit);
-
-      if($scope.canStartFilter()){
-        postsOnPage = $scope.filteredPosts.slice(start, start+limit);
-      }
-
-      postsOnPage.forEach(function(element){
+      var toLoad = $scope.posts.slice(start, start+limit);
+      toLoad.forEach(function(element){
         if(!element.metadata){
-          Repository.post.get(element).then(function(result){
+          Repository.content.get(element).then(function(result){
             angular.extend(element, result);
           });
         }
@@ -68,7 +53,7 @@ angular.module('cmsApp')
     };
 
     $scope.loadSkelleton = function(){
-      Repository.skelleton.get($scope.user).then(function(result){
+      Repository.skelleton.get($rootScope.repository).then(function(result){
         $rootScope.user.skelleton = angular.fromJson(result);
         $scope.ready = true;
       });
@@ -86,14 +71,12 @@ angular.module('cmsApp')
       $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
     };
 
-    $scope.find = function(){
-      Repository.post.list($rootScope.user, $scope.filter).then(function(result){
-        $scope.posts = result.reverse();
-        $scope.search();
-        $scope.pageChanged();
+    $scope.list = function(){
+      Repository.content.list($rootScope.repository, $scope.filter).then(function(result){
+        $scope.updateView(result);
       });
     };
 
-    $scope.find();
+    $scope.list();
     $scope.loadSkelleton();
   });

@@ -267,16 +267,13 @@ describe('Service: PostUtil', function () {
     });
 
     it('should remove any number of white spaces to generate the filename', function() {
-
       var post = {
         metadata: {
           date: '2014-09-30T14:20:58-03:00',
           title: 'Alta nos aluguéis é a principal responsável por falta de moradia'
         }
       };
-
       var filename = PostUtil.generateFileName(post);
-
       expect(filename).toBe('2014-09-30-alta-nos-alugueis-e-a-principal-responsavel-por-falta-de-moradia.md');
     });
   });

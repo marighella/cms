@@ -35,14 +35,15 @@ describe('Service: GithubContent', function () {
     expect(!!Content).toBe(true);
   });
 
-  it( 'deve salvar na mesma pasta de origem da data de criação', function(){
-    var user = {repository: {full_name: 'Gabas'}};
+  it( 'should save in the same folder of creation', function(){
+    var repository = {full_name: 'my-repository'};
     var post = {filename: 'arquivo.md', created_date: '2014-01-30'};
     var sha = 'abcd3';
-    var promise = Content.save(user, post, sha );
+    var promise = Content.save(repository, post, sha );
     promise.then(function (address){
-      expect(address).toBe('repos/Gabas/contents/_posts/2014/01/arquivo.md');
+      expect(address).toBe('repos/my-repository/contents/_posts/2014/01/arquivo.md');
     });
     rootScope.$digest();
   });
+  
 });

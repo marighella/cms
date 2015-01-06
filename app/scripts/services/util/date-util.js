@@ -35,6 +35,21 @@ angular.module('cmsApp')
         return (new Date()).getFullYear();
       }
     };
+
+    this.isValidMonth = function(value){
+      if ( !isNaN(value) && isFinite(value) ) {
+        if (value < 12){
+          return true;
+        } 
+      }
+      return false;
+    };
+
+    this.parseMonth = function(value){
+      value = parseInt(value) + 1;
+      return (value < 10 ? '0' + value : value);
+    };
+
     this.format = function(date){
       return $filter('date')(new Date(date),'yyyy/MM');
     };
