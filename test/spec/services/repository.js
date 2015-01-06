@@ -26,7 +26,7 @@ describe('Service: Repository', function () {
     }));
 
     it('should return a list of posts', function (){
-      expect(Repository.post.list().length).toBe(3);
+      expect(Repository.content.list().length).toBe(3);
     });
 
   });

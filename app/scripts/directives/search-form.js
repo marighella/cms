@@ -2,30 +2,26 @@
 
 var directive = function(){
   //
-  function link(scope, el){
-    scope.clearSearch = function(){
-      scope.searchValue= '';
-      scope.submited = false;
-      scope.$apply();
-      scope.submit();
-    };
-    //
-    el.on('submit',function(){
-      scope.submited = true;
-    });
-  }
-  //
   return {
-      restrict: 'A',
-      require : '?searchValue',
+      restrict: 'AE',
+      require : '?filter',
       scope: {
         submit: '&',
-        searchValue: '=',
         filter: '=',
         changeDate: '&'
       },
       templateUrl: '/views/post/include/search-form.html',
-      link: link
+      link: function(scope, el){
+        scope.clearSearch = function(){
+          scope.filter.title= '';
+          scope.submited = false;
+          scope.submit();
+        };
+        //
+        el.on('submit',function(){
+          scope.submited = true;
+        });
+      }
     };
 };
 

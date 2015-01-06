@@ -10,30 +10,30 @@
 angular.module('cmsApp')
   .factory('Repository', function (Github) {
 
-    var post = {
-      list: function(user, filter){
-        return Github.content.posts(user, filter);
+    var content = {
+      list: function(repository, filter){
+        return Github.content.posts(repository, filter);
       },
       get: function(post){
         return Github.content.post(post);
       },
-      save: function(user, post, year, month, sha){
-        return Github.content.save(user, post, year, month, sha);
+      save: function(repository, post, year, month, sha){
+        return Github.content.save(repository, post, year, month, sha);
       },
-      search: function(value, repository){
-        return Github.content.search(value, repository);
+      search: function(repository, filter){
+        return Github.content.search(repository, filter);
       }
     };
-
-    var repositorie = {
-      get: function(repositorie){
-        return Github.content.skelleton(repositorie);
+    
+    var skelleton = {
+      get: function(repository){
+        return Github.content.skelleton(repository);
       }
     };
 
     return {
-      post: post,
+      content: content,
       organization: Github.organization,
-      skelleton: repositorie
+      skelleton: skelleton
     };
   });
