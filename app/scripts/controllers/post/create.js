@@ -53,7 +53,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           post.metadata[$scope.coverField.name] = $scope.cover;
 
-          Repository.post.save($rootScope.repository, post, sha)
+          Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
             $scope.state = 'default';
             $location.path('/post/search');
@@ -68,7 +68,7 @@ angular.module('cmsApp')
       };
 
       if(!!post.url){
-        Repository.post.get(post).then(function(post){
+        Repository.content.get(post).then(function(post){
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
