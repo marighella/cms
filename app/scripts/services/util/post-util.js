@@ -86,13 +86,15 @@ angular.module('cmsApp')
       post.metadata.files = files;
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
-
-      getVideoThumbnailUrl(videoUrl)
+      if(videoUrl){
+        getVideoThumbnailUrl(videoUrl)
         .then(function(videoThumbnail){
           post.metadata.video_thumbnail = videoThumbnail;
           return deferred.resolve(post);
         });
-
+      }else{
+        deferred.resolve(post);
+      }
       return promise;
     };
 
