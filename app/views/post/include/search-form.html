@@ -1,9 +1,9 @@
-<form novalidate ng-submit="submit()">
+<form novalidate ng-submit="filter.search()">
   <div class="form-group">
-    <div year-drop filter='filter' change='changeDate()' offset="-4" range="0"></div>
+    <div year-drop filter='filter' change='filter.search()' offset="-4" range="0"></div>
   </div>
   <div class="form-group">
-    <select ng-model='filter.month' class='form-control month' ng-change='changeDate()'>
+    <select ng-model='filter.month' class='form-control month' ng-change='filter.search()'>
 
       <option value='*'>-- Todos os meses --</option>
       <option value='0'>Janeiro</option>

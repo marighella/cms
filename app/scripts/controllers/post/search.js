@@ -16,7 +16,12 @@ angular.module('cmsApp')
     $scope.filter = {
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear(),
-      title: ''
+      title: '',
+      search: function(){
+        Repository.content.list($rootScope.repository, this).then(function(result){
+          $scope.updateView(result);
+        });
+      }
     };
 
     $scope.organization = $rootScope.user.organization;
@@ -71,12 +76,6 @@ angular.module('cmsApp')
       $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
     };
 
-    $scope.list = function(){
-      Repository.content.list($rootScope.repository, $scope.filter).then(function(result){
-        $scope.updateView(result);
-      });
-    };
-
-    $scope.list();
+    $scope.filter.search();
     $scope.loadSkelleton();
   });
