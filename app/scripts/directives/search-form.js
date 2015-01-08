@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * @ngdoc directive
+ * @name cmsApp.directive:searchForm
+ * @description
+ * # searchForm
+ */
 angular.module('cmsApp')
   .directive('searchForm',  function(){
   var filter = {
@@ -9,9 +15,11 @@ angular.module('cmsApp')
     search: function(){}
   };
 
+
   return {
       restrict: 'E',
       require : '?filter',
+      replace: true,
       scope: {
         filter: '=',
       },
@@ -21,8 +29,7 @@ angular.module('cmsApp')
 
         scope.clearSearch = function(){
           scope.filter.title = '';
-          scope.submited = false;
-          scope.submit();
+          scope.filter.search();
         };
 
         el.on('submit',function(){
