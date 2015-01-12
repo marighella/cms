@@ -18,7 +18,7 @@ angular.module('cmsApp')
       year: DateUtil.now.getYear(),
       title: '',
       search: function(){
-        Repository.content.list($rootScope.repository, this).then(function(result){
+        return Repository.content.list($rootScope.repository, this).then(function(result){
           $scope.updateView(result);
         });
       }

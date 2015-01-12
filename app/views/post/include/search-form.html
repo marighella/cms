@@ -1,10 +1,9 @@
-<form novalidate ng-submit="filter.search()">
+<form novalidate ng-submit="search()" ng-disabled='loading'>
   <div class="form-group">
-    <div year-drop filter='filter' change='filter.search()' offset="-4" range="0"></div>
+    <div year-drop filter='filter' change='search()' offset="-4" range="0" disabled="loading"></div>
   </div>
   <div class="form-group">
-    <select ng-model='filter.month' class='form-control month' ng-change='filter.search()'>
-
+    <select ng-model='filter.month' class='form-control month' ng-change='search()' ng-disabled='loading'>
       <option value='*'>-- Todos os meses --</option>
       <option value='0'>Janeiro</option>
       <option value='1'>Fevereiro</option>
@@ -21,10 +20,16 @@
     </select>
   </div>
   <div class="form-group">
-    <input ng-model="filter.title" type="text" placeholder="Pesquise por título" class="form-control" />
-    <a class='btn btn-danger' ng-show="submited"  ng-click="clearSearch()"> 
-      <span id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+    <input ng-model="filter.title" type="search" placeholder="Pesquise por título" class="form-control" ng-disabled='loading'/>
+    <button class='btn btn-default' ng-click="search(this)" ng-disabled="loading" title="Pesquisar">
+      <i class="glyphicon glyphicon-search"></i>
+    </button>
+    <a class='btn btn-default' ng-click="clearSearch()" ng-disabled="loading" title="Limpar campos">
+      <i class="glyphicon glyphicon-trash"></i>
     </a>
+    <span class='wait' ng-show='loading'>
+      <i class="glyphicon glyphicon-refresh spin"></i>
+    </span>
   </div>
 </form>
 
