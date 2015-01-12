@@ -5,7 +5,8 @@
  * code font: https://github.com/esvit/ng-ckeditor/blob/master/ng-ckeditor.js
  */
 
-var $defer, loaded;
+var $defer;
+
 angular.module('cmsApp')
   .run(['$rootScope','$q', '$timeout', function($rootScope, $q, $timeout) {
     $defer = $q.defer();
@@ -15,17 +16,15 @@ angular.module('cmsApp')
     }
     CKEDITOR.config.allowedContent = true;
     CKEDITOR.disableAutoInline = true;
-    function checkLoaded() {
+    function ckEditorIsLoaded() {
       if (CKEDITOR.status === 'loaded') {
-        loaded = true;
         $defer.resolve();
       } else {
-        checkLoaded();
-
+        ckEditorIsLoaded();
       }
     }
-    CKEDITOR.on('loaded', checkLoaded);
-    $timeout(checkLoaded, 100);
+    CKEDITOR.on('loaded', ckEditorIsLoaded);
+    $timeout(ckEditorIsLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
       var instance = CKEDITOR.instances.editor_loko;
@@ -104,23 +103,17 @@ angular.module('cmsApp')
           }, onUpdateModelData = function(setPristine) {
             if (!data.length) { return; }
 
-
-            var item = data.pop() || EMPTY_HTML;
             isReady = false;
-            instance.setData(item, function () {
+            instance.setData( data.pop() || EMPTY_HTML, function () {
               setModelData(setPristine);
               isReady = true;
             });
           };
 
-          instance.on('pasteState',   setModelData);
-          instance.on('change',       setModelData);
-          instance.on('blur',         setModelData);
-          instance.on('drop',         setModelData);
-          //instance.on('key',          setModelData); // for source view
+          instance.on('pasteState change blur drop', setModelData);
 
           instance.on('instanceReady', function() {
-            $scope.$broadcast('ckeditor.ready');
+            $scope.$emit('ckeditor.ready');
             $scope.$apply(function() {
               onUpdateModelData(true);
             });
@@ -151,15 +144,7 @@ angular.module('cmsApp')
             }
           };
         };
-
-        if (CKEDITOR.status === 'loaded') {
-          loaded = true;
-        }
-        if (loaded) {
-          onLoad();
-        } else {
-          $defer.promise.then(onLoad);
-        }
+        $defer.promise.then(onLoad);
       }
-      };
-    });
+    };
+  });
