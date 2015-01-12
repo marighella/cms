@@ -67,8 +67,8 @@
       show-errors
       dynamic-field="field">
     </input>
-    <span ng-if='field.limit && (field.limit - entity[field.name].length) > 0'>{{ field.limit - entity[field.name].length}} caracteres restantes</span>
-    <span ng-if='field.limit && (field.limit - entity[field.name].length) == 0'>Você atingiu o limite de caracteres!</span>
+    <span ng-if='field.limit && (field.limit - entity[field.name].length) > 0' class='counter-warning'>{{ field.limit - entity[field.name].length}} caracteres restantes</span>
+    <span ng-if='field.limit && (field.limit - entity[field.name].length) == 0' class='counter-warning'>Você atingiu o limite de caracteres!</span>
     <select
       ng-model="entity[field.name]"
       ng-attr-id='{{ field.name }}'
