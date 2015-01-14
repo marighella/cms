@@ -1,29 +1,32 @@
-var Helper = (function () {
- this.waitUntilIsDisplayed = function(ptor, element, timeMax){
-  browser.wait(function(){
-   return element.isDisplayed();
-  }, timeMax);
- }
+'use strict';
 
- this.clear = function(field){
-   field.clear();
- }
+var Helper = function () {
+  this.waitUntilIsDisplayed = function(ptor, element, timeMax){
+    browser.wait(function(){
+      return element.isDisplayed();
+    }, timeMax);
+  };
 
- this.wait = function(element, timeMax){
-  timeMax = timeMax || 2000;
-  browser.wait(function(){
-   return element.isDisplayed();
-  }, timeMax);
- }
+  this.clear = function(field){
+    field.clear();
+  };
 
- this.random = function (value){
-  return value + (new Date()).getTime();
- }
+  this.wait = function(element, timeMax){
+    timeMax = timeMax || 2000;
+    browser.wait(function(){
+      return element.isDisplayed();
+    }, timeMax);
+  };
 
- this.fill = function(element, value){
-   this.wait(element);
-   element.sendKeys(value);
- }
+  this.random = function (value){
+    return value + (new Date()).getTime();
+  };
 
-});
+  this.fill = function(element, value){
+    this.wait(element);
+    element.sendKeys(value);
+  };
+
+};
+
 module.exports = new Helper();

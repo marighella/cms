@@ -9,7 +9,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, YoutubeLinkUtil, VimeoLinkUtil, TagsUtil, _) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil, _) {
     var getReleatedPosts = function(tags){
       tags = _.map(tags, function(e){ return getSlug(e.tag);} );
       return $scope.tags.getPostsByTags(tags);
@@ -62,7 +62,7 @@ angular.module('cmsApp')
           post.metadata[$scope.coverField.name] = $scope.cover;
           post.metadata.releated_posts = getReleatedPosts(post.metadata.tags); 
 
-          Repository.post.save($rootScope.user, post, sha)
+          Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
             $scope.state = 'default';
             $location.path('/post/search');
@@ -84,7 +84,7 @@ angular.module('cmsApp')
       };
 
       if(!!post.url){
-        Repository.post.get(post).then(function(post){
+        Repository.content.get(post).then(function(post){
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;

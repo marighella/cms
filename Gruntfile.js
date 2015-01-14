@@ -170,7 +170,7 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/,**/}*.js']
+        src: ['test/spec/{,*/,**/}*.js', 'e2e/{,*/,**/}*.js']
       }
     },
 
@@ -285,16 +285,16 @@ module.exports = function (grunt) {
     //   dist: {}
     // },
 
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
+    // imagemin: {
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/images',
+    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
+    //       dest: '<%= yeoman.dist %>/images'
+    //     }]
+    //   }
+    // },
 
     svgmin: {
       dist: {
@@ -359,6 +359,7 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/,**/}*.html',
             'images/{,*/}*.{webp}',
+            'images/*',
             'fonts/*',
             'ckeditor-plugins/**/*'
           ]
@@ -404,7 +405,7 @@ module.exports = function (grunt) {
       dist: [
         'copy:styles',
         'htmlmin',
-        'imagemin',
+        // 'imagemin',
         'svgmin'
       ]
     },
@@ -475,7 +476,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-    'filerev',
+    // 'filerev',
     'usemin',
     'htmlmin'
   ]);

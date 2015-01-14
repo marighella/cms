@@ -7,10 +7,15 @@ angular.module('cmsApp')
         var obj = angular.fromJson(repository);
         $scope.user.repository = obj;
         $rootScope.user = $scope.user;
-
+        $rootScope.repository = $scope.user.repository;
         $location.path('/post/search');
       }
     };
+
+    if (typeof $scope.user !== 'undefined') {
+      $scope.user.organization = undefined;
+      $scope.user.repositories = [];
+    }
 
     $scope.getRepositories = function(organization){
       $scope.user.organization = undefined;

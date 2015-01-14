@@ -1,7 +1,7 @@
 # CMS - Marighella
 
 ![Carolos Marighella]
-(http://marighella.github.io/cms/images/logo.f86a5930.png)
+(http://marighella.github.io/cms/images/logo.png)
 
 O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociais e organizações populares através da tecnologia. O nome é uma homenagem ao revolucionário Carlos Marighella, o negro guerrilheiro que balançou o Brasil ao lutar contra as opressões sobre o povo.
 
@@ -20,13 +20,25 @@ O Marighella é uma iniciativa dedicada a empoderar coletivos, movimentos sociai
 
 ### Instalando dependências
 
+
+Instalando os pacotes NodeJS
+
 ``
 $ npm install
 ``
 
+Instalando os pacotes do Frontend do projeto via Bower
+
 ``
 $ bower install
 ``
+
+Atualizando o Webdriver Manager do Protractor
+
+``
+$ ./node_modules/protractor/bin/webdriver-manager update
+``
+
 ### Executando local
 ``
 $ grunt serve

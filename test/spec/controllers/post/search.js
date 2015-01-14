@@ -12,8 +12,9 @@ describe('Controller: PostSearchCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope, Repository) {
     scope = $rootScope.$new();
     scope.user = {};
+    scope.repository = {};
 
-    Repository.post = {
+    Repository.content = {
       list: function(){
         return {
           then: function(){

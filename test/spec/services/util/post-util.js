@@ -35,7 +35,7 @@ describe('Service: PostUtil', function () {
     it('should get vimeo thumbnail url', function (){
       var videoUrl = 'http://vimeo.com/6489674';
 
-      httpBackend.whenGET('http://vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
+      httpBackend.whenGET('//vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
         thumbnail_url: 'http://image.mockada/000.jpg'
       });
 
@@ -267,16 +267,13 @@ describe('Service: PostUtil', function () {
     });
 
     it('should remove any number of white spaces to generate the filename', function() {
-
       var post = {
         metadata: {
           date: '2014-09-30T14:20:58-03:00',
           title: 'Alta nos aluguéis é a principal responsável por falta de moradia'
         }
       };
-
       var filename = PostUtil.generateFileName(post);
-
       expect(filename).toBe('2014-09-30-alta-nos-alugueis-e-a-principal-responsavel-por-falta-de-moradia.md');
     });
   });
