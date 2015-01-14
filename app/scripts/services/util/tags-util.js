@@ -1,4 +1,5 @@
 'use strict';
+/* globals getSlug */
 
 /**
  * @ngdoc service
@@ -72,12 +73,18 @@ angular.module('cmsApp')
       return result;
     };
 
+    var getReleatedPosts = function(tags){
+      var tagsWithSlug = _.map(tags, function(e){ return getSlug(e.tag);} );
+      return getPostsByTags(tagsWithSlug);
+    };
+
     var factory = function(file){
-      tagsFile = file;
+      tagsFile = file || {};
       allTags  = _.keys(tagsFile);
       return {
         search: search,
-        getPostsByTags: getPostsByTags
+        getPostsByTags: getPostsByTags,
+        getReleatedPosts: getReleatedPosts
       };
     };
     return factory;

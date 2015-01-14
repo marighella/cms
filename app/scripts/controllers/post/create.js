@@ -1,5 +1,4 @@
 'use strict';
-/* globals getSlug */
 
 /**
  * @ngdoc function
@@ -9,11 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil, _) {
-    var getReleatedPosts = function(tags){
-      tags = _.map(tags, function(e){ return getSlug(e.tag);} );
-      return $scope.tags.getPostsByTags(tags);
-    };
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil) {
 
     $scope.state = 'default';
     $scope.entity = {
@@ -23,7 +18,7 @@ angular.module('cmsApp')
     $scope.cover = '';
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
-    $scope.tags = { };
+    $scope.tags = new TagsUtil();
 
     $scope.fields.forEach(function(element){
       if( element.type.view === 'cover'){
@@ -60,7 +55,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           /*jshint camelcase: false */
           post.metadata[$scope.coverField.name] = $scope.cover;
-          post.metadata.releated_posts = getReleatedPosts(post.metadata.tags); 
+          post.metadata.releated_posts = $scope.tags.getReleatedPosts(post.metadata.tags); 
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
