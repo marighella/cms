@@ -23,7 +23,9 @@ describe('Service: TagsUtil', function () {
       tagsWithPosts = {'Banana':['dois','tres', 'sete'],
         'Cianureto':['tres','sete'],
         'Manga':['dois','quatro'],
+        'Apollo':['onze','doze'],
         'Maca':['quatro', 'seis', 'sete']};
+
       factory = new TagsUtil(tagsWithPosts);
     });
 
@@ -39,9 +41,14 @@ describe('Service: TagsUtil', function () {
         .toEqual(jasmine.objectContaining({'sete':1}));
     });
 
-    it('should get at least 3 result', function(){
+    it('should get at least 3 result order by value and name', function(){
       var tags = ['Banana','Maca'];
-      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'dois':1, 'tres': 0, 'quatro': 0});
+      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'sete':1, 'dois': 0, 'quatro': 0 });
+    });
+
+    it('should get at least 3 result when the tags dont have any combination', function(){
+      var tags = ['Banana','Apollo'];
+      expect(factory.getPostsByTags(tags, tagsWithPosts)).toEqual({'dois': 0, 'onze':0});
     });
 
     it('should get the posts with more relevance to a set of tags', function(){

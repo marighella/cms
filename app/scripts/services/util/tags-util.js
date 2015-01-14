@@ -56,13 +56,14 @@ angular.module('cmsApp')
       var postsByTag = _.pick(tagsFile, selectedTags);
       var allPosts = _.values(postsByTag);
       var result = intersection.apply(this, allPosts);
+      var keysLength = _.keys(result).length;
 
-      if(_.keys(result).length < 3){
 
+      if( keysLength < 3){
 
         var newerByTag = {};
         _.each(postsByTag, function(element){
-          newerByTag[element[0]] = 0;
+          newerByTag[element.shift()] = 0;
         });
 
         result = _.extend(newerByTag, result);
