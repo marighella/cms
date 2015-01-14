@@ -3,6 +3,25 @@
     float: right;
   }
 
+  .filters {
+    figure {
+      float: right;
+      display: inline-block;
+      img {
+        width: 40px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+      figcaption {
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: bold;
+      }
+    }
+  }
+
   ul {
     li{
       a {
@@ -25,24 +44,6 @@
 
   p {
     margin: 10px 0 10px 0;
-  }
-}
-
-figure {
-  margin-bottom: 20px;
-
-  img {
-    width: 40px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 10px;
-    border-radius: 50%;
-  }
-
-  figcaption {
-    display: inline-block;
-    vertical-align: middle;
-    font-weight: bold;
   }
 }
 

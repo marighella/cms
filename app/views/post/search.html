@@ -22,6 +22,10 @@
   </div>
   <div class="form-inline filters">
     <search-form class="form-group" filter="filter" ></search-form>
+    <figure>
+      <img src="{{ organization.avatar_url }}" alt="{{ organization.name || organization.login }}">
+      <figcaption>{{ organization.name || organization.login }}</figcaption>
+    </figure>
   </div>
 
   <div ng-if="posts.length > 0" class="result">
@@ -79,8 +83,4 @@
     <p>Nenhuma postagem criada, companheira(o).</p>
   </div>
 
-  <figure>
-    <img src="{{ organization.avatar_url }}" alt="{{ organization.name || organization.login }}">
-    <figcaption>{{ organization.name || organization.login }}</figcaption>
-  </figure>
 </div>
