@@ -59,9 +59,7 @@ angular.module('cmsApp')
       var result = intersection.apply(this, allPosts);
       var keysLength = _.keys(result).length;
 
-
       if( keysLength < 3){
-
         var newerByTag = {};
         _.each(postsByTag, function(element){
           newerByTag[element.shift()] = 0;
@@ -74,8 +72,16 @@ angular.module('cmsApp')
     };
 
     var getReleatedPosts = function(tags){
-      var tagsWithSlug = _.map(tags, function(e){ return getSlug(e.tag);} );
-      return getPostsByTags(tagsWithSlug);
+      var tagsWithSlug = _.map(tags, function(e){ return getSlug(e.tag || e);} );
+      var postsByTags =  getPostsByTags(tagsWithSlug);
+
+      var sortable = [];
+      for (var post in postsByTags){
+        sortable.push([post, postsByTags[post]]);
+      }
+
+      sortable = sortable.sort(function(a, b) {return b[1] - a[1];});
+      return _.map(sortable, function(element){ return element[0];});
     };
 
     var factory = function(file){
