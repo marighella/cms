@@ -63,6 +63,7 @@ angular.module('cmsApp')
     };
 
     $scope.load = function(){
+      $scope.state = 'loading';
       var post = {
         url: $routeParams.url
       };
@@ -74,6 +75,7 @@ angular.module('cmsApp')
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
+          $scope.state = 'default';
         });
       }
     };
