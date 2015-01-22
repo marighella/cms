@@ -28,7 +28,7 @@ angular.module('cmsApp')
     $timeout(checkLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
-      var instance = CKEDITOR.instances.editor_loko;
+      var instance = CKEDITOR.instances.editor;
       var paste = '<strong>Algo deu errado :/</strong>';
       var link_name = obj.title;
       if(obj.small){
