@@ -16,7 +16,7 @@
       <textarea id='editor_loko' ck-editor ng-model="body">
       </textarea>
     </div>
-    <div ng-include="'views/post/include/button-action.html'">
+    <div ng-include="'views/post/include/button-action.html'" ng-if="editorLoaded">
     </div>
   </aside>
 </form>
