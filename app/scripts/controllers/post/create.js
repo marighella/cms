@@ -15,6 +15,7 @@ angular.module('cmsApp')
     };
     $scope.body = '';
     $scope.cover = '';
+    $scope.editorLoaded = false;
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
 
@@ -36,6 +37,10 @@ angular.module('cmsApp')
          $scope.files.splice(imageIndex, 1);
       }
     };
+
+    $scope.$on('ckeditor.ready', function(){
+      $scope.editorLoaded = true;
+    });
 
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
