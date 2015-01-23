@@ -109,6 +109,7 @@ angular.module('cmsApp')
             isReady = false;
             instance.setData(item, function () {
               setModelData(setPristine);
+              $scope.$broadcast('ckeditor.ready');
               isReady = true;
             });
           };
@@ -120,7 +121,6 @@ angular.module('cmsApp')
           //instance.on('key',          setModelData); // for source view
 
           instance.on('instanceReady', function() {
-            $scope.$broadcast('ckeditor.ready');
             $scope.$apply(function() {
               onUpdateModelData(true);
             });
