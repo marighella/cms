@@ -55,7 +55,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           /*jshint camelcase: false */
           post.metadata[$scope.coverField.name] = $scope.cover;
-          post.metadata.releated_posts = $scope.tags.getReleatedPosts(post.metadata.tags); 
+          post.metadata.releated_posts = getReleatedPosts();
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
@@ -72,12 +72,8 @@ angular.module('cmsApp')
       });
     };
 
-    var fillReleatedPosts = function(){
-      /*jshint camelcase: false */
-      if(!$scope.entity.releated_posts){
-        var releated = $scope.tags.getReleatedPosts($scope.entity.tags, { postToRemove: $scope.filename });
-        loadReleatedPost(releated);
-      }
+    var getReleatedPosts = function(){
+      return $scope.tags.getReleatedPosts($scope.entity.tags, { postToRemove: $scope.filename });
     };
 
     $scope.load = function(){
@@ -86,6 +82,7 @@ angular.module('cmsApp')
       };
 
       loadTagsFile();
+
       if(!!post.url){
         Repository.content.get(post).then(function(post){
           $scope.entity = post.metadata;
@@ -93,7 +90,6 @@ angular.module('cmsApp')
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
-          fillReleatedPosts();
         });
       }
     };
