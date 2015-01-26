@@ -70,3 +70,8 @@ um chat em tempo real.
 [![Throughput Graph](https://graphs.waffle.io/marighella/cms/throughput.svg)](https://waffle.io/marighella/cms/metrics)
 
 Para controle das funcionalidades, bugs, revisão de código e afins é utilizado o waffle que trabalha em cima das issues do github, e disponibiliza um painel para um controle maior.
+
+
+
+
+Copyright (C) 2014  ThoughtWorks Brasil

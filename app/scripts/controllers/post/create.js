@@ -16,6 +16,7 @@ angular.module('cmsApp')
     };
     $scope.body = '';
     $scope.cover = '';
+    $scope.editorLoaded = false;
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
     $scope.tags = new TagsUtil();
@@ -38,6 +39,10 @@ angular.module('cmsApp')
          $scope.files.splice(imageIndex, 1);
       }
     };
+
+    $scope.$on('ckeditor.ready', function(){
+      $scope.editorLoaded = true;
+    });
 
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
@@ -84,12 +89,15 @@ angular.module('cmsApp')
       loadTagsFile();
 
       if(!!post.url){
+        $scope.state = 'loading';
+
         Repository.content.get(post).then(function(post){
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
+          $scope.state = 'default';
         });
       }
     };

@@ -5,8 +5,7 @@
  * code font: https://github.com/esvit/ng-ckeditor/blob/master/ng-ckeditor.js
  */
 
-var $defer;
-
+var $defer, loaded;
 angular.module('cmsApp')
   .run(['$rootScope','$q', '$timeout', function($rootScope, $q, $timeout) {
     $defer = $q.defer();
@@ -16,18 +15,20 @@ angular.module('cmsApp')
     }
     CKEDITOR.config.allowedContent = true;
     CKEDITOR.disableAutoInline = true;
-    function ckEditorIsLoaded() {
+    function checkLoaded() {
       if (CKEDITOR.status === 'loaded') {
+        loaded = true;
         $defer.resolve();
       } else {
-        ckEditorIsLoaded();
+        checkLoaded();
+
       }
     }
-    CKEDITOR.on('loaded', ckEditorIsLoaded);
-    $timeout(ckEditorIsLoaded, 100);
+    CKEDITOR.on('loaded', checkLoaded);
+    $timeout(checkLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
-      var instance = CKEDITOR.instances.editor_loko;
+      var instance = CKEDITOR.instances.editor;
       var paste = '<strong>Algo deu errado :/</strong>';
       var link_name = obj.title;
       if(obj.small){
@@ -103,17 +104,23 @@ angular.module('cmsApp')
           }, onUpdateModelData = function(setPristine) {
             if (!data.length) { return; }
 
+
+            var item = data.pop() || EMPTY_HTML;
             isReady = false;
-            instance.setData( data.pop() || EMPTY_HTML, function () {
+            instance.setData(item, function () {
               setModelData(setPristine);
+              $scope.$broadcast('ckeditor.ready');
               isReady = true;
             });
           };
 
-          instance.on('pasteState change blur drop', setModelData);
+          instance.on('pasteState',   setModelData);
+          instance.on('change',       setModelData);
+          instance.on('blur',         setModelData);
+          instance.on('drop',         setModelData);
+          //instance.on('key',          setModelData); // for source view
 
           instance.on('instanceReady', function() {
-            $scope.$emit('ckeditor.ready');
             $scope.$apply(function() {
               onUpdateModelData(true);
             });
@@ -144,7 +151,15 @@ angular.module('cmsApp')
             }
           };
         };
-        $defer.promise.then(onLoad);
+
+        if (CKEDITOR.status === 'loaded') {
+          loaded = true;
+        }
+        if (loaded) {
+          onLoad();
+        } else {
+          $defer.promise.then(onLoad);
+        }
       }
-    };
-  });
+      };
+    });
