@@ -33,7 +33,15 @@ angular.module('cmsApp')
       };
       return promiseGithub(address, then);
     },
-
+    load: function (postUrl, repository) {
+      var address = ['repos',repository.full_name,'contents/',postUrl].join('/');
+      var then = function(data){
+        var post = PostUtil.load(data.content);
+        post.filename = data.name;
+        return post;
+      };
+      return promiseGithub(address, then);
+    },
     post: function (post) {
       var then = function(data){
         var post = PostUtil.load(data.content);

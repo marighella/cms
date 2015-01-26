@@ -59,8 +59,9 @@ angular.module('cmsApp')
       var allPosts = _.values(postsByTag);
       var result = intersection.apply(this, allPosts);
       var keysLength = _.keys(result).length;
+      var MINIMUN_CHAR = 3;
 
-      if( keysLength < 3){
+      if( keysLength < MINIMUN_CHAR){
         var newerByTag = {};
         _.each(postsByTag, function(element){
           newerByTag[element.shift()] = 0;
