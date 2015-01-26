@@ -107,5 +107,11 @@ describe('Service: TagsUtil', function () {
       expect(factory.getReleatedPosts(tags))
         .toEqual([ 'dois', 'tres', 'sete' ]);
     });
+
+    it('should return the list of posts releated without except', function(){
+      var tags = ['Manga','Banana','Cianureto'];
+      expect(factory.getReleatedPosts(tags, {postToRemove: 'dois'}))
+        .toEqual([ 'tres', 'sete' ]);
+    });
   });
 });

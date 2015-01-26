@@ -73,13 +73,16 @@ angular.module('cmsApp')
       return result;
     };
 
-    var getReleatedPosts = function(tags){
+    var getReleatedPosts = function(tags, options){
+      options = options || { postToRemove: false };
       var tagsWithSlug = _.map(tags, function(e){ return getSlug(e.tag || e);} );
       var postsByTags =  getPostsByTags(tagsWithSlug);
 
       var sortable = [];
       for (var post in postsByTags){
-        sortable.push([post, postsByTags[post]]);
+        if(!options.postToRemove || !post.match(options.postToRemove)){
+          sortable.push([post, postsByTags[post]]);
+        }
       }
 
       sortable = sortable.sort(function(a, b) {return b[1] - a[1];});
