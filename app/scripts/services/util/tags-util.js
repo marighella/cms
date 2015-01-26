@@ -41,9 +41,10 @@ angular.module('cmsApp')
     var allTags  = {};
 
     var search = function(query){
+      query = (!!query) ? query.toLowerCase() : '';
       var deferred = $q.defer();
       var tags = _.map(allTags, function(e){
-        if(e.match(query)){
+        if(e.toLowerCase().match(query)){
           return {tag: e};
         }
         return false;

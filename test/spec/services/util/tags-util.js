@@ -16,6 +16,37 @@ describe('Service: TagsUtil', function () {
     expect(!!TagsUtil).toBe(true);
   });
 
+  describe('give a lot of tag-posts file', function (){
+    var tagsWithPosts, factory;
+
+    beforeEach(function () {
+      tagsWithPosts = {'Banana':['dois','tres', 'sete'],
+        'Cianureto':['tres','sete'],
+        'Manga':['dois','quatro'],
+        'Apollo':['onze','doze'],
+        'Maca':['quatro', 'seis', 'sete']};
+
+      factory = new TagsUtil(tagsWithPosts);
+    });
+
+    it('should search by name without casesensitive', inject(function($rootScope){
+      var query = 'MaNgA'; //Search by Manga
+      factory.search(query).then(function(result){
+        expect(result).toEqual([{tag:'Manga'}]);
+      });
+      $rootScope.$digest();
+    }));
+
+    it('should return all tags matched', inject(function($rootScope){
+      var query = 'M'; //Search by Manga
+      factory.search(query).then(function(result){
+        expect(result)
+          .toEqual(jasmine.objectContaining([{tag: 'Manga'}, {tag: 'Maca'}]));
+      });
+      $rootScope.$digest();
+    }));
+  });
+
   describe('give a tag-posts file and a set of tags', function (){
     var tagsWithPosts, factory;
 
