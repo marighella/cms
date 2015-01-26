@@ -2,6 +2,9 @@
 
 angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Resource, Repository) {
+    $scope.user = { logged: false,
+                organization: false,
+                repositories: [] };
     $scope.finish = function(repository){
       if(!!repository){
         var obj = angular.fromJson(repository);
@@ -11,11 +14,6 @@ angular.module('cmsApp')
         $location.path('/post/search');
       }
     };
-
-    if (typeof $scope.user !== 'undefined') {
-      $scope.user.organization = undefined;
-      $scope.user.repositories = [];
-    }
 
     $scope.getRepositories = function(organization){
       $scope.user.organization = undefined;
@@ -41,6 +39,7 @@ angular.module('cmsApp')
         Resource.github = response;
         $timeout(function(){
           $scope.user = User.info();
+          $scope.user.logged = true;
         },0);
       });
     };

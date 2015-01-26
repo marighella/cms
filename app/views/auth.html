@@ -1,10 +1,10 @@
 <div class='page-header auth' >
   <p>
-    <button ng-click='authenticate()' class='btn btn-default login' ng-hide='user'>
+    <button ng-click='authenticate()' class='btn btn-default login' ng-hide='user.logged'>
       <img src='//oauth.io/api/providers/github/logo' /> Entrar
     </button>
   </p>
-  <main ng-show='user'>
+  <main ng-show='user.logged'>
     <h1>
       <select class='form-control organization'
         ng-change='getRepositories(organization)'
