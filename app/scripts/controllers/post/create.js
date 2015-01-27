@@ -19,6 +19,7 @@ angular.module('cmsApp')
     $scope.editorLoaded = false;
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
+    $scope.releatedPosts = [];
     $scope.tags = new TagsUtil();
 
     $scope.fields.forEach(function(element){
@@ -71,9 +72,11 @@ angular.module('cmsApp')
       }
     };
 
-    var loadTagsFile = function(){
+    var loadTagsFile = function(then){
+      then = then || function(){};
       Repository.tagsFile.get($scope.user).then(function(result){
         $scope.tags = new TagsUtil(angular.fromJson(result));
+        then();
       });
     };
 
@@ -86,8 +89,6 @@ angular.module('cmsApp')
         url: $routeParams.url
       };
 
-      loadTagsFile();
-
       if(!!post.url){
         $scope.state = 'loading';
 
@@ -97,8 +98,14 @@ angular.module('cmsApp')
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
-          $scope.state = 'default';
+
+          loadTagsFile(function(){
+            $scope.releatedPosts = getReleatedPosts();
+            $scope.state = 'default';
+          });
         });
+      }else{
+        loadTagsFile();
       }
     };
 
