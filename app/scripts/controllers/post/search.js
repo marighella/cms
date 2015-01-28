@@ -67,6 +67,10 @@ angular.module('cmsApp')
       $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
     };
 
-    $scope.filter.search();
-    $scope.loadSkelleton();
+    $scope.load = function(){
+      $scope.filter.search();
+      $scope.loadSkelleton();
+    };
+
+    $scope.load();
   });
