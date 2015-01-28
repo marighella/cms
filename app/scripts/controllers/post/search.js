@@ -29,15 +29,6 @@ angular.module('cmsApp')
       return $scope.filter.title &&  $scope.filter.title.length > 3;
     };
 
-    $scope.search = function(){
-      var result  = [];
-      Repository.content.search($rootScope.repository, $scope.filter).then(function(response){
-        result = response.items;
-        $scope.updateView(result);
-      });
-    };
-
-
     $scope.updateView = function(posts){
       $scope.currentPage = 1;
       $scope.posts = posts || $scope.posts;
