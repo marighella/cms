@@ -64,7 +64,10 @@ angular.module('cmsApp')
       if( keysLength < MINIMUN_CHAR){
         var newerByTag = {};
         _.each(postsByTag, function(element){
-          newerByTag[element.shift()] = 0;
+          var tag = element.shift();
+          if(!!tag){
+            newerByTag[tag] = 0;
+          }
         });
 
         result = _.extend(newerByTag, result);
