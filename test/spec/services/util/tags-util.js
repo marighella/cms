@@ -72,16 +72,6 @@ describe('Service: TagsUtil', function () {
         .toEqual(jasmine.objectContaining({'sete':1}));
     });
 
-    it('should get at least 3 result order by value and name', function(){
-      var tags = ['Banana','Maca'];
-      expect(factory.getPostsByTags(tags)).toEqual({'sete':1, 'dois': 0, 'quatro': 0 });
-    });
-
-    it('should get at least 3 result when the tags dont have any combination', function(){
-      var tags = ['Banana','Apollo'];
-      expect(factory.getPostsByTags(tags)).toEqual({'dois': 0, 'onze':0});
-    });
-
     it('should get the posts with more relevance to a set of tags', function(){
       var tags = ['Banana','Maca','Cianureto'];
       expect(factory.getPostsByTags(tags))
@@ -112,6 +102,12 @@ describe('Service: TagsUtil', function () {
       var tags = ['Manga','Banana','Cianureto'];
       expect(factory.getReleatedPosts(tags, {postToRemove: 'dois'}))
         .toEqual([ 'tres', 'sete' ]);
+    });
+
+    it('should return two posts when a single posts was send', function(){
+      var tags = ['Manga'];
+      expect(factory.getReleatedPosts(tags))
+        .toEqual([ 'dois', 'quatro' ]);
     });
   });
 });

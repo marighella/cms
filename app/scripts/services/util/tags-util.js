@@ -57,23 +57,10 @@ angular.module('cmsApp')
     var getPostsByTags = function(selectedTags){
       var postsByTag = _.pick(tagsFile, selectedTags);
       var allPosts = _.values(postsByTag);
-      var result = intersection.apply(this, allPosts);
-      var keysLength = _.keys(result).length;
-      var MINIMUN_CHAR = 3;
-
-      if( keysLength < MINIMUN_CHAR){
-        var newerByTag = {};
-        _.each(postsByTag, function(element){
-          var tag = element.shift();
-          if(!!tag){
-            newerByTag[tag] = 0;
-          }
-        });
-
-        result = _.extend(newerByTag, result);
+      if(selectedTags.length > 1){
+        return intersection.apply(this, allPosts);
       }
-
-      return result;
+      return _.countBy(_.flatten(allPosts));
     };
 
     var getReleatedPosts = function(tags, options){
@@ -84,7 +71,7 @@ angular.module('cmsApp')
       var sortable = [];
       for (var post in postsByTags){
         if(!options.postToRemove || !post.match(options.postToRemove)){
-          sortable.push([post, postsByTags[post]]);
+          sortable.push([post, postsByTags[post] || 0]);
         }
       }
 
