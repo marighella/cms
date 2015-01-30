@@ -29,7 +29,7 @@ angular.module('cmsApp')
        
         var query = queries.join((need.equal) ? '||' : '&&');
         element.attr('ng-required', query);
-        element.attr('ng-show', query);
+        element.attr('ng-if', query);
       }else {
         element.attr('ng-required', 'field.required');
       }
