@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil, _) {
 
     $scope.state = 'default';
     $scope.entity = {
@@ -20,6 +20,7 @@ angular.module('cmsApp')
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
     $scope.releatedPosts = [];
+    $scope.suggestedPosts = [];
     $scope.tags = new TagsUtil();
 
     $scope.fields.forEach(function(element){
@@ -61,7 +62,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           /*jshint camelcase: false */
           post.metadata[$scope.coverField.name] = $scope.cover;
-          post.metadata.releated_posts = getReleatedPosts();
+          post.metadata.releated_posts = getReleatedPosts($scope.entity.tags);
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
@@ -80,9 +81,22 @@ angular.module('cmsApp')
       });
     };
 
-    var getReleatedPosts = function(){
-      return $scope.tags.getReleatedPosts($scope.entity.tags, { postToRemove: $scope.filename });
+    var getReleatedPosts = function(tags){
+      return $scope.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
     };
+
+    var fillReleatedPosts = function(){
+      $scope.releatedPosts = getReleatedPosts($scope.entity.tags);
+
+      var suggestedPosts = []; 
+      $scope.entity.tags.forEach(function(tag){
+        suggestedPosts.push(getReleatedPosts(tag));
+      });
+
+      $scope.suggestedPosts = _.difference(_.flatten(suggestedPosts), $scope.releatedPosts);
+    };
+
+    $scope.fillReleatedPosts = fillReleatedPosts;
 
     $scope.load = function(){
       var post = {
@@ -100,7 +114,7 @@ angular.module('cmsApp')
           $scope.cover = post.metadata[$scope.coverField.name];
 
           loadTagsFile(function(){
-            $scope.releatedPosts = getReleatedPosts();
+            fillReleatedPosts();
             $scope.state = 'default';
           });
         });

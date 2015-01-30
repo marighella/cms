@@ -14,8 +14,12 @@ angular.module('cmsApp')
       list: function(repository, filter){
         return Github.content.posts(repository, filter);
       },
-      get: function(post){
-        return Github.content.post(post);
+      get: function(post, repository){
+        if(post.url){
+          return Github.content.post(post);
+        }else{
+          return Github.content.load(post, repository);
+        }
       },
       save: function(repository, post, year, month, sha){
         return Github.content.save(repository, post, year, month, sha);

@@ -85,6 +85,8 @@
         ng-model="entity[field.name]"
         dynamic-field="field"
         display-property="tag"
+        on-tag-added='fillReleatedPosts()'
+        on-tag-removed='fillReleatedPosts()'
         class='tag-input'
         show-errors
         placeholder="{{ field.placeholder }}">
