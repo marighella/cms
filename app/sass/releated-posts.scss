@@ -1,26 +1,55 @@
 .releated-posts {
-  article {
+  display: inline-block;
+  padding-bottom: 20px;
+
+  article { 
     figure {
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
       background-size: cover;
-      width: 150px;
+      width: 20%;
+      float: left;
 
       img {
+        width: 100%;
         object-fit: cover;
       }
     }
-    time {
-  
-    }
-    h1 {
-  
+    section {
+      width: 80%;
+      float: left;
+      padding-left: 10px;
+      time {
+        color: #A3A3AB;
+        font-size: 13px;
+      }
+      h1 {
+        font-size: 20px;
+        margin-top: 0;
+      }
     }
   }
 
   .tags {
     .tag {
+      background-color: white;
+      padding: .2em .7em .3em;
+      font-size: 81%;
+      line-height: 1;
+      color: #A3A3AB;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      text-transform: lowercase;
+      border-radius: .25em;
+      border-color: #A3A3AB;
+      border-style: solid;
+      border-width: thin;
+      
+      & + .tag {
+        margin-left: 10px;
+      }
     }
   }
 }

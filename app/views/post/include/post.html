@@ -7,13 +7,15 @@
       <figure>
         <img src="{{ post.metadata.images_hd  }}" alt="Imagem de capa da noticia" />
       </figure>
-      <time datetime="{{ post.metadata.date  }}">{{ post.metadata.date }}</time>
-      <h1>{{ post.metadata.title }}</h1>
-    </article>
-    <div class="tags">
-      <span ng-repeat="tag in post.metadata.tags" class="tag">
-        {{ tag.tag }}
-      </span>
-    </div>
+      <section>
+        <time datetime="{{ post.metadata.date  }}">{{ post.metadata.date }}</time>
+        <h1>{{ post.metadata.title }}</h1>
+        <div class="tags">
+          <span ng-repeat="tag in post.metadata.tags" class="tag">
+            {{ tag.tag }}
+          </span>
+        </div>
+      </section>
+     </article>
   </div>
 </div>
