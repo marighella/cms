@@ -8,7 +8,7 @@
         <img src="{{ post.metadata.images_hd  }}" alt="Imagem de capa da noticia" />
       </figure>
       <section>
-        <time datetime="{{ post.metadata.date  }}">{{ post.metadata.date }}</time>
+        <time datetime="{{ post.metadata.date }}">{{ post.metadata.date | date: 'medium'}}</time>
         <h1>{{ post.metadata.title }}</h1>
         <div class="tags">
           <span ng-repeat="tag in post.metadata.tags" class="tag">
