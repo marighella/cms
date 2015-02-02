@@ -1,4 +1,5 @@
 'use strict';
+/* global getSlug */
 
 /**
  * @ngdoc directive
@@ -7,7 +8,7 @@
  * # searchForm
  */
 angular.module('cmsApp')
-  .directive('post',  function($rootScope, Repository){
+  .directive('post', function($rootScope, Repository, _){
 
 
   return {
@@ -16,11 +17,15 @@ angular.module('cmsApp')
       replace: true,
       scope: {
         post: '=',
+        tags: '='
       },
       templateUrl: 'views/post/include/post.html',
       link: function(scope){
         scope.loading = false;
-        console.log(scope.post);
+        scope.tags = scope.tags || [];
+        scope.checkTag = function (tag) {
+          return _.find(scope.tags, function (t) {return getSlug(t.tag) === getSlug(tag.tag);});
+        };
 
         Repository.content.get(scope.post, $rootScope.repository).then(function(result){
           scope.post = result;

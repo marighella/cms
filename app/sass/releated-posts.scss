@@ -49,7 +49,11 @@
       
       & + .tag {
         margin-left: 10px;
-      }
+      }  
+    }
+    .selected {
+      color: #428bca;
+      border-color: #428bca;
     }
   }
 }

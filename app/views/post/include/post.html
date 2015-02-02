@@ -11,7 +11,7 @@
         <time datetime="{{ post.metadata.date }}">{{ post.metadata.date | date: 'medium'}}</time>
         <h1>{{ post.metadata.title }}</h1>
         <div class="tags">
-          <span ng-repeat="tag in post.metadata.tags" class="tag">
+          <span ng-repeat="tag in post.metadata.tags" class="tag" ng-class="{'selected': checkTag(tag)}">
             {{ tag.tag }}
           </span>
         </div>
