@@ -44,6 +44,15 @@ angular.module('cmsApp')
       $scope.editorLoaded = true;
     });
 
+    var getVideoUrl = function(){
+      var field = $scope.videoField;
+
+      if(!!field && !!field.name){
+        return $scope.entity[field.name];
+      }
+      return '';
+    };
+
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
         return;
@@ -55,7 +64,7 @@ angular.module('cmsApp')
 
       if(!form.$invalid){
         $scope.state = (publish) ? 'publishing' : 'saving';
-        var videoUrl = $scope.entity[$scope.videoField.name];
+        var videoUrl = getVideoUrl();
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
           /*jshint camelcase: false */
