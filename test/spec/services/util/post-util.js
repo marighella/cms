@@ -84,13 +84,6 @@ describe('Service: PostUtil', function () {
       expect(post.body).toBe('Texto em HTML com dash');
     });
 
-    it('should load created date', function(){
-      var md = '---\ntitle: Rodrigo\ncreated_date: 2015-01-09T14:20:43-02:00\n---Texto em HTML com dash';
-      var post = PostUtil.load(md);
-
-      expect(post.created_date).toBe(1420820443000);
-    });
-
     it('should load text with triple dash inside body', function(){
       var md = '---\ntitle: Rodrigo\n---Texto em HTML com dash\n---\nFim do Texto';
       var post = PostUtil.load(md);

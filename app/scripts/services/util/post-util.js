@@ -52,8 +52,6 @@ angular.module('cmsApp')
 
       post.body = body.replace(/^\n/, '');
       post.metadata = window.jsyaml.load(metadata);
-      /*jshint camelcase: false */
-      post.created_date = DateUtil.fromISO8601(post.metadata.created_date).toMilliseconds();
 
       return post;
     };
