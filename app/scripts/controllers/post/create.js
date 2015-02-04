@@ -73,6 +73,7 @@ angular.module('cmsApp')
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
+            $rootScope.alerts = [];
             $scope.state = 'default';
             $location.path('/post/search');
           });

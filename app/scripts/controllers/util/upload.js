@@ -33,6 +33,7 @@ angular.module('cmsApp')
           $rootScope.$broadcast('upload-file', { file: data  });
         }).error(function(error) {
           console.log(error);
+          $rootScope.alerts.push({msg: 'Desculpa, algo de errado aconteceu ao adicionar o arquivo na notícia.', type: 'danger'});
         });
       });
     };

@@ -48,6 +48,11 @@ angular
       });
   })
   .run(['$rootScope', '$location', 'Resource','ENV', function ($rootScope, $location, Resource, ENV) {
+    $rootScope.alerts = [];
+    $rootScope.closeAlert = function(index) {
+      $rootScope.alerts.splice(index, 1);
+    };
+
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
       if (!Resource.github) {
