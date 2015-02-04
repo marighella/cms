@@ -57,8 +57,9 @@ angular.module('cmsApp')
     };
     this.getYearMonthCreated = function(post){
       /*jshint camelcase: false */
+      var createdDate = (!!post.metadata) ? post.metadata.created_date : false;
       var date = new Date(DateUtil.now.getYear(), DateUtil.now.getMonth());
-      return  DateUtil.format(post.created_date || date);
+      return  DateUtil.format(createdDate || date);
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);

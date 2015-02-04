@@ -62,7 +62,7 @@ describe('Service: PostUtil', function () {
     });
 
     it('should get year and month from a existent post', function(){
-      var post = {created_date: '2012-01-14' };
+      var post = { metadata: { created_date: '2012-01-14'}};
       expect(PostUtil.getYearMonthCreated(post)).toBe('2012/01');
     });
 
