@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
 
     $scope.state = 'default';
     $scope.entity = {
@@ -82,6 +82,19 @@ angular.module('cmsApp')
             $rootScope.addError(error);
           });
         });
+      } else {
+        var inputs = form.$error.required || [];
+        var inputNames = [];
+        inputs.forEach(function(input) {
+          var field = _.find($scope.fields, function(field) {
+            return field.name === input.$name;
+          });
+          inputNames.push(field.title);
+        });
+
+        var message = 'Os campos: ' + inputNames.join(', ') + ' precisam ser preenchidos.';
+
+        $rootScope.addWarning(message);
       }
     };
 

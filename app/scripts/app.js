@@ -54,6 +54,10 @@ angular
        $rootScope.alerts.push({msg: message, type: 'danger'});
     };
 
+    $rootScope.addWarning = function(message) {
+       $rootScope.alerts.push({msg: message, type: 'warning'});
+    };
+
     $rootScope.closeAlert = function(index) {
       $rootScope.alerts.splice(index, 1);
     };
