@@ -49,6 +49,11 @@ angular
   })
   .run(['$rootScope', '$location', 'Resource','ENV', function ($rootScope, $location, Resource, ENV) {
     $rootScope.alerts = [];
+
+    $rootScope.addError = function(message) {
+       $rootScope.alerts.push({msg: message, type: 'danger'});
+    };
+
     $rootScope.closeAlert = function(index) {
       $rootScope.alerts.splice(index, 1);
     };

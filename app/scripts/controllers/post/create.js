@@ -76,6 +76,10 @@ angular.module('cmsApp')
             $rootScope.alerts = [];
             $scope.state = 'default';
             $location.path('/post/search');
+          })
+          .catch(function(error) {
+            $scope.state = 'default';
+            $rootScope.addError(error);
           });
         });
       }
