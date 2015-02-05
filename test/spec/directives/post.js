@@ -40,7 +40,6 @@ describe('Directive: post', function () {
     expect(tagElements[1].text()).toContain('juventude');
   }));
 
-
   it('should highlight tags in common on related posts', inject(function ($compile, _) {
     scope.releated = {
       link: 'related post url'
@@ -65,4 +64,37 @@ describe('Directive: post', function () {
     expect(tagElements.length).toBe(1);
     expect(tagElements[0].text()).toContain('saude');
   }));
+
+  it('should update related tag highlighting when post tags change', inject(function ($compile, _) {
+    scope.releated = {
+      link: 'related post url'
+    };
+    scope.tags = [{tag: 'saude'}, 
+                  {tag: 'encontro'}];
+    
+    element = angular.element('<post post="releated" tags="tags"></post>');
+    element = $compile(element)(scope);
+
+    scope.$digest();
+
+    scope.tags = [{tag: 'saude'}, 
+                  {tag: 'encontro'},
+                  {tag: 'juventude'}];
+
+    scope.$digest();
+    
+    var tagElements = _.chain(element.find('span'))
+    .map(function(elem){
+       return angular.element(elem);
+    })
+    .filter(function (elem) {
+       return elem.hasClass('tag') && elem.hasClass('selected');
+    })
+    .value();
+
+    expect(tagElements.length).toBe(2);
+    expect(tagElements[0].text()).toContain('saude');
+    expect(tagElements[1].text()).toContain('juventude');
+  }));
+
 });

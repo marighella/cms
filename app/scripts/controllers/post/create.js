@@ -90,7 +90,7 @@ angular.module('cmsApp')
 
       var suggestedPosts = []; 
       $scope.entity.tags.forEach(function(tag){
-        suggestedPosts.push(getReleatedPosts(tag));
+        suggestedPosts.push(getReleatedPosts([tag]));
       });
 
       $scope.suggestedPosts = _.difference(_.flatten(suggestedPosts), $scope.releatedPosts);
