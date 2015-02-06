@@ -86,14 +86,15 @@ angular.module('cmsApp')
     };
 
     var fillReleatedPosts = function(){
-      $scope.releatedPosts = getReleatedPosts($scope.entity.tags);
+      var releatedPosts = getReleatedPosts($scope.entity.tags);
 
       var suggestedPosts = []; 
       $scope.entity.tags.forEach(function(tag){
         suggestedPosts.push(getReleatedPosts([tag]));
       });
 
-      $scope.suggestedPosts = _.difference(_.flatten(suggestedPosts), $scope.releatedPosts);
+      $scope.suggestedPosts = _.difference(_.flatten(suggestedPosts), releatedPosts);
+      $scope.releatedPosts = releatedPosts; 
     };
 
     $scope.fillReleatedPosts = fillReleatedPosts;

@@ -16,7 +16,7 @@ angular.module('cmsApp')
       require : '?post',
       replace: true,
       scope: {
-        post: '=',
+        postUrl: '=',
         tags: '='
       },
       templateUrl: 'views/post/include/post.html',
@@ -27,7 +27,9 @@ angular.module('cmsApp')
           return _.find(scope.tags, function (t) {return getSlug(t.tag) === getSlug(tag.tag);});
         };
 
-        Repository.content.get(scope.post, $rootScope.repository).then(function(result){
+        console.log(scope.postUrl);
+
+        Repository.content.get(scope.postUrl, $rootScope.repository).then(function(result){
           scope.post = result;
           scope.loading = true;
         });

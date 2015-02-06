@@ -1,8 +1,83 @@
+.view {
+  width: 300px;
+  height: 200px;
+  margin: 10px;
+  float: left;
+  border: 10px solid #fff;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  box-shadow: 1px 1px 2px #e6e6e6;
+  cursor: default;
+
+
+  .mask, .content {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0
+  }
+
+  img {
+    display: block;
+    position: relative
+  }
+
+  h2 {
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    font-size: 17px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    margin: 20px 0 0 0
+  } 
+
+
+ img { 
+    transition: all 0.2s linear;
+}
+ .mask {
+    opacity: 0;
+      background-color: rgba(219,127,8, 0.7); 
+        transition: all 0.4s ease-in-out;
+    }
+     h2 {
+      transform: translateY(-100px);
+        opacity: 0;
+          transition: all 0.2s ease-in-out;
+      }
+
+
+&:hover img { 
+  transform: scale(1.1);
+} 
+&:hover .mask { 
+  opacity: 1;
+}
+&:hover h2 {
+    opacity: 1;
+      transform: translateY(0px);
+  }
+
+
+
+
+
+} // termina aqui
+
 .releated-posts {
   display: inline-block;
   padding-bottom: 20px;
 
-  article { 
+  article {
+    display: inline-block;
+    padding: 7px;
+    box-shadow: 1px 1px 5px #383838;
+
     figure {
       -webkit-background-size: cover;
       -moz-background-size: cover;
