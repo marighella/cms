@@ -5,11 +5,10 @@
 
   .filters {
     figure {
-      float: right;
-      display: inline-block;
+      display: block;
+      text-align: center;
       img {
         width: 40px;
-        display: inline-block;
         vertical-align: middle;
         margin-right: 10px;
         border-radius: 50%;
@@ -19,6 +18,10 @@
         vertical-align: middle;
         font-weight: bold;
       }
+    }
+    .button-group {
+      padding: 0;
+      margin-left: -15px;
     }
   }
 

@@ -19,7 +19,7 @@
       </strong>
     </button>
   </div>
-  <div class="form-inline filters">
+  <div class="filters">
     <search-form class="form-group" filter="filter" ></search-form>
     <figure>
       <img src="{{ organization.avatar_url }}" alt="{{ organization.name || organization.login }}">
@@ -31,7 +31,7 @@
     <table  ng-if="posts.length > 0" class="table table-striped">
       <thead>
         <tr>
-          <th>Data/hora publicação</th>
+          <th>Data<span class="hidden-xs"> de publicação</span></th>
           <th>Título notícia</th>
           <th></th>
           <th></th>
@@ -40,7 +40,8 @@
       <tbody>
         <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
           <td>
-            {{ post.metadata.date | date: 'dd/MM/yyyy HH:mm:ss'  }}
+            <span class="hidden-xs">{{ post.metadata.date | date: 'dd/MM/yyyy HH:mm:ss'  }}</span>
+            <span class="visible-xs">{{ post.metadata.date | date: 'dd/MM'  }}</span>
             <span ng-hide="post.metadata">
               <i class="glyphicon glyphicon-refresh spin" ></i>
             </span>
@@ -53,15 +54,15 @@
           </td>
           <td>
             <span ng-show="post.metadata">
-              <span class="label label-default" ng-show="!post.metadata.published" >Rascunho</span>
-              <span class="label label-primary" ng-show="post.metadata.published" >Publicada</span>
+              <span class="label label-default" ng-show="!post.metadata.published" ><i class="fa fa-archive"></i> <span class="hidden-xs">Rascunho</span></span>
+              <span class="label label-primary" ng-show="post.metadata.published" ><i class="fa fa-check"></i> <span class="hidden-xs">Publicada</span></span>
             </span>
           </td>
-          <td>
+          <td >
             <button ng-click="edit(post)"
               class="btn btn-default"
               ng-disabled="!ready">
-              <span class="glyphicon glyphicon-pencil"></span> Editar
+              <span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs">Editar</span>
             </button>
           </td>
         </tr>
