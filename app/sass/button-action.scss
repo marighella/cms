@@ -18,4 +18,19 @@
   & + .action{
     float: right;
   }
+
+  .spin {
+    display: none;
+  }
+
+  &.block{
+
+    * {
+      display: none;
+    }
+
+    .spin {
+      display: block;
+    }
+  }
 }

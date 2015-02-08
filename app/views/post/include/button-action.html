@@ -1,14 +1,16 @@
-<button class="btn btn-default btn-block draft" ng-disabled="true" ng-show="state != 'default'" >
-  <strong>Trabalhando...
-    <i class="fa fa-cog fa-spin" ></i>
-  </strong>
-</button>
+<button type="button" class="btn btn-default action"
+  ng-click='save(postForm, "draft")' ng-class="{'block': (state != 'default' )}">
 
-<button type="button" class="btn btn-default action" ng-click='save(postForm, "draft")'>
   <i class="fa fa-floppy-o"></i>
+  <i class="fa fa-refresh fa-spin spin" ></i>
   <span>Rascunho</span>
+
 </button>
-<button type="button" class="btn btn-success action" ng-click='save(postForm, "publish")'>
+<button type="button" class="btn btn-success action"
+  ng-click='save(postForm, "publish")' ng-class="{'block': (state != 'default' )}">
+
   <i class="fa fa-floppy-o"></i>
+  <i class="fa fa-refresh fa-spin spin" ></i>
   <span>Publicar</span>
+
 </button>
