@@ -1,5 +1,5 @@
 <form name="postForm" nonvalidate ng-init='load()' class='create'>
-  <div class='metadata'>
+  <div class='metadata col-xs-12 col-md-4'>
     <div ng-include="'views/post/include/dynamic-fields.html'">
     </div>
 
@@ -11,7 +11,7 @@
       <input type='text' ng-model='cover' name='cover' dynamic-field="coverField"/>
     </div>
   </div>
-  <aside class='body'>
+  <aside class='body col-xs-12 col-md-8'>
     <div class='form-group'>
       <textarea id='editor' ck-editor ng-model="body">
       </textarea>
