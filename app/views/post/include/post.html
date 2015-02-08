@@ -2,20 +2,14 @@
   <span ng-hide='loading'>
     <i class="glyphicon glyphicon-refresh spin" ></i>
   </span>
-  <div ng-show='loading' class="releated-posts">
-    <article>
-      <figure>
-        <img src="{{ post.metadata.images_hd  }}" alt="Imagem de capa da noticia" />
-      </figure>
-      <section>
-        <time datetime="{{ post.metadata.date }}">{{ post.metadata.date | date: 'medium'}}</time>
-        <h1>{{ post.metadata.title }}</h1>
-        <div class="tags">
-          <span ng-repeat="tag in post.metadata.tags" class="tag" ng-class="{'selected': checkTag(tag)}">
-            {{ tag.tag }}
-          </span>
-        </div>
-      </section>
-     </article>
-  </div>
+  <article ng-show='loading' class='post'>
+    <img src="{{ post.metadata.images_hd  }}" alt="Imagem de capa da noticia" />
+    <time datetime="{{ post.metadata.date }}">{{ post.metadata.date | date: 'medium'}}</time>
+    <h1>{{ post.metadata.title }}</h1>
+    <div class="tags">
+      <span ng-repeat="tag in post.metadata.tags" class="tag" ng-class="{'selected': checkTag(tag)}">
+        {{ tag.tag }}
+      </span>
+    </div>
+   </article>
 </div>
