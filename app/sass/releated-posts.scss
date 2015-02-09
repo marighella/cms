@@ -1,13 +1,3 @@
-.columns {
-  padding: 0;
-  -webkit-column-count: 3;
-  -moz-column-count: 3;
-  column-count: 3;
-  -webkit-column-gap: 1em;
-  -moz-column-gap: 1em;
-  column-gap: 1em;
-}
-
 .suggest {
   text-align: center;
   border-bottom: 1px solid #ccc;
@@ -16,20 +6,24 @@
 }
 
 .releated-posts {
-  width: 98%;
-  max-width: 230px;
+  width: 100%;
   display: inline-block;
   background: #FEFEFE;
   border: 2px solid #FAFAFA;
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-  margin: 0 2px 15px;
-  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
-  page-break-inside: avoid; /* Firefox */
-  break-inside: avoid; /* IE 10+ */
+  margin: 10px 0;
   padding: 0;
   padding-bottom: 5px;
   background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
   opacity: 0.4;
+
+  &.releated{
+    opacity: 1;
+  }
+
+  &.suggested{
+    opacity: 0.4;
+  }
 
   &:hover{
     opacity: 1;
@@ -37,9 +31,19 @@
   }
 
   & > h1{
-    display: none;
+    opacity:0;
+    height: 0;
+    overflow: hidden;
+
     margin: 10px 0;
     margin-top: 0px;
+
+
+    -webkit-transition: all .2s ease .15s;
+    -moz-transition: all .2s ease .15s;
+    -o-transition: all .2s ease .15s;
+    -ms-transition: all .2s ease .15s;
+    transition: all .2s ease .15s;
   }
 
   & > div{
@@ -50,7 +54,9 @@
     opacity: 1;
 
     & > h1{
-      display: block;
+      opacity: 1;
+      height: auto;
+
       font-size: 12px;
       color: white;
       background-color: #C10613;

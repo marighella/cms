@@ -2,7 +2,7 @@
   <h1 class="suggest">
     Noticiais Relacionadas
   </h1>
-  <div class='releated-posts' ng-repeat="releated in releatedPosts" ng-click="removeReleatedPost(releated)">
+  <div class='releated-posts releated' ng-repeat="releated in releatedPosts" ng-click="removeReleatedPost(releated)">
     <post post-url='releated' tags="entity.tags"/>
   </div>
 </div>
@@ -10,13 +10,11 @@
   <h1 class="suggest">
     Sugeridas
   </h1>
-  <ul class='columns'>
-    <li class='releated-posts' ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
-      ng-class="{'selected': isPostReleated(releated)}">
-      <h1>selecionada</h1>
-      <post post-url='releated' tags="entity.tags"/>
-    </li>
-  </ul>
+  <div class='releated-posts suggested' ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
+    ng-class="{'selected': isPostReleated(releated)}">
+    <h1>selecionada</h1>
+    <post post-url='releated' tags="entity.tags"/>
+  </div>
   <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
     Mais...
     <span ng-if="postLimit < suggestedPosts.length">Exibindo {{ postLimit  }} de {{ suggestedPosts.length }}</span>

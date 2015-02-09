@@ -81,13 +81,18 @@ angular.module('cmsApp')
       });
     };
 
-    var addReleatedPost = function(post){
-      $scope.releatedPosts.push(post);
-    };
     var removeReleatedPost = function(post){
       var index = $scope.releatedPosts.indexOf(post);
       if( index >= 0 ){
         $scope.releatedPosts.splice(index, 1);
+      }
+    };
+    var addReleatedPost = function(post){
+      var index = $scope.releatedPosts.indexOf(post);
+      if( index >= 0 ){
+        removeReleatedPost(post);
+      }else{
+        $scope.releatedPosts.push(post);
       }
     };
     var isPostReleated = function(post){
