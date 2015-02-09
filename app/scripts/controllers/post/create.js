@@ -22,6 +22,8 @@ angular.module('cmsApp')
     $scope.releatedPosts = [];
     $scope.suggestedPosts = [];
     $scope.tags = new TagsUtil();
+    $scope.coverField = undefined;
+    $scope.videoField = undefined;
 
     $scope.fields.forEach(function(element){
       if( element.type.view === 'cover'){

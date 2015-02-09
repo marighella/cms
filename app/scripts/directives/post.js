@@ -17,17 +17,18 @@ angular.module('cmsApp')
       replace: true,
       scope: {
         postUrl: '=',
-        tags: '='
+        tags: '=',
+        coverField: '='
       },
       templateUrl: 'views/post/include/post.html',
       link: function(scope){
+        scope.coverField = scope.coverField || {name:''};
         scope.loading = false;
         scope.tags = scope.tags || [];
         scope.checkTag = function (tag) {
           return _.find(scope.tags, function (t) {return getSlug(t.tag) === getSlug(tag.tag);});
         };
 
-        console.log(scope.postUrl);
 
         Repository.content.get(scope.postUrl, $rootScope.repository).then(function(result){
           scope.post = result;
