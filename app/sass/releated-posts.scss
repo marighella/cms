@@ -1,13 +1,11 @@
 .columns {
+  padding: 0;
   -webkit-column-count: 3;
-  -webkit-column-gap: 10px;
-  -webkit-column-fill: auto;
   -moz-column-count: 3;
-  -moz-column-gap: 10px;
-  -moz-column-fill: auto;
   column-count: 3;
-  column-gap: 15px;
-  column-fill: auto;
+  -webkit-column-gap: 1em;
+  -moz-column-gap: 1em;
+  column-gap: 1em;
 }
 
 .suggest {
@@ -25,9 +23,9 @@
   border: 2px solid #FAFAFA;
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
   margin: 0 2px 15px;
-  -webkit-column-break-inside: avoid;
-  -moz-column-break-inside: avoid;
-  column-break-inside: avoid;
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
   padding: 15px;
   padding-bottom: 5px;
   background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);

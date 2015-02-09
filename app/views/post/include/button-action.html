@@ -1,4 +1,5 @@
 <button type="button" class="btn btn-default action"
+  ng-disable="state != default"
   ng-click='save(postForm, "draft")' ng-class="{'block': (state != 'default' )}">
 
   <i class="fa fa-floppy-o"></i>
@@ -7,6 +8,7 @@
 
 </button>
 <button type="button" class="btn btn-success action"
+  ng-disable="state != default"
   ng-click='save(postForm, "publish")' ng-class="{'block': (state != 'default' )}">
 
   <i class="fa fa-floppy-o"></i>

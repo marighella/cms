@@ -6,14 +6,17 @@
     <post post-url='releated' tags="entity.tags"/>
   </div>
 </div>
-<section class="form-group">
+<section class="form-group"  ng-init="postLimit = 6">
   <h1 class="suggest">
     Sugeridas
   </h1>
-  <div class='columns'>
-    <div class='releated-posts' ng-repeat="releated in suggestedPosts" ng-click="addReleatedPost(releated)"
+  <ul class='columns'>
+    <li class='releated-posts' ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
       ng-class="{'selected': isPostReleated(releated)}">
       <post post-url='releated' tags="entity.tags"/>
-    </div>
-  </div>
+    </li>
+  </ul>
+  <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
+    Mais...
+  </button>
 </section>
