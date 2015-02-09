@@ -81,6 +81,22 @@ angular.module('cmsApp')
       });
     };
 
+    var addReleatedPost = function(post){
+      $scope.releatedPosts.push(post);
+    };
+    var removeReleatedPost = function(post){
+      var index = $scope.releatedPosts.indexOf(post);
+      if( index >= 0 ){
+        $scope.releatedPosts.splice(index, 1);
+      }
+    };
+    var isPostReleated = function(post){
+      return _.find($scope.releatedPosts, function(e){ return e === post; });
+    };
+    $scope.addReleatedPost = addReleatedPost;
+    $scope.removeReleatedPost = removeReleatedPost;
+    $scope.isPostReleated = isPostReleated;
+
     var getReleatedPosts = function(tags){
       return $scope.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
     };
@@ -93,8 +109,8 @@ angular.module('cmsApp')
         suggestedPosts.push(getReleatedPosts([tag]));
       });
 
-      $scope.suggestedPosts = _.difference(_.flatten(suggestedPosts), releatedPosts);
-      $scope.releatedPosts = releatedPosts; 
+      $scope.suggestedPosts = _.flatten(suggestedPosts);
+      $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
     };
 
     $scope.fillReleatedPosts = fillReleatedPosts;
