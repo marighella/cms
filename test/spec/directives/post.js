@@ -21,7 +21,9 @@ describe('Directive: post', function () {
       link: 'related post url'
     };
    
-    element = angular.element('<post post="releated" tags="tags"></post>');
+    scope.coverField = false;
+
+    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -46,8 +48,9 @@ describe('Directive: post', function () {
     };
     scope.tags = [{tag: 'saude'}, 
                   {tag: 'encontro'}];
+    scope.coverField = false;
     
-    element = angular.element('<post post="releated" tags="tags"></post>');
+    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -71,8 +74,9 @@ describe('Directive: post', function () {
     };
     scope.tags = [{tag: 'saude'}, 
                   {tag: 'encontro'}];
+    scope.coverField = false;
     
-    element = angular.element('<post post="releated" tags="tags"></post>');
+    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
