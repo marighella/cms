@@ -25,6 +25,10 @@ angular.module('cmsApp')
       }
     }
     CKEDITOR.on('loaded', checkLoaded);
+    CKEDITOR.on('imageUploaded', function(event) {
+      $rootScope.$emit('uploaded', event.data);
+    });
+    
     $timeout(checkLoaded, 100);
 
     $rootScope.insertImageCKEditor = function(obj){
@@ -169,43 +173,51 @@ var createUploadButton = function() {
   CKEDITOR.on( 'dialogDefinition', function( ev ) {
   var dialogName = ev.data.name;
   var dialogDefinition = ev.data.definition;
-  if ( dialogName == 'image2' ) {
+  console.log('definindo dialogo ', dialogName);
+  if ( dialogName === 'image2' ) {
+    
+      CKEDITOR.uploadPlugin = function(event) {
+        var files = event.target.files;
+        if(files && files.length > 0) {
+          CKEDITOR.fireOnce('imageUploaded', files);
+          
+        }
+      };
+    
       var infoTab = dialogDefinition.getContents( 'info' );
       infoTab.add( {
         type: 'html',
-        html: '<a id="upload-button" ng-controller="UploadCtrl as uploadCtrl"  href="javascript:void(0)" class="cke_dialog_ui_button" onclick="$(\'#upload\').click()">'
-                  + '<span ng-show="uploadCtrl.upload.working()"><i class="uploading-icon fa fa-cog fa-spin"></i></span>'
-                  + '<span ng-hide="uploadCtrl.upload.working()"><i class="uploading-icon fa fa-upload"></i></span>'
-              +'</a>'
+        html: '<input type="file" name="ckeditorUpload" id="ckeditorUpload" onchange="CKEDITOR.uploadPlugin(event)" />'
       });
 
-      dialogDefinition.onFocus = function() {
-        var $injector = angular.element($('#upload')).injector();
-        $injector.invoke(function($rootScope, $compile, $timeout) {
-
-          $rootScope.$on('upload-file', function(event, args) {
-            dialogDefinition.dialog.setValueOf('info', 'src', args.file.link )
-          });
-
-          $timeout(function() {
-            $('#upload-button').replaceWith($compile('#upload-button')($rootScope))
-            .css({
-              "padding": '5px 8px',
-              'margin': '-17px 0 0 5px'
-            })
-            .find('.uploading-icon')
-            .css({
-              'font': 'normal normal normal 14px/1 FontAwesome',
-              'width': '13px',
-              'float': 'left'
-            })
-          }, 600);
-        });
-
-        // Move the botton to the side of src field
-        $("#upload-button").parent().parent().prev().prev().prev().prev().prev().append($("#upload-button"));
-      };
+      
+//      dialogDefinition.onFocus = function() {
+//        var $injector = angular.element($('#upload')).injector();
+//        $injector.invoke(function($rootScope, $compile, $timeout) {
+//
+//          $rootScope.$on('upload-file', function(event, args) {
+//            dialogDefinition.dialog.setValueOf('info', 'src', args.file.link )
+//          });
+//
+//          $timeout(function() {
+//            $('#upload-button').replaceWith($compile('#upload-button')($rootScope))
+//            .css({
+//              'padding': '5px 8px',
+//              'margin': '-17px 0 0 5px'
+//            })
+//            .find('.uploading-icon')
+//            .css({
+//              'font': 'normal normal normal 14px/1 FontAwesome',
+//              'width': '13px',
+//              'float': 'left'
+//            })
+//          }, 600);
+//        });
+//
+//        // Move the botton to the side of src field
+//        $("#upload-button").parent().parent().prev().prev().prev().prev().prev().append($("#upload-button"));
+//      };
   }
   });
-}
+};
 createUploadButton();

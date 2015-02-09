@@ -46,5 +46,9 @@ angular.module('cmsApp')
       $scope.upload.length = args.length;
       $scope.upload.done = 0;
     });
+  
+    $rootScope.$on('uploaded', function(files) {
+      $scope.uploadFiles(files);
+    });
 
   });
