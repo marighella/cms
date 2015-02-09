@@ -52,14 +52,14 @@ angular.module('cmsApp')
 
       post.body = body.replace(/^\n/, '');
       post.metadata = window.jsyaml.load(metadata);
-      post.createdTime = DateUtil.fromISO8601(post.metadata.date).toMilliseconds();
 
       return post;
     };
     this.getYearMonthCreated = function(post){
       /*jshint camelcase: false */
+      var createdDate = (!!post.metadata) ? post.metadata.created_date : false;
       var date = new Date(DateUtil.now.getYear(), DateUtil.now.getMonth());
-      return  DateUtil.format(post.created_date || date);
+      return  DateUtil.format(createdDate || date);
     };
     this.serialize = function(post){
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);

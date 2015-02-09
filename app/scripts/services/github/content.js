@@ -107,8 +107,14 @@ angular.module('cmsApp')
         github.put(address, {
           data: commit,
           cache: false
-        }).error(function(status, message){
-          console.log(status, message);
+        }).error(function(error){
+          console.log(error);
+          var message = error.responseJSON.message;
+          if(error.status === 422) {
+            message = 'Essa notícia já existe.';
+          }
+          
+          return deferred.reject(message);
         }).then(function(data){
           return deferred.resolve(data);
         });

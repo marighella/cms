@@ -8,7 +8,7 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, PostUtil, Repository, TagsUtil, _) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
 
     $scope.state = 'default';
     $scope.entity = {
@@ -48,6 +48,15 @@ angular.module('cmsApp')
       $scope.editorLoaded = true;
     });
 
+    var getVideoUrl = function(){
+      var field = $scope.videoField;
+
+      if(!!field && !!field.name){
+        return $scope.entity[field.name];
+      }
+      return '';
+    };
+
     $scope.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
         return;
@@ -59,7 +68,7 @@ angular.module('cmsApp')
 
       if(!form.$invalid){
         $scope.state = (publish) ? 'publishing' : 'saving';
-        var videoUrl = $scope.entity[$scope.videoField.name];
+        var videoUrl = getVideoUrl();
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
           /*jshint camelcase: false */
@@ -68,10 +77,28 @@ angular.module('cmsApp')
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
+            $rootScope.alerts = [];
             $scope.state = 'default';
             $location.path('/post/search');
+          })
+          .catch(function(error) {
+            $scope.state = 'default';
+            $rootScope.addError(error);
           });
         });
+      } else {
+        var inputs = form.$error.required || [];
+        var inputNames = [];
+        inputs.forEach(function(input) {
+          var field = _.find($scope.fields, function(field) {
+            return field.name === input.$name;
+          });
+          inputNames.push(field.title);
+        });
+
+        var message = 'Os campos: ' + inputNames.join(', ') + ' precisam ser preenchidos.';
+
+        $rootScope.addWarning(message);
       }
     };
 

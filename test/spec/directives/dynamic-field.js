@@ -33,19 +33,19 @@ describe('Directive: dynamicField', function () {
     }));
   });
 
-  describe('dynamic field to fill ng-show', function() {
+  describe('dynamic field to fill ng-if', function() {
     it('should put nothing required when do not have "need" field', inject(function ($compile) {
       scope.field = {
       
       };
       element = angular.element('<input dynamic-field="field"/>');
       element = $compile(element)(scope);
-      expect(element.attr('ng-show')).toBeFalsy();
+      expect(element.attr('ng-if')).toBeFalsy();
     }));
 
 
     describe('when have a "need" field', function() {
-      it('should put ng-show with condition equal', inject(function ($compile) {
+      it('should put ng-if with condition equal', inject(function ($compile) {
         scope.field = {
           need: {
             field: 'section',
@@ -55,10 +55,10 @@ describe('Directive: dynamicField', function () {
         };
         element = angular.element('<input dynamic-field="field"/>');
         element = $compile(element)(scope);
-        expect(element.attr('ng-show')).toBe('entity.section===\'tv\'');
+        expect(element.attr('ng-if')).toBe('entity.section===\'tv\'');
       }));
 
-      it('should put ng-show with condition not equal', inject(function ($compile) {
+      it('should put ng-if with condition not equal', inject(function ($compile) {
         scope.field = {
           need: {
             field: 'section',
@@ -68,9 +68,9 @@ describe('Directive: dynamicField', function () {
         };
         element = angular.element('<input dynamic-field="field"/>');
         element = $compile(element)(scope);
-        expect(element.attr('ng-show')).toBe('entity.section!==\'tv\'');
+        expect(element.attr('ng-if')).toBe('entity.section!==\'tv\'');
       }));
-      it('should put ng-show with condition equal and using OR, when value is an array', inject(function($compile){
+      it('should put ng-if with condition equal and using OR, when value is an array', inject(function($compile){
         scope.field = {
           need: {
             field: 'section',
@@ -80,9 +80,9 @@ describe('Directive: dynamicField', function () {
         };
         element = angular.element('<input dynamic-field="field"/>');
         element = $compile(element)(scope);
-        expect(element.attr('ng-show')).toBe('entity.section===\'tv\'||entity.section===\'featured-news\'');
+        expect(element.attr('ng-if')).toBe('entity.section===\'tv\'||entity.section===\'featured-news\'');
       }));
-      it('should put ng-show with condition equal and using AND, when value is an array', inject(function($compile){
+      it('should put ng-if with condition equal and using AND, when value is an array', inject(function($compile){
         scope.field = {
           need: {
             field: 'section',
@@ -92,7 +92,7 @@ describe('Directive: dynamicField', function () {
         };
         element = angular.element('<input dynamic-field="field"/>');
         element = $compile(element)(scope);
-        expect(element.attr('ng-show')).toBe('entity.section!==\'tv\'&&entity.section!==\'featured-news\'');
+        expect(element.attr('ng-if')).toBe('entity.section!==\'tv\'&&entity.section!==\'featured-news\'');
       }));
     });
   });

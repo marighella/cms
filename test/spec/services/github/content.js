@@ -37,7 +37,7 @@ describe('Service: GithubContent', function () {
 
   it( 'should save in the same folder of creation', function(){
     var repository = {full_name: 'my-repository'};
-    var post = {filename: 'arquivo.md', created_date: '2014-01-30'};
+    var post = {filename: 'arquivo.md', metadata: { created_date: '2014-01-30'}};
     var sha = 'abcd3';
     var promise = Content.save(repository, post, sha );
     promise.then(function (address){
