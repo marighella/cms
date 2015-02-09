@@ -1,30 +1,25 @@
-<div class='page-header auth' >
+<div class="page-header auth" >
   <p>
-    <button ng-click='authenticate()' class='btn btn-default login' ng-hide='user.logged'>
-      <img src='//oauth.io/api/providers/github/logo' /> Entrar
+    <button ng-click="authenticate()" class='btn btn-default login' ng-hide='user.logged'>
+      <img src="//oauth.io/api/providers/github/logo" /> Entrar
     </button>
   </p>
-  <main ng-show='user.logged'>
-    <h1>
-      <select class='form-control organization'
-        ng-change='getRepositories(organization)'
-        ng-model='organization'>
-        <option value="">Qual a sua luta, companheira?</option>
-        <option ng-repeat='organization in user.organizations' value="{{ organization }}">
-        {{ organization.name || organization.login }}
-        </option>
-      </select>
-      <span class='wait organization' ng-hide='user.organizations[0].ready'>
-        <i class="glyphicon glyphicon-refresh spin" ></i>
-      </span>
-    </h1>
-    <select class='form-control repository'
-      ng-change='finish(repository)'
-      ng-model='repository'
-      ng-show='user.repositories'>
+  <main ng-show="user.logged">
+    <img class="img-circle organization"
+      ng-repeat="organization in user.organizations track by $index" 
+      ng-click="getRepositories(organization)"
+      ng-class="{'selected': isOrgSelected(organization)}"
+      ng-src="{{ organization.avatar_url }}"/>
+      {{ orgSelected  }}
+    <span class="wait organization" ng-hide='user.organizations[0].ready'>
+      <i class="glyphicon glyphicon-refresh spin" ></i>
+    </span>
+    <select class="form-control repository"
+      ng-change="finish(repository)"
+      ng-model="repository"
+      ng-show="user.repositories">
       <option value="">Em quais desses?</option>
-      <option ng-repeat='repository in user.repositories' value="{{ repository }}">{{ repository.name }}</option>
+      <option ng-repeat="repository in user.repositories" value="{{ repository }}">{{ repository.name }}</option>
     </select>
-    <img ng-src='{{ user.organization.avatar_url }}' ng-show='user.organization'  class='img-thumbnail'/>
   </main>
 </div>

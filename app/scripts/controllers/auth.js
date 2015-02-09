@@ -14,7 +14,13 @@ angular.module('cmsApp')
         $location.path('/post/search');
       }
     };
+    $scope.isOrgSelected = function(organization){
+      if(!$scope.user.organization){
+        return false;
+      }
 
+      return $scope.user.organization.login === organization.login;
+    };
     $scope.getRepositories = function(organization){
       $scope.user.organization = undefined;
       $scope.user.repositories = [];
