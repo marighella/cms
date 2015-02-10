@@ -361,7 +361,8 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'images/*',
             'fonts/*',
-            'ckeditor-plugins/**/*'
+            'ckeditor-plugins/**/*',
+            'default-skelleton.json'
           ]
         }, {
           expand: true,
