@@ -9,6 +9,7 @@
  */
 angular.module('cmsApp')
   .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, PostUtil, Repository) {
+    $scope.cleanAlerts();
     $scope.posts = [];
     $scope.maxSize = 5;
     $scope.currentPage = 1;
@@ -48,11 +49,8 @@ angular.module('cmsApp')
       });
     };
 
-    $scope.loadSkelleton = function(){
-      Repository.skelleton.get($rootScope.repository).then(function(result){
-        $rootScope.user.skelleton = angular.fromJson(result);
-        $scope.ready = true;
-      });
+    $scope.ready = function(){
+      return !!$rootScope.user.skelleton;
     };
 
     $scope.create = function(){

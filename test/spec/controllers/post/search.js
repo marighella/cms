@@ -18,6 +18,10 @@ describe('Controller: PostSearchCtrl', function () {
       list: function(){
         return {
           then: function(){
+            return this;
+          },
+          catch: function(){
+            return this;
           }
         };
       }
@@ -26,6 +30,10 @@ describe('Controller: PostSearchCtrl', function () {
       get: function(){
         return {
           then: function(){
+            return this;
+          },
+          catch: function(){
+            return this;
           }
         };
       }

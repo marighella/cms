@@ -47,7 +47,7 @@ angular
         redirectTo: '/auth'
       });
   })
-  .run(['$rootScope', '$location', 'Resource','ENV', function ($rootScope, $location, Resource, ENV) {
+  .run(['$rootScope', '$location', '$http', 'Resource','ENV', 'Repository', function ($rootScope, $location, $http, Resource, ENV, Repository) {
     $rootScope.alerts = [];
 
     $rootScope.addError = function(message) {
@@ -60,6 +60,23 @@ angular
 
     $rootScope.closeAlert = function(index) {
       $rootScope.alerts.splice(index, 1);
+    };
+
+    $rootScope.cleanAlerts = function() {
+      $rootScope.alerts = [];
+    };
+
+    $rootScope.loadSkelleton = function(){
+      Repository.skelleton.get($rootScope.repository)
+      .then(function(result){
+        $rootScope.user.skelleton = angular.fromJson(result);
+      }).catch(function(error){
+        $rootScope.addWarning(error);
+        $http.get('default-skelleton.json')
+        .success(function(data) {
+          $rootScope.user.skelleton = angular.fromJson(data);
+        });
+      });
     };
 
     $rootScope.$on('$locationChangeStart', function () {

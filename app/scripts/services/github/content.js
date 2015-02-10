@@ -12,13 +12,17 @@
 angular.module('cmsApp')
 .factory('GithubContent', function ($q, Resource, PostUtil, DateUtil) {
 
-  function promiseGithub(address, then){
+  function promiseGithub(address, then, error){
     var deferred = $q.defer();
     var promise = deferred.promise;
     var github = Resource.github;
     then = then || function(data){return data;};
+    error = error || function(error){return error.responseJSON.message;};
+
     github.get(address,{
       cache: false
+    }).error(function(code){
+      return deferred.reject(error(code));
     }).then(function(data){
       return deferred.resolve(then(data));
     });
@@ -31,7 +35,17 @@ angular.module('cmsApp')
       var then = function(data){
         return PostUtil.decodeContent(data.content);
       };
-      return promiseGithub(address, then);
+      var error = function(error){
+        console.log(error);
+        var message = error.responseJSON.message;
+        if(error.status === 404) {
+          message = 'Não achei um metadado no seu repositório, usarei o meu padrão!';
+        }
+
+        return message;
+      };
+
+      return promiseGithub(address, then, error);
     },
     load: function (postUrl, repository) {
       var address = ['repos',repository.full_name,'contents/_posts',postUrl].join('/');

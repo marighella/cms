@@ -10,6 +10,7 @@
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
 
+    $scope.cleanAlerts();
     $scope.state = 'default';
     $scope.entity = {
       date: (new Date()).toString(),

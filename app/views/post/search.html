@@ -2,19 +2,19 @@
   <div class="form-group">
     <button ng-click="create()"
       class="btn btn-default btn-block create"
-      ng-disabled="!ready">
+      ng-disabled="!ready()">
 
 
-      <span class="glyphicon glyphicon-play" ng-show="ready">
+      <span class="glyphicon glyphicon-play" ng-show="ready()">
       </span>
-      <strong ng-show="ready">
+      <strong ng-show="ready()">
         Nova Notícia
       </strong>
 
-      <span ng-hide="ready">
+      <span ng-hide="ready()">
         <i class="fa fa-cog fa-spin" ></i>
       </span>
-      <strong ng-hide="ready">
+      <strong ng-hide="ready()">
         Carregando informações adicionais, só um momento companheira!
       </strong>
     </button>
@@ -77,9 +77,13 @@
     </pager>
     <p>{{ posts.length }} registro(s) encontrados companheira(o).</p>
   </div>
-
   <div ng-if="posts.length === 0" class="result">
     <p>Nenhuma postagem criada, companheira(o).</p>
   </div>
+  <alert ng-repeat="alert in alerts" 
+    type="{{alert.type}}" 
+    close="closeAlert($index)">
+    {{alert.msg}}
+  </alert>
 
 </div>
