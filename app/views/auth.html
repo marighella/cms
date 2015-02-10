@@ -17,7 +17,7 @@
     <select class="form-control repository"
       ng-change="finish(repository)"
       ng-model="repository"
-      ng-show="user.repositories">
+      ng-show="user.repositories.length > 0">
       <option value="">Em quais desses?</option>
       <option ng-repeat="repository in user.repositories" value="{{ repository }}">{{ repository.name }}</option>
     </select>

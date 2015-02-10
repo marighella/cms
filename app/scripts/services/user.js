@@ -28,11 +28,17 @@ angular.module('cmsApp')
 
         organizationsPromisse.then(function(value){
           result.organizations = [];
-          //https://api.github.com/search/code?q=_config+in:path+extension:yml+user:movimento-sem-terra&sort=filename
           _.each(value, function(org){
             Github.organization.searchJekyllFiles(org)
             .then(function(searchResult){
               if(searchResult.total_count > 0){
+                var repositories = [];
+                _.each(searchResult.items, function(item){
+                  repositories.push(item.repository.name);
+                });
+
+                org.repositories = _.uniq(repositories);
+
                 result.organizations.push(org);
               }
             });

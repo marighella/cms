@@ -22,6 +22,17 @@ angular.module('cmsApp')
       return orgPromisse;
     }
 
+    function getRepository(organization, repositoryName){
+      var orgDeferred = $q.defer();
+      var orgPromisse = orgDeferred.promise;
+      var github = Resource.github;
+
+      github.get('repos/'+organization.login+'/'+repositoryName).then(function(data){
+        return orgDeferred.resolve(data);
+      });
+      return orgPromisse;
+    }
+
     function listRepositories(organization){
       var deferred = $q.defer();
       var promise = deferred.promise;
@@ -90,6 +101,9 @@ angular.module('cmsApp')
           },
           org: function(){
             return getOrganization(organization);
+          },
+          repository: function(repositoryName){
+            return getRepository(organization, repositoryName);
           }
         };
       },

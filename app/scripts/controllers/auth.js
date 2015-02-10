@@ -1,10 +1,17 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, User, Resource, Repository) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, _, User, Resource, Repository) {
+
+    var fillRepository = function(repoName){
+      var org = $scope.user.organization;
+      return Repository.organization.get(org).repository(repoName);
+    };
+
     $scope.user = { logged: false,
                 organization: false,
                 repositories: [] };
+
     $scope.finish = function(repository){
       if(!!repository){
         var obj = angular.fromJson(repository);
@@ -14,6 +21,7 @@ angular.module('cmsApp')
         $location.path('/post/search');
       }
     };
+
     $scope.isOrgSelected = function(organization){
       if(!$scope.user.organization){
         return false;
@@ -29,10 +37,24 @@ angular.module('cmsApp')
         var obj = angular.fromJson(organization);
         $scope.user.organization = obj;
 
-        Repository.organization.get(obj)
+        if(!!obj.repositories && obj.repositories.length === 1 ){
+          fillRepository(obj.repositories[0])
+          .then(function(repo){
+            $scope.finish(repo);
+          });
+        }else if(!!obj.repositories){
+          _.each(obj.repositories, function(repoName){
+            fillRepository(repoName)
+            .then(function(repo){
+              $scope.user.repositories.push(repo);
+            });
+          });
+        }else{
+          Repository.organization.get(obj)
           .repositories().then(function(result){
             $scope.user.repositories = result;
           });
+        }
       }
     };
 
