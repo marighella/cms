@@ -24,8 +24,7 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
-    "angular-scenario": "~1.2.0",
-    "ckeditor": "~4.4.4"
+    "angular-scenario": "~1.2.0"
   },
   "appPath": "app"
 }
