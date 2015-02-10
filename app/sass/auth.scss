@@ -39,6 +39,7 @@
 
       &:hover, &:focus, &:active{
         cursor: pointer;
+        opacity: 1;
         @include selected();
       }
     }
