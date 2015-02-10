@@ -27,7 +27,16 @@ angular.module('cmsApp')
         });
 
         organizationsPromisse.then(function(value){
-          result.organizations = value;
+          result.organizations = [];
+          //https://api.github.com/search/code?q=_config+in:path+extension:yml+user:movimento-sem-terra&sort=filename
+          _.each(value, function(org){
+            Github.organization.searchJekyllFiles(org)
+            .then(function(searchResult){
+              if(searchResult.total_count > 0){
+                result.organizations.push(org);
+              }
+            });
+          });
         });
 
         return result;

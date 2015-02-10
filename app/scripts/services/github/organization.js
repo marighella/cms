@@ -61,6 +61,24 @@ angular.module('cmsApp')
       return listOrgPromisse;
     }
 
+    function jekyllFiles(organization) {
+      var address = ['search/code?q=', '_config', '+in:path'].join('');
+      var repo = ['+user:', organization.login].join('');
+      var extension = ['+extension', 'yml'].join(':');
+      var order = '&sort=updated&order=desc';
+
+      var url = [address, extension, repo, order].join('');
+
+      var orgDeferred = $q.defer();
+      var orgPromisse = orgDeferred.promise;
+      var github = Resource.github;
+
+      github.get(url).then(function(data){
+        return orgDeferred.resolve(data);
+      });
+      return orgPromisse;
+    }
+
     return {
       list: function() {
         return listOrganizations();
@@ -74,6 +92,7 @@ angular.module('cmsApp')
             return getOrganization(organization);
           }
         };
-      }
+      },
+      searchJekyllFiles: jekyllFiles
     };
   });
