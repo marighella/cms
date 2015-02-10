@@ -11,10 +11,25 @@
 angular.module('cmsApp')
   .factory('User', function(_, Github) {
 
+    var filterByJekyllRepository = function(result, org){
+      Github.organization.searchJekyllFiles(org)
+      .then(function(searchResult){
+        if(searchResult.total_count > 0){
+          var repositories = [];
+          _.each(searchResult.items, function(item){
+            repositories.push(item.repository.name);
+          });
+
+          org.repositories = _.uniq(repositories);
+
+          result.organizations.push(org);
+        }
+      });
+    };
+
     return {
       info: function() {
         var userPromise = Github.user.getAuth();
-        var organizationsPromisse = Github.organization.list();
 
         var result = {
           info: '',
@@ -22,28 +37,17 @@ angular.module('cmsApp')
           repositories: []
         };
 
-        userPromise.then(function(value){
-          result.info = value;
-        });
-
-        organizationsPromisse.then(function(value){
-          result.organizations = [];
-          _.each(value, function(org){
-            Github.organization.searchJekyllFiles(org)
-            .then(function(searchResult){
-              if(searchResult.total_count > 0){
-                var repositories = [];
-                _.each(searchResult.items, function(item){
-                  repositories.push(item.repository.name);
-                });
-
-                org.repositories = _.uniq(repositories);
-
-                result.organizations.push(org);
-              }
+        userPromise.then(function(user){
+          result.info = user;
+          var organizationsPromisse = Github.organization.list();
+          organizationsPromisse.then(function(orgs){
+            var orgMoreMe = _.union(orgs, [user]);
+            _.each(orgMoreMe, function(org){
+              filterByJekyllRepository(result, org);
             });
           });
         });
+
 
         return result;
       }
