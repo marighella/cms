@@ -59,16 +59,17 @@ angular.module('cmsApp')
     };
 
     $scope.authenticate =  function(){
-      oauth.popup('github', function(error, response) {
-        if(error) {
-          return window.alert(error);
-        }
-
+      oauth.popup('github', {cache: true})
+      .done(function(response) {
         Resource.github = response;
         $timeout(function(){
           $scope.user = User.info();
           $scope.user.logged = true;
         },0);
+      }).fail(function(error){
+        if(error) {
+          return window.alert(error);
+        }
       });
     };
   });
