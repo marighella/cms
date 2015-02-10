@@ -20,6 +20,11 @@ $invalid-red: #a94442;
     }
   }
 
+  .alert {
+    margin-bottom: 0;
+    margin-top: 20px;
+  }
+
   .alert-cover {
     label {
        color: $invalid-red;

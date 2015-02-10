@@ -78,13 +78,13 @@ angular.module('cmsApp')
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
-            $rootScope.alerts = [];
+            $scope.cleanAlerts();
             $scope.state = 'default';
             $location.path('/post/search');
           })
           .catch(function(error) {
             $scope.state = 'default';
-            $rootScope.addError(error);
+            $scope.addError(error);
           });
         });
       } else {
@@ -99,7 +99,7 @@ angular.module('cmsApp')
 
         var message = 'Os campos: ' + inputNames.join(', ') + ' precisam ser preenchidos.';
 
-        $rootScope.addWarning(message);
+        $scope.addWarning(message);
       }
     };
 
