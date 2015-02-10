@@ -55,12 +55,17 @@ angular.module('cmsApp')
     };
 
     var getPostsByTags = function(selectedTags){
-      var postsByTag = _.pick(tagsFile, selectedTags);
+      var postsByTag = _.pick(tagsFile, function(value, key){
+        return _.find(selectedTags, function(item){
+          return getSlug(key) === getSlug(item);
+        });
+      });
+
       var allPosts = _.values(postsByTag);
       if(selectedTags.length > 1){
         return intersection.apply(this, allPosts);
       }
-      return _.countBy(_.flatten(allPosts));
+      return _.countBy(_.last(_.flatten(allPosts),10));
     };
 
     var getReleatedPosts = function(tags, options){

@@ -95,7 +95,7 @@ describe('Service: TagsUtil', function () {
     it('should return the list of posts releated', function(){
       var tags = ['Manga','Banana','Cianureto'];
       expect(factory.getReleatedPosts(tags))
-        .toEqual([ 'dois', 'tres', 'sete' ]);
+        .toEqual(['tres', 'sete', 'dois']);
     });
 
     it('should return the list of posts releated without except', function(){

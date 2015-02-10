@@ -137,15 +137,24 @@ angular.module('cmsApp')
     };
 
     var fillReleatedPosts = function(){
-      var releatedPosts = getReleatedPosts($scope.entity.tags);
+      var tags = $scope.entity.tags || [];
+      if(tags.length === 0 ){
+        $scope.suggestedPosts = [];
+        $scope.releatedPosts = [];
+      }else{
+        var releatedPosts = getReleatedPosts(tags);
 
-      var suggestedPosts = []; 
-      $scope.entity.tags.forEach(function(tag){
-        suggestedPosts.push(getReleatedPosts([tag]));
-      });
+        var suggestedPosts = [];
+        tags.forEach(function(tag){
+          suggestedPosts.push(getReleatedPosts([tag]));
+        });
 
-      $scope.suggestedPosts = _.flatten(suggestedPosts);
-      $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
+        $scope.suggestedPosts = _.flatten(suggestedPosts);
+
+        if(tags.length > 1){
+          $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
+        }
+      }
     };
 
     $scope.fillReleatedPosts = fillReleatedPosts;
