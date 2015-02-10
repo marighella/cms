@@ -7,6 +7,7 @@ app/styles/*
 .grunt/
 app/scripts/config.js
 **/*.swp
+app/ckeditor/
 .DS_Store
 app/.DS_Store
 app/ckeditor-plugins/.DS_Store
