@@ -1,0 +1,52 @@
+[
+{
+  "name": "date",
+    "pattern": "",
+    "icon": "fa-calendar",
+    "title": "Data e hora da notícia",
+    "required": true,
+    "type": {
+      "view": "date"
+    }
+},
+{
+  "name": "title",
+  "title": "Título da notícia",
+  "required": true,
+  "limit": 140,
+  "placeholder": "Informe o título",
+  "type": {
+    "view": "textarea"
+  }
+},
+{
+  "name": "description",
+  "title": "Descrição",
+  "required": true,
+  "limit": 240,
+  "placeholder": "Informe o título",
+  "type": {
+    "view": "textarea"
+  }
+},
+{
+  "name": "image",
+  "pattern": "",
+  "icon": "fa-picture-o",
+  "title": "Imagem de Capa",
+  "required": true,
+  "type": {
+    "view": "cover"
+  }
+},
+{
+  "name": "tags",
+  "pattern": "",
+  "icon": "fa-tags",
+  "title": "Tags",
+  "required": false,
+  "type": {
+    "view": "tagging"
+  }
+}
+]
