@@ -72,4 +72,16 @@ angular.module('cmsApp')
         }
       });
     };
+
+    $scope.authenticateFlickr =  function(){
+      oauth.popup('flickr', {cache: true})
+        .done(function(response) {
+          console.log(response);
+        }).fail(function(error){
+          if(error) {
+            return window.alert(error);
+          }
+        });
+    };
+
   });

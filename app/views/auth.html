@@ -1,12 +1,18 @@
 <div class="page-header auth" >
   <p>
     <button ng-click="authenticate()" class='btn btn-default login' ng-hide='user.logged'>
-      <img src="//oauth.io/api/providers/github/logo" /> Entrar
+      <img src="//oauth.io/api/providers/github/logo" /> Logar
     </button>
+    <br />
+    <br />
+    <button style="background-color: red" ng-click="authenticateFlickr()" class='btn btn-default login' ng-hide='user.logged'>
+      <img src="//oauth.io/api/providers/flickr/logo" /> Logar Flickr
+    </button>
+
   </p>
   <main ng-show="user.logged">
     <img class="img-circle organization"
-      ng-repeat="organization in user.organizations track by $index" 
+      ng-repeat="organization in user.organizations track by $index"
       ng-click="getRepositories(organization)"
       ng-class="{'selected': isOrgSelected(organization)}"
       ng-src="{{ organization.avatar_url }}"/>
