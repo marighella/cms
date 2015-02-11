@@ -48,13 +48,13 @@ angular.module('cmsApp')
       return promiseGithub(address, then, error);
     },
     load: function (postUrl, repository) {
-      var address = ['repos',repository.full_name,'contents/_posts',postUrl].join('/');
+      var address = ['repos',repository.full_name,'contents/',postUrl].join('/');
       var then = function(data){
         var post = PostUtil.load(data.content);
         post.filename = data.name;
         return post;
       };
-      return promiseGithub(address, then);
+      return promiseGithub(address+'?ref=master', then);
     },
     post: function (post) {
       var then = function(data){

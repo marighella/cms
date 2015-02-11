@@ -161,13 +161,14 @@ angular.module('cmsApp')
 
     $scope.load = function(){
       var post = {
-        url: $routeParams.url
+        path: $routeParams.path
       };
 
-      if(!!post.url){
+      if(!!post.path){
         $scope.state = 'loading';
 
-        Repository.content.get(post).then(function(post){
+        Repository.content.get(post.path, $rootScope.repository)
+        .then(function(post){
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;

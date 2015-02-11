@@ -42,7 +42,8 @@ angular.module('cmsApp')
       var toLoad = $scope.posts.slice(start, start+limit);
       toLoad.forEach(function(element){
         if(!element.metadata){
-          Repository.content.get(element).then(function(result){
+          Repository.content.get(element.path, $scope.repository)
+          .then(function(result){
             angular.extend(element, result);
           });
         }
@@ -62,7 +63,7 @@ angular.module('cmsApp')
     $scope.edit = function(post){
       var year = $scope.filter.year;
       var month = $scope.filter.month;
-      $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.url);
+      $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.path);
     };
 
     $scope.load = function(){
