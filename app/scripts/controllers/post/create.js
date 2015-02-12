@@ -174,10 +174,10 @@ angular.module('cmsApp')
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
+          $scope.state = 'default';
 
           loadTagsFile(function(){
             fillReleatedPosts();
-            $scope.state = 'default';
           });
         });
       }else{
