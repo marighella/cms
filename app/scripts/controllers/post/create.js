@@ -74,7 +74,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           /*jshint camelcase: false */
           post.metadata[$scope.coverField.name] = $scope.cover;
-          post.metadata.releated_posts = getReleatedPosts($scope.entity.tags);
+          post.metadata.releated_posts = $scope.releatedPosts;
 
           Repository.content.save($rootScope.repository, post, sha)
           .then(function(){
