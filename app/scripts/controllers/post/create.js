@@ -143,7 +143,7 @@ angular.module('cmsApp')
           suggestedPosts.push(getReleatedPosts([tag]));
         });
 
-        $scope.releatedPosts = _.flatten(suggestedPosts);
+        $scope.suggestedPosts = _.uniq(_.flatten(suggestedPosts));
     };
 
     var fillReleatedPosts = function(){
@@ -173,11 +173,13 @@ angular.module('cmsApp')
 
         Repository.content.get(post.path, $rootScope.repository)
         .then(function(post){
+          /*jshint camelcase: false */
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
           $scope.cover = post.metadata[$scope.coverField.name];
+          $scope.releatedPosts = post.metadata.releated_posts || [];
           $scope.state = 'default';
 
           loadTagsFile(function(){
