@@ -136,6 +136,16 @@ angular.module('cmsApp')
       return $scope.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
     };
 
+    var fillSuggestedPosts = function(){
+        var tags = $scope.entity.tags || [];
+        var suggestedPosts = [];
+        tags.forEach(function(tag){
+          suggestedPosts.push(getReleatedPosts([tag]));
+        });
+
+        $scope.releatedPosts = _.flatten(suggestedPosts);
+    };
+
     var fillReleatedPosts = function(){
       var tags = $scope.entity.tags || [];
       if(tags.length === 0 ){
@@ -143,13 +153,7 @@ angular.module('cmsApp')
         $scope.releatedPosts = [];
       }else{
         var releatedPosts = getReleatedPosts(tags);
-
-        var suggestedPosts = [];
-        tags.forEach(function(tag){
-          suggestedPosts.push(getReleatedPosts([tag]));
-        });
-
-        $scope.suggestedPosts = _.flatten(suggestedPosts);
+        fillSuggestedPosts();
 
         if(tags.length > 1){
           $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
@@ -177,7 +181,7 @@ angular.module('cmsApp')
           $scope.state = 'default';
 
           loadTagsFile(function(){
-            fillReleatedPosts();
+            fillSuggestedPosts();
           });
         });
       }else{
