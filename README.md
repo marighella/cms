@@ -33,11 +33,6 @@ Instalando os pacotes do Frontend do projeto via Bower
 $ bower install
 ``
 
-Atualizando o Webdriver Manager do Protractor
-
-``
-$ ./node_modules/protractor/bin/webdriver-manager update
-``
 
 ### Executando local
 ``
@@ -52,7 +47,7 @@ A aplicação será executada no endereço http://localhost:9000.
 
 O Gerenciador de Conteúdo (CMS) Marighella foi construído em AngularJS e é hospedado no Github Pages. Através da Github API, o conteúdo gerado é submetido para um repositório no Github através de um commit. Esse repositório, por sua vez, contém o Jekyll, marcações (HTML + CSS) e todas as postagens.
 
-Para a publicação deste conteúdo, também usamos o Github Pages. Através do SnapCI, um serviço de integração contínua, mantém-se vigilância sobre o repositório que contém as postagens. A cada novo commit, o Jekyll é executado no ambiente do SnapCI e gera páginas estáticas para ser publicado no Github Pages. Isto encerra o ciclo de produção/publicação de conteúdo.
+Para a publicação deste conteúdo, também usamos o Github Pages. Utilizando a API do Github o Marighella faz um commit para o repositório onde o usuário possui o site, se você estiver usando o Jekyll com geração automatica do github o resto é ele, caso não utilize o GH com geração de páginas automaticas, por qualquer motivo seja esse pluglins de terceiros, sugerimos que utilize algum [Servidor de Integração](snapi-ci.com) para realizar uma implantação do conteudo. 
 
 ## Como colaborar?
 
