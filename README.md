@@ -67,6 +67,16 @@ um chat em tempo real.
 Para controle das funcionalidades, bugs, revisão de código e afins é utilizado o waffle que trabalha em cima das issues do github, e disponibiliza um painel para um controle maior.
 
 
+## Perguntas frequentes
+
+1. Quando logo ele pede permissão para escrita nos repositórios, é de boa?
+> Sim, o Marighella executa 95% do trabalho em sua maquina os outros 5% é a chamada da biblioteca do GithubAPI para realizar o commit.
+
+2. Quando eu logo não aparece nada
+> O Marighella procura entre todos os seus projetos/organização algum repositório que tenha um jekyll hospedado, caso não tenha nenhum repositório com o Jekyll vai ficar dificil :/
+
+
+
 
 
 Copyright (C) 2014  ThoughtWorks Brasil
