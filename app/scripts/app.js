@@ -29,19 +29,23 @@ angular
     $routeProvider
       .when('/auth', {
         templateUrl: 'views/auth.html',
-        controller: 'AuthCtrl'
+        controller: 'AuthCtrl',
+        controllerAs: 'authCtrl'
       })
       .when('/post/search', {
         templateUrl: 'views/post/search.html',
-        controller: 'PostSearchCtrl'
+        controller: 'PostSearchCtrl',
+        controllerAs: 'postSearchCtrl'
       })
       .when('/post/:year/:month', {
         templateUrl: 'views/post/create.html',
-        controller: 'PostCreateCtrl'
+        controller: 'PostCreateCtrl',
+        controllerAs: 'postCreateCtrl'
       })
       .when('/post/:year/:month/:sha/:path*', {
         templateUrl: 'views/post/create.html',
-        controller: 'PostCreateCtrl'
+        controller: 'PostCreateCtrl',
+        controllerAs: 'postCreateCtrl'
       })
       .otherwise({
         redirectTo: '/auth'

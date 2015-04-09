@@ -1,25 +1,27 @@
 <div class="page-header auth" >
   <p>
-    <button ng-click="authenticate()" class='btn btn-default login' ng-hide='user.logged'>
+    <button ng-click="authCtrl.authenticate()" class="btn btn-default login" ng-hide="authCtrl.user.logged === true">
       <img src="images/github.png" /> Entrar
     </button>
   </p>
-  <main ng-show="user.logged">
+  <main ng-show="authCtrl.user.logged === true">
     <img class="img-circle organization"
-      ng-repeat="organization in user.organizations track by $index" 
-      ng-click="getRepositories(organization)"
-      ng-class="{'selected': isOrgSelected(organization)}"
+      ng-repeat="organization in authCtrl.user.organizations track by organization.id"
+      ng-click="authCtrl.getRepositories(organization)"
+      alt="{{ organization.name }}"
+      title="{{ organization.name }}"
+      ng-class="{'selected': authCtrl.isOrgSelected(organization)}"
       ng-src="{{ organization.avatar_url }}"/>
       {{ orgSelected  }}
-    <span class="wait organization" ng-hide='user.organizations[0].ready'>
+    <span class="wait organization" ng-hide="authCtrl.user.organizations[0].ready === true">
       <i class="glyphicon glyphicon-refresh spin" ></i>
     </span>
     <select class="form-control repository"
-      ng-change="finish(repository)"
-      ng-model="repository"
-      ng-show="user.repositories.length > 0">
+      ng-change="authCtrl.finish(authCtrl.repository)"
+      ng-model="authCtrl.repository"
+      ng-show="authCtrl.user.repositories.length > 0">
       <option value="">Em quais desses?</option>
-      <option ng-repeat="repository in user.repositories" value="{{ repository }}">{{ repository.name }}</option>
+      <option ng-repeat="repository in authCtrl.user.repositories" value="{{ repository }}">{{ repository.name }}</option>
     </select>
   </main>
 </div>

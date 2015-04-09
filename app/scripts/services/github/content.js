@@ -10,7 +10,7 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-.factory('GithubContent', function ($q, Resource, PostUtil, DateUtil) {
+.factory('GithubContent', function ($q, Resource, PostUtil, DateUtil, $log) {
 
   function promiseGithub(address, then, error){
     var deferred = $q.defer();
@@ -36,7 +36,7 @@ angular.module('cmsApp')
         return PostUtil.decodeContent(data.content);
       };
       var error = function(error){
-        console.log(error);
+        $log.log(error);
         var message = error.responseJSON.message;
         if(error.status === 404) {
           message = 'Não achei um metadado no seu repositório, usarei o meu padrão!';
@@ -90,7 +90,7 @@ angular.module('cmsApp')
       }
 
       var url = [address, filename, path, repo, order].join('');
-      
+
       var then = function (data){
         data.items =  data.items.sort(function(a,b){
           var date_a =  new Date(a.name.substring(0,10));
@@ -122,12 +122,12 @@ angular.module('cmsApp')
           data: commit,
           cache: false
         }).error(function(error){
-          console.log(error);
+          $log.log(error);
           var message = error.responseJSON.message;
           if(error.status === 422) {
             message = 'Essa notícia já existe.';
           }
-          
+
           return deferred.reject(message);
         }).then(function(data){
           return deferred.resolve(data);

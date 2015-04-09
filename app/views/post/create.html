@@ -1,30 +1,30 @@
-<form name="postForm" nonvalidate ng-init='load()' class='create'>
-  <div class='metadata'>
+<form name="postForm" novalidate class="create" autocomplete="off" role="form">
+  <div class="metadata">
     <div ng-include="'views/post/include/dynamic-fields.html'">
     </div>
 
     <div ng-include="'views/post/include/gallery.html'">
     </div>
 
-    <div class='alert-cover' dynamic-field='coverField'>
-      <input type='text' ng-model='cover' name='cover' dynamic-field="coverField"/>
+    <div class="alert-cover" dynamic-field="coverField">
+      <input type="text" ng-model="cover" name="cover" dynamic-field="coverField"/>
     </div>
   </div>
-  <aside class='body'>
-    <div class='form-group'>
-      <textarea id='editor' ck-editor ng-model="body">
+  <aside class="body">
+    <div class="form-group">
+      <textarea id="editor" ck-editor ng-model="postCreateCtrl.body">
       </textarea>
     </div>
-    <div ng-include="'views/post/include/button-action.html'" ng-if="editorLoaded">
+    <div ng-include="'views/post/include/button-action.html'" ng-if="postCreateCtrl.editorLoaded">
     </div>
-    <alert ng-repeat="alert in alerts" 
-          type="{{alert.type}}" 
+    <alert ng-repeat="alert in postCreateCtrl.alerts"
+          type="{{alert.type}}"
           close="closeAlert($index)">
           {{alert.msg}}
     </alert>
-    <div ng-include="'views/post/include/releated-posts.html'" ng-if="editorLoaded">
+    <div ng-include="'views/post/include/releated-posts.html'" ng-if="postCreateCtrl.editorLoaded">
     </div>
-    
+
   </aside>
-    
+
 </form>

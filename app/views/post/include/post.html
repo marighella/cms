@@ -1,13 +1,13 @@
 <div>
-  <span ng-hide='loading'>
+  <span ng-hide="loading">
     <i class="glyphicon glyphicon-refresh spin" ></i>
   </span>
-  <article ng-show='loading' class='post'>
+  <article ng-show="loading" class="post">
     <img ng-src="{{ post.metadata[coverField.name] }}" alt="Imagem de capa da noticia" />
     <time datetime="{{ post.metadata.date }}">{{ post.metadata.date | date: 'medium'}}</time>
     <h1>{{ post.metadata.title }}</h1>
     <div class="tags">
-      <span ng-repeat="tag in post.metadata.tags" class="tag" ng-class="{'selected': checkTag(tag)}">
+      <span ng-repeat="tag in post.metadata.tags track by $index" class="tag" ng-class="{'selected': checkTag(tag)}">
         {{ tag.tag }}
       </span>
     </div>

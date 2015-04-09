@@ -1,26 +1,26 @@
-<div class="form-group" ng-if="!!releatedPosts && releatedPosts.length > 0">
+<div class="form-group" ng-if="!!postCreateCtrl.releatedPosts && postCreateCtrl.releatedPosts.length > 0">
   <h1 class="suggest">
     Noticiais Relacionadas
   </h1>
-  <div class='releated-posts releated'
-    ng-repeat="releated in releatedPosts"
-    ng-click="removeReleatedPost(releated)">
-    <post post-url='releated' cover-field="coverField" tags="entity.tags"/>
+  <div class="releated-posts releated"
+    ng-repeat="releated in postCreateCtrl.releatedPosts"
+    ng-click="postCreateCtrl.removeReleatedPost(releated)">
+    <post post-url="releated" cover-field="coverField" tags="entity.tags"/>
   </div>
 </div>
-<section class="form-group"  ng-init="postLimit = 6"
-        ng-if="!!suggestedPosts && suggestedPosts.length > 0" >
+<section class="form-group"  ng-init="postCreateCtrl.postLimit = 6"
+        ng-if="!!postCreateCtrl.suggestedPosts && postCreateCtrl.suggestedPosts.length > 0" >
   <h1 class="suggest">
     Sugeridas
   </h1>
-  <div class='releated-posts suggested' ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
-    ng-class="{'selected': isPostReleated(releated)}">
+  <div class="releated-posts suggested" ng-repeat="releated in postCreateCtrl.suggestedPosts | limitTo: postCreateCtrl.postLimit" ng-click="postCreateCtrl.addReleatedPost(releated)"
+    ng-class="{'selected': postCreateCtrl.isPostReleated(releated)}">
     <h1>selecionada</h1>
-    <post post-url='releated' cover-field="coverField" tags="entity.tags"/>
+    <post post-url="releated" cover-field="coverField" tags="postCreateCtrl.entity.tags"/>
   </div>
-  <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
+  <button class="btn btn-default btn-block" ng-click="postCreateCtrl.postLimit = postCreateCtrl.postLimit + 6">
     Mais...
-    <span ng-if="postLimit < suggestedPosts.length">Exibindo {{ postLimit  }} de {{ suggestedPosts.length }}</span>
-    <span ng-if="postLimit >= suggestedPosts.length">Exibindo todas as noticias sugeridas</span>
+    <span ng-if="postCreateCtrl.postLimit < suggestedPosts.length">Exibindo {{ postCreateCtrl.postLimit  }} de {{ postCreateCtrl.suggestedPosts.length }}</span>
+    <span ng-if="postCreateCtrl.postLimit >= suggestedPosts.length">Exibindo todas as noticias sugeridas</span>
   </button>
 </section>

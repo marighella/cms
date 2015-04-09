@@ -8,90 +8,76 @@
  * Controller of the cmsApp
  */
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, R, PostUtil, Repository, TagsUtil) {
 
-    $scope.cleanAlerts();
-    $scope.state = 'default';
-    $scope.entity = {
+    $rootScope.cleanAlerts();
+    this.state = 'default';
+    this.entity = {
       date: (new Date()).toString(),
     };
-    $scope.body = '';
-    $scope.cover = '';
-    $scope.editorLoaded = false;
-    $scope.fields = $rootScope.user.skelleton || [];
-    $scope.files = [];
-    $scope.releatedPosts = [];
-    $scope.suggestedPosts = [];
-    $scope.tags = new TagsUtil();
-    $scope.coverField = undefined;
-    $scope.videoField = undefined;
+    this.body = '';
+    this.cover = '';
+    this.editorLoaded = false;
+    this.fields = $rootScope.user.skelleton || [];
+    this.files = [];
+    this.releatedPosts = [];
+    this.suggestedPosts = [];
+    this.tags = new TagsUtil();
+    this.coverField = undefined;
+    this.videoField = undefined;
+    this._index = undefined;
 
-    $scope.fields.forEach(function(element){
-      if( element.type.view === 'cover'){
-        $scope.coverField = element;
-      }
-      else if(element.type.view === 'video'){
-        $scope.videoField = element;
-      }
-    });
 
-    $scope.$on('upload-file', function(event, args) {
-      $scope.files.push(args.file);
-    });
-
-    $scope.removeImage = function (imageIndex){
+    this.removeImage = function (imageIndex){
       if(window.confirm('Deseja realmente remover este item?')){
-         $scope.files.splice(imageIndex, 1);
+        this.files.splice(imageIndex, 1);
       }
     };
 
-    $scope.$on('ckeditor.ready', function(){
-      $scope.editorLoaded = true;
-    });
-
-    var getVideoUrl = function(){
-      var field = $scope.videoField;
+    this.getVideoUrl = function(entity){
+      var field = this.videoField;
 
       if(!!field && !!field.name){
-        return $scope.entity[field.name];
+        return entity[field.name];
       }
       return '';
     };
 
-    $scope.save = function(form, action){
+    this.save = function(form, action){
       if(action !== 'publish' && action !== 'draft'){
         return;
       }
       var publish = (action === 'publish');
       var sha = $routeParams.sha;
+      var self = this;
 
-      $scope.$broadcast('submited');
+      $rootScope.$broadcast('submited');
 
       if(!form.$invalid){
-        $scope.state = (publish) ? 'publishing' : 'saving';
-        var videoUrl = getVideoUrl();
-        var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
-        promise.then(function(post){
-          /*jshint camelcase: false */
-          post.metadata[$scope.coverField.name] = $scope.cover;
-          post.metadata.releated_posts = $scope.releatedPosts;
+        this.state = (publish) ? 'publishing' : 'saving';
+        var videoUrl = this.getVideoUrl(this.entity);
+        PostUtil.preparePost(this.entity, this.body, this.filename, this.files, publish, videoUrl)
+          .then(function(post){
+            /*jshint camelcase: false */
+            post.metadata[self.coverField.name] = self.cover;
+            post.metadata.releated_posts = self.releatedPosts;
 
-          Repository.content.save($rootScope.repository, post, sha)
-          .then(function(){
-            $scope.cleanAlerts();
-            $scope.state = 'default';
-            $location.path('/post/search');
-          })
-          .catch(function(error) {
-            $scope.state = 'default';
-            $scope.addError(error);
+            Repository.content.save($rootScope.repository, post, sha)
+              .then(function(){
+                $rootScope.cleanAlerts();
+                self.state = 'default';
+                $location.path('/post/search');
+              })
+              .catch(function(error) {
+                self.state = 'default';
+                $rootScope.addError(error);
+              });
           });
-        });
       } else {
         var inputs = form.$error.required || [];
         var inputNames = [];
         inputs.forEach(function(input) {
-          var field = _.find($scope.fields, function(field) {
+          var field = self.fields.filter( function(field) {
             return field.name === input.$name;
           });
           inputNames.push(field.title);
@@ -99,104 +85,129 @@ angular.module('cmsApp')
 
         var message = 'Os campos: ' + inputNames.join(', ') + ' precisam ser preenchidos.';
 
-        $scope.addWarning(message);
+        this.addWarning(message);
       }
     };
 
-    var loadTagsFile = function(then){
-      then = then || function(){};
-      Repository.tagsFile.get($scope.user).then(function(result){
-        $scope.tags = new TagsUtil(angular.fromJson(result));
-        then();
+    this.loadTagsFile = function(loadTagsFileCallback){
+      loadTagsFileCallback = loadTagsFileCallback || function(){};
+      var self = this;
+      Repository.tagsFile.get($rootScope.user)
+        .then(function(result){
+          self.tags = new TagsUtil(angular.fromJson(result));
+          loadTagsFileCallback();
+        });
+    };
+
+    this.removeReleatedPost = function(post){
+      var index = this.releatedPosts.indexOf(post);
+      if( index >= 0 ){
+        this.releatedPosts.splice(index, 1);
+      }
+    };
+
+    this.addReleatedPost = function(post){
+      var index = $scope.releatedPosts.indexOf(post);
+      if( index >= 0 ){
+        this.removeReleatedPost(post);
+      }else{
+        this.releatedPosts.push(post);
+      }
+    };
+
+    this.isPostReleated = function(post){
+      return this.releatedPosts.filter( function(e) {
+        return e === post;
       });
     };
 
-    var removeReleatedPost = function(post){
-      var index = $scope.releatedPosts.indexOf(post);
-      if( index >= 0 ){
-        $scope.releatedPosts.splice(index, 1);
-      }
-    };
-    var addReleatedPost = function(post){
-      var index = $scope.releatedPosts.indexOf(post);
-      if( index >= 0 ){
-        removeReleatedPost(post);
-      }else{
-        $scope.releatedPosts.push(post);
-      }
-    };
-    var isPostReleated = function(post){
-      return _.find($scope.releatedPosts, function(e){ return e === post; });
-    };
-    $scope.addReleatedPost = addReleatedPost;
-    $scope.removeReleatedPost = removeReleatedPost;
-    $scope.isPostReleated = isPostReleated;
-
-    var getReleatedPosts = function(tags){
-      return $scope.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
+    this.getReleatedPosts = function(tags){
+      return this.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
     };
 
-    var fillSuggestedPosts = function(){
-        var tags = $scope.entity.tags || [];
+    this.fillSuggestedPosts = function(){
+        var tags = this.entity.tags || [];
         var suggestedPosts = [];
+        var self = this;
         tags.forEach(function(tag){
-          suggestedPosts.push(getReleatedPosts([tag]));
+          suggestedPosts.push(self.getReleatedPosts([tag]));
         });
 
-        $scope.suggestedPosts = _.uniq(_.flatten(suggestedPosts));
+        this.suggestedPosts = _.uniq(_.flatten(suggestedPosts));
     };
 
-    var fillReleatedPosts = function(){
-      var tags = $scope.entity.tags || [];
+    this.fillReleatedPosts = function(){
+      var tags = this.entity.tags || [];
       if(tags.length === 0 ){
-        $scope.suggestedPosts = [];
-        $scope.releatedPosts = [];
+        this.suggestedPosts = [];
+        this.releatedPosts = [];
       }else{
-        var releatedPosts = getReleatedPosts(tags);
-        fillSuggestedPosts();
+        var releatedPosts = this.getReleatedPosts(tags);
+        this.fillSuggestedPosts();
 
         if(tags.length > 1){
-          $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
+          this.releatedPosts = _.union(releatedPosts, this.releatedPosts);
         }
       }
     };
 
-    $scope.fillReleatedPosts = fillReleatedPosts;
-
-    $scope.load = function(){
+    this.load = function(){
       var post = {
         path: $routeParams.path
       };
 
       if(!!post.path){
-        $scope.state = 'loading';
-
+        this.state = 'loading';
+        var self = this;
         Repository.content.get(post.path, $rootScope.repository)
-        .then(function(post){
-          /*jshint camelcase: false */
-          $scope.entity = post.metadata;
-          $scope.body   = post.body;
-          $scope.filename = post.filename;
-          $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
-          $scope.cover = post.metadata[$scope.coverField.name];
-          $scope.releatedPosts = post.metadata.releated_posts || [];
-          $scope.state = 'default';
+          .then(function(post){
+            /*jshint camelcase: false */
+            self.entity = post.metadata;
+            self.body   = post.body;
+            self.filename = post.filename;
+            self.files  = PostUtil.prepareListOfFiles(post.metadata, self.coverField.name);
+            self.cover = post.metadata[self.coverField.name];
+            self.releatedPosts = post.metadata.releated_posts || [];
+            self.state = 'default';
 
-          loadTagsFile(function(){
-            fillSuggestedPosts();
+            self.loadTagsFile(function(){
+              self.fillSuggestedPosts();
+            });
           });
-        });
       }else{
-        loadTagsFile();
+        this.loadTagsFile();
       }
     };
 
-    $scope.toggleCover = function(newCover) {
-      if ($scope.cover === newCover) {
-        $scope.cover = null;
+    this.toggleCover = function(newCover) {
+      if (this.cover === newCover) {
+        this.cover = null;
         return;
       }
 
-      $scope.cover = newCover;
+      this.cover = newCover;
     };
+
+    this.init = function() {
+      var self = this;
+      this.fields.forEach(function(element){
+        if( element.type.view === 'cover'){
+          self.coverField = element;
+        }
+        else if(element.type.view === 'video'){
+          self.videoField = element;
+        }
+      });
+
+      $scope.$on('upload-file', function(event, args) {
+        self.files.push(args.file);
+      });
+
+      $scope.$on('ckeditor.ready', function(){
+        self.editorLoaded = true;
+      });
+      this.load();
+    };
+
+    this.init();
   });
