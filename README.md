@@ -86,6 +86,13 @@ Para controle das funcionalidades, bugs, revisão de código e afins é utilizad
 
 ## Perguntas frequentes
 
+0. Eu não quero contribuir eu quero é usae sáporra!
+> Ótimo só de usar o Marighella você já tá ajudando bastante. Para usar o Marighella tu não precisa forkar o projeto, só precisa acessar o [link dele em produção](marighella.github.io/cms) e garantir que tu tenha esses pontos aqui ó:
+
+>> Ter uma conta no Github;
+
+>> Ter ao menos um projeto com o Jekyll em qualquer repositório seu no Github;
+
 1. Quando logo ele pede permissão para escrita nos repositórios, é de boa?
 > Sim, o Marighella executa 95% do trabalho em sua maquina os outros 5% é a chamada da biblioteca do GithubAPI para realizar o commit.
 
