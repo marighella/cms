@@ -59,14 +59,16 @@ A aplicação será executada no endereço `http://localhost:9000`.
 
 O Gerenciador de Conteúdo (CMS) Marighella foi construído em AngularJS e é hospedado no Github Pages. Através da Github API, o conteúdo gerado é submetido para um repositório no Github através de um commit. Esse repositório, por sua vez, contém o Jekyll, marcações (HTML + CSS) e todas as postagens.
 
-Para a publicação deste conteúdo, também usamos o Github Pages. Utilizando a API do Github o Marighella faz um commit para o repositório onde o usuário possui o site, se você estiver usando o Jekyll com geração automatica do github o resto é ele, caso não utilize o GH com geração de páginas automaticas, por qualquer motivo seja esse pluglins de terceiros, sugerimos que utilize algum [Servidor de Integração](snapi-ci.com) para realizar uma implantação do conteudo.
+Para a publicação deste conteúdo, também usamos o Github Pages. Utilizando a API do Github o Marighella faz um commit para o repositório onde o usuário possui o site, se você estiver usando o Jekyll com geração automatica do github o resto é ele, caso não utilize o GH com geração de páginas automaticas, por qualquer motivo seja esse pluglins de terceiros, sugerimos que utilize algum [Servidor de Integração](snap-ci.com) para realizar uma implantação do conteudo.
 
 
 ## Como colaborar?
 
-Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantemente. Como vocês podem imaginar, o desafio é grande! Colaboração é a chave para nos manter-mos relevantes para mais e mais movimentos/organizações sociais.
+Esta plataforma é levada a cabo por um time dedicado a melhorá-la constantesmente. Como vocês podem imaginar, o desafio é grande! Colaboração é a chave para nos manter-mos relevantes para mais e mais movimentos/organizações sociais.
 
-Queremos (e precisamos) de ajuda para trabalhar no Marighella. Se você tem interesse em nos ajudar, em tirar alguma dúvida, em pegar mais contexto, fique a vontade para nos contactar. Qualquer um dos desenvolvedores deste repositório irá respondê-lo.
+Queremos (e precisamos) de ajuda para trabalhar no Marighella. Se você tem interesse em nos ajudar, em tirar alguma dúvida, em pegar mais contexto, fique a vontade para nos contactar. Qualquer um dos desenvolvedores deste repositório irá respondê-lo. 
+
+Também criamos uma box vagrant com todas as dependências necessárias para facilitar a vida de novos contribuidores que chamamos carinhosamente de [Marighella-Box](https://github.com/marighella/marighella-box)
 
 
 ## Discussões [![Gitter chat](https://badges.gitter.im/marighella/cms.png)](https://gitter.im/marighella/cms)
