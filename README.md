@@ -86,17 +86,22 @@ Para controle das funcionalidades, bugs, revisão de código e afins é utilizad
 
 ## Perguntas frequentes
 
-1. Eu não quero contribuir, eu quero utilizar o Marighella!
+1 - Eu não quero contribuir, eu quero utilizar o Marighella!
+
 > Ótimo só de usar o Marighella você já tá ajudando bastante. Para usar o Marighella, não é preciso "forkar" o projeto, só precisa acessar o [link dele em produção](http://marighella.github.io/cms) e garantir estes pontos abaixo:
 
 >> Ter uma conta no Github;
 
 >> Ter ao menos um projeto que utilize o [Jekyll](http://jekyllrb.com) na sua lista de repositórios do Github;
 
-2. Quando logo ele pede permissão para escrita nos repositórios, é de boa?
+
+2 - Quando logo ele pede permissão para escrita nos repositórios, é de boa?
+
 > Sim, o Marighella executa 95% do trabalho em sua maquina os outros 5% é a chamada da biblioteca do GithubAPI para realizar e enviar o commit com o que foi feito.
 
-3. Quando eu clico em entrar e dou permissão no github não aparece nada.
+
+3 - Quando eu clico em entrar e dou permissão no github não aparece nada.
+
 > O Marighella procura entre todos os seus projetos/organização algum repositório que tenha um jekyll hospedado, caso não tenha nenhum repositório com o Jekyll vai ficar dificil :/
 
 
