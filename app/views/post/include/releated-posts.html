@@ -2,10 +2,10 @@
   <h1 class="suggest">
     Noticiais Relacionadas
   </h1>
-  <div class='releated-posts releated'
+  <div class="releated-posts releated"
     ng-repeat="releated in releatedPosts"
     ng-click="removeReleatedPost(releated)">
-    <post post-url='releated' cover-field="coverField" tags="entity.tags"/>
+    <post post-url="releated" cover-field="coverField" tags="entity.tags"/>
   </div>
 </div>
 <section class="form-group"  ng-init="postLimit = 6"
@@ -13,10 +13,10 @@
   <h1 class="suggest">
     Sugeridas
   </h1>
-  <div class='releated-posts suggested' ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
+  <div class="releated-posts suggested" ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
     ng-class="{'selected': isPostReleated(releated)}">
     <h1>selecionada</h1>
-    <post post-url='releated' cover-field="coverField" tags="entity.tags"/>
+    <post post-url="releated" cover-field="coverField" tags="entity.tags"/>
   </div>
   <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
     Mais...
