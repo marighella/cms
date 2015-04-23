@@ -25,21 +25,30 @@ describe('Service: PostUtil', function () {
 
     it('should get youtube thumbnail url', function (){
       var videoUrl = 'http://www.youtube.com/watch?v=KQQrHH4RrNc';
+      var metadata = {
+          date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+          title: 'test titulo de post'
+      };
 
-      var promise = PostUtil.preparePost({}, '', '', [], false, videoUrl);
+      var promise = PostUtil.preparePost(metadata, '', '', [], false, videoUrl);
       promise.then(function(post){
+        console.log(post);
         expect(post.metadata.video_thumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
       });
     });
 
     it('should get vimeo thumbnail url', function (){
       var videoUrl = 'http://vimeo.com/6489674';
+      var metadata = {
+          date: 'Tue Jul 15 2014 14:13:34 GMT-0300 (BRT)',
+          title: 'test titulo de post'
+      };
 
       httpBackend.whenGET('//vimeo.com/api/oembed.json?url=' + videoUrl).respond(200, {
         thumbnail_url: 'http://image.mockada/000.jpg'
       });
 
-      var promise = PostUtil.preparePost({}, '', '', [], false, videoUrl);
+      var promise = PostUtil.preparePost(metadata, '', '', [], false, videoUrl);
       promise.then(function(post){
         expect(post.metadata.video_thumbnail).toBe('http://image.mockada/000.jpg');
       });
