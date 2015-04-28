@@ -93,4 +93,10 @@
           <auto-complete source="tags.search($query)"></auto-complete>
         </tags-input>
     </div>
+
+    <div ng-switch-when="tracks" dynamic-field="field">
+      <tracks
+        tracks="entity[field.name]">
+      </tracks>
+    </div>
 </div>
