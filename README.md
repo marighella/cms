@@ -104,6 +104,11 @@ Para controle das funcionalidades, bugs, revisão de código e afins é utilizad
 
 > O Marighella procura entre todos os seus projetos/organização algum repositório que tenha um jekyll hospedado, caso não tenha nenhum repositório com o Jekyll vai ficar dificil :/
 
+4 - Quero contribuir no projeto, mas quando rodo ele localmente e tento enviar um rascunho ou uma publicação o meu navegador faz download do arquivo. Isto é um bug?
+
+> Não e pode ficar tranquilo. Caso o projeto não esteja rodando no ambiente de produção isso ocorrerá e é totalmente esperado. Caso queira alterar isso, [basta alterar o valor do serviço de resource e colocar `isProduction: true`](app/scripts/services/resource.js#L9)
+
+
 
 
 Copyright (C) 2014  ThoughtWorks Brasil
