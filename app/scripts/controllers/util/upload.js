@@ -2,7 +2,7 @@
 /*jshint camelcase: false */
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, _) {
+  .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, ENV, _) {
     this.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
     $scope.upload = this.upload;
 
@@ -15,7 +15,7 @@ angular.module('cmsApp')
     };
 
     $scope.uploadFiles = function(files) {
-      var IMAGE_SERVICE_URL = '//mst-image-service.herokuapp.com/upload';
+      var IMAGE_SERVICE_URL = ENV.upload;
       $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
         $http({
