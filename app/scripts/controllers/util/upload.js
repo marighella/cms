@@ -14,7 +14,7 @@ angular.module('cmsApp')
       return fd;
     };
 
-    $scope.uploadFiles = function(files) {
+    $scope.uploadFiles = function(files, successCallback) {
       var IMAGE_SERVICE_URL = ENV.upload;
       $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
@@ -30,7 +30,11 @@ angular.module('cmsApp')
             'myfile': file
           }
         }).success(function(data) {
+          console.log(data);
           $rootScope.$broadcast('upload-file', { file: data  });
+          if(!!successCallback){
+            successCallback(data);
+          }
         }).error(function(error) {
           console.log(error);
           $rootScope.addError('Desculpa, algo de errado aconteceu ao adicionar o arquivo na notícia.');

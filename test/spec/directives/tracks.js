@@ -9,56 +9,50 @@ describe('Directive: Tracks', function () {
     scope;
 
   beforeEach(inject(function ($rootScope, $compile) {
+    $rootScope.user = { organization: { id: 1 } };
+
     scope = $rootScope.$new();
     scope.entity = {};
+
 
     element = angular.element('<tracks tracks="entity[\'tracks\']" />');
     element = $compile(element)(scope);
   }));
 
   describe('the first step',function(){
-    it('should have only one track', function () {
+    it('should not a track', function () {
       scope.$digest();
       var inputs = element[0].querySelectorAll('.track');
 
-      expect(inputs.length).toBe(1);
-    });
-
-    it('should have only a add button', function() {
-      var inputs = element.find('button');
-      expect(inputs.length).toBe(1);
-      expect(inputs.hasClass('add')).toBeTruthy();
+      expect(inputs.length).toBe(0);
     });
   });
 
-  describe('add button',function(){
-    it('should add a new entry on tracks', function(){
-      element.find('button').triggerHandler('click');
+  describe('upload button',function(){
+    it('should exists', function(){
+      var input = element[0].querySelectorAll('input[type="file"]');
 
-      var inputs = element[0].querySelectorAll('.track');
-      expect(inputs.length).toBe(2);
+
+      expect(input.length).toBe(1);
     });
-  });
 
-  describe('edit fields',function(){
-    it('should edit the first track', function(){
+    it('should get a link to stream', inject(function($httpBackend, ENV){
+      $httpBackend.when('POST', ENV.upload)
+       .respond({title: '1.mp3', link: 'https://link.com/download/?m=1.mp3'});
 
+      var barScope = element.find('input').scope();
+
+      var list = { 0:{ name: '1.mp3' } };
+      barScope.updateFiles(list);
+
+
+      $httpBackend.flush();
       scope.$digest();
-      var inputTitle = angular.element(element[0].querySelectorAll('.track input.title'));
-      var inputMP3 = angular.element(element[0].querySelectorAll('.track input.mp3'));
-      var inputOGG = angular.element(element[0].querySelectorAll('.track input.ogg'));
 
-      inputTitle.val('Teste').triggerHandler('input');
-      inputMP3.val('Teste musica').triggerHandler('input');
-      inputOGG.val('Teste ogg').triggerHandler('input');
-
-      var track = scope.entity.tracks[0];
-
-      expect(track.title).toBe('Teste');
-      expect(track.mp3).toBe('Teste musica');
-      expect(track.ogg).toBe('Teste ogg');
-
-    });
+      expect(scope.entity.tracks.length).toBe(1);
+      expect(scope.entity.tracks[0].title).toBe('1.mp3');
+      expect(scope.entity.tracks[0].mp3).toBe('https://link.com/download/?m=1.mp3');
+    }));
   });
 
   it('should show old values', function(){

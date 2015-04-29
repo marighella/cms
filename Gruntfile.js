@@ -85,7 +85,7 @@ module.exports = function (grunt) {
           ENV: {
             name: 'development',
             basepath: '',
-            upload: '//file-service-stub.herokuapp.com'
+            upload: '//file-service-stub.herokuapp.com/upload'
           }
         }
       },
@@ -94,7 +94,7 @@ module.exports = function (grunt) {
           ENV: {
             name: 'production',
             basepath: '/cms',
-            upload: '//mst-image-service.herokuapp.com/upload'
+            upload: '//file-service.herokuapp.com/upload'
           }
         }
       }

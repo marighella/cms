@@ -1,23 +1,25 @@
 'use strict';
 
 angular.module('cmsApp')
-  .directive('tracks', function () {
+  .directive('tracks', function ( _ ) {
     return {
       restrict: 'E',
       replace: true,
       require : '?tracks',
+      controller: 'UploadCtrl',
       scope: {
         tracks: '='
       },
-      link: function(scope,element,attrs){
-        scope.add = function() {
-          scope.tracks.push({});
+      link: function(scope) {
+        scope.updateFiles = function(fileList){
+          scope.uploadFiles(fileList, function(result){
+            scope.tracks.push({ title: result.title, mp3: result.link });
+          });
         };
-
-        scope.tracks = [{}];
+        scope.tracks = [];
       },
       template: '<div class="tracks">'+
-                    '<button class="add" ng-click="add()"></button>'+
+                    '<input type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
                     '<div ng-repeat="track in tracks" class="track">'+
                         '<input ng-model="track.title" class="title"/>'+
                         '<input ng-model="track.mp3" class="mp3"/>'+
