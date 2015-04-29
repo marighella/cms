@@ -14,7 +14,6 @@ describe('Directive: Tracks', function () {
     scope = $rootScope.$new();
     scope.entity = {};
 
-
     element = angular.element('<tracks tracks="entity[\'tracks\']" />');
     element = $compile(element)(scope);
   }));

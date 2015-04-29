@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .directive('tracks', function ( _ ) {
+  .directive('tracks', function () {
     return {
       restrict: 'E',
       replace: true,
