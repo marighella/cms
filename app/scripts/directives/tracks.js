@@ -19,7 +19,7 @@ angular.module('cmsApp')
         scope.tracks = [];
       },
       template: '<div class="tracks">'+
-                    '<input type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
+                    '<input accept="audio/*" type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
                     '<div ng-repeat="track in tracks" class="track">'+
                         '<input ng-model="track.title" class="title"/>'+
                         '<input ng-model="track.mp3" class="mp3"/>'+
