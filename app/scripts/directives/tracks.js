@@ -19,11 +19,14 @@ angular.module('cmsApp')
         scope.tracks = [];
       },
       template: '<div class="tracks">'+
-                    '<input accept="audio/*" type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
+                    '<div class="upload btn btn-default btn-block">'+
+                      '<span><i class="fa fa-upload"></i> Adicionar músicas </span>'+
+                      '<input  accept="audio/*" type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
+                    '</div>'+
                     '<div ng-repeat="track in tracks" class="track">'+
-                        '<input ng-model="track.title" class="title"/>'+
-                        '<input ng-model="track.mp3" class="mp3"/>'+
-                        '<input ng-model="track.ogg" class="ogg"/>'+
+                        '<input ng-model="track.title" class="title form-control"/>'+
+                        '<input ng-model="track.mp3" readonly="true" class="mp3"/>'+
+                        '<input ng-model="track.ogg" readonly="true" class="ogg"/>'+
                     '</div>'+
                 '</div>'
     };
