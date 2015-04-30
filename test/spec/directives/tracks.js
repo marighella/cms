@@ -37,7 +37,11 @@ describe('Directive: Tracks', function () {
 
     it('should get a link to stream', inject(function($httpBackend, ENV){
       $httpBackend.when('POST', ENV.upload)
-       .respond({title: 'nome arquivo.mp3', basename: 'nome arquivo', link: 'https://link.com/download/?m=1.mp3'});
+       .respond({title: 'nome arquivo.mp3',
+                basename: 'nome arquivo',
+                link: 'https://link.com/download/?m=1.mp3&export=download',
+                embed: 'https://link.com/download/?m=1.mp3'
+                });
 
       var barScope = element.find('input').scope();
 
