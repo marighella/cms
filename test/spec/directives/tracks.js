@@ -37,7 +37,7 @@ describe('Directive: Tracks', function () {
 
     it('should get a link to stream', inject(function($httpBackend, ENV){
       $httpBackend.when('POST', ENV.upload)
-       .respond({title: '1.mp3', link: 'https://link.com/download/?m=1.mp3'});
+       .respond({title: 'nome arquivo.mp3', basename: 'nome arquivo', link: 'https://link.com/download/?m=1.mp3'});
 
       var barScope = element.find('input').scope();
 
@@ -49,7 +49,7 @@ describe('Directive: Tracks', function () {
       scope.$digest();
 
       expect(scope.entity.tracks.length).toBe(1);
-      expect(scope.entity.tracks[0].title).toBe('1.mp3');
+      expect(scope.entity.tracks[0].title).toBe('nome arquivo');
       expect(scope.entity.tracks[0].mp3).toBe('https://link.com/download/?m=1.mp3');
     }));
   });

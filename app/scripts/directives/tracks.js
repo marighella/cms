@@ -13,7 +13,7 @@ angular.module('cmsApp')
       link: function(scope) {
         scope.updateFiles = function(fileList){
           scope.uploadFiles(fileList, function(result){
-            scope.tracks.push({ title: result.title, mp3: result.link });
+            scope.tracks.push({ title: result.basename, mp3: result.link });
           });
         };
         scope.tracks = [];
