@@ -16,21 +16,16 @@ angular.module('cmsApp')
       date: (new Date()).toString(),
     };
     $scope.body = '';
-    $scope.cover = '';
     $scope.editorLoaded = false;
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
     $scope.releatedPosts = [];
     $scope.suggestedPosts = [];
     $scope.tags = new TagsUtil();
-    $scope.coverField = undefined;
     $scope.videoField = undefined;
 
     $scope.fields.forEach(function(element){
-      if( element.type.view === 'cover'){
-        $scope.coverField = element;
-      }
-      else if(element.type.view === 'video'){
+      if(element.type.view === 'video'){
         $scope.videoField = element;
       }
     });
@@ -73,7 +68,6 @@ angular.module('cmsApp')
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
           /*jshint camelcase: false */
-          post.metadata[$scope.coverField.name] = $scope.cover;
           post.metadata.releated_posts = $scope.releatedPosts;
 
           Repository.content.save($rootScope.repository, post, sha)
@@ -177,8 +171,7 @@ angular.module('cmsApp')
           $scope.entity = post.metadata;
           $scope.body   = post.body;
           $scope.filename = post.filename;
-          $scope.files  = PostUtil.prepareListOfFiles(post.metadata, $scope.coverField.name);
-          $scope.cover = post.metadata[$scope.coverField.name];
+          $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
           $scope.releatedPosts = post.metadata.releated_posts || [];
           $scope.state = 'default';
 
@@ -189,14 +182,5 @@ angular.module('cmsApp')
       }else{
         loadTagsFile();
       }
-    };
-
-    $scope.toggleCover = function(newCover) {
-      if ($scope.cover === newCover) {
-        $scope.cover = null;
-        return;
-      }
-
-      $scope.cover = newCover;
     };
   });

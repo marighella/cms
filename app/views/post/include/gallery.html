@@ -25,12 +25,6 @@
   <div class="slide">
     <img ng-src="{{ file.small || file.thumbnail }}" ng-repeat="file in files" ng-click="insertImageCKEditor(file)"  class="enable" ng-show="_index === $index"/>
     <img class="disable" ng-hide="files.length > 0" src="http://farm9.staticflickr.com/8679/15804779889_a6716842c2_b.jpg"></i>
-    <label ng-show="files.length > 0 && files[_index].small">
-      <input type="checkbox" class="image_checkbox"
-             ng-checked="files[_index].small === $parent.cover"
-             ng-click="toggleCover(files[_index].small)">
-             Imagem como capa
-    </label>
   </div>
 
   <!-- extra navigation controls -->

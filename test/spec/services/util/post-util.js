@@ -179,16 +179,6 @@ describe('Service: PostUtil', function () {
       expect(!!PostUtil.prepareListOfFiles).toBeTruthy();
     });
 
-    it('should cover image inside array of files', function() {
-      var post = { imagesHd: 'image.jpg'};
-      var coverImageField = 'imagesHd';
-
-      var listOfFiles = PostUtil.prepareListOfFiles(post, coverImageField);
-
-      var result = {thumbnail: 'image.jpg', small: 'image.jpg'};
-      expect(listOfFiles[0]).toEqual(result);
-    });
-
     it('should return list of files on metadata', function() {
       var post = { files: [{thumbnail: '1.jpg', small: '1.jpg'}] };
       var listOfFiles = PostUtil.prepareListOfFiles(post);
@@ -198,11 +188,10 @@ describe('Service: PostUtil', function () {
     });
 
     it('should return list of files on metadata', function() {
-      var post = { cover: 'img.jpg', files: [{thumbnail: '1.jpg', small: '1.jpg'}] };
-      var listOfFiles = PostUtil.prepareListOfFiles(post, 'cover');
+      var post = { files: [{thumbnail: '1.jpg', small: '1.jpg'}] };
+      var listOfFiles = PostUtil.prepareListOfFiles(post);
 
-      var result = [{thumbnail: 'img.jpg', small: 'img.jpg'},
-      {thumbnail: '1.jpg', small: '1.jpg'}];
+      var result = [{thumbnail: '1.jpg', small: '1.jpg'}];
 
       result.forEach(function(element){
         expect(listOfFiles).toContain(element);

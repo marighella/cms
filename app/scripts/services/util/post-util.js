@@ -105,19 +105,8 @@ angular.module('cmsApp')
       return promise;
     };
 
-    this.prepareListOfFiles =  function(metadata, coverImageField){
+    this.prepareListOfFiles =  function(metadata){
       var files = [];
-
-      if(coverImageField){
-        var cover = _.find(metadata.files, function(element){
-          return element.small ===  metadata[coverImageField];
-        });
-
-        if(!cover){
-          cover = { thumbnail: metadata[coverImageField], small: metadata[coverImageField] };
-          files.push(cover);
-        }
-      }
 
       files.push(metadata.files);
       return _.flatten(files);

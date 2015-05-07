@@ -1,7 +1,6 @@
 <div class="form-group has-feedback"
   ng-repeat="field in fields"
-  ng-switch on="field.type.view"
-  ng-hide="field.type.view === 'cover'">
+  ng-switch on="field.type.view">
   <label class="control-label"
     for="{{ field.name }}"
     dynamic-field="field">
@@ -104,5 +103,11 @@
       <zip
         download-link="entity[field.name]">
       </zip>
+    </div>
+
+    <div ng-switch-when="cover" dynamic-field="field">
+      <cover
+        image="entity[field.name]">
+      </cover>
     </div>
 </div>
