@@ -86,4 +86,11 @@ $invalid-red: #a94442;
     top: 0px;
     left: 0px;
   }
+
+  button.btn-cover-thumb{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
 }
