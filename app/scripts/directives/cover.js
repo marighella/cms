@@ -25,7 +25,7 @@ angular.module('cmsApp')
           });
         };
       },
-      template: '<div class="cover">'+
+      template: '<div>'+
                     '<div class="upload btn btn-default btn-block" ng-disabled="loading" ng-show="!image" >'+
                       '<span>'+
                         '<i class="fa fa-upload"></i>'+

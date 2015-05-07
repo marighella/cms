@@ -3,6 +3,15 @@
 //font: http://blog.yodersolutions.com/bootstrap-form-validation-done-right-in-angularjs/
 angular.module('cmsApp').
   directive('showErrors', function() {
+  var getParent = function(element, parent){
+    if(element.is(parent)){
+      return element;
+    } else if( element.is('html')){
+      return false;
+    }
+    return getParent(element.parent(), parent);
+  };
+
   return {
     restrict: 'EA',
     require:  '^form',
@@ -13,7 +22,8 @@ angular.module('cmsApp').
       var inputName = inputNgEl.attr('name');
 
       var toggleClassByElement = function(element, toggle){
-        window.$(element.parent().get(0)).toggleClass('has-error', toggle);
+        var divField = getParent(window.$(element), '.field');
+        divField.toggleClass('has-error', toggle);
         element.toggleClass('has-error', toggle);
       };
 

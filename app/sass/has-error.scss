@@ -1,0 +1,7 @@
+$invalid-red: #a94442;
+
+.has-error {
+  div.btn {
+    border-color: $invalid-red;
+  }
+}

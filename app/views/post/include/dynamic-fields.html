@@ -1,4 +1,4 @@
-<div class="form-group has-feedback"
+<div class="form-group has-feedback field"
   ng-repeat="field in fields"
   ng-switch on="field.type.view">
   <label class="control-label"
@@ -105,9 +105,10 @@
       </zip>
     </div>
 
-    <div ng-switch-when="cover" dynamic-field="field">
+    <div ng-switch-when="cover" dynamic-field="field" class="cover">
       <cover
         image="entity[field.name]">
       </cover>
+      <input class="form-control" type="text" ng-model="entity[field.name]" show-errors dynamic-field="field" />
     </div>
 </div>
