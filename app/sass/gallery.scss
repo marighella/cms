@@ -4,55 +4,36 @@
   width: 100%;
   text-align: center;
 
-  .slide {
-    width: 100%;
-    display: block;
-    margin-bottom: 5px;
-    float: none;
-
-    img {
-      max-width: 100%;
-
-      &.disable {
-        cursor: initial;
-      }
-
-      &.enable {
-        cursor: pointer;
-
-        &:hover {
-          -moz-box-shadow: 0 0 60px #ccc;
-          -webkit-box-shadow: 0 0 60px #ccc;
-          box-shadow: 0 0 60px #ccc;
-        }
-      }
-    }
-  }
-
   .nav {
     width: 100%;
     display: block;
     float: none;
 
     li {
-      opacity: 0.6;
+      opacity: 1;
       border: 2px solid #AAAAAA;
       border-radius: 1px;
       display: inline-block;
       margin: 0 8px;
       margin-top: 5px;
       position: relative;
-      width: 80px;
+      width: 100px;
+      transition-duration: .3s;
+
+      &:hover{
+        -moz-transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+
+      &:active{
+        -moz-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+      }
 
       img {
         cursor: pointer;
-      }
-
-      &.active {
-        opacity: 1;
-        border: 5px solid #FFFFFF;
-      }
-      img {
         width: 100%;
       }
     }
@@ -64,27 +45,9 @@
     text-align: none;
 
     .nav {
-      width: 45%;
-      float: left;
-
+      width: 100%;
       small { 
         display: block;
-      }
-    }
-
-    .slide {
-      margin-bottom: 0;
-      float: left;
-      width: 55%;
-
-      img {
-        max-width: 360px;
-        display: block;
-        float: right;
-
-        &.enable, &.disable {
-          max-width: 180px;
-        }
       }
     }
   }

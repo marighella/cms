@@ -16,16 +16,11 @@
     <small ng-show="files.length > 0">Clique na imagem para adicionar na noticia!</small>
     <small ng-show="files.length == 0">Clique no botão para subir uma imagem/arquivo</small>
 
-    <li ng-repeat="file in files" ng-class="{'active': ( _index === $index ) }">
-      <img src="{{ file.thumbnail }}" alt="{{ file.title }}" title="{{ file.title }}" ng-click="$parent._index = $index;" />
+    <li ng-repeat="file in files">
+      <img src="{{ file.thumbnail }}" alt="{{ file.title }}" title="{{ file.title }}" ng-click="insertImageCKEditor(file)"/>
       <button class="btn btn-xs btn-danger btn-delete-thumb" ng-click="removeImage($index)">X</button>
     </li>
   </ul>
-
-  <div class="slide">
-    <img ng-src="{{ file.small || file.thumbnail }}" ng-repeat="file in files" ng-click="insertImageCKEditor(file)"  class="enable" ng-show="_index === $index"/>
-    <img class="disable" ng-hide="files.length > 0" src="http://farm9.staticflickr.com/8679/15804779889_a6716842c2_b.jpg"></i>
-  </div>
 
   <!-- extra navigation controls -->
 </div>
