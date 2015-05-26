@@ -8,12 +8,9 @@
  * Factory in the cmsApp.
  */
 angular.module('cmsApp')
-  .factory('Repository', function (Github) {
+  .factory('Repository', function (Github, NewsServiceContent) {
 
-    var content = {
-      list: function(repository, filter){
-        return Github.content.posts(repository, filter);
-      },
+    var github = {
       get: function(post, repository){
         if(post.url){
           return Github.content.post(post);
@@ -24,10 +21,16 @@ angular.module('cmsApp')
       save: function(repository, post, year, month, sha){
         return Github.content.save(repository, post, year, month, sha);
       },
+    };
+    var newsService = {
       search: function(repository, filter){
-        return Github.content.search(repository, filter);
+        return NewsServiceContent.posts(repository, filter);
+      },
+      list: function(repository, filter){
+        return NewsServiceContent.posts(repository, filter);
       }
     };
+
     var tags = {
       get: function(user){
         return Github.content.tagsFile(user);
@@ -40,7 +43,7 @@ angular.module('cmsApp')
     };
 
     return {
-      content: content,
+      content: angular.extend(github,newsService),
       organization: Github.organization,
       skelleton: skelleton,
       tagsFile: tags

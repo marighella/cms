@@ -90,7 +90,7 @@ angular.module('cmsApp')
       }
 
       var url = [address, filename, path, repo, order].join('');
-      
+
       var then = function (data){
         data.items =  data.items.sort(function(a,b){
           var date_a =  new Date(a.name.substring(0,10));
@@ -127,7 +127,7 @@ angular.module('cmsApp')
           if(error.status === 422) {
             message = 'Essa notícia já existe.';
           }
-          
+
           return deferred.reject(message);
         }).then(function(data){
           return deferred.resolve(data);

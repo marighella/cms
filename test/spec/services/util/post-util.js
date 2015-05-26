@@ -32,7 +32,6 @@ describe('Service: PostUtil', function () {
 
       var promise = PostUtil.preparePost(metadata, '', '', [], false, videoUrl);
       promise.then(function(post){
-        console.log(post);
         expect(post.metadata.video_thumbnail).toBe('http://img.youtube.com/vi/KQQrHH4RrNc/0.jpg');
       });
     });
