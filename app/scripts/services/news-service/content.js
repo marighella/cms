@@ -1,5 +1,6 @@
 'use strict';
 /* jshint camelcase: false */
+/* global getSlug */
 
 /**
  * @ngdoc service
@@ -36,6 +37,10 @@ angular.module('cmsApp')
       if (DateUtil.isValidMonth(filter.month)){
         var month = 'month='+DateUtil.parseMonth(filter.month);
         filters = [filters, month].join('&');
+      }
+
+      if(filter.title){
+        filters += '&title='+getSlug(filter.title);
       }
 
       url = url.replace(/:organization_fullname/, repository.full_name).replace(/:filters/, filters);
