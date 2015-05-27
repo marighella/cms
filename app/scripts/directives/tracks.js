@@ -16,7 +16,7 @@ angular.module('cmsApp')
             scope.tracks.push({ title: result.basename, mp3: result.embed });
           });
         };
-        scope.tracks = [];
+        scope.tracks = scope.tracks || [];
       },
       template: '<div class="tracks">'+
                     '<div class="upload btn btn-default btn-block">'+
