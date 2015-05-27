@@ -16,10 +16,9 @@
   <div class="releated-posts suggested" ng-repeat="releated in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(releated)"
     ng-class="{'selected': isPostReleated(releated)}">
     <h1>selecionada</h1>
-    <post post-url="releated" cover-field="coverField" tags="entity.tags"/>
+    <post post-url="releated" cover-field="'images_hd'" tags="entity.tags"/>
   </div>
   <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
-    Mais...
     <span ng-if="postLimit < suggestedPosts.length">Exibindo {{ postLimit  }} de {{ suggestedPosts.length }}</span>
     <span ng-if="postLimit >= suggestedPosts.length">Exibindo todas as noticias sugeridas</span>
   </button>

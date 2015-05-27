@@ -14,6 +14,10 @@ angular.module('cmsApp')
 
         scope.loading = false;
 
+        scope.$on('imageToBeCover', function(event, image) {
+          scope.image = image;
+        });
+
         scope.remove = function(){
           scope.image = '';
         };
