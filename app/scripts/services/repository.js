@@ -28,7 +28,15 @@ angular.module('cmsApp')
       },
       list: function(repository, filter){
         return NewsServiceContent.posts(repository, filter);
+      },
+      get: function(post, repository){
+        if(!post.url){
+          return NewsServiceContent.load(post, repository);
+        }else{
+          return NewsServiceContent.post(post);
+        }
       }
+
     };
 
     var tags = {

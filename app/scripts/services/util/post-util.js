@@ -10,7 +10,7 @@
  */
 angular.module('cmsApp')
   .service('PostUtil', function PostUtil($http, $q, DateUtil, _, YoutubeLinkUtil, VimeoLinkUtil) {
-    
+
     function formatDate(post) {
       var today = new Date(post.metadata.date);
       return today.toISOString().split('T')[0];

@@ -30,7 +30,7 @@ angular.module('cmsApp')
 
   return {
     posts: function (repository, filter) {
-      var url = ENV.news;
+      var url = ENV.news.search;
       var filters = 'year='+filter.year;
 
       if (DateUtil.isValidMonth(filter.month)){
@@ -41,6 +41,16 @@ angular.module('cmsApp')
       url = url.replace(/:organization_fullname/, repository.full_name).replace(/:filters/, filters);
 
       return promiseGithub(url);
+    },
+    load: function (postUrl, repository) {
+      var url  = ENV.news.get;
+      url =  url.replace(/:organization_fullname/, repository.full_name).replace(/:path/, postUrl);
+      var then = function(data){
+        var post = data;
+        post.filename = data.name;
+        return post;
+      };
+      return promiseGithub(url, then);
     }
   };
 });
