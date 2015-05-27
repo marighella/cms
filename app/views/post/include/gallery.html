@@ -19,7 +19,7 @@
     <li ng-repeat="file in files">
       <img src="{{ file.thumbnail }}" alt="{{ file.title }}" title="{{ file.title }}" ng-click="insertImageCKEditor(file)"/>
       <button class="btn btn-xs btn-danger btn-delete-thumb" ng-click="removeImage($index)">X</button>
-      <button class="btn btn-xs btn-default btn-cover-thumb" ng-click="imageToCover($index)"> Tornar Capa</button>
+      <button class="btn btn-xs btn-default btn-cover-thumb" ng-click="imageToCover($index)" ng-if="file.small">Tornar Capa</button>
     </li>
   </ul>
 
