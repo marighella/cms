@@ -28,7 +28,7 @@ angular.module('cmsApp')
             result.push(inter);
           }
         }
-        
+
         header++;
         finished = (header === argsLength);
       }
@@ -81,7 +81,10 @@ angular.module('cmsApp')
       }
 
       sortable = sortable.sort(function(a, b) {return b[1] - a[1];});
-      return _.map(sortable, function(element){ return element[0];});
+
+      var result = _.map(sortable, function(element){ return element[0];});
+
+      return result.slice(0,5);
     };
 
     var factory = function(file){

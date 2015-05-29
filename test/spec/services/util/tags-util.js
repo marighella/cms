@@ -110,4 +110,26 @@ describe('Service: TagsUtil', function () {
         .toEqual([ 'dois', 'quatro' ]);
     });
   });
+
+  describe('limit releated posts', function (){
+    var tagsWithPosts, factory;
+    beforeEach(function () {
+      tagsWithPosts = {'banana':['dois','tres', 'sete', 'vinte', 'dez'],
+        'cianureto':['tres','sete', 'vinte'],
+        'manga':['dois','quatro', 'vinte'],
+        'apollo':['onze','doze', 'cinco', 'vinte'],
+        'bolo':['onze','doze', 'cinco', 'vinte'],
+        'coca':['onze','doze', 'dez', 'vinte'],
+        'fanta':['onze','doze', 'treze'],
+        'maca':['quatro', 'seis', 'sete']};
+
+      factory = new TagsUtil(tagsWithPosts);
+    });
+
+    it('should return maximum 5 results', function(){
+      var tags = ['banana','bolo', 'apollo', 'coca', 'maca'];
+      expect(factory.getReleatedPosts(tags).length)
+        .toEqual(5);
+    });
+  });
 });
