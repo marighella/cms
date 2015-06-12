@@ -28,14 +28,13 @@ angular.module('cmsApp')
           var index  = scope.tracks.indexOf(track);
 
           if(track.uploaded){
-            $http({
-              url: ENV.upload,
-              method: 'DELETE',
-              data : {
+            $http.delete(
+              ENV.upload,
+              {params : {
                 'organization': $rootScope.user.organization.id,
                 'url': track.mp3
-              }
-            }).success(function(data) {
+              }}
+            ).success(function(data) {
               console.log(data);
             }).error(function(error) {
               console.log(error);
