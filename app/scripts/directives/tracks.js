@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .directive('tracks', function () {
+  .directive('tracks', function ($timeout, $q, $rootScope, $http, ENV, _) {
     return {
       restrict: 'E',
       replace: true,
@@ -11,23 +11,78 @@ angular.module('cmsApp')
         tracks: '='
       },
       link: function(scope) {
-        scope.updateFiles = function(fileList){
-          scope.uploadFiles(fileList, function(result){
-            scope.tracks.push({ title: result.basename, mp3: result.embed });
+        scope.addTracks = function(fileList){
+          var deferred = $q.defer();
+
+          deferred.promise.then(function(){
+            _.each(fileList, function(file){
+              scope.previewTracks.push({title: file.name, file: file, uploaded: false});
+            });
+          });
+
+          deferred.resolve();
+        };
+
+        scope.removeTrack = function(track){
+          var index  = scope.previewTracks.indexOf(track);
+
+          if(track.uploaded){
+            $http({
+              url: ENV.upload,
+              method: 'DELETE',
+              data : {
+                'organization': $rootScope.user.organization.id,
+                'url': track.mp3
+              }
+            }).success(function(data) {
+              console.log(data);
+            }).error(function(error) {
+              console.log(error);
+              $rootScope.addError('Desculpa, algo de errado aconteceu ao remover a trilha do album.');
+            });
+          }
+          return scope.previewTracks.pop(index);
+        };
+
+        scope.uploadTracks = function(){
+          _.each(scope.previewTracks, function(track){
+            if(!track.uploaded){
+              scope.uploadFile(track.file, function(result){
+                track.mp3 = result.embed;
+                track.uploaded = true;
+                console.log('Fiz', track);
+              });
+            }
           });
         };
+
         scope.tracks = scope.tracks || [];
+        scope.previewTracks = [];
+
+        _.each(scope.tracks, function(track){
+          track.uploaded = true;
+          scope.previewTracks.push(track);
+        });
+
       },
       template: '<div class="tracks">'+
                     '<div class="upload btn btn-default btn-block">'+
-                      '<span><i class="fa fa-upload"></i> Adicionar músicas </span>'+
-                      '<input  accept="audio/*" type="file" multiple onchange="angular.element(this).scope().updateFiles(this.files);" />'+
+                      '<span><i class="fa fa-music"></i> Adicionar músicas </span>'+
+                      '<input  accept="audio/*" type="file" multiple onchange="angular.element(this).scope().addTracks(this.files);" />'+
                     '</div>'+
-                    '<div ng-repeat="track in tracks" class="track">'+
-                        '<input ng-model="track.title" class="title form-control"/>'+
-                        '<input ng-model="track.mp3" readonly="true" class="mp3"/>'+
-                        '<input ng-model="track.ogg" readonly="true" class="ogg"/>'+
-                    '</div>'+
+                    '<ul ui-sortable="{ handle: \'> .order\' }" ng-model="previewTracks">'+
+                      '<li ng-repeat="track in previewTracks" class="track">'+
+                          '{{ $index + 1 | leadingZero }}'+
+                          '<i class="fa fa-sort order"></i>'+
+                          '<input ng-model="track.title" class="title form-control"/>'+
+                          '<input ng-model="track.mp3" readonly="true" class="mp3"/>'+
+                          '<input ng-model="track.ogg" readonly="true" class="ogg"/>'+
+                          '<i class="fa fa-times remove" ng-click="removeTrack(track)"></i>'+
+                      '</li>'+
+                    '</ul>'+
+                    '<button class="upload btn btn-default btn-block" ng-if="previewTracks.length > 0" ng-click="uploadTracks()">'+
+                      '<span><i class="fa fa-upload"></i> Upload </span>'+
+                    '</button>'+
                 '</div>'
     };
   });

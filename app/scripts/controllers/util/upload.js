@@ -13,23 +13,38 @@ angular.module('cmsApp')
       });
       return fd;
     };
+    var call = function(file){
+      return $http({
+        url: ENV.upload,
+        method: 'POST',
+        transformRequest: FormDataObject,
+        headers: {
+          'Content-Type': undefined
+        },
+        data : {
+          'organization': $rootScope.user.organization.id,
+          'myfile': file
+        }
+      });
+    };
+
+    $scope.uploadFile = function(file, successCallback) {
+      call(file)
+      .success(function(data) {
+        if(!!successCallback){
+          successCallback(data);
+        }
+      }).error(function(error) {
+        console.log(error);
+        $rootScope.addError('Desculpa, algo de errado aconteceu ao adicionar o arquivo na notícia.');
+      });
+    };
 
     $scope.uploadFiles = function(files, successCallback) {
-      var IMAGE_SERVICE_URL = ENV.upload;
       $rootScope.$broadcast('prepared-to-upload', { length: files.length });
       _.each(files, function(file){
-        $http({
-          url: IMAGE_SERVICE_URL,
-          method: 'POST',
-          transformRequest: FormDataObject,
-          headers: {
-            'Content-Type': undefined
-          },
-          data : {
-            'organization': $rootScope.user.organization.id,
-            'myfile': file
-          }
-        }).success(function(data) {
+        call(file)
+        .success(function(data) {
           console.log(data);
           $rootScope.$broadcast('upload-file', { file: data  });
           if(!!successCallback){

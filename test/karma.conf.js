@@ -37,6 +37,7 @@ module.exports = function(config) {
       'bower_components/underscore/underscore.js',
       'bower_components/js-yaml/dist/js-yaml.js',
       'bower_components/speakingurl/lib/index.js',
+      'bower_components/angular-ui-sortable/sortable.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js',

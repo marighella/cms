@@ -27,6 +27,75 @@ describe('Directive: Tracks', function () {
     });
   });
 
+  describe('add track action',function(){
+
+    it('should exists', function(){
+      var input = element[0].querySelectorAll('input[type="file"]');
+      expect(input.length).toBe(1);
+    });
+
+    it('should add a list with tracks', function(){
+      var scope = element.find('input').scope();
+
+      var list = { 0:{ name: '1.mp3' } };
+      scope.addTracks(list);
+      scope.$digest();
+
+      var tracks = element[0].querySelectorAll('.track');
+      expect(tracks.length).toBe(1);
+    });
+
+    it('should show old values', inject(function($compile){
+      scope.entity.tracks = [{title: 'pizza'}, {title:'bolo'}];
+      element = angular.element('<tracks tracks="entity[\'tracks\']" />');
+      element = $compile(element)(scope);
+
+      scope.$digest();
+      var inputTitle = angular.element(element[0].querySelectorAll('.track input.title'));
+
+      expect(inputTitle.val()).toBe('pizza');
+    }));
+  });
+
+  describe('remove button',function(){
+    beforeEach(inject(function ($httpBackend, ENV) {
+      $httpBackend.whenDELETE(ENV.upload)
+      .respond(201, 'Ok..');
+    }));
+
+    it('should call API to remove on serve when the track was uploaded', inject(function($httpBackend, $compile, ENV){
+      scope.entity.tracks = [{title: 'pizza' , mp3: 'link'}, {title:'bolo', mp3: 'second-link'}];
+      element = angular.element('<tracks tracks="entity[\'tracks\']" />');
+      element = $compile(element)(scope);
+
+      scope.$digest();
+
+      var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
+
+      $httpBackend.expectDELETE(ENV.upload)
+       .respond(201, 'Ok..');
+
+      firstTrackRemove.click();
+      $httpBackend.flush();
+    }));
+
+    it('should remove uploaded files call service', inject(function($compile){
+      scope.entity.tracks = [{title: 'pizza'}, {title:'bolo'}];
+      element = angular.element('<tracks tracks="entity[\'tracks\']" />');
+      element = $compile(element)(scope);
+
+      scope.$digest();
+
+      var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
+
+      firstTrackRemove.click();
+      scope.$digest();
+
+      var tracks = element[0].querySelectorAll('.track');
+      expect(tracks.length).toBe(1);
+    }));
+  });
+/*
   describe('upload button',function(){
     it('should exists', function(){
       var input = element[0].querySelectorAll('input[type="file"]');
@@ -66,4 +135,6 @@ describe('Directive: Tracks', function () {
 
     expect(inputTitle.val()).toBe('pizza');
   });
+*/
+
 });

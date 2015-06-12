@@ -1,11 +1,30 @@
 .tracks {
+
+  ul {
+    padding: 0 0 0 20px;
+  }
+
   .track{
+    display: table;
+    width: 100%;
+    margin: 10px 0;
+
     .mp3, .ogg{
       display: none;
     }
-    .title{
-      display: block;
-      margin: 10px 0;
+    .title, .remove, .order {
+      display: table-cell;
+    }
+    .order:hover{
+      cursor: move;
+    }
+    .remove{
+      text-align: end;
+      color: #C10613;
+
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
   .upload {
