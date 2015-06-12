@@ -72,19 +72,22 @@ describe('Directive: Tracks', function () {
 
       var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
 
-      $httpBackend.expectDELETE(ENV.upload)
+      $httpBackend.expectDELETE(new RegExp(ENV.upload))
        .respond(201, 'Ok..');
 
       firstTrackRemove.click();
       $httpBackend.flush();
     }));
 
-    it('should remove uploaded files call service', inject(function($compile){
-      scope.entity.tracks = [{title: 'pizza'}, {title:'bolo'}];
+    it('should remove files before upload', inject(function($compile){
+      scope.entity.tracks = [];
       element = angular.element('<tracks tracks="entity[\'tracks\']" />');
       element = $compile(element)(scope);
 
+      var list = { 0:{ name: '1.mp3' } };
+      element.find('input').scope().addTracks(list);
       scope.$digest();
+
 
       var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
 
@@ -92,49 +95,7 @@ describe('Directive: Tracks', function () {
       scope.$digest();
 
       var tracks = element[0].querySelectorAll('.track');
-      expect(tracks.length).toBe(1);
+      expect(tracks.length).toBe(0);
     }));
   });
-/*
-  describe('upload button',function(){
-    it('should exists', function(){
-      var input = element[0].querySelectorAll('input[type="file"]');
-
-
-      expect(input.length).toBe(1);
-    });
-
-    it('should get a link to stream', inject(function($httpBackend, ENV){
-      $httpBackend.when('POST', ENV.upload)
-       .respond({title: 'nome arquivo.mp3',
-                basename: 'nome arquivo',
-                link: 'https://link.com/download/?m=1.mp3&export=download',
-                embed: 'https://link.com/download/?m=1.mp3'
-                });
-
-      var barScope = element.find('input').scope();
-
-      var list = { 0:{ name: '1.mp3' } };
-      barScope.updateFiles(list);
-
-
-      $httpBackend.flush();
-      scope.$digest();
-
-      expect(scope.entity.tracks.length).toBe(1);
-      expect(scope.entity.tracks[0].title).toBe('nome arquivo');
-      expect(scope.entity.tracks[0].mp3).toBe('https://link.com/download/?m=1.mp3');
-    }));
-  });
-
-  it('should show old values', function(){
-    scope.entity.tracks = [{title: 'pizza'}, {title:'bolo'}];
-
-    scope.$digest();
-    var inputTitle = angular.element(element[0].querySelectorAll('.track input.title'));
-
-    expect(inputTitle.val()).toBe('pizza');
-  });
-*/
-
 });
