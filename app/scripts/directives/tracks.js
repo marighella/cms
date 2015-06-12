@@ -24,8 +24,8 @@ angular.module('cmsApp')
           deferred.resolve();
         };
 
-        scope.removeTrack = function(track){
-          var index  = scope.tracks.indexOf(track);
+        scope.removeTrack = function(index){
+          var track  = scope.tracks[index];
 
           if(track.uploaded){
             $http.delete(
@@ -41,7 +41,7 @@ angular.module('cmsApp')
               $rootScope.addError('Desculpa, algo de errado aconteceu ao remover a trilha do album.');
             });
           }
-          var result = scope.tracks.pop(index);
+          var result = scope.tracks.splice(index, 1);
 
           if(scope.tracks.length === 0){
             scope.showUpload = false;
@@ -92,7 +92,7 @@ angular.module('cmsApp')
                           '<input ng-model="track.title" class="title form-control"/>'+
                           '<input ng-model="track.mp3" readonly="true" class="mp3"/>'+
                           '<input ng-model="track.ogg" readonly="true" class="ogg"/>'+
-                          '<i class="fa fa-times remove" ng-click="removeTrack(track)"></i>'+
+                          '<i class="fa fa-times remove" ng-click="removeTrack($index)"></i>'+
                       '</li>'+
                     '</ul>'+
                     '<button class="upload btn btn-default btn-block" ng-if="showUpload" ng-click="uploadTracks()" ng-disable="uploading == 0">'+
