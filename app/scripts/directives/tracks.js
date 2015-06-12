@@ -41,7 +41,13 @@ angular.module('cmsApp')
               $rootScope.addError('Desculpa, algo de errado aconteceu ao remover a trilha do album.');
             });
           }
-          return scope.tracks.pop(index);
+          var result = scope.tracks.pop(index);
+
+          if(scope.tracks.length === 0){
+            scope.showUpload = false;
+          }
+
+          return result;
         };
 
         scope.showUpload = false;
@@ -58,6 +64,10 @@ angular.module('cmsApp')
                 track.file = '';
                 track.mp3  = result.embed;
                 scope.uploading -= 1;
+
+                if(scope.uploading === 0){
+                  scope.showUpload = false;
+                }
               });
             }
           });
@@ -78,7 +88,7 @@ angular.module('cmsApp')
                     '<ul ui-sortable="{ handle: \'> .order\' }" ng-model="tracks">'+
                       '<li ng-repeat="track in tracks" class="track {{ track.uploaded ? \'uploaded\' : \'new\'   }}">'+
                           '{{ $index + 1 | leadingZero }}'+
-                          '<i class="fa fa-sort order"></i>'+
+                          '<i class="fa fa-arrows order"></i>'+
                           '<input ng-model="track.title" class="title form-control"/>'+
                           '<input ng-model="track.mp3" readonly="true" class="mp3"/>'+
                           '<input ng-model="track.ogg" readonly="true" class="ogg"/>'+
