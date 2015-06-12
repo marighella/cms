@@ -16,7 +16,7 @@ angular.module('cmsApp')
 
           deferred.promise.then(function(){
             _.each(fileList, function(file){
-              scope.previewTracks.push({title: file.name, file: file, uploaded: false});
+              scope.tracks.push({title: file.name, file: file, uploaded: false});
             });
             scope.showUpload = true;
           });
@@ -25,7 +25,7 @@ angular.module('cmsApp')
         };
 
         scope.removeTrack = function(track){
-          var index  = scope.previewTracks.indexOf(track);
+          var index  = scope.tracks.indexOf(track);
 
           if(track.uploaded){
             $http({
@@ -42,7 +42,7 @@ angular.module('cmsApp')
               $rootScope.addError('Desculpa, algo de errado aconteceu ao remover a trilha do album.');
             });
           }
-          return scope.previewTracks.pop(index);
+          return scope.tracks.pop(index);
         };
 
         scope.showUpload = false;
@@ -50,13 +50,14 @@ angular.module('cmsApp')
 
         scope.uploadTracks = function(){
           scope.uploading = 0;
-          _.each(scope.previewTracks, function(track){
+          _.each(scope.tracks, function(track){
             if(!track.uploaded){
               scope.uploading += 1;
 
               scope.uploadFile(track.file, function(result){
-                track.mp3 = result.embed;
                 track.uploaded = true;
+                track.file = '';
+                track.mp3  = result.embed;
                 scope.uploading -= 1;
               });
             }
@@ -64,11 +65,9 @@ angular.module('cmsApp')
         };
 
         scope.tracks = scope.tracks || [];
-        scope.previewTracks = [];
 
         _.each(scope.tracks, function(track){
           track.uploaded = true;
-          scope.previewTracks.push(track);
         });
 
       },
@@ -77,8 +76,8 @@ angular.module('cmsApp')
                       '<span><i class="fa fa-music"></i> Adicionar músicas </span>'+
                       '<input  accept="audio/*" type="file" multiple onchange="angular.element(this).scope().addTracks(this.files);" />'+
                     '</div>'+
-                    '<ul ui-sortable="{ handle: \'> .order\' }" ng-model="previewTracks">'+
-                      '<li ng-repeat="track in previewTracks" class="track {{ track.uploaded ? \'uploaded\' : \'new\'   }}">'+
+                    '<ul ui-sortable="{ handle: \'> .order\' }" ng-model="tracks">'+
+                      '<li ng-repeat="track in tracks" class="track {{ track.uploaded ? \'uploaded\' : \'new\'   }}">'+
                           '{{ $index + 1 | leadingZero }}'+
                           '<i class="fa fa-sort order"></i>'+
                           '<input ng-model="track.title" class="title form-control"/>'+
