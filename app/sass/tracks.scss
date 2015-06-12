@@ -8,6 +8,13 @@
     display: table;
     width: 100%;
     margin: 10px 0;
+    color: black;
+
+    &.new {
+      color: #3366CC;
+    }
+
+
 
     .mp3, .ogg{
       display: none;

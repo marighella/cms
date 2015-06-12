@@ -18,6 +18,7 @@ angular.module('cmsApp')
             _.each(fileList, function(file){
               scope.previewTracks.push({title: file.name, file: file, uploaded: false});
             });
+            scope.showUpload = true;
           });
 
           deferred.resolve();
@@ -44,13 +45,19 @@ angular.module('cmsApp')
           return scope.previewTracks.pop(index);
         };
 
+        scope.showUpload = false;
+        scope.uploading  = 0;
+
         scope.uploadTracks = function(){
+          scope.uploading = 0;
           _.each(scope.previewTracks, function(track){
             if(!track.uploaded){
+              scope.uploading += 1;
+
               scope.uploadFile(track.file, function(result){
                 track.mp3 = result.embed;
                 track.uploaded = true;
-                console.log('Fiz', track);
+                scope.uploading -= 1;
               });
             }
           });
@@ -71,7 +78,7 @@ angular.module('cmsApp')
                       '<input  accept="audio/*" type="file" multiple onchange="angular.element(this).scope().addTracks(this.files);" />'+
                     '</div>'+
                     '<ul ui-sortable="{ handle: \'> .order\' }" ng-model="previewTracks">'+
-                      '<li ng-repeat="track in previewTracks" class="track">'+
+                      '<li ng-repeat="track in previewTracks" class="track {{ track.uploaded ? \'uploaded\' : \'new\'   }}">'+
                           '{{ $index + 1 | leadingZero }}'+
                           '<i class="fa fa-sort order"></i>'+
                           '<input ng-model="track.title" class="title form-control"/>'+
@@ -80,8 +87,14 @@ angular.module('cmsApp')
                           '<i class="fa fa-times remove" ng-click="removeTrack(track)"></i>'+
                       '</li>'+
                     '</ul>'+
-                    '<button class="upload btn btn-default btn-block" ng-if="previewTracks.length > 0" ng-click="uploadTracks()">'+
-                      '<span><i class="fa fa-upload"></i> Upload </span>'+
+                    '<button class="upload btn btn-default btn-block" ng-if="showUpload" ng-click="uploadTracks()" ng-disable="uploading == 0">'+
+                      '<span ng-if="uploading == 0">'+
+                          '<i class="fa fa-upload"></i> Upload'+
+                      '</span>'+
+                      '<span ng-if="uploading > 0">'+
+                          '<i class="fa fa-cog fa-spin" ></i>'+
+                          'Subindo o arquivo...'+
+                      '</span>'+
                     '</button>'+
                 '</div>'
     };
