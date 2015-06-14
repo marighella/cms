@@ -101,7 +101,7 @@ angular.module('cmsApp')
                       '</span>'+
                       '<span ng-if="uploading > 0">'+
                           '<i class="fa fa-cog fa-spin" ></i>'+
-                          'Subindo o arquivo...'+
+                          ' Subindo o arquivo... {{ uploading  }}'+
                       '</span>'+
                     '</button>'+
                 '</div>'
