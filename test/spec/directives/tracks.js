@@ -70,12 +70,13 @@ describe('Directive: Tracks', function () {
 
       scope.$digest();
 
-      var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
+      var firstTrackRemove = element[0].querySelector('.track:first-child .remove');
 
       $httpBackend.expectDELETE(new RegExp(ENV.upload))
        .respond(201, 'Ok..');
 
       firstTrackRemove.click();
+
       $httpBackend.flush();
     }));
 
@@ -89,7 +90,7 @@ describe('Directive: Tracks', function () {
       scope.$digest();
 
 
-      var firstTrackRemove = element[0].querySelectorAll('.track:first-child .remove')[0];
+      var firstTrackRemove = element[0].querySelector('.track:first-child .remove');
 
       firstTrackRemove.click();
       scope.$digest();
