@@ -26,7 +26,7 @@ angular.module('cmsApp')
           var condition     = (need.equal) ? '===' : '!==';
           queries.push(['entity.', requiredField, condition, '\'', requiredValue, '\''].join(''));
         });
-       
+
         var query = queries.join((need.equal) ? '||' : '&&');
         element.attr('ng-required', query);
         element.attr('ng-if', query);
@@ -34,7 +34,7 @@ angular.module('cmsApp')
         element.attr('ng-required', 'field.required');
       }
     }
-  
+
     return {
       restrict:'A',
       terminal:true,

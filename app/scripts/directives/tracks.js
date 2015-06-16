@@ -18,6 +18,8 @@ angular.module('cmsApp')
             _.each(fileList, function(file){
               scope.tracks.push({title: file.name, file: file, uploaded: false});
             });
+
+            $rootScope.addWarning('Não esqueça de clicar no botão de upload depois de adicionar as músicas.');
             scope.showUpload = true;
           });
 
