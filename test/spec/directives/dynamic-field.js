@@ -36,7 +36,7 @@ describe('Directive: dynamicField', function () {
   describe('dynamic field to fill ng-if', function() {
     it('should put nothing required when do not have "need" field', inject(function ($compile) {
       scope.field = {
-      
+
       };
       element = angular.element('<input dynamic-field="field"/>');
       element = $compile(element)(scope);
@@ -100,7 +100,7 @@ describe('Directive: dynamicField', function () {
   describe('dynamic field to fill ng-required', function() {
     it('should put default required when do not have field "need"', inject(function ($compile) {
       scope.field = {
-      
+
       };
       element = angular.element('<input dynamic-field="field"/>');
       element = $compile(element)(scope);
@@ -109,6 +109,7 @@ describe('Directive: dynamicField', function () {
 
     it('should put need expression', inject(function ($compile) {
       scope.field = {
+        required: true,
         need: {
           field: 'section',
           equal: true,
@@ -122,6 +123,7 @@ describe('Directive: dynamicField', function () {
 
     it('should put need expression ', inject(function ($compile) {
       scope.field = {
+        required: true,
         need: {
           field: 'section',
           equal: false,
