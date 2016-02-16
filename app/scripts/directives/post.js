@@ -31,7 +31,7 @@ angular.module('cmsApp')
 
 
         Repository.content
-        .get('_posts/'+scope.postUrl, $rootScope.repository).then(function(result){
+        .get(scope.postUrl, $rootScope.repository).then(function(result){
           scope.post = result;
           scope.loading = true;
         });
