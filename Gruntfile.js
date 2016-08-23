@@ -180,7 +180,7 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/,**/}*.js', 'e2e/{,*/,**/}*.js']
+        src: ['test/spec/{,*/,**/}*.js']
       }
     },
 
@@ -428,13 +428,6 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-
-    protractor: {
-      options: {
-        configFile: 'e2e/protractor.conf.js'
-      },
-      run: {}
-    }
   });
 
 
@@ -516,13 +509,5 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
-  ]);
-
-  grunt.registerTask('e2etest', [
-    'clean:constants',
-    'ngconstant:development',
-    'concurrent:server',
-    'connect:test',
-    'protractor:run'
   ]);
 };
