@@ -6,6 +6,7 @@ angular.module('cmsApp')
 
     return {
       github: '',
+      connection: '',
       isProduction: false
     };
   });

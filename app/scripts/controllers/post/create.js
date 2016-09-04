@@ -74,7 +74,7 @@ angular.module('cmsApp')
           /*jshint camelcase: false */
           post.metadata.releated_posts = $scope.releatedPosts;
 
-          Repository.content.save($rootScope.repository, post, sha)
+          Repository.content.save($rootScope.repository, post)
           .then(function(){
             $scope.cleanAlerts();
             $scope.state = 'default';
@@ -163,13 +163,13 @@ angular.module('cmsApp')
 
     $scope.load = function(){
       var post = {
-        path: $routeParams.path
+        _id: $routeParams._id
       };
 
-      if(!!post.path){
+      if(!!post._id){
         $scope.state = 'loading';
 
-        Repository.content.get(post.path, $rootScope.repository)
+        Repository.content.get(post._id, $rootScope.repository)
         .then(function(post){
           /*jshint camelcase: false */
           $scope.entity = post.metadata;

@@ -10,33 +10,22 @@
 angular.module('cmsApp')
   .factory('Repository', function (Github, NewsServiceContent) {
 
-    var github = {
-      get: function(post, repository){
-        if(post.url){
-          return Github.content.post(post);
-        }else{
-          return Github.content.load(post, repository);
-        }
-      },
-      save: function(repository, post, year, month, sha){
-        return Github.content.save(repository, post, year, month, sha);
-      },
-    };
     var newsService = {
       search: function(repository, filter){
-        return NewsServiceContent.posts(repository, filter);
+        return NewsServiceContent.search(repository, filter);
       },
       list: function(repository, filter){
-        return NewsServiceContent.posts(repository, filter);
+        return NewsServiceContent.search(repository, filter);
       },
       get: function(post, repository){
-        if(!post.url){
-          return NewsServiceContent.load(post, repository);
-        }else{
-          return NewsServiceContent.post(post);
+        return NewsServiceContent.load(post, repository);
+      },
+      save: function(repository, post){
+        if(!!post._id){
+          return NewsServiceContent.update(repository, post);
         }
+        return NewsServiceContent.save(repository, post);
       }
-
     };
 
     var tags = {
@@ -51,7 +40,7 @@ angular.module('cmsApp')
     };
 
     return {
-      content: angular.extend(github,newsService),
+      content: newsService,
       organization: Github.organization,
       skelleton: skelleton,
       tagsFile: tags

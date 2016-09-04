@@ -61,7 +61,9 @@ angular.module('cmsApp')
     $scope.authenticate =  function(){
       oauth.popup('github', {cache: true})
       .done(function(response) {
-        Resource.github = response;
+
+        Resource.connection = Resource.github = response;
+
         $timeout(function(){
           $scope.user = User.info();
           $scope.user.logged = true;

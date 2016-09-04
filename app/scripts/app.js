@@ -36,11 +36,11 @@ angular
         templateUrl: 'views/post/search.html',
         controller: 'PostSearchCtrl'
       })
-      .when('/post/:year/:month', {
+      .when('/post', {
         templateUrl: 'views/post/create.html',
         controller: 'PostCreateCtrl'
       })
-      .when('/post/:year/:month/:sha/:path*', {
+      .when('/post/:_id', {
         templateUrl: 'views/post/create.html',
         controller: 'PostCreateCtrl'
       })

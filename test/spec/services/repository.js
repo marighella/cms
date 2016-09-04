@@ -16,12 +16,11 @@ describe('Service: Repository', function () {
   });
 
   describe('content from github', function (){
-    beforeEach(inject(function (_GithubContent_, _NewsServiceContent_) {
+    beforeEach(inject(function (_NewsServiceContent_) {
       var defaultFunction = function (){
         return [1,2,3];
       };
-      _GithubContent_.posts = defaultFunction;
-      _NewsServiceContent_.posts = defaultFunction;
+      _NewsServiceContent_.search = defaultFunction;
     }));
 
     it('should return a list of posts', function (){

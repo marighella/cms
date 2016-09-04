@@ -87,8 +87,9 @@ module.exports = function (grunt) {
             basepath: '',
             upload: 'https://file-service-stub.herokuapp.com/upload',
             news: {
-              search: 'https://news-service.herokuapp.com/organization/:organization_fullname/posts?:filters',
-              get: 'https://news-service.herokuapp.com/organization/:organization_fullname/post?path=:path'
+              search: 'http://localhost:5000/news?:filters',
+              get: 'http://localhost:5000/news/:id',
+              save: 'http://localhost:5000/news'
             }
           }
         }
@@ -99,10 +100,6 @@ module.exports = function (grunt) {
             name: 'production',
             basepath: '/cms',
             upload: 'https://file-service.herokuapp.com/upload',
-            news: {
-              search: 'https://news-service.herokuapp.com/organization/:organization_fullname/posts?:filters',
-              get: 'https://news-service.herokuapp.com/organization/:organization_fullname/post?path=:path'
-            }
           }
         }
       }

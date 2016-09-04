@@ -33,21 +33,6 @@ angular.module('cmsApp')
     $scope.updateView = function(posts){
       $scope.currentPage = 1;
       $scope.posts = posts || $scope.posts;
-      $scope.loadElements();
-    };
-
-    $scope.loadElements = function(){
-      var start = ($scope.currentPage - 1) * $scope.maxSize;
-      var limit = $scope.maxSize;
-      var toLoad = $scope.posts.slice(start, start+limit);
-      toLoad.forEach(function(element){
-        if(!element.metadata){
-          Repository.content.get(element.path, $scope.repository)
-          .then(function(result){
-            angular.extend(element, result);
-          });
-        }
-      });
     };
 
     $scope.ready = function(){
@@ -63,7 +48,7 @@ angular.module('cmsApp')
     $scope.edit = function(post){
       var year = $scope.filter.year;
       var month = $scope.filter.month;
-      $location.path('/post/'+year+'/'+month+'/'+post.sha+'/'+post.path);
+      $location.path('/post/'+post._id);
     };
 
     $scope.load = function(){

@@ -2,35 +2,41 @@
 /* jshint camelcase: false */
 /* global getSlug */
 
-/**
- * @ngdoc service
- * @name cmsApp.Content
- * @description
- * # Content
- * Factory in the cmsApp.
- */
 angular.module('cmsApp')
-.factory('NewsServiceContent', function ($q, ENV, Resource, DateUtil) {
+.factory('NewsServiceContent', function ($q, $http, ENV, DateUtil) {
 
-  function promiseGithub(address, then, error){
-    var deferred = $q.defer();
-    var promise = deferred.promise;
-    var github = Resource.github;
+  function promise(address, method, data, then, error){
+    var deferred   = $q.defer();
+    var promise    = deferred.promise;
+    var connection = $http;
+
+    method = method ||'GET';
+    data = data || {};
     then = then || function(data){return data;};
-    error = error || function(error){return error.responseJSON.message;};
+    error = error || function(error){return error;};
 
-    github.get(address,{
-      cache: false
-    }).error(function(code){
-      return deferred.reject(error(code));
-    }).then(function(data){
-      return deferred.resolve(then(data));
-    });
+    var request = undefined;
+
+    if(method === 'POST'){
+      request = connection.post(address, data);
+    }else{
+      request = connection.get(address);
+    }
+
+    request.then(
+      function successCallback(response){
+        return deferred.resolve(then(response.data));
+      },
+      function errorCallback(response){
+        return deferred.reject(error(response.code));
+      }
+    );
+
     return promise;
   }
 
   return {
-    posts: function (repository, filter) {
+    search: function (repository, filter) {
       var url = ENV.news.search;
       var filters = 'year='+filter.year;
 
@@ -43,19 +49,28 @@ angular.module('cmsApp')
         filters += '&title='+getSlug(filter.title);
       }
 
-      url = url.replace(/:organization_fullname/, repository.full_name).replace(/:filters/, filters);
-
-      return promiseGithub(url);
+      return promise(url);
     },
-    load: function (postUrl, repository) {
+    load: function (postId, repository) {
       var url  = ENV.news.get;
-      url =  url.replace(/:organization_fullname/, repository.full_name).replace(/:path/, postUrl);
-      var then = function(data){
-        var post = data;
-        post.filename = data.name;
-        return post;
-      };
-      return promiseGithub(url, then);
+      url =  url.replace(/:id/, postId);
+      return promise(url);
+    },
+    save: function(repository, post) {
+      post.metadata.date = DateUtil.toISO8601(post.metadata.date);
+      var obj = angular.toJson(post);
+      var url = ENV.news.save;
+
+      return promise(url, 'POST', obj);
+    },
+    update: function(repository, post) {
+      post.metadata.date = DateUtil.toISO8601(post.metadata.date);
+      var obj = JSON.stringify(post);
+      var url = ENV.news.update;
+
+      url =  url.replace(/:id/, post._id);
+
+      return promise(url, 'PUT', obj);
     }
   };
 });
