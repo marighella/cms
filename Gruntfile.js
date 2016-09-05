@@ -94,6 +94,20 @@ module.exports = function (grunt) {
           }
         }
       },
+      stage: {
+        constants: {
+          ENV: {
+            name: 'development',
+            basepath: '',
+            upload: 'https://file-service-stub.herokuapp.com/upload',
+            news: {
+              search: 'http://dev.marighella.io:5000/news?:filters',
+              get: 'http://dev.marighella.io:5000/news/:id',
+              save: 'http://dev.marighella.io:5000/news'
+            }
+          }
+        }
+      },
       production: {
         constants: {
           ENV: {
@@ -485,7 +499,7 @@ module.exports = function (grunt) {
   grunt.registerTask('staging', [
     'clean:dist',
     'clean:constants',
-    'ngconstant:development',
+    'ngconstant:stage',
     'wiredep',
     'sass',
     'useminPrepare',
@@ -497,7 +511,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-    'filerev',
+    // 'filerev',
     'usemin',
     'htmlmin'
   ]);
