@@ -1,8 +1,12 @@
 {
-  "name": "cms",
-  "version": "0.0.0",
-  "dependencies": {},
-  "devDependencies": {
+  "name": "marighella-cms",
+  "version": "2.0.0",
+  "description": "O Gerenciador de conteúdo, do projeto Marighella, tem como objetivo empoderar movimentos sociais na Internet, permitindo-os focar apenas no conteúdo. ",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
     "bower": "^1.4.1",
     "grunt": "^1.0.1",
     "grunt-autoprefixer": "^3.0.4",
@@ -36,10 +40,22 @@
     "load-grunt-tasks": "^3.5.2",
     "time-grunt": "^0.3.1"
   },
-  "engines": {
-    "node": ">=0.10.0"
-  },
+  "devDependencies": {},
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marighella/cms.git"
+  },
+  "keywords": [
+    "cms",
+    "marighella"
+  ],
+  "author": "RatoX",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/marighella/cms/issues"
+  },
+  "homepage": "https://github.com/marighella/cms#readme"
 }
