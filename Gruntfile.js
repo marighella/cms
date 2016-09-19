@@ -1,40 +1,19 @@
-// Generated on 2014-09-04 using generator-angular 0.9.7
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-
-  // Load grunt tasks automatically
+  var serveStatic = require('serve-static');
   require('load-grunt-tasks')(grunt);
-
-  // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
 
-  // Define the configuration for all the tasks
   grunt.initConfig({
-
-    'gh-pages': {
-      options: {
-        base: 'dist'
-      },
-      src: ['**']
-    },
-
-    // Project settings
     yeoman: appConfig,
 
-    // Watches files for changes and runs tasks based on the changed files
     watch: {
       bower: {
         files: ['bower.json'],
@@ -73,7 +52,6 @@ module.exports = function (grunt) {
       }
     },
     ngconstant: {
-      // Options for all targets
       options: {
         space: '',
         wrap: '\'use strict\';\n\n{%= __ngModule %}',
@@ -101,19 +79,10 @@ module.exports = function (grunt) {
             basepath: '',
             upload: 'https://file-service-stub.herokuapp.com/upload',
             news: {
-              search: 'http://dev.marighella.io:5000/news?:filters',
-              get: 'http://dev.marighella.io:5000/news/:id',
-              save: 'http://dev.marighella.io:5000/news'
+              search: 'https://dev.marighella.io:5000/news?:filters',
+              get: 'https://dev.marighella.io:5000/news/:id',
+              save: 'https://dev.marighella.io:5000/news'
             }
-          }
-        }
-      },
-      production: {
-        constants: {
-          ENV: {
-            name: 'production',
-            basepath: '/cms',
-            upload: 'https://file-service.herokuapp.com/upload',
           }
         }
       }
@@ -142,12 +111,12 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
+              serveStatic('.tmp'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
-              connect.static(appConfig.app)
+              serveStatic(appConfig.app)
             ];
           }
         }
@@ -156,13 +125,13 @@ module.exports = function (grunt) {
         options: {
           middleware: function (connect) {
             return [
-              connect.static('.tmp'),
-              connect.static('test'),
+              serveStatic('.tmp'),
+              serveStatic('test'),
               connect().use(
                 '/bower_components',
-                connect.static('./bower_components')
+                serveStatic('./bower_components')
               ),
-              connect.static(appConfig.app)
+              serveStatic(appConfig.app)
             ];
           }
         }
@@ -280,54 +249,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks will produce minified files in the dist folder
-    // By default, your `index.html`'s <!-- Usemin block --> will take care of
-    // minification. These next options are pre-configured if you do not wish
-    // to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
-    // concat: {
-    //   dist: {}
-    // },
-
-    // imagemin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
-
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-
     htmlmin: {
       dist: {
         options: {
@@ -427,8 +348,6 @@ module.exports = function (grunt) {
       dist: [
         'copy:styles',
         'htmlmin',
-        // 'imagemin',
-        'svgmin'
       ]
     },
 

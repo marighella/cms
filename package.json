@@ -40,7 +40,10 @@
     "load-grunt-tasks": "^3.5.2",
     "time-grunt": "^0.3.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt-contrib-connect": "^1.0.2",
+    "serve-static": "^1.11.1"
+  },
   "scripts": {
     "test": "grunt tests"
   },
