@@ -71,6 +71,7 @@ angular.module('cmsApp')
         var videoUrl = getVideoUrl();
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
+          post._id = $scope._id;
           /*jshint camelcase: false */
           post.metadata.releated_posts = $scope.releatedPosts;
 
@@ -173,6 +174,7 @@ angular.module('cmsApp')
         .then(function(post){
           /*jshint camelcase: false */
           $scope.entity = post.metadata;
+          $scope._id = post._id;
           $scope.body   = post.body;
           $scope.filename = post.filename;
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata);

@@ -19,6 +19,8 @@ angular.module('cmsApp')
 
     if(method === 'POST'){
       request = connection.post(address, data);
+    }else if(method === 'PUT'){
+      request = connection.put(address, data);
     }else{
       request = connection.get(address);
     }
@@ -65,7 +67,7 @@ angular.module('cmsApp')
     },
     update: function(repository, post) {
       post.metadata.date = DateUtil.toISO8601(post.metadata.date);
-      var obj = JSON.stringify(post);
+      var obj = angular.toJson(post);
       var url = ENV.news.update;
 
       url =  url.replace(/:id/, post._id);

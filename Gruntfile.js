@@ -67,7 +67,8 @@ module.exports = function (grunt) {
             news: {
               search: 'http://localhost:5000/news?:filters',
               get: 'http://localhost:5000/news/:id',
-              save: 'http://localhost:5000/news'
+              save: 'http://localhost:5000/news',
+              update: 'http://localhost:5000/news/:id'
             }
           }
         }
@@ -81,7 +82,8 @@ module.exports = function (grunt) {
             news: {
               search: 'https://dev.marighella.io:5000/news?:filters',
               get: 'https://dev.marighella.io:5000/news/:id',
-              save: 'https://dev.marighella.io:5000/news'
+              save: 'https://dev.marighella.io:5000/news',
+              update: 'https://dev.marighella.io:5000/news/:id'
             }
           }
         }
