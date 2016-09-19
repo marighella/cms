@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name cmsApp.controller:PostsearchCtrl
- * @description
- * #.content.earchCtrl
- * Controller of the cmsApp
- */
 angular.module('cmsApp')
   .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, PostUtil, Repository) {
     $scope.cleanAlerts();
@@ -40,14 +33,10 @@ angular.module('cmsApp')
     };
 
     $scope.create = function(){
-      var year = $scope.filter.year;
-      var month = $scope.filter.month;
       $location.path('/post');
     };
 
     $scope.edit = function(post){
-      var year = $scope.filter.year;
-      var month = $scope.filter.month;
       $location.path('/post/'+post._id);
     };
 

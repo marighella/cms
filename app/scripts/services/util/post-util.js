@@ -1,13 +1,6 @@
 'use strict';
 /* globals escape, unescape, getSlug */
 
-/**
- * @ngdoc service
- * @name cmsApp.Dateutil
- * @description
- * # Dateutil
- * Service in the cmsApp.
- */
 angular.module('cmsApp')
   .service('PostUtil', function PostUtil($http, $q, DateUtil, _, YoutubeLinkUtil, VimeoLinkUtil) {
 

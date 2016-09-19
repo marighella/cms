@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name cmsApp.controller:PostcreatectrlCtrl
- * @description
- * # PostcreatectrlCtrl
- * Controller of the cmsApp
- */
 angular.module('cmsApp')
   .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
 
