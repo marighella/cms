@@ -42,7 +42,7 @@ angular.module('cmsApp')
     $scope.create = function(){
       var year = $scope.filter.year;
       var month = $scope.filter.month;
-      $location.path('/post/'+year+'/'+month);
+      $location.path('/post');
     };
 
     $scope.edit = function(post){
