@@ -23,62 +23,56 @@
         data-autoclose="1" placeholder="Time" bs-timepicker dynamic-field="field">
       </div>
     </div>
-
-    <input type="text"
-      ng-attr-id="{{ field.name }}"
-      class="form-control"
-      ng-model="entity[field.name]"
-      placeholder="{{ field.placeholder }}"
-      ng-pattern="{{ field.pattern }}"
-      dynamic-field="field"
-      validate-video
-      ng-switch-when="video"
-      dynamic-field="field"
-      class="has-feedback"
-      show-errors
-    />
-    <span class="fa fa-check form-control-feedback valid"></span>
-    <span class="fa fa-times form-control-feedback invalid"></span>
-
-    <textarea type="text"
-      dynamic-field="field"
-      ng-attr-id="{{ field.name }}"
-      class="form-control"
-      ng-model="entity[field.name]"
-      placeholder="{{ field.placeholder }}"
-      rows="1"
-      show-errors
-      ng-switch-when="textarea"
-      dynamic-field="field"
-      ng-trim="false"
-      maxlength="{{ field.limit }}"
-      expand>
-    </textarea>
-
-    <input type="text"
-      ng-attr-id="{{ field.name }}"
-      class="form-control"
-      ng-model="entity[field.name]"
-      ng-trim="false"
-      placeholder="{{ field.placeholder }}"
-      maxlength="{{ field.limit }}"
-      ng-switch-when="text"
-      show-errors
-      dynamic-field="field">
-    </input>
-    <span ng-if="field.limit && (field.limit - entity[field.name].length) > 0" class="counter-warning">{{ field.limit - entity[field.name].length}} caracteres restantes</span>
-    <span ng-if="field.limit && (field.limit - entity[field.name].length) == 0" class="counter-warning">Você atingiu o limite de caracteres!</span>
-    <select
-      ng-model="entity[field.name]"
-      ng-attr-id="{{ field.name }}"
-      ng-options="item.id as item.name for item in field.type.options"
-      ng-switch-when="select"
-      dynamic-field="field"
-      show-errors
-      class="form-control">
-      <option value="">-- Nenhum --</option>
-    </select>
-
+    <div ng-switch-when="video">
+      <input type="text"
+        ng-attr-id="{{ field.name }}"
+        class="form-control"
+        ng-model="entity[field.name]"
+        placeholder="{{ field.placeholder }}"
+        ng-pattern="{{ field.pattern }}"
+        dynamic-field="field"
+        validate-video
+        dynamic-field="field"
+        class="has-feedback"
+        show-errors
+      />
+    </div>
+    <div ng-switch-when="textarea">
+      <textarea type="text"
+        dynamic-field="field"
+        ng-attr-id="{{ field.name }}"
+        class="form-control"
+        ng-model="entity[field.name]"
+        placeholder="{{ field.placeholder }}"
+        rows="1"
+        show-errors
+        dynamic-field="field"
+        ng-trim="false"
+        maxlength="{{ field.limit }}"
+        expand>
+    </div>
+    <div ng-switch-when="text">
+      <input type="text"
+        ng-attr-id="{{ field.name }}"
+        class="form-control"
+        ng-model="entity[field.name]"
+        ng-trim="false"
+        placeholder="{{ field.placeholder }}"
+        maxlength="{{ field.limit }}"
+        show-errors
+        dynamic-field="field">
+    </div>
+    <div ng-switch-when="select">
+      <select
+        ng-model="entity[field.name]"
+        ng-attr-id="{{ field.name }}"
+        ng-options="item.id as item.name for item in field.type.options"
+        dynamic-field="field"
+        show-errors
+        class="form-control">
+        <option value="">-- Nenhum --</option>
+      </select>
+    </div>
     <div ng-switch-when="tagging" dynamic-field="field">
       <tags-input
         ng-model="entity[field.name]"
@@ -92,24 +86,42 @@
           <auto-complete source="tags.search($query)"></auto-complete>
         </tags-input>
     </div>
-
     <div ng-switch-when="tracks" dynamic-field="field">
       <tracks
         tracks="entity[field.name]">
       </tracks>
     </div>
-
     <div ng-switch-when="zip" dynamic-field="field">
       <zip
         download-link="entity[field.name]">
       </zip>
-      <input class="form-control" type="text" ng-hide="true" ng-model="entity[field.name]" show-errors dynamic-field="field" />
+      <input class="form-control"
+             type="text"
+             ng-hide="true"
+             ng-model="entity[field.name]"
+             show-errors
+             dynamic-field="field" />
     </div>
-
     <div ng-switch-when="cover" dynamic-field="field" class="cover">
       <cover
         image="entity[field.name]">
       </cover>
-      <input class="form-control" type="text" ng-model="entity[field.name]" show-errors dynamic-field="field" />
+      <input class="form-control"
+             type="text"
+             ng-model="entity[field.name]"
+             show-errors
+             dynamic-field="field" />
     </div>
+
+
+    <span class="fa fa-check form-control-feedback valid"></span>
+    <span class="fa fa-times form-control-feedback invalid"></span>
+    <span ng-if="field.limit && (field.limit - entity[field.name].length) > 0"
+          class="counter-warning">
+          {{ field.limit - entity[field.name].length}} caracteres restantes
+    </span>
+    <span ng-if="field.limit && (field.limit - entity[field.name].length) == 0"
+          class="counter-warning">
+          Você atingiu o limite de caracteres!
+    </span>
 </div>

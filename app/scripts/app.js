@@ -20,7 +20,6 @@ angular
     'ngTouch',
     'ngTagsInput',
     'ui.bootstrap',
-    'ui.sortable',
     'mgcrea.ngStrap.datepicker',
     'mgcrea.ngStrap.tooltip',
     'mgcrea.ngStrap.helpers.dateParser',
