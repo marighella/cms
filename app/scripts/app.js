@@ -24,8 +24,9 @@ angular
     'mgcrea.ngStrap.tooltip',
     'mgcrea.ngStrap.helpers.dateParser',
     'mgcrea.ngStrap.timepicker',
+    'satellizer',
   ])
-  .config(function ($routeProvider) {
+  .config(function ($routeProvider, $authProvider) {
     $routeProvider
       .when('/auth', {
         templateUrl: 'views/auth.html',
@@ -46,6 +47,12 @@ angular
       .otherwise({
         redirectTo: '/auth'
       });
+
+    $authProvider.github({
+      clientId: '5ab84ed4a4b6a371211f',
+      responseType: 'token',
+    });
+
   })
   .run(['$rootScope', '$location', '$http', 'Resource','ENV', 'Repository', function ($rootScope, $location, $http, Resource, ENV, Repository) {
     $rootScope.alerts = [];

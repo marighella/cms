@@ -34,8 +34,7 @@
         validate-video
         dynamic-field="field"
         class="has-feedback"
-        show-errors
-      />
+        show-errors>
     </div>
     <div ng-switch-when="textarea">
       <textarea type="text"
@@ -100,17 +99,19 @@
              ng-hide="true"
              ng-model="entity[field.name]"
              show-errors
-             dynamic-field="field" />
+             dynamic-field="field">
     </div>
-    <div ng-switch-when="cover" dynamic-field="field" class="cover">
-      <cover
-        image="entity[field.name]">
-      </cover>
-      <input class="form-control"
-             type="text"
-             ng-model="entity[field.name]"
-             show-errors
-             dynamic-field="field" />
+    <div class="cover"  ng-switch-when="cover" >
+      <div dynamic-field="field">
+        <cover
+                 image="entity[field.name]">
+        </cover>
+        <input class="form-control"
+               type="text"
+               ng-model="entity[field.name]"
+               show-errors
+               dynamic-field="field"/>
+      </div>
     </div>
 
 
@@ -118,7 +119,7 @@
     <span class="fa fa-times form-control-feedback invalid"></span>
     <span ng-if="field.limit && (field.limit - entity[field.name].length) > 0"
           class="counter-warning">
-          {{ field.limit - entity[field.name].length}} caracteres restantes
+      {{ field.limit - entity[field.name].length}} caracteres restantes
     </span>
     <span ng-if="field.limit && (field.limit - entity[field.name].length) == 0"
           class="counter-warning">

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, oauth, _, User, Resource, Repository) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, $auth, _, User, Resource, Repository) {
 
     var fillRepository = function(repoName){
       var org = $scope.user.organization;
@@ -58,20 +58,28 @@ angular.module('cmsApp')
       }
     };
 
+
     $scope.authenticate =  function(){
-      oauth.popup('github', {cache: true})
-      .done(function(response) {
-
-        Resource.connection = Resource.github = response;
-
-        $timeout(function(){
-          $scope.user = User.info();
-          $scope.user.logged = true;
-        },0);
-      }).fail(function(error){
-        if(error) {
-          return window.alert(error);
-        }
+      $auth.authenticate('github').
+      then(function(response){
+        console.log('certo', response);
+        console.log('token', $auth.getToken());
+      }).
+      catch(function(response){
+        console.log('errado', response);
       });
+      /*
+      .done(function(response) {
+      Resource.github = response;
+      $timeout(function(){
+      $scope.user = User.info();
+      $scope.user.logged = true;
+      },0);
+      }).fail(function(error){
+      if(error) {
+      return window.alert(error);
+      }
+      });
+      */
     };
   });
