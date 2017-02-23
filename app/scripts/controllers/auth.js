@@ -92,14 +92,14 @@ angular.module('cmsApp')
 
 
     $scope.authenticate =  function(){
-      $auth.authenticate('github').
-      then(function(response){
+      $auth.authenticate('github')
+      .then(function(response){
         console.log('certo', response);
         console.log('token', $auth.getToken());
 
         var result = eita(ENV.authentication, 'GET', response);
-      }).
-      catch(function(response){
+      })
+      .catch(function(response){
         console.log('errado', response);
       });
       /*
