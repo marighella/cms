@@ -80,6 +80,7 @@ module.exports = function (grunt) {
             name: 'development',
             basepath: '',
             upload: 'https://file-service-stub.herokuapp.com/upload',
+            authentication: 'https://dev.marighella.io/auth',
             news: {
               search: 'https://dev.marighella.io:5000/news?:filters',
               get: 'https://dev.marighella.io:5000/news/:id',
