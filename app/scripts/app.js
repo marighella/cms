@@ -51,6 +51,7 @@ angular
     $authProvider.github({
       clientId: '5ab84ed4a4b6a371211f',
       responseType: 'token',
+      scope: ['public_repo', 'user:email'],
     });
 
   })
