@@ -1,39 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $timeout, $location, $auth, $q, $http, _, ENV, User, Resource, Repository) {
-
-    function eita(address, method, data, then, error){
-      var deferred   = $q.defer();
-      var promise    = deferred.promise;
-      var connection = $http;
-
-      method = method ||'GET';
-      data = data || {};
-      then = then || function(data){return data;};
-      error = error || function(error){return error;};
-
-      var request = undefined;
-
-      if(method === 'POST'){
-        request = connection.post(address, data);
-      }else if(method === 'PUT'){
-        request = connection.put(address, data);
-      }else{
-        request = connection.get(address);
-      }
-
-      request.then(
-        function successCallback(response){
-          return deferred.resolve(then(response.data));
-        },
-        function errorCallback(response){
-          return deferred.reject(error(response.code));
-        }
-      );
-
-      return promise;
-    }
+  .controller('AuthCtrl', function ($rootScope, $scope, $location, $auth, _, ENV, User, Repository, PromiseUtil) {
 
     var fillRepository = function(repoName){
       var org = $scope.user.organization;
@@ -61,6 +29,7 @@ angular.module('cmsApp')
 
       return $scope.user.organization.login === organization.login;
     };
+
     $scope.getRepositories = function(organization){
       $scope.user.organization = undefined;
       $scope.user.repositories = [];
@@ -94,26 +63,13 @@ angular.module('cmsApp')
     $scope.authenticate =  function(){
       $auth.authenticate('github')
       .then(function(response){
-        console.log('certo', response);
-        console.log('token', $auth.getToken());
-
-        var result = eita(ENV.authentication, 'GET', response);
+        return PromiseUtil.request(ENV.authentication + '?code=' + response.code, 'GET', response);
+      }).then(function(result){
+        window.localStorage['jwt_marighella'] = result.jwt;
       })
       .catch(function(response){
-        console.log('errado', response);
+        console.error('ERROR on authenticate', response);
+        window.alert(error);
       });
-      /*
-      .done(function(response) {
-      Resource.github = response;
-      $timeout(function(){
-      $scope.user = User.info();
-      $scope.user.logged = true;
-      },0);
-      }).fail(function(error){
-      if(error) {
-      return window.alert(error);
-      }
-      });
-      */
     };
   });
