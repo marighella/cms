@@ -12,3 +12,4 @@ app/ckeditor/
 app/.DS_Store
 app/ckeditor-plugins/.DS_Store
 npm-debug.log
+dist_to_stage.tar.gz
