@@ -61,15 +61,25 @@ angular.module('cmsApp')
 
 
     $scope.authenticate =  function(){
+      if(!!window.localStorage['jwt_marighella']){
+        $scope.user = User.info();
+        $scope.user.logged = true;
+
+        return true;
+      }
+
       $auth.authenticate('github')
-      .then(function(response){
-        return PromiseUtil.request(ENV.authentication + '?code=' + response.code, 'GET', response);
-      }).then(function(result){
-        window.localStorage['jwt_marighella'] = result.jwt;
-      })
-      .catch(function(response){
-        console.error('ERROR on authenticate', response);
-        window.alert(error);
-      });
+        .then(function(response){
+          return PromiseUtil.request(ENV.authentication + '?code=' + response.code, 'GET', response);
+        }).then(function(result){
+          window.localStorage['jwt_marighella'] = result.jwt;
+
+          $scope.user = User.info();
+          $scope.user.logged = true;
+        })
+        .catch(function(response){
+          console.error('ERROR on authenticate', response);
+          window.alert(response);
+        });
     };
   });

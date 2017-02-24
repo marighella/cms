@@ -11,7 +11,7 @@
       ng-class="{'selected': isOrgSelected(organization)}"
       ng-src="{{ organization.avatar_url }}"/>
       {{ orgSelected  }}
-    <span class="wait organization" ng-hide="user.organizations[0].ready">
+    <span class="wait organization" ng-hide="user.organizations[0].id">
       <i class="glyphicon glyphicon-refresh spin" ></i>
     </span>
     <select class="form-control repository"
