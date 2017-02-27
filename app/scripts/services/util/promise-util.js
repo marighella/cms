@@ -13,18 +13,19 @@ angular.module('cmsApp')
       error = error || function(error){return error;};
 
       var request = undefined;
-      var data_header = {
+      var config = {
         headers: {
           'Authorization': 'Bearer ' + window.localStorage['jwt_marighella']
         }
       };
 
       if(method === 'POST'){
-        request = connection.post(address, data);
+        request = connection.post(address, data, config);
       }else if(method === 'PUT'){
-        request = connection.put(address, data);
+        request = connection.put(address, data, config);
       }else{
-        request = connection.get(address, data_header);
+        config.params = data
+        request = connection.get(address, config);
       }
 
       request.then(
