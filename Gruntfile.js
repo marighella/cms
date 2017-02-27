@@ -64,9 +64,11 @@ module.exports = function (grunt) {
             name: 'development',
             basepath: '',
             upload: 'https://file-service-stub.herokuapp.com/upload',
-            authentication: 'https://dev.marighella.io/auth',
+            authentication: 'http://localhost:3000/auth',
+            github_api_key: '152e97c7be4ac42fffe9',
             api: {
-              user: 'https://dev.marighella.io/api/user',
+              user: 'http://localhost:3000/api/user',
+              repositories: 'http://localhost:3000/api/repos',
             },
             news: {
               search: 'http://localhost:5000/news?:filters',
@@ -83,9 +85,11 @@ module.exports = function (grunt) {
             name: 'development',
             basepath: '',
             upload: 'https://file-service-stub.herokuapp.com/upload',
+            github_api_key: '5ab84ed4a4b6a371211f',
             authentication: 'https://dev.marighella.io/auth',
             api: {
               user: 'https://dev.marighella.io/api/user',
+              repositories: 'https://dev.marighella.io/api/repos',
             },
             news: {
               search: 'https://dev.marighella.io:5000/news?:filters',

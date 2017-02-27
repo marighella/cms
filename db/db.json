@@ -1,0 +1,22 @@
+{
+  "auth": {
+    "jwt": "fake.jwt.token"
+  },
+  "user": {
+      "id": -1,
+      "login": "Fakito",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200",
+      "organizations": [
+        {
+          "id": -1,
+          "login": "org-fakito",
+          "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200"
+        }
+      ]
+  },
+  "repos": [{
+    "id": 20023341,
+    "name": "fake-file-service",
+    "full_name": "org-fakito/repo-fake"
+  }]
+}

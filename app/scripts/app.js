@@ -26,7 +26,7 @@ angular
     'mgcrea.ngStrap.timepicker',
     'satellizer',
   ])
-  .config(function ($routeProvider, $authProvider) {
+  .config(function ($routeProvider, $authProvider, ENV) {
     $routeProvider
       .when('/auth', {
         templateUrl: 'views/auth.html',
@@ -49,7 +49,7 @@ angular
       });
 
     $authProvider.github({
-      clientId: '5ab84ed4a4b6a371211f',
+      clientId: ENV.github_api_key,
       responseType: 'token',
       scope: ['public_repo', 'user:email'],
     });
