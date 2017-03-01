@@ -1,6 +1,6 @@
 <div class="form-group has-feedback field"
-  ng-repeat="field in fields"
-  ng-switch on="field.type.view">
+  ng-repeat="field in fields">
+
   <label class="control-label"
     for="{{ field.name }}"
     dynamic-field="field">
@@ -8,7 +8,7 @@
     {{ field.title }}
   </label>
 
-    <div class="form-inline datepicker" ng-switch-when="date">
+    <div class="form-inline datepicker" ng-if="field.type.view === 'date'">
       <div class="form-group" dynamic-field="field">
         <input type="text" size="10" class="form-control date"
         ng-model="entity[field.name]"
@@ -23,7 +23,17 @@
         data-autoclose="1" placeholder="Time" bs-timepicker dynamic-field="field">
       </div>
     </div>
-    <div ng-switch-when="video">
+    <div ng-if="field.type.view === 'text'">
+      <input type="text"
+        ng-attr-id="{{ field.name }}"
+        class="form-control"
+        ng-model="entity[field.name]"
+        placeholder="{{ field.placeholder }}"
+        maxlength="{{ field.limit }}"
+        dynamic-field="field"
+        show-errors>
+    </div>
+    <div ng-if="field.type.view === 'video'">
       <input type="text"
         ng-attr-id="{{ field.name }}"
         class="form-control"
@@ -36,7 +46,7 @@
         class="has-feedback"
         show-errors>
     </div>
-    <div ng-switch-when="textarea">
+    <div ng-if="field.type.view === 'textarea'">
       <textarea type="text"
         dynamic-field="field"
         ng-attr-id="{{ field.name }}"
@@ -49,19 +59,19 @@
         ng-trim="false"
         maxlength="{{ field.limit }}"
         expand>
+       </textarea>
     </div>
-    <div ng-switch-when="text">
-      <input type="text"
-        ng-attr-id="{{ field.name }}"
-        class="form-control"
+    <div ng-if="field.type.view === 'tagging'" dynamic-field="field">
+      <tags-input
         ng-model="entity[field.name]"
-        ng-trim="false"
-        placeholder="{{ field.placeholder }}"
-        maxlength="{{ field.limit }}"
+        display-property="tag"
+        class="tag-input"
         show-errors
-        dynamic-field="field">
+        placeholder="{{ field.placeholder }}">
+          <auto-complete source="tags.search($query)"></auto-complete>
+        </tags-input>
     </div>
-    <div ng-switch-when="select">
+    <div ng-if="field.type.view === 'select'">
       <select
         ng-model="entity[field.name]"
         ng-attr-id="{{ field.name }}"
@@ -72,25 +82,12 @@
         <option value="">-- Nenhum --</option>
       </select>
     </div>
-    <div ng-switch-when="tagging" dynamic-field="field">
-      <tags-input
-        ng-model="entity[field.name]"
-        dynamic-field="field"
-        display-property="tag"
-        on-tag-added="fillReleatedPosts()"
-        on-tag-removed="fillReleatedPosts()"
-        class="tag-input"
-        show-errors
-        placeholder="{{ field.placeholder }}">
-          <auto-complete source="tags.search($query)"></auto-complete>
-        </tags-input>
-    </div>
-    <div ng-switch-when="tracks" dynamic-field="field">
+    <div ng-if="field.type.view === 'tracks'" dynamic-field="field">
       <tracks
         tracks="entity[field.name]">
       </tracks>
     </div>
-    <div ng-switch-when="zip" dynamic-field="field">
+    <div ng-if="field.type.view === 'zip'" dynamic-field="field">
       <zip
         download-link="entity[field.name]">
       </zip>
@@ -101,7 +98,7 @@
              show-errors
              dynamic-field="field">
     </div>
-    <div class="cover"  ng-switch-when="cover" >
+    <div class="cover"  ng-if="field.type.view === 'cover'" >
       <div dynamic-field="field">
         <cover
                  image="entity[field.name]">
@@ -113,7 +110,6 @@
                dynamic-field="field"/>
       </div>
     </div>
-
 
     <span class="fa fa-check form-control-feedback valid"></span>
     <span class="fa fa-times form-control-feedback invalid"></span>

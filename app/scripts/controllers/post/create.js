@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, $q, _, PostUtil, Repository, TagsUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, Repository, TagsUtil, PromiseUtil) {
 
     $scope.cleanAlerts();
     $scope.state = 'default';
@@ -95,20 +95,13 @@ angular.module('cmsApp')
       }
     };
 
-    var loadTagsFile = function(then){
-      then = then || function(){};
-      Repository.tagsFile.get($scope.user).then(function(result){
-        $scope.tags = new TagsUtil(angular.fromJson(result));
-        then();
-      });
-    };
-
     var removeReleatedPost = function(post){
       var index = $scope.releatedPosts.indexOf(post);
       if( index >= 0 ){
         $scope.releatedPosts.splice(index, 1);
       }
     };
+
     var addReleatedPost = function(post){
       var index = $scope.releatedPosts.indexOf(post);
       if( index >= 0 ){
@@ -117,9 +110,11 @@ angular.module('cmsApp')
         $scope.releatedPosts.push(post);
       }
     };
+
     var isPostReleated = function(post){
       return _.find($scope.releatedPosts, function(e){ return e === post; });
     };
+
     $scope.addReleatedPost = addReleatedPost;
     $scope.removeReleatedPost = removeReleatedPost;
     $scope.isPostReleated = isPostReleated;
@@ -173,13 +168,7 @@ angular.module('cmsApp')
           $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
           $scope.releatedPosts = post.metadata.releated_posts || [];
           $scope.state = 'default';
-
-          loadTagsFile(function(){
-            fillSuggestedPosts();
-          });
         });
-      }else{
-        loadTagsFile();
       }
     };
   });

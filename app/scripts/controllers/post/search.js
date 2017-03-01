@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, PostUtil, Repository) {
+  .controller('PostSearchCtrl', function ($rootScope, $scope, $location, DateUtil, PromiseUtil, ENV) {
     $scope.cleanAlerts();
     $scope.posts = [];
     $scope.maxSize = 5;
@@ -12,9 +12,13 @@ angular.module('cmsApp')
       year: DateUtil.now.getYear(),
       title: '',
       search: function(){
-        return Repository.content.list($rootScope.repository, this).then(function(result){
-          $scope.updateView(result);
-        });
+        var promise = PromiseUtil
+          .request(ENV.api.news.search, 'GET', { month: this.month, year: this.year, title: this.title })
+          .then(function(result){
+            $scope.updateView(result);
+          });
+
+        return promise
       }
     };
 
@@ -43,6 +47,14 @@ angular.module('cmsApp')
     $scope.load = function(){
       $scope.filter.search();
       $scope.loadSkelleton();
+    };
+
+    $scope.loadSkelleton = function(){
+      return PromiseUtil
+        .request(ENV.api.skelleton)
+        .then(function(result){
+          $rootScope.user.skelleton = angular.fromJson(result);
+        });
     };
 
     $scope.load();

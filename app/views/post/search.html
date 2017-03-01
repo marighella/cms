@@ -40,22 +40,14 @@
       <tbody>
         <tr data-ng-repeat="post in posts | startFrom: (currentPage - 1) * maxSize | limitTo:maxSize">
           <td>
-            {{ post.metadata.date | date: 'dd/MM/yyyy HH:mm:ss'  }}
-            <span ng-hide="post.metadata">
-              <i class="glyphicon glyphicon-refresh spin" ></i>
-            </span>
+            {{ post.date | date: 'dd/MM/yyyy HH:mm:ss'  }}
           </td>
           <td>
-            {{ post.metadata.title }}
-            <span ng-hide="post.metadata">
-              <i class="glyphicon glyphicon-refresh spin" ></i>
-            </span>
+            {{ post.title }}
           </td>
           <td>
-            <span ng-show="post.metadata">
-              <span class="label label-default" ng-show="!post.metadata.published" >Rascunho</span>
-              <span class="label label-primary" ng-show="post.metadata.published" >Publicada</span>
-            </span>
+            <span class="label label-default" ng-show="!post.published" >Rascunho</span>
+            <span class="label label-primary" ng-show="post.published" >Publicada</span>
           </td>
           <td>
             <button ng-click="edit(post)"

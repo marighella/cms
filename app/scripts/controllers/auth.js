@@ -3,9 +3,11 @@
 angular.module('cmsApp')
   .controller('AuthCtrl', function ($rootScope, $scope, $location, $auth, _, ENV, User, Repository, PromiseUtil) {
 
-    $scope.user = { logged: false,
-                organization: false,
-                repositories: [] };
+    $scope.user = {
+      logged: false,
+      organization: false,
+      repositories: [],
+    };
 
     $scope.finish = function(repository){
       if(!!repository){
@@ -33,11 +35,9 @@ angular.module('cmsApp')
         var obj = angular.fromJson(organization);
         $scope.user.organization = obj;
 
-
         PromiseUtil
           .request(ENV.api.repositories, 'GET', { org: obj.login })
           .then(function(repos){
-            console.log(repos);
             if(repos.length === 1){
               $scope.finish(repos[0]);
             }else{

@@ -1,15 +1,8 @@
 'use strict';
 /* globals getSlug */
 
-/**
- * @ngdoc service
- * @name cmsApp.ReleatedPosts
- * @description
- * # Dateutil
- * Service in the cmsApp.
- */
 angular.module('cmsApp')
-  .factory('TagsUtil', function($q, _) {
+  .factory('TagsUtil', function($q, _, ENV, PromiseUtil) {
     var intersection = function(array){
       if (!array) {
         return [];
@@ -42,16 +35,15 @@ angular.module('cmsApp')
 
     var search = function(query){
       query = (!!query) ? query.toLowerCase() : '';
-      var deferred = $q.defer();
-      var tags = _.map(allTags, function(e){
-        if(e.toLowerCase().match(query)){
-          return {tag: e};
-        }
-        return false;
-      });
-      deferred.resolve(_.compact(tags));
+      var promise = PromiseUtil
+        .request(ENV.api.tags, 'GET', {query: query})
+        .then(function(result){
+          return _.map(result, function(tag){
+            return tag.toLowerCase().match(query);
+          });
+        });
 
-      return deferred.promise;
+      return promise;
     };
 
     var getPostsByTags = function(selectedTags){
@@ -87,9 +79,7 @@ angular.module('cmsApp')
       return result.slice(0,5);
     };
 
-    var factory = function(file){
-      tagsFile = file || {};
-      allTags  = _.keys(tagsFile);
+    var factory = function(){
       return {
         search: search,
         getPostsByTags: getPostsByTags,

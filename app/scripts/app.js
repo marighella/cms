@@ -55,7 +55,7 @@ angular
     });
 
   })
-  .run(['$rootScope', '$location', '$http', 'Resource','ENV', 'Repository', function ($rootScope, $location, $http, Resource, ENV, Repository) {
+  .run(['$rootScope', '$location', '$http', 'ENV', 'Repository', function ($rootScope, $location, $http, ENV, Repository) {
     $rootScope.alerts = [];
 
     $rootScope.addError = function(message) {
@@ -74,26 +74,11 @@ angular
       $rootScope.alerts = [];
     };
 
-    $rootScope.loadSkelleton = function(){
-      Repository.skelleton.get($rootScope.repository)
-      .then(function(result){
-        $rootScope.user.skelleton = angular.fromJson(result);
-      }).catch(function(error){
-        $rootScope.addWarning(error);
-        $http.get('default-skelleton.json')
-        .success(function(data) {
-          $rootScope.user.skelleton = angular.fromJson(data);
-        });
-      });
-    };
-
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
-      if (!Resource.github) {
+      if (!$rootScope.user) {
         $location.path('/auth').replace();
         return false;
       }
     });
-
-    Resource.isProduction = (ENV.name === 'production');
   }]);

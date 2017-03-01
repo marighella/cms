@@ -69,12 +69,11 @@ module.exports = function (grunt) {
             api: {
               user: 'http://localhost:3000/api/user',
               repositories: 'http://localhost:3000/api/repos',
-            },
-            news: {
-              search: 'http://localhost:5000/news?:filters',
-              get: 'http://localhost:5000/news/:id',
-              save: 'http://localhost:5000/news',
-              update: 'http://localhost:5000/news/:id'
+              skelleton: 'http://localhost:3000/api/skelleton',
+              tags: 'http://localhost:3000/api/tags',
+              news: {
+                search: 'http://localhost:3000/api/news?:filters',
+              }
             }
           }
         }

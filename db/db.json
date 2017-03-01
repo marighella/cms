@@ -3,20 +3,86 @@
     "jwt": "fake.jwt.token"
   },
   "user": {
-      "id": -1,
-      "login": "Fakito",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200",
-      "organizations": [
-        {
-          "id": -1,
-          "login": "org-fakito",
-          "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200"
-        }
-      ]
+    "id": -1,
+    "login": "Fakito",
+    "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200",
+    "organizations": [
+      {
+        "id": -1,
+        "login": "org-fakito",
+        "avatar_url": "https://avatars3.githubusercontent.com/u/8655919?v=3&s=200"
+      }
+    ]
   },
   "repos": [{
     "id": 20023341,
     "name": "fake-file-service",
     "full_name": "org-fakito/repo-fake"
-  }]
+  }],
+  "news": [{
+    "created_date": "2017-02-01T15:31:27-02:00",
+    "date": "2017-02-01T15:28:18-02:00",
+    "published": true,
+    "title": "Titulo da noticia",
+    "name": "2017-02-01-titulo-noticia",
+    "path": "_posts/2017/02/2017-02-01-titulo",
+    "_id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b"
+  }],
+  "skelleton": [
+    {
+      "name": "date",
+      "pattern": "",
+      "icon": "fa-calendar",
+      "title": "Data e hora da notícia",
+      "required": true,
+      "type": {
+        "view": "date"
+      }
+    },
+    {
+      "name": "title",
+      "title": "Título da notícia",
+      "required": true,
+      "limit": 140,
+      "placeholder": "Informe o título",
+      "type": {
+        "view": "textarea"
+      }
+    },
+    {
+      "name": "description",
+      "title": "Descrição",
+      "required": true,
+      "limit": 240,
+      "placeholder": "Informe o título",
+      "type": {
+        "view": "textarea"
+      }
+    },
+    {
+      "name": "image",
+      "pattern": "",
+      "icon": "fa-picture-o",
+      "title": "Imagem de Capa",
+      "required": true,
+      "type": {
+        "view": "cover"
+      }
+    },
+    {
+      "name": "tags",
+      "pattern": "",
+      "icon": "fa-tags",
+      "title": "Tags",
+      "required": false,
+      "type": {
+        "view": "tagging"
+      }
+    }
+  ],
+  "tags": [
+    "luta",
+    "vida",
+    "planeta"
+  ]
 }
