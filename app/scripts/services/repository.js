@@ -14,7 +14,7 @@ angular.module('cmsApp')
         return NewsServiceContent.load(post, repository);
       },
       save: function(repository, post){
-        if(!!post._id){
+        if(!!post.id){
           return NewsServiceContent.update(repository, post);
         }
         return NewsServiceContent.save(repository, post);

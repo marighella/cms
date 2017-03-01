@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, Repository, TagsUtil, PromiseUtil) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, Repository, TagsUtil, PromiseUtil, ENV) {
 
     $scope.cleanAlerts();
     $scope.state = 'default';
@@ -64,7 +64,7 @@ angular.module('cmsApp')
         var videoUrl = getVideoUrl();
         var promise = PostUtil.preparePost($scope.entity, $scope.body, $scope.filename, $scope.files, publish, videoUrl);
         promise.then(function(post){
-          post._id = $scope._id;
+          post.id = $scope.id;
           /*jshint camelcase: false */
           post.metadata.releated_posts = $scope.releatedPosts;
 
@@ -152,23 +152,25 @@ angular.module('cmsApp')
 
     $scope.load = function(){
       var post = {
-        _id: $routeParams._id
+        id: $routeParams.id
       };
 
-      if(!!post._id){
+      if(!!post.id){
         $scope.state = 'loading';
+        var url = ENV.api.news.get.replace(":id", post.id)
 
-        Repository.content.get(post._id, $rootScope.repository)
-        .then(function(post){
-          /*jshint camelcase: false */
-          $scope.entity = post.metadata;
-          $scope._id = post._id;
-          $scope.body   = post.body;
-          $scope.filename = post.filename;
-          $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
-          $scope.releatedPosts = post.metadata.releated_posts || [];
-          $scope.state = 'default';
-        });
+        PromiseUtil
+          .request(url)
+          .then(function(post){
+            /*jshint camelcase: false */
+            $scope.entity = post.metadata;
+            $scope.id = post.id;
+            $scope.body   = post.body;
+            $scope.filename = post.filename;
+            $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
+            $scope.releatedPosts = post.metadata.releated_posts || [];
+            $scope.state = 'default';
+          });
       }
     };
   });

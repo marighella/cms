@@ -1,6 +1,7 @@
 {
   "/api/user": "/user",
   "/api/repos": "/repos",
+  "/api/news/:id": "/news-with-body",
   "/api/news": "/news",
   "/api/skelleton": "/skelleton",
   "/api/tags": "/tags",

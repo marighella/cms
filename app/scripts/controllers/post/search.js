@@ -12,8 +12,14 @@ angular.module('cmsApp')
       year: DateUtil.now.getYear(),
       title: '',
       search: function(){
+        var data = {
+          month: DateUtil.parseMonth(this.month),
+          year: this.year,
+          title: this.title
+        }
+
         var promise = PromiseUtil
-          .request(ENV.api.news.search, 'GET', { month: this.month, year: this.year, title: this.title })
+          .request(ENV.api.news.search, 'GET', data)
           .then(function(result){
             $scope.updateView(result);
           });
@@ -23,6 +29,7 @@ angular.module('cmsApp')
     };
 
     $scope.organization = $rootScope.user.organization;
+
     $scope.canStartFilter = function(){
       return $scope.filter.title &&  $scope.filter.title.length > 3;
     };
@@ -41,7 +48,7 @@ angular.module('cmsApp')
     };
 
     $scope.edit = function(post){
-      $location.path('/post/'+post._id);
+      $location.path('/post/'+post.id);
     };
 
     $scope.load = function(){

@@ -40,14 +40,13 @@ angular.module('cmsApp')
       if ( !isNaN(value) && isFinite(value) ) {
         if (value < 12){
           return true;
-        } 
+        }
       }
       return false;
     };
 
     this.parseMonth = function(value){
-      value = parseInt(value) + 1;
-      return (value < 10 ? '0' + value : value);
+      return parseInt(value) + 1;
     };
 
     this.format = function(date){

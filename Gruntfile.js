@@ -72,7 +72,8 @@ module.exports = function (grunt) {
               skelleton: 'http://localhost:3000/api/skelleton',
               tags: 'http://localhost:3000/api/tags',
               news: {
-                search: 'http://localhost:3000/api/news?:filters',
+                search: 'http://localhost:3000/api/news',
+                get: 'http://localhost:3000/api/news/:id',
               }
             }
           }

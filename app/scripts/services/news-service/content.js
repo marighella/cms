@@ -38,7 +38,7 @@ angular.module('cmsApp')
       var obj = angular.toJson(post);
       var url = ENV.news.update;
 
-      url =  url.replace(/:id/, post._id);
+      url =  url.replace(/:id/, post.id);
 
       return PromiseUtil.request(url, 'PUT', obj);
     }

@@ -101,7 +101,10 @@ angular.module('cmsApp')
     this.prepareListOfFiles =  function(metadata){
       var files = [];
 
-      files.push(metadata.files);
+      if(!!metadata.files){
+        files.push(metadata.files);
+      }
+
       return _.flatten(files);
     };
   });

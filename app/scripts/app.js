@@ -40,7 +40,7 @@ angular
         templateUrl: 'views/post/create.html',
         controller: 'PostCreateCtrl'
       })
-      .when('/post/:_id', {
+      .when('/post/:id', {
         templateUrl: 'views/post/create.html',
         controller: 'PostCreateCtrl'
       })
