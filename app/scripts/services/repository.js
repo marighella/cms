@@ -1,12 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc service
- * @name cmsApp.Repository
- * @description
- * # Repository
- * Factory in the cmsApp.
- */
 angular.module('cmsApp')
   .factory('Repository', function (Github, NewsServiceContent) {
 
