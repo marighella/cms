@@ -75,6 +75,8 @@ module.exports = function (grunt) {
                 search: 'http://localhost:3000/api/news',
                 get: 'http://localhost:3000/api/news/:id',
                 related: 'http://localhost:3000/api/news',
+                save: 'http://localhost:3000/api/news',
+                update: 'http://localhost:3000/api/news/:id',
               }
             }
           }

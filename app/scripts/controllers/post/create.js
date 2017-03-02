@@ -32,6 +32,7 @@ angular.module('cmsApp')
          $scope.files.splice(imageIndex, 1);
       }
     };
+
     $scope.imageToCover = function (imageIndex){
       var cover = $scope.files[imageIndex];
       $scope.$broadcast('imageToBeCover', cover.link);
@@ -68,8 +69,19 @@ angular.module('cmsApp')
           /*jshint camelcase: false */
           post.metadata.related_posts = $scope.relatedPosts;
 
-          PromiseUtil
-            .request(ENV.api.news.save, 'POST', post)
+          var promise = undefined;
+
+          if(!!post.id){
+            var url = ENV.api.news.update.replace(':id', post.id);
+
+            promise = PromiseUtil
+              .request(url, 'PUT', post);
+          }else{
+            promise = PromiseUtil
+              .request(ENV.api.news.save, 'POST', post);
+          }
+
+          promise
             .then(function(){
               $scope.cleanAlerts();
               $scope.state = 'default';
