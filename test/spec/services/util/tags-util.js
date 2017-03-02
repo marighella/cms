@@ -79,7 +79,7 @@ describe('Service: TagsUtil', function () {
     });
   });
 
-  describe('give a releated posts', function (){
+  describe('give a related posts', function (){
     var tagsWithPosts, factory;
 
     beforeEach(function () {
@@ -92,26 +92,26 @@ describe('Service: TagsUtil', function () {
       factory = new TagsUtil(tagsWithPosts);
     });
 
-    it('should return the list of posts releated', function(){
+    it('should return the list of posts related', function(){
       var tags = ['Manga','Banana','Cianureto'];
-      expect(factory.getReleatedPosts(tags))
+      expect(factory.getRelatedPosts(tags))
         .toEqual(['tres', 'sete', 'dois']);
     });
 
-    it('should return the list of posts releated without except', function(){
+    it('should return the list of posts related without except', function(){
       var tags = ['Manga','Banana','Cianureto'];
-      expect(factory.getReleatedPosts(tags, {postToRemove: 'dois'}))
+      expect(factory.getRelatedPosts(tags, {postToRemove: 'dois'}))
         .toEqual([ 'tres', 'sete' ]);
     });
 
     it('should return two posts when a single posts was send', function(){
       var tags = ['Manga'];
-      expect(factory.getReleatedPosts(tags))
+      expect(factory.getRelatedPosts(tags))
         .toEqual([ 'dois', 'quatro' ]);
     });
   });
 
-  describe('limit releated posts', function (){
+  describe('limit related posts', function (){
     var tagsWithPosts, factory;
     beforeEach(function () {
       tagsWithPosts = {'banana':['dois','tres', 'sete', 'vinte', 'dez'],
@@ -128,7 +128,7 @@ describe('Service: TagsUtil', function () {
 
     it('should return maximum 5 results', function(){
       var tags = ['banana','bolo', 'apollo', 'coca', 'maca'];
-      expect(factory.getReleatedPosts(tags).length)
+      expect(factory.getRelatedPosts(tags).length)
         .toEqual(5);
     });
   });

@@ -12,7 +12,7 @@ angular.module('cmsApp')
     $scope.editorLoaded = false;
     $scope.fields = $rootScope.user.skelleton || [];
     $scope.files = [];
-    $scope.releatedPosts = [];
+    $scope.relatedPosts = [];
     $scope.suggestedPosts = [];
     $scope.tags = new TagsUtil();
     $scope.videoField = undefined;
@@ -66,7 +66,7 @@ angular.module('cmsApp')
         promise.then(function(post){
           post.id = $scope.id;
           /*jshint camelcase: false */
-          post.metadata.releated_posts = $scope.releatedPosts;
+          post.metadata.related_posts = $scope.relatedPosts;
 
           PromiseUtil
             .request(ENV.api.news.save, 'POST', post)
@@ -97,38 +97,38 @@ angular.module('cmsApp')
     };
 
     var removeReleatedPost = function(post){
-      var index = $scope.releatedPosts.indexOf(post);
+      var index = $scope.relatedPosts.indexOf(post);
       if( index >= 0 ){
-        $scope.releatedPosts.splice(index, 1);
+        $scope.relatedPosts.splice(index, 1);
       }
     };
 
     var addReleatedPost = function(post){
-      var index = $scope.releatedPosts.indexOf(post);
+      var index = $scope.relatedPosts.indexOf(post);
       if( index >= 0 ){
         removeReleatedPost(post);
       }else{
-        $scope.releatedPosts.push(post);
+        $scope.relatedPosts.push(post);
       }
     };
 
     var isPostReleated = function(post){
-      return _.find($scope.releatedPosts, function(e){ return e === post; });
+      return _.find($scope.relatedPosts, function(e){ return e === post; });
     };
 
     $scope.addReleatedPost = addReleatedPost;
     $scope.removeReleatedPost = removeReleatedPost;
     $scope.isPostReleated = isPostReleated;
 
-    var getReleatedPosts = function(tags){
-      return $scope.tags.getReleatedPosts(tags, { postToRemove: $scope.filename });
+    var getRelatedPosts = function(tags){
+      return $scope.tags.getRelatedPosts(tags, { postToRemove: $scope.filename });
     };
 
     var fillSuggestedPosts = function(){
         var tags = $scope.entity.tags || [];
         var suggestedPosts = [];
         tags.forEach(function(tag){
-          suggestedPosts.push(getReleatedPosts([tag]));
+          suggestedPosts.push(getRelatedPosts([tag]));
         });
 
         $scope.suggestedPosts = _.uniq(_.flatten(suggestedPosts));
@@ -138,13 +138,13 @@ angular.module('cmsApp')
       var tags = $scope.entity.tags || [];
       if(tags.length === 0 ){
         $scope.suggestedPosts = [];
-        $scope.releatedPosts = [];
+        $scope.relatedPosts = [];
       }else{
-        var releatedPosts = getReleatedPosts(tags);
+        var relatedPosts = getRelatedPosts(tags);
         fillSuggestedPosts();
 
         if(tags.length > 1){
-          $scope.releatedPosts = _.union(releatedPosts, $scope.releatedPosts);
+          $scope.relatedPosts = _.union(relatedPosts, $scope.relatedPosts);
         }
       }
     };
@@ -169,7 +169,7 @@ angular.module('cmsApp')
             $scope.body   = post.body;
             $scope.filename = post.filename;
             $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
-            $scope.releatedPosts = post.metadata.releated_posts || [];
+            $scope.relatedPosts = post.metadata.related_posts || [];
             $scope.state = 'default';
           });
       }

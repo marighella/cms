@@ -5,7 +5,7 @@
   font-size: 1.2em;
 }
 
-.releated-posts {
+.related-posts {
   width: 100%;
   display: inline-block;
   background: #FEFEFE;
@@ -17,7 +17,7 @@
   background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
   opacity: 0.4;
 
-  &.releated{
+  &.related{
     opacity: 1;
 
     -webkit-transition: all .2s  ease-in-out .15s;

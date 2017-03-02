@@ -20,10 +20,10 @@ describe('Directive: post', function () {
     scope.related = {
       link: 'related post url'
     };
-   
+
     scope.coverField = false;
 
-    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
+    element = angular.element('<post post="related" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -43,14 +43,14 @@ describe('Directive: post', function () {
   }));
 
   it('should highlight tags in common on related posts', inject(function ($compile, _) {
-    scope.releated = {
+    scope.related = {
       link: 'related post url'
     };
-    scope.tags = [{tag: 'saude'}, 
+    scope.tags = [{tag: 'saude'},
                   {tag: 'encontro'}];
     scope.coverField = false;
-    
-    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
+
+    element = angular.element('<post post="related" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
@@ -69,24 +69,24 @@ describe('Directive: post', function () {
   }));
 
   it('should update related tag highlighting when post tags change', inject(function ($compile, _) {
-    scope.releated = {
+    scope.related = {
       link: 'related post url'
     };
-    scope.tags = [{tag: 'saude'}, 
+    scope.tags = [{tag: 'saude'},
                   {tag: 'encontro'}];
     scope.coverField = false;
-    
-    element = angular.element('<post post="releated" tags="tags" cover-field="cover"></post>');
+
+    element = angular.element('<post post="related" tags="tags" cover-field="cover"></post>');
     element = $compile(element)(scope);
 
     scope.$digest();
 
-    scope.tags = [{tag: 'saude'}, 
+    scope.tags = [{tag: 'saude'},
                   {tag: 'encontro'},
                   {tag: 'juventude'}];
 
     scope.$digest();
-    
+
     var tagElements = _.chain(element.find('span'))
     .map(function(elem){
        return angular.element(elem);
