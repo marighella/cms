@@ -1,139 +1,70 @@
 // bower:scss
 
 // endbower
-
 a {
   color: black;
+}
+
+a:hover, a:focus {
+	color: #961913;
+	text-decoration: none;
 }
 
 .btn {
   box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
 }
 
-.dropdown-icon > li {
-  display: inline-block;
-
-  img {
-    width: 16px;
-    height: 16px;
-    float: left;
-  }
-
-  a {
-    float: left;
-    clear: none;
-  }
-}
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-.container {
-  min-height: 85%;
-  height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
-  height: 85%;
-  margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
-  background-color: none;
-  /* equal to footer height */
-}
-
-.container:after {
-  content: "";
-  display: block;
-}
-
 * {
   margin: 0;
 }
 
-body > footer, .push {
-  height: 155px; /* .push must be the same height as .footer */
-}
-
-body, html {
-  height: 100%;
-}
-
-/* Space out content a bit */
 body {
   padding: 0px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+main {
+  display: flex;
+  flex-direction: row;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
+main aside {
+  width: 100px;
+  height: 100vh;
+  margin-right: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.83);
 
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
 
-.container {
-  display: inline;
-}
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    display: block;
+  img.logo {
+    width: auto;
+    height: 90px;
+    border-radius: 50%;
   }
 
-  /* Remove the padding we set earlier */
-  .header{
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-}
-.spin {
-  transform-origin: 50% 50%;
-  -o-transform-origin:50% 50%;
-  -ms-transform-origin:50% 50%;
-  -moz-transform-origin:50% 50%;
-  -webkit-transform-origin:50% 50%;
-  -webkit-animation: Rotate 500ms infinite linear;
-  -moz-animation: Rotate 500ms infinite linear;
-  -ms-animation: Rotate 500ms infinite linear;
-  -o-animation: Rotate 500ms infinite linear;
-  animation: Rotate 500ms infinite linear;
-  padding: 10px;
-}
+  nav {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    font-size: 2em;
+    text-shadow: 1px 1px 3px rgba(150, 150, 150, 1);
+    width: 100%;
+    align-items: center;
 
-@-o-keyframes Rotate {
-  from {-o-transform:rotate(0deg);}
-  to {-o-transform:rotate(360deg);}
-}
-@-moz-keyframes Rotate {
-  from {-moz-transform:rotate(0deg);}
-  to {-moz-transform:rotate(360deg);}
-}
-@-ms-keyframes Rotate {
-  from {-ms-transform:rotate(0deg);}
-  to {-ms-transform:rotate(360deg);}
-}
-@-webkit-keyframes Rotate {
-  from {-webkit-transform:rotate(0deg);}
-  to {-webkit-transform:rotate(360deg);}
-}
-@-keyframes Rotate {
-  from { transform:rotate(0deg);}
-  to { transform:rotate(360deg);}
+    .item {
+      height: 70px;
+      text-align: center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      & + .item {
+        border-top: 1px solid rgba(0,0,0,0.1);
+      }
+    }
+  }
 }

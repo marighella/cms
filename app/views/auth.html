@@ -1,29 +1,29 @@
 <div class="auth" >
   <img src="images/logo.png" class="img-rounded logo" />
 
-  <button ng-click="authenticate()" class="btn btn-default login" ng-hide="user.logged">
-    <img src="images/github.png" /> Entrar
+  <button ng-click="authenticate()" class="login" ng-hide="user.logged">
+    <i class="fa fa-github-alt" aria-hidden="true"></i>
+    Entrar
   </button>
 
-  <main ng-show="user.logged">
+  <div ng-show="user.logged" class="options">
     <div class="orgs">
       <img class="img-circle organization"
         ng-repeat="organization in user.organizations track by $index"
         ng-click="getRepositories(organization)"
         ng-class="{'selected': isOrgSelected(organization)}"
         ng-src="{{ organization.avatar_url }}"/>
-        {{ orgSelected  }}
+      {{ orgSelected  }}
 
       <span class="wait organization" ng-hide="user.organizations[0].id">
         <i class="glyphicon glyphicon-refresh spin" ></i>
       </span>
     </div>
-    <select class="form-control repository"
-            ng-change="finish(repository)"
+    <select ng-change="finish(repository)"
             ng-model="repository"
             ng-show="user.repositories.length > 0">
-      <option value="">Em quais desses?</option>
+      <option value="" disabled selected>Em quais desses?</option>
       <option ng-repeat="repository in user.repositories" value="{{ repository }}">{{ repository.name }}</option>
     </select>
-  </main>
+  </div>
 </div>

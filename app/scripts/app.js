@@ -19,11 +19,6 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngTagsInput',
-    'ui.bootstrap',
-    'mgcrea.ngStrap.datepicker',
-    'mgcrea.ngStrap.tooltip',
-    'mgcrea.ngStrap.helpers.dateParser',
-    'mgcrea.ngStrap.timepicker',
     'satellizer',
   ])
   .config(function ($routeProvider, $authProvider, ENV) {

@@ -1,24 +1,4 @@
 <div class="search">
-  <div class="form-group">
-    <button ng-click="create()"
-      class="btn btn-default btn-block create"
-      ng-disabled="!ready()">
-
-
-      <span class="glyphicon glyphicon-play" ng-show="ready()">
-      </span>
-      <strong ng-show="ready()">
-        Nova Notícia
-      </strong>
-
-      <span ng-hide="ready()">
-        <i class="fa fa-cog fa-spin" ></i>
-      </span>
-      <strong ng-hide="ready()">
-        Carregando informações adicionais, só um momento companheira!
-      </strong>
-    </button>
-  </div>
   <div class="form-inline filters">
     <search-form class="form-group" filter="filter" ></search-form>
     <figure>

@@ -6,12 +6,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="icon" href="favicon.ico">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.css" />
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
     <!-- endbower -->
@@ -38,13 +38,29 @@
     <!-- endbuild -->
   </head>
   <body ng-app="cmsApp" ng-cloak>
-    <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-
     <!-- Add your site or application content here -->
-    <div ng-view="">
+    <div ng-view="" ng-if="!user.logged">
     </div>
+
+    <main ng-if="!!user.logged">
+      <aside>
+        <img src="images/logo.png" class="logo" />
+        <nav class="actions">
+          <a href="#" class="item" ng-if="!user.skelleton">
+            <i class="fa fa-cog fa-spin" ></i>
+          </a>
+          <a href="#/post/create" class="item" ng-if="!!user.skelleton">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </a>
+          <a href="#/post/search" class="item">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </a>
+        </nav>
+      </aside>
+      <div ng-view="">
+      </div>
+    </main>
+
 
     <script src="ckeditor/ckeditor.js"></script>
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -63,11 +79,6 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
-    <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
