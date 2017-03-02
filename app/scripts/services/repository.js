@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .factory('Repository', function (Github, NewsServiceContent) {
+  .factory('Repository', function (NewsServiceContent) {
 
     var newsService = {
       search: function(repository, filter){
@@ -21,20 +21,8 @@ angular.module('cmsApp')
       }
     };
 
-    var tags = {
-      get: function(user){
-        return Github.content.tagsFile(user);
-      }
-    };
-    var skelleton = {
-      get: function(repository){
-        return Github.content.skelleton(repository);
-      }
-    };
-
     return {
       content: newsService,
-      organization: Github.organization,
       skelleton: skelleton,
       tagsFile: tags
     };
