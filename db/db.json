@@ -19,27 +19,31 @@
       }
     ]
   },
-  "repos": [{
-    "id": 20023341,
-    "name": "fake-file-service",
-    "full_name": "org-fakito/repo-fake"
-  },
-  {
-    "id": 20023342,
-    "name": "fake-ninja-service",
-    "full_name": "org-topzeira/repo-fake"
-  }],
-  "news": [{
-    "year": 2017,
-    "month": 2,
-    "created_date": "2017-02-01T15:31:27-02:00",
-    "date": "2017-02-01T15:28:18-02:00",
-    "published": true,
-    "title": "titulo",
-    "name": "2017-02-01-titulo-noticia",
-    "path": "_posts/2017/02/2017-02-01-titulo",
-    "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b"
-  }],
+  "repos": [
+    {
+      "id": 20023341,
+      "name": "fake-file-service",
+      "full_name": "org-fakito/repo-fake"
+    },
+    {
+      "id": 20023342,
+      "name": "fake-ninja-service",
+      "full_name": "org-topzeira/repo-fake"
+    }
+  ],
+  "news": [
+    {
+      "year": 2017,
+      "month": 2,
+      "created_date": "2017-02-01T15:31:27-02:00",
+      "date": "2017-02-01T15:28:18-02:00",
+      "published": true,
+      "title": "titulo",
+      "name": "2017-02-01-titulo-noticia",
+      "path": "_posts/2017/02/2017-02-01-titulo",
+      "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b"
+    }
+  ],
   "skelleton": [
     {
       "name": "date",
@@ -98,28 +102,36 @@
     "planeta"
   ],
   "news-with-body": {
-    "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b",
     "metadata": {
       "year": 2017,
       "month": 2,
       "created_date": "2017-02-01T15:31:27-02:00",
-      "date": "2017-02-01T15:28:18-02:00",
+      "date": "2015-12-09T17:13:01-02:00",
       "published": true,
       "title": "titulo",
       "name": "2017-02-01-titulo-noticia",
       "path": "_posts/2017/02/2017-02-01-titulo",
       "image": "//farm6.staticflickr.com/5802/23340914960_7860b5e8de_b.jpg",
-      "tags": ["luta"],
+      "tags": [
+        {
+          "tag": "poe"
+        }
+      ],
       "description": "Noticia Teste",
-      "date": "2015-12-09T17:13:01-02:00",
-      "files": [{
+      "files": [
+        {
           "link": "//farm6.staticflickr.com/5759/23528037712_0051ac6681_b.jpg",
           "thumbnail": "//farm6.staticflickr.com/5759/23528037712_0051ac6681_t.jpg",
           "medium": "//farm6.staticflickr.com/5759/23528037712_0051ac6681_z.jpg",
           "small": "//farm6.staticflickr.com/5759/23528037712_0051ac6681_n.jpg",
           "title": "gilberto gil Divulgação.jpg"
-      }]
+        }
+      ],
+      "layout": "post",
+      "related_posts": []
     },
-    "body": "<h1>Hello World</h1>"
+    "body": "<h1>Nem foi vei</h1>\n",
+    "filename": "2015-12-09-titulo.md",
+    "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b"
   }
 }
