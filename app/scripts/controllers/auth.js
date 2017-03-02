@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('AuthCtrl', function ($rootScope, $scope, $location, $auth, _, ENV, User, Repository, PromiseUtil) {
+  .controller('AuthCtrl', function ($rootScope, $scope, $location, $auth, _, ENV, User, PromiseUtil) {
 
     $scope.user = {
       logged: false,

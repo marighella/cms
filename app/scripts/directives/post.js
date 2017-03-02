@@ -1,14 +1,8 @@
 'use strict';
 /* global getSlug */
 
-/**
- * @ngdoc directive
- * @name cmsApp.directive:searchForm
- * @description
- * # searchForm
- */
 angular.module('cmsApp')
-  .directive('post', function($rootScope, Repository, _){
+  .directive('post', function($rootScope, PromiseUtil, _){
 
 
   return {
@@ -29,12 +23,12 @@ angular.module('cmsApp')
           return _.find(scope.tags, function (t) {return getSlug(t.tag) === getSlug(tag.tag);});
         };
 
-
-        Repository.content
-        .get(scope.postUrl, $rootScope.repository).then(function(result){
-          scope.post = result;
-          scope.loading = true;
-        });
+        PromiseUtil
+          .request(scope.postUrl)
+          .then(function(result){
+            scope.post = result;
+            scope.loading = true;
+          });
       }
     };
   });

@@ -55,7 +55,7 @@ angular
     });
 
   })
-  .run(['$rootScope', '$location', '$http', 'ENV', 'Repository', function ($rootScope, $location, $http, ENV, Repository) {
+  .run(['$rootScope', '$location', '$http', 'ENV', function ($rootScope, $location, $http, ENV) {
     $rootScope.alerts = [];
 
     $rootScope.addError = function(message) {

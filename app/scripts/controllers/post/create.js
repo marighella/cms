@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, Repository, TagsUtil, PromiseUtil, ENV) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, TagsUtil, PromiseUtil, ENV) {
 
     $scope.cleanAlerts();
     $scope.state = 'default';
@@ -68,16 +68,17 @@ angular.module('cmsApp')
           /*jshint camelcase: false */
           post.metadata.releated_posts = $scope.releatedPosts;
 
-          Repository.content.save($rootScope.repository, post)
-          .then(function(){
-            $scope.cleanAlerts();
-            $scope.state = 'default';
-            $location.path('/post/search');
-          })
-          .catch(function(error) {
-            $scope.state = 'default';
-            $scope.addError(error);
-          });
+          PromiseUtil
+            .request(ENV.api.news.save, 'POST', post)
+            .then(function(){
+              $scope.cleanAlerts();
+              $scope.state = 'default';
+              $location.path('/post/search');
+            })
+            .catch(function(error) {
+              $scope.state = 'default';
+              $scope.addError(error);
+            });
         });
       } else {
         var inputs = form.$error.required || [];
