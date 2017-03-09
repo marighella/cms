@@ -46,13 +46,13 @@
       <aside>
         <img src="images/logo.png" class="logo" />
         <nav class="actions">
-          <a href="#" class="item" ng-if="!user.skelleton">
+          <a ng-href="#" class="item" ng-if="!user.skelleton">
             <i class="fa fa-cog fa-spin" ></i>
           </a>
-          <a href="#/post/create" class="item" ng-if="!!user.skelleton">
+          <a ng-href="#!/post/create" class="item" ng-if="!!user.skelleton">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </a>
-          <a href="#/post/search" class="item">
+          <a ng-href="#!/post/search" class="item">
             <i class="fa fa-search" aria-hidden="true"></i>
           </a>
         </nav>

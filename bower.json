@@ -2,13 +2,13 @@
   "name": "cms",
   "version": "1.0.0",
   "dependencies": {
-    "angular": "~1.5",
-    "angular-resource": "~1.5",
-    "angular-cookies": "~1.5",
-    "angular-sanitize": "~1.5",
-    "angular-animate": "~1.5",
-    "angular-touch": "~1.5",
-    "angular-route": "~1.5",
+    "angular": "~1.6",
+    "angular-resource": "~1.6",
+    "angular-cookies": "~1.6",
+    "angular-sanitize": "~1.6",
+    "angular-animate": "~1.6",
+    "angular-touch": "~1.6",
+    "angular-route": "~1.6",
     "json3": "~3.3.1",
     "es5-shim": "~3.1.0",
     "underscore": "~1.7.0",
@@ -20,8 +20,8 @@
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "angular-mocks": "~1.5",
-    "angular-scenario": "~1.5",
+    "angular-mocks": "~1.6",
+    "angular-scenario": "~1.6",
     "ckeditor": "~4.4.4"
   },
   "overrides": {
