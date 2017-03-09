@@ -41,6 +41,7 @@
       "title": "titulo",
       "name": "2017-02-01-titulo-noticia",
       "path": "_posts/2017/02/2017-02-01-titulo",
+      "image": "//farm6.staticflickr.com/5802/23340914960_7860b5e8de_b.jpg",
       "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b"
     }
   ],
@@ -62,7 +63,31 @@
       "limit": 140,
       "placeholder": "Informe o título",
       "type": {
-        "view": "textarea"
+        "view": "text"
+      }
+    },
+    {
+      "name": "number",
+      "title": "Numero do destaque",
+      "required": true,
+      "limit": 140,
+      "type": {
+        "view": "text"
+      },
+      "need": {
+        "field": "section",
+        "equal": true,
+        "value": "featured-news"
+      }
+    },
+    {
+      "name": "video",
+      "title": "Video",
+      "required": true,
+      "limit": false,
+      "placeholder": "Youtube ou vimeo o link de um video",
+      "type": {
+        "view": "video"
       }
     },
     {
@@ -94,12 +119,36 @@
       "type": {
         "view": "tagging"
       }
+    },
+    {
+      "name": "section",
+      "title": "Seção",
+      "required": false,
+      "type": {
+        "view": "select",
+        "options": [
+          {"name": "Capa", "id": "cover"},
+          {"name": "Destaque", "id": "featured-news"}
+        ]
+      }
     }
   ],
   "tags": [
-    "luta",
-    "vida",
-    "planeta"
+    {
+      "tag": "luta"
+    },
+    {
+      "tag": "borracha"
+    },
+    {
+      "tag": "lula"
+    },
+    {
+      "tag": "vida"
+    },
+    {
+      "tag": "bala"
+    }
   ],
   "news-with-body": {
     "metadata": {

@@ -1,10 +1,10 @@
 <div class="auth" >
   <img src="images/logo.png" class="img-rounded logo" />
 
-  <button ng-click="authenticate()" class="login" ng-hide="user.logged">
+  <md-button ng-click="authenticate()" class="md-raised" ng-hide="user.logged" >
     <i class="fa fa-github-alt" aria-hidden="true"></i>
     Entrar
-  </button>
+  </md-button>
 
   <div ng-show="user.logged" class="options">
     <div class="orgs">
@@ -19,11 +19,17 @@
         <i class="glyphicon glyphicon-refresh spin" ></i>
       </span>
     </div>
-    <select ng-change="finish(repository)"
+    <md-select ng-change="finish(repository)"
             ng-model="repository"
-            ng-show="user.repositories.length > 0">
-      <option value="" disabled selected>Em quais desses?</option>
-      <option ng-repeat="repository in user.repositories" value="{{ repository }}">{{ repository.name }}</option>
-    </select>
+            class="md-no-underline"
+            placeholder="Em quais desses?"
+            ng-show="user.repositories.length > 0" >
+
+      <md-option
+        ng-repeat="repository in user.repositories"
+        value="{{ repository }}">
+        {{ repository.name }}
+      </md-option>
+    </md-select>
   </div>
 </div>

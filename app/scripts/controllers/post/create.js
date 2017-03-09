@@ -6,16 +6,20 @@ angular.module('cmsApp')
     $scope.cleanAlerts();
     $scope.state = 'default';
     $scope.entity = {
-      date: (new Date()).toString(),
+      date: new Date(),
+      tags: []
     };
     $scope.body = '';
     $scope.editorLoaded = false;
-    $scope.fields = $rootScope.user.skelleton || [];
+    $scope.fields = [];
     $scope.files = [];
     $scope.relatedPosts = [];
     $scope.suggestedPosts = [];
     $scope.tags = new TagsUtil();
     $scope.videoField = undefined;
+    $scope.currentNavItem = 'metadata';
+    $scope.id = undefined;
+    $scope.filename = '';
 
     $scope.fields.forEach(function(element){
       if(element.type.view === 'video'){
@@ -163,27 +167,40 @@ angular.module('cmsApp')
 
     $scope.fillReleatedPosts = fillReleatedPosts;
 
+    $scope.loadSkelleton = function(){
+      return PromiseUtil
+        .request(ENV.api.skelleton)
+        .then(function(result){
+          $rootScope.user.skelleton = angular.fromJson(result);
+          $scope.fields = $rootScope.user.skelleton;
+        });
+    };
+
+    $scope.loadPost = function(){
+      $scope.state = 'loading';
+      var url = ENV.api.news.get.replace(":id", post.id)
+
+      PromiseUtil
+        .request(url)
+        .then(function(post){
+          /*jshint camelcase: false */
+          $scope.entity = post.metadata;
+          $scope.id = post.id;
+          $scope.body   = post.body;
+          $scope.filename = post.filename;
+          $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
+          $scope.relatedPosts = post.metadata.related_posts || [];
+          $scope.state = 'default';
+        });
+    }
+
     $scope.load = function(){
-      var post = {
-        id: $routeParams.id
-      };
-
-      if(!!post.id){
-        $scope.state = 'loading';
-        var url = ENV.api.news.get.replace(":id", post.id)
-
-        PromiseUtil
-          .request(url)
-          .then(function(post){
-            /*jshint camelcase: false */
-            $scope.entity = post.metadata;
-            $scope.id = post.id;
-            $scope.body   = post.body;
-            $scope.filename = post.filename;
-            $scope.files  = PostUtil.prepareListOfFiles(post.metadata);
-            $scope.relatedPosts = post.metadata.related_posts || [];
-            $scope.state = 'default';
-          });
-      }
+      $scope
+        .loadSkelleton()
+        .then(function(){
+          if(!!$routeParams.id){
+            $scope.loadPost();
+          }
+        });
     };
   });

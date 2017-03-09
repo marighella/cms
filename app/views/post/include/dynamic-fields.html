@@ -1,124 +1,96 @@
-<div class="form-group has-feedback field"
-  ng-repeat="field in fields">
+<div layout="row"
+  layout-align="center center"
+  ng-repeat="field in fields"
+  ng-if="field.type.view !== 'cover'">
+  <md-input-container
+    class="md-block"
+    flex-gt-xs
+    dynamic-field="field"
+    >
+    <label>
+      {{ field.title }}
+    </label>
 
-  <label class="control-label"
-    for="{{ field.name }}"
-    dynamic-field="field">
-    <i class="fa {{ field.icon }}"></i>
-    {{ field.title }}
-  </label>
+    <md-datepicker
+      ng-model="entity[field.name]"
+      name="{{ field.name }}"
+      ng-if="field.type.view === 'date'" >
+    </md-datepicker>
 
-    <div class="form-inline datepicker" ng-if="field.type.view === 'date'">
-      <div class="form-group" dynamic-field="field">
-        <input type="text" size="10" class="form-control date"
-        ng-model="entity[field.name]"
-        data-date-format="dd/MM/yyyy"
-        show-errors
-        data-autoclose="1" placeholder="Date" data-max-date="today" bs-datepicker dynamic-field="field">
+    <input
+      name="{{ field.name }}"
+      ng-model="entity[field.name]"
+      md-maxlength="{{ field.limit }}"
+      ng-attr-id="{{ field.name }}"
+      ng-if="field.type.view === 'text'"
+      dynamic-field="field"
+      placeholder="{{ field.placeholder }}" />
+
+    <input
+      name="{{ field.name }}"
+      ng-attr-id="{{ field.name }}"
+      ng-model="entity[field.name]"
+      placeholder="{{ field.placeholder }}"
+      ng-pattern="{{ field.pattern }}"
+      ng-if="field.type.view === 'video'"
+      dynamic-field="field"
+      validate-video />
+
+    <textarea
+      name="{{ field.name }}"
+      ng-model="entity[field.name]"
+      ng-attr-id="{{ field.name }}"
+      md-maxlength="{{ field.limit }}"
+      placeholder="{{ field.placeholder }}"
+      ng-if="field.type.view === 'textarea'"
+      dynamic-field="field"
+      md-select-on-focus>
+    </textarea>
+
+    <md-chips
+      name="{{ field.name }}"
+      ng-model="entity[field.name]"
+      md-transform-chip="tags.transformChip($chip)"
+      md-autocomplete-snap
+      ng-if="field.type.view === 'tagging'">
+      <md-autocomplete
+        md-selected-item=""
+        md-items="item in tags.search(queryText)"
+        md-search-text="queryText"
+        md-item-text="item.tag">
+        <span>{{ item.tag }}</span>
+      </md-autocomplete>
+      <md-chip-template>
+        <span>
+          <strong>{{$chip.tag}}</strong>
+        </span>
+      </md-chip-template>
+    </md-chips>
+
+    <md-select
+      ng-attr-id="{{ field.name }}"
+      ng-if="field.type.view === 'select'"
+      dynamic-field="field"
+      ng-model="entity[field.name]">
+      <md-option
+        ng-repeat="item in field.type.options"
+        value="{{ item.id }}">
+        {{ item.name }}
+      </md-option>
+    </md-select>
+
+    <div
+      ng-messages="postForm[field.name].$error">
+      <div ng-message="required">
+        {{ field.title }} é necessário.
       </div>
-      <div class="form-group" dynamic-field="field">
-        <input type="text" size="8" class="form-control time"
-        ng-model="entity[field.name]"
-        show-errors
-        data-autoclose="1" placeholder="Time" bs-timepicker dynamic-field="field">
+      <div ng-message="md-maxlength">
+        O '{{ field.title }} tem que ser menor que {{ field.limit }}.
       </div>
-    </div>
-    <div ng-if="field.type.view === 'text'">
-      <input type="text"
-        ng-attr-id="{{ field.name }}"
-        class="form-control"
-        ng-model="entity[field.name]"
-        placeholder="{{ field.placeholder }}"
-        maxlength="{{ field.limit }}"
-        dynamic-field="field"
-        show-errors>
-    </div>
-    <div ng-if="field.type.view === 'video'">
-      <input type="text"
-        ng-attr-id="{{ field.name }}"
-        class="form-control"
-        ng-model="entity[field.name]"
-        placeholder="{{ field.placeholder }}"
-        ng-pattern="{{ field.pattern }}"
-        dynamic-field="field"
-        validate-video
-        dynamic-field="field"
-        class="has-feedback"
-        show-errors>
-    </div>
-    <div ng-if="field.type.view === 'textarea'">
-      <textarea type="text"
-        dynamic-field="field"
-        ng-attr-id="{{ field.name }}"
-        class="form-control"
-        ng-model="entity[field.name]"
-        placeholder="{{ field.placeholder }}"
-        rows="1"
-        show-errors
-        dynamic-field="field"
-        ng-trim="false"
-        maxlength="{{ field.limit }}"
-        expand>
-       </textarea>
-    </div>
-    <div ng-if="field.type.view === 'tagging'" dynamic-field="field">
-      <tags-input
-        ng-model="entity[field.name]"
-        display-property="tag"
-        class="tag-input"
-        show-errors
-        placeholder="{{ field.placeholder }}">
-          <auto-complete source="tags.search($query)"></auto-complete>
-        </tags-input>
-    </div>
-    <div ng-if="field.type.view === 'select'">
-      <select
-        ng-model="entity[field.name]"
-        ng-attr-id="{{ field.name }}"
-        ng-options="item.id as item.name for item in field.type.options"
-        dynamic-field="field"
-        show-errors
-        class="form-control">
-        <option value="">-- Nenhum --</option>
-      </select>
-    </div>
-    <div ng-if="field.type.view === 'tracks'" dynamic-field="field">
-      <tracks
-        tracks="entity[field.name]">
-      </tracks>
-    </div>
-    <div ng-if="field.type.view === 'zip'" dynamic-field="field">
-      <zip
-        download-link="entity[field.name]">
-      </zip>
-      <input class="form-control"
-             type="text"
-             ng-hide="true"
-             ng-model="entity[field.name]"
-             show-errors
-             dynamic-field="field">
-    </div>
-    <div class="cover"  ng-if="field.type.view === 'cover'" >
-      <div dynamic-field="field">
-        <cover
-                 image="entity[field.name]">
-        </cover>
-        <input class="form-control"
-               type="text"
-               ng-model="entity[field.name]"
-               show-errors
-               dynamic-field="field"/>
+      <div ng-message="video-url-format">
+         Link do vídeo invalido.
       </div>
     </div>
 
-    <span class="fa fa-check form-control-feedback valid"></span>
-    <span class="fa fa-times form-control-feedback invalid"></span>
-    <span ng-if="field.limit && (field.limit - entity[field.name].length) > 0"
-          class="counter-warning">
-      {{ field.limit - entity[field.name].length}} caracteres restantes
-    </span>
-    <span ng-if="field.limit && (field.limit - entity[field.name].length) == 0"
-          class="counter-warning">
-          Você atingiu o limite de caracteres!
-    </span>
+  </md-input-container>
 </div>

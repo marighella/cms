@@ -17,9 +17,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
     'ngTagsInput',
     'satellizer',
+    'ngMessages',
+    'ngMaterial',
   ])
   .config(function ($routeProvider, $authProvider, ENV) {
     $routeProvider
@@ -27,7 +28,7 @@ angular
         templateUrl: 'views/auth.html',
         controller: 'AuthCtrl'
       })
-      .when('/post/search', {
+      .when('/posts', {
         templateUrl: 'views/post/search.html',
         controller: 'PostSearchCtrl'
       })

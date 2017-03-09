@@ -7,6 +7,7 @@ angular.module('cmsApp')
     $scope.maxSize = 5;
     $scope.currentPage = 1;
     $scope.ready = false;
+    $scope.status = "none";
     $scope.filter = {
       month: DateUtil.now.getMonth(),
       year: DateUtil.now.getYear(),
@@ -18,10 +19,12 @@ angular.module('cmsApp')
           title: this.title
         }
 
+        $scope.status = "loading";
         var promise = PromiseUtil
           .request(ENV.api.news.search, 'GET', data)
           .then(function(result){
             $scope.updateView(result);
+            $scope.status = "finished";
           });
 
         return promise
@@ -39,10 +42,6 @@ angular.module('cmsApp')
       $scope.posts = posts || $scope.posts;
     };
 
-    $scope.ready = function(){
-      return !!$rootScope.user.skelleton;
-    };
-
     $scope.create = function(){
       $location.path('/post');
     };
@@ -53,15 +52,6 @@ angular.module('cmsApp')
 
     $scope.load = function(){
       $scope.filter.search();
-      $scope.loadSkelleton();
-    };
-
-    $scope.loadSkelleton = function(){
-      return PromiseUtil
-        .request(ENV.api.skelleton)
-        .then(function(result){
-          $rootScope.user.skelleton = angular.fromJson(result);
-        });
     };
 
     $scope.load();

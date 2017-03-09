@@ -1,35 +1,55 @@
-<form novalidate ng-submit="search()" ng-disabled="loading">
-  <div class="form-group">
-    <div year-drop filter="filter" change="search()" offset="-4" range="0" disabled="loading"></div>
-  </div>
-  <div class="form-group">
-    <select ng-model="filter.month" class="form-control month" ng-change="search()" ng-disabled="loading">
-      <option value="*">-- Todos os meses --</option>
-      <option value="0">Janeiro</option>
-      <option value="1">Fevereiro</option>
-      <option value="2">Março</option>
-      <option value="3">Abril</option>
-      <option value="4">Maio</option>
-      <option value="5">Junho</option>
-      <option value="6">Julho</option>
-      <option value="7">Agosto</option>
-      <option value="8">Setembro</option>
-      <option value="9">Outubro</option>
-      <option value="10">Novembro</option>
-      <option value="11">Dezembro</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <input ng-model="filter.title" type="search" placeholder="Pesquise por título" class="form-control" ng-disabled="loading"/>
-    <button class="btn btn-default" ng-click="search(this)" ng-disabled="loading" title="Pesquisar">
-      <i class="fa fa-search"></i>
-    </button>
-    <a class="btn btn-default" ng-click="clearSearch()" ng-disabled="loading" title="Limpar campos">
-      <i class="fa fa-eraser"></i>
-    </a>
-    <span class="wait" ng-show="loading">
-      <i class="glyphicon glyphicon-refresh spin"></i>
-    </span>
-  </div>
-</form>
+<md-card>
+  <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Notícias</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-content>
+    <div layout="row">
+      <md-input-container>
+        <label>Título</label>
+        <input
+          ng-model="filter.title"
+          type="search"
+          class="form-control"
+          ng-disabled="loading"/>
+      </md-input-container>
 
+      <md-input-container>
+        <label>Mês</label>
+        <md-select ng-model="filter.month" ng-change="search()">
+          <md-option value="*"><em>-- Todos os meses --</em></md-option>
+          <md-option value="0">Janeiro</md-option>
+          <md-option value="1">Fevereiro</md-option>
+          <md-option value="2">Março</md-option>
+          <md-option value="3">Abril</md-option>
+          <md-option value="4">Maio</md-option>
+          <md-option value="5">Junho</md-option>
+          <md-option value="6">Julho</md-option>
+          <md-option value="7">Agosto</md-option>
+          <md-option value="8">Setembro</md-option>
+          <md-option value="9">Outubro</md-option>
+          <md-option value="10">Novembro</md-option>
+          <md-option value="11">Dezembro</md-option>
+        </md-select>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Ano</label>
+        <year-drop
+          filter="filter"
+          change="search()"
+          offset="-4"
+          range="0"
+          disabled="loading" >
+        <year-drop>
+      </md-input-container>
+
+      <md-button
+        ng-click="search(this)"
+        class="md-fab">
+        <i class="fa fa-search"></i>
+      </md-button>
+    </div>
+  </md-card-content>
+</md-card>

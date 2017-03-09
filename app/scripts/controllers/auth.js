@@ -15,7 +15,8 @@ angular.module('cmsApp')
         $scope.user.repository = obj;
         $rootScope.user = $scope.user;
         $rootScope.repository = $scope.user.repository;
-        $location.path('/post/search');
+
+        $location.path('/posts');
       }
     };
 

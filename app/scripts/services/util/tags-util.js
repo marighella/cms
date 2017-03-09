@@ -9,9 +9,7 @@ angular.module('cmsApp')
       return PromiseUtil
         .request(ENV.api.tags, 'GET', {q: query})
         .then(function(result){
-          return _.map(result, function(tag){
-            return tag.toLowerCase().match(query);
-          });
+          return result;
         });
     };
 
@@ -27,7 +25,10 @@ angular.module('cmsApp')
     return function(){
       return {
         search: search,
-        getRelatedPosts: getRelatedPosts
+        getRelatedPosts: getRelatedPosts,
+        transformChip: function(chip) {
+          return chip;
+        },
       };
     };
   });

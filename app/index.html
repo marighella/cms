@@ -14,6 +14,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.css" />
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -37,29 +38,38 @@
 
     <!-- endbuild -->
   </head>
-  <body ng-app="cmsApp" ng-cloak>
+  <body ng-app="cmsApp" ng-cloak layout-fill layout="column">
     <!-- Add your site or application content here -->
     <div ng-view="" ng-if="!user.logged">
     </div>
 
-    <main ng-if="!!user.logged">
-      <aside>
-        <img src="images/logo.png" class="logo" />
-        <nav class="actions">
-          <a ng-href="#" class="item" ng-if="!user.skelleton">
-            <i class="fa fa-cog fa-spin" ></i>
-          </a>
-          <a ng-href="#!/post/create" class="item" ng-if="!!user.skelleton">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-          </a>
-          <a ng-href="#!/post/search" class="item">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </a>
-        </nav>
-      </aside>
+    <md-content
+      class="md-padding"
+      ng-if="!!user.logged"
+      layout="column"
+      >
+
+      <md-toolbar class="md-hue-2">
+       <div class="md-toolbar-tools">
+         <h2 md-truncate flex>Marighella</h2>
+
+         <md-divider></md-divider>
+         <span class="md-title">{{ user.organization.login }}</span>
+       </div>
+      </md-toolbar>
+
+      <md-nav-bar nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-href="#!post" name="create">
+          Nova Noticia
+        </md-nav-item>
+        <md-nav-item md-nav-href="#!posts" name="search">
+          Pesquisar
+        </md-nav-item>
+      </md-nav-bar>
+
       <div ng-view="">
       </div>
-    </main>
+    </md-content>
 
 
     <script src="ckeditor/ckeditor.js"></script>
@@ -77,7 +87,6 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -86,6 +95,9 @@
     <script src="bower_components/ng-tags-input/ng-tags-input.js"></script>
     <script src="bower_components/speakingurl/speakingurl.min.js"></script>
     <script src="bower_components/satellizer/dist/satellizer.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
