@@ -40,10 +40,8 @@
         </md-progress-circular>
         <div class="form-group"
           ng-show="!!user.skelleton">
-          <textarea id="editor" ck-editor ng-model="body">
+          <textarea id="editor" ng-model="body">
           </textarea>
-        </div>
-        <div ng-include="'views/post/include/button-action.html'" ng-if="editorLoaded">
         </div>
       </md-content>
     </md-tab>

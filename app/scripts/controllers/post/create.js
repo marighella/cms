@@ -10,7 +10,6 @@ angular.module('cmsApp')
       tags: []
     };
     $scope.body = '';
-    $scope.editorLoaded = false;
     $scope.fields = [];
     $scope.files = [];
     $scope.relatedPosts = [];
@@ -41,10 +40,6 @@ angular.module('cmsApp')
       var cover = $scope.files[imageIndex];
       $scope.$broadcast('imageToBeCover', cover.link);
     };
-
-    $scope.$on('ckeditor.ready', function(){
-      $scope.editorLoaded = true;
-    });
 
     var getVideoUrl = function(){
       var field = $scope.videoField;

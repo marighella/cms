@@ -22,8 +22,7 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.6",
-    "angular-scenario": "~1.6",
-    "ckeditor": "~4.4.4"
+    "angular-scenario": "~1.6"
   },
   "overrides": {
     "font-awesome": {

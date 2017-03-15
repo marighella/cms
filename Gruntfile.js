@@ -320,7 +320,6 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'images/*',
             'fonts/*',
-            'ckeditor-plugins/**/*',
             'default-skelleton.json'
           ]
         }, {
@@ -328,18 +327,7 @@ module.exports = function (grunt) {
           cwd: '.tmp/images',
           dest: '<%= yeoman.dist %>/images',
           src: ['generated/*']
-        }, {
-          expand: true,
-          cwd: 'bower_components/ckeditor',
-          dest: '<%= yeoman.dist %>/ckeditor',
-          src: ['**/*']
         }]
-      },
-      ckeditor: {
-        expand: true,
-        cwd: 'bower_components/ckeditor',
-        dest: '<%= yeoman.app %>/ckeditor',
-        src: ['**/*']
       },
       styles: {
         expand: true,
@@ -381,7 +369,6 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'clean:constants',
-      'copy:ckeditor',
       'wiredep',
       'sass',
       'ngconstant:development',
