@@ -176,7 +176,7 @@ angular.module('cmsApp')
         });
     };
 
-    $scope.loadPost = function(){
+    $scope.loadPost = function(post){
       $scope.state = 'loading';
       var url = ENV.api.news.get.replace(":id", post.id)
 
@@ -199,7 +199,9 @@ angular.module('cmsApp')
         .loadSkelleton()
         .then(function(){
           if(!!$routeParams.id){
-            $scope.loadPost();
+            $scope.loadPost({
+              id: $routeParams.id
+            });
           }
         });
     };
