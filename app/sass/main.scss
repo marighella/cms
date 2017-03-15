@@ -6,8 +6,8 @@ a {
 }
 
 a:hover, a:focus {
-	color: #961913;
-	text-decoration: none;
+  color: #961913;
+  text-decoration: none;
 }
 
 .btn {
@@ -61,6 +61,7 @@ main aside {
       display: flex;
       justify-content: center;
       align-items: center;
+      text-decoration: none;
 
       & + .item {
         border-top: 1px solid rgba(0,0,0,0.1);
