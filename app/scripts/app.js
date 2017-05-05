@@ -21,6 +21,7 @@ angular
     'satellizer',
     'ngMessages',
     'ngMaterial',
+    'textAngular',
   ])
   .config(function ($routeProvider, $authProvider, ENV) {
     $routeProvider

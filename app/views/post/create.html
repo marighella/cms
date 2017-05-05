@@ -38,10 +38,10 @@
         <md-progress-circular md-mode="indeterminate"
           ng-hide="user.skelleton">
         </md-progress-circular>
-        <div class="form-group"
+        <div class="form-group editor"
           ng-show="!!user.skelleton">
-          <textarea id="editor" ng-model="body">
-          </textarea>
+          <text-angular ng-model="body">
+          </text-angular>
         </div>
       </md-content>
     </md-tab>
