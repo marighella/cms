@@ -72,9 +72,24 @@ angular
 
     $rootScope.$on('$locationChangeStart', function () {
       $rootScope.error = null;
-      if (!$rootScope.user) {
+      var jwt = window.localStorage['jwt_marighella'];
+      var user = window.localStorage['user'];
+      var path = $location.path();
+
+      if (!jwt || !user) {
         $location.path('/auth').replace();
         return false;
+      } else {
+        user = JSON.parse(user);
+        $rootScope.user = user;
+        $rootScope.repository = user.repository;
+
+        if(path === '/auth') {
+          $location.path('/post').replace();
+          return false;
+        }
+
+        return true;
       }
     });
   }]);

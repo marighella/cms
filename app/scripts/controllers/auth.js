@@ -16,6 +16,8 @@ angular.module('cmsApp')
         $rootScope.user = $scope.user;
         $rootScope.repository = $scope.user.repository;
 
+        window.localStorage['user'] = JSON.stringify($scope.user);
+
         $location.path('/posts');
       }
     };
