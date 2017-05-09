@@ -51,11 +51,8 @@ angular.module('cmsApp')
       return '';
     };
 
-    $scope.save = function(form, action){
-      if(action !== 'publish' && action !== 'draft'){
-        return;
-      }
-      var publish = (action === 'publish');
+    $scope.save = function(form){
+      var publish = $scope.entity.published;
       var sha = $routeParams.sha;
 
       $scope.$broadcast('submited');
@@ -69,23 +66,19 @@ angular.module('cmsApp')
           /*jshint camelcase: false */
           post.metadata.related_posts = $scope.relatedPosts;
 
-          var promise = undefined;
+          var url = ENV.api.news.save;
+          var method = 'POST';
 
           if(!!post.id){
-            var url = ENV.api.news.update.replace(':id', post.id);
-
-            promise = PromiseUtil
-              .request(url, 'PUT', post);
-          }else{
-            promise = PromiseUtil
-              .request(ENV.api.news.save, 'POST', post);
+            url = ENV.api.news.update.replace(':id', post.id);
+            method = 'PUT';
           }
 
-          promise
+          PromiseUtil
+            .request(url, method, post)
             .then(function(){
               $scope.cleanAlerts();
               $scope.state = 'default';
-              $location.path('/post/search');
             })
             .catch(function(error) {
               $scope.state = 'default';

@@ -16,13 +16,23 @@
             </div>
           <md-card-content>
         </md-card>
-        <md-button
-                ng-click="save(postForm, 'draft')"
-                class="md-primary md-raised"
-                type="submit"
-                style="margin-right: 0;">
-          Salvar
-        </md-button>
+        <div layout="row" layout-align="start left">
+          <md-button
+            ng-click="save(postForm)"
+            class="md-primary md-raised"
+            type="submit" >
+            Salvar
+          </md-button>
+          <md-switch ng-model="entity.published"
+            aria-label="Switch 1" >
+            <span ng-if="!entity.published">
+              Rascunho
+            </span>
+            <span ng-if="entity.published">
+              Publicado
+            </span>
+          </md-switch>
+        </div>
       </md-content>
     </md-tab>
     <md-tab label="galeria">
