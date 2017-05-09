@@ -1,30 +1,31 @@
-<!-- slider container -->
-<div class="slider"  ng-init="_index = 0">
-  <ul class="nav thumb-list">
+<div ng-init="_index = 0">
+  <md-button
+    class="md-raised"
+    ng-disabled="upload.working()" >
+    Adicionar Arquivo
+  </md-button>
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex
+      layout-wrap
+      layout="row">
+      <md-card
+        md-theme="dark-grey"
+        md-theme-watch=""
+        ng-repeat="file in files">
+        <img
+          ng-src="{{ file.small }}"
+          class="md-card-image"
+          alt="{{ file.title }}">
 
-    <div class="upload btn btn-default btn-block" ng-disabled="upload.working()" ng-controller="UploadCtrl as uploadCtrl">
-      <span ng-hide="uploadCtrl.upload.working()">
-        <i class="fa fa-upload"></i>
-        Adicionar arquivo
-      </span>
-      <span ng-show="uploadCtrl.upload.working()">
-        <i class="fa fa-cog fa-spin" ></i>
-        Subindo arquivo {{ upload.done }}/{{ upload.length }}
-      </span>
-      <input type="file" name="upload" id="upload" ng-disabled="uploadCtrl.upload.working()" multiple upload />
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-icon-button" aria-label="Copy">
+            <i class="fa fa-clipboard fa-2" aria-hidden="true"></i>
+          </md-button>
+          <md-button class="md-icon-button md-warn" aria-label="remove">
+            <i class="fa fa-trash fa-2" aria-hidden="true"></i>
+          </md-button>
+        </md-card-actions>
+      </md-card>
     </div>
-    <small ng-show="files.length > 0">Clique na imagem para adicionar na noticia!</small>
-    <small ng-show="files.length == 0">Clique no botão para subir uma imagem/arquivo</small>
-
-    <li ng-repeat="file in files">
-      <img src="{{ file.thumbnail }}"
-           alt="{{ file.title }}"
-           title="{{ file.title }}"
-           ng-click="insertImageCKEditor(file)"/>
-      <button class="btn btn-xs btn-danger btn-delete-thumb" ng-click="removeImage($index)">X</button>
-      <button class="btn btn-xs btn-default btn-cover-thumb" ng-click="imageToCover($index)" ng-if="file.small">Tornar Capa</button>
-    </li>
-  </ul>
-
-  <!-- extra navigation controls -->
+  </md-content>
 </div>
