@@ -77,10 +77,11 @@ angular.module('cmsApp')
           PromiseUtil
             .request(url, method, post)
             .then(function(){
-              $scope.cleanAlerts();
+              $scope.showAlert('Salvo com sucesso!');
               $scope.state = 'default';
             })
             .catch(function(error) {
+              $scope.showError('Erro ao salvar', error);
               $scope.state = 'default';
               $scope.addError(error);
             });

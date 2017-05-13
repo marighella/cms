@@ -52,7 +52,7 @@ angular
     });
 
   })
-  .run(['$rootScope', '$location', '$http', 'ENV', function ($rootScope, $location, $http, ENV) {
+  .run(['$rootScope', '$location', '$http', '$mdToast', 'ENV', function ($rootScope, $location, $http, $mdToast, ENV) {
     $rootScope.alerts = [];
 
     $rootScope.addError = function(message) {
@@ -61,6 +61,30 @@ angular
 
     $rootScope.addWarning = function(message) {
        $rootScope.alerts.push({msg: message, type: 'warning'});
+    };
+
+    $rootScope.showError = function(text, error) {
+      var toast = $mdToast.simple()
+        .textContent(text)
+        .action('Qual erro?')
+        .highlightAction(true)
+        .position('top right');
+
+      $mdToast.show(toast).then(function(response) {
+        if ( response == 'ok' ) {
+          console.error(error);
+          alert('Error', error);
+        }
+      });
+    };
+
+    $rootScope.showAlert = function(text) {
+       $mdToast.show(
+         $mdToast.simple()
+           .textContent(text)
+           .position('top right')
+           .hideDelay(3000)
+       );
     };
 
     $rootScope.closeAlert = function(index) {

@@ -33,7 +33,7 @@ angular.module('cmsApp')
           return deferred.resolve(then(response.data));
         },
         function errorCallback(response){
-          return deferred.reject(error(response.code));
+          return deferred.reject(error(response));
         }
       );
 
