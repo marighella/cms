@@ -102,61 +102,6 @@ angular.module('cmsApp')
       }
     };
 
-    var removeReleatedPost = function(post){
-      var index = $scope.relatedPosts.indexOf(post);
-      if( index >= 0 ){
-        $scope.relatedPosts.splice(index, 1);
-      }
-    };
-
-    var addReleatedPost = function(post){
-      var index = $scope.relatedPosts.indexOf(post);
-      if( index >= 0 ){
-        removeReleatedPost(post);
-      }else{
-        $scope.relatedPosts.push(post);
-      }
-    };
-
-    var isPostReleated = function(post){
-      return _.find($scope.relatedPosts, function(e){ return e === post; });
-    };
-
-    $scope.addReleatedPost = addReleatedPost;
-    $scope.removeReleatedPost = removeReleatedPost;
-    $scope.isPostReleated = isPostReleated;
-
-    var getRelatedPosts = function(tags){
-      return $scope.tags.getRelatedPosts(tags, { postToRemove: $scope.filename });
-    };
-
-    var fillSuggestedPosts = function(){
-        var tags = $scope.entity.tags || [];
-        var suggestedPosts = [];
-        tags.forEach(function(tag){
-          suggestedPosts.push(getRelatedPosts([tag]));
-        });
-
-        $scope.suggestedPosts = _.uniq(_.flatten(suggestedPosts));
-    };
-
-    var fillReleatedPosts = function(){
-      var tags = $scope.entity.tags || [];
-      if(tags.length === 0 ){
-        $scope.suggestedPosts = [];
-        $scope.relatedPosts = [];
-      }else{
-        var relatedPosts = getRelatedPosts(tags);
-        fillSuggestedPosts();
-
-        if(tags.length > 1){
-          $scope.relatedPosts = _.union(relatedPosts, $scope.relatedPosts);
-        }
-      }
-    };
-
-    $scope.fillReleatedPosts = fillReleatedPosts;
-
     $scope.loadSkelleton = function(){
       return PromiseUtil
         .request(ENV.api.skelleton)

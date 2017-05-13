@@ -1,33 +1,26 @@
 'use strict';
-/* global getSlug */
 
 angular.module('cmsApp')
-  .directive('post', function($rootScope, PromiseUtil, _){
-
+  .directive('post', function($rootScope, PromiseUtil, ENV){
 
   return {
       restrict: 'E',
-      require : '?post',
+      require : '?id',
       replace: true,
       scope: {
-        postUrl: '=',
-        tags: '=',
-        coverField: '='
+        id: '=',
+        weight: '=',
       },
       templateUrl: 'views/post/include/post.html',
       link: function(scope){
-        scope.coverField = scope.coverField || {name:''};
-        scope.loading = false;
-        scope.tags = scope.tags || [];
-        scope.checkTag = function (tag) {
-          return _.find(scope.tags, function (t) {return getSlug(t.tag) === getSlug(tag.tag);});
-        };
+        var url = ENV.api.news.get.replace(":id", scope.id);
+        scope.loading = true;
 
         PromiseUtil
-          .request(scope.postUrl)
+          .request(url)
           .then(function(result){
             scope.post = result;
-            scope.loading = true;
+            scope.loading = false;
           });
       }
     };

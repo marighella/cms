@@ -177,7 +177,17 @@
         }
       ],
       "layout": "post",
-      "related_posts": []
+      "related_posts": [
+        {
+          "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b",
+          "weight": 10
+        },
+        {
+          "id": "203e0c1f30ddca0c2c790714be204364bc0d3b8b",
+          "weight": 5
+        }
+      ],
+      "video": "https://www.youtube.com/watch?v=r78jxpqMGwE"
     },
     "body": "<h1>Nem foi vei</h1>\n",
     "filename": "2015-12-09-titulo.md",

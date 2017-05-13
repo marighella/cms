@@ -1,29 +1,22 @@
-<div class="form-group" ng-if="!!relatedPosts && relatedPosts.length > 0" ng-init="postReleatedLimit = 3">
-  <h1 class="suggest">
-    Noticiais Relacionadas
-  </h1>
-  <div class="related-posts related"
-    ng-repeat="related in relatedPosts | limitTo: postReleatedLimit"
-    ng-click="removeReleatedPost(related)">
-    <post post-url="related" cover-field="'images_hd'" tags="entity.tags"/>
+<md-content layout-padding>
+  <md-input-container class="md-block">
+    <label>Pesquisar</label>
+    <input
+      required
+      md-no-asterisk
+      name="description">
+  </md-input-container>
+</md-content>
+<md-content class="md-padding" layout-xs="column" layout="row">
+  <div
+   flex-xs
+   flex-gt-xs="80"
+   layout-align="center"
+   layout="row">
+    <post
+      ng-repeat="relatedPost in relatedPosts"
+      id="relatedPost.id"
+      weight="relatedPost.weight">
+    </post>
   </div>
-  <button class="btn btn-default btn-block" ng-click="postReleatedLimit = postReleatedLimit + 6">
-    <span ng-if="postReleatedLimit < relatedPosts.length">Exibindo {{ postReleatedLimit  }} de {{ relatedPosts.length }}</span>
-    <span ng-if="postReleatedLimit >= relatedPosts.length">Exibindo todas as noticias relacionadas</span>
-  </button>
-</div>
-<section class="form-group"  ng-init="postLimit = 6"
-        ng-if="!!suggestedPosts && suggestedPosts.length > 0" >
-  <h1 class="suggest">
-    Sugeridas
-  </h1>
-  <div class="related-posts suggested" ng-repeat="related in suggestedPosts | limitTo: postLimit" ng-click="addReleatedPost(related)"
-    ng-class="{'selected': isPostReleated(related)}">
-    <h1>selecionada</h1>
-    <post post-url="related" cover-field="'images_hd'" tags="entity.tags"/>
-  </div>
-  <button class="btn btn-default btn-block" ng-click="postLimit = postLimit + 6">
-    <span ng-if="postLimit < suggestedPosts.length">Exibindo {{ postLimit  }} de {{ suggestedPosts.length }}</span>
-    <span ng-if="postLimit >= suggestedPosts.length">Exibindo todas as noticias sugeridas</span>
-  </button>
-</section>
+</md-content>
