@@ -40,9 +40,9 @@
         <md-progress-circular md-mode="indeterminate"
           ng-hide="user.skelleton">
         </md-progress-circular>
-        <div ng-include="'views/post/include/gallery.html'"
-          ng-show="!!user.skelleton">
-        </div>
+        <ng-include
+          src="'views/post/include/gallery.html'">
+        </ng-include>
       </md-content>
     </md-tab>
     <md-tab label="corpo da notícia">

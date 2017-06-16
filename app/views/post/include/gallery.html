@@ -1,29 +1,35 @@
-<div ng-init="_index = 0">
-  <md-button
-    class="md-raised"
-    ng-disabled="upload.working()" >
-    Adicionar Arquivo
-  </md-button>
+<div>
+  <input
+    class="ng-hide"
+    id="input-file-id"
+    multiple
+    upload
+    accept="image/*"
+    type="file" />
+  <label
+    for="input-file-id"
+    class="md-button md-raised md-primary">
+    Adicionar Arquivos
+  </label>
+
   <md-content class="md-padding" layout-xs="column" layout="row">
     <div flex
       layout-wrap
+      layout-align="space-around"
+      layout-margin="20"
       layout="row">
-      <md-card
-        ng-repeat="file in files">
-        <img
-          ng-src="{{ file.small }}"
-          class="md-card-image"
-          alt="{{ file.title }}">
 
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-icon-button" aria-label="Copy">
-            <i class="fa fa-clipboard fa-2" aria-hidden="true"></i>
-          </md-button>
-          <md-button class="md-icon-button md-warn" aria-label="remove">
-            <i class="fa fa-trash fa-2" aria-hidden="true"></i>
-          </md-button>
-        </md-card-actions>
-      </md-card>
+        <figure
+          ng-repeat="file in files track by file._id"
+          ng-class="{ 'md-card-image': true, 'gallery-image': true}"
+          ng-style="{ 'background-image': 'url('+file.getImage()+')' }"
+          >
+          <md-progress-circular
+            md-mode="indeterminate"
+            ng-if="!file.uploaded"
+            class="preview-image__loading">
+          </md-progress-circular>
+        </figure>
     </div>
   </md-content>
 </div>

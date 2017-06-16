@@ -27,8 +27,25 @@ angular.module('cmsApp')
       }
     });
 
+    $scope.$on('preview-file', function(event, args) {
+      const file = args.file;
+      file.getImage = function(){
+        if(!this.uploaded){
+          return this.preview;
+        }
+
+        return this.uploaded.small;
+      };
+      $scope.files.push(file);
+    });
+
     $scope.$on('upload-file', function(event, args) {
-      $scope.files.push(args.file);
+      const _id = args.file;
+      angular.forEach($scope.files, function(file) {
+        if(file._id === _id){
+          file.uploaded = file.uploaded;
+        }
+      });
     });
 
     $scope.removeImage = function (imageIndex){

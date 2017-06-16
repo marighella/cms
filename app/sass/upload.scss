@@ -15,3 +15,28 @@
   opacity: 0;
   filter: alpha(opacity=0);
 }
+
+.gallery-image {
+  width: 300px;
+  min-height: 100px;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-transition: all .6s ease-in-out;
+  -moz-transition: all .6s ease-in-out;
+  -o-transition: all .6s ease-in-out;
+  -ms-transition: all .6s ease-in-out;
+  transition: all .6s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-image {
+  max-width: 300px;
+  filter: blur(2px);
+}
+
+.preview-image__loading {
+  position: relative;
+}
