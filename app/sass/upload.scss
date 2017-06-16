@@ -17,8 +17,8 @@
 }
 
 .gallery-image {
-  width: 300px;
-  min-height: 100px;
+  width: 200px;
+  height: 300px;
   display: block;
   background-repeat: no-repeat;
   background-position: center center;
@@ -30,6 +30,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .preview-image {
