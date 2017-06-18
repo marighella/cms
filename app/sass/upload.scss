@@ -45,3 +45,15 @@
 .preview-image__loading {
   position: relative;
 }
+
+.gallery-image__input-link {
+  opacity: 0;
+  cursor: pointer;
+}
+
+.gallery-image__button-copy {
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  opacity: 0;
+}

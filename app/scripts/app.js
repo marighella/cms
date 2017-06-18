@@ -22,6 +22,7 @@ angular
     'ngMessages',
     'ngMaterial',
     'textAngular',
+    'ngclipboard',
   ])
   .config(function ($routeProvider, $authProvider, ENV) {
     $routeProvider

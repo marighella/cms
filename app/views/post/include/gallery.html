@@ -24,6 +24,19 @@
           ng-class="{ 'md-card-image': true, 'gallery-image': true}"
           ng-style="{ 'background-image': 'url('+file.getImage()+')' }"
           >
+          <input
+            ng-if="file.uploaded"
+            ng-value="file.uploaded.link"
+            id="link-image-{{ $index }}"
+            class="gallery-image__input-link"
+            />
+          <button
+            ngclipboard
+            ng-if="file.uploaded"
+            data-clipboard-target="#link-image-{{ $index }}"
+            class="gallery-image__button-copy"
+            >
+          </button>
           <md-progress-circular
             md-mode="indeterminate"
             ng-if="!file.uploaded"
