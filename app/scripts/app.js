@@ -1,14 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name cmsApp
- * @description
- * # cmsApp
- *
- * Main module of the application.
- */
-
 angular
   .module('cmsApp', [
     'config',
@@ -114,7 +105,6 @@ angular
           $location.path('/post').replace();
           return false;
         }
-
         return true;
       }
     });

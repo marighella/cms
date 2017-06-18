@@ -2,10 +2,7 @@
 /*jshint camelcase: false */
 
 angular.module('cmsApp')
-  .controller('UploadCtrl', function ($scope, $http, $rootScope, Resource, ENV, _) {
-    this.upload = { length: 0, done: 0, working: function() { return this.length !== this.done;  } };
-    $scope.upload = this.upload;
-
+  .controller('UploadCtrl', function ($scope, $timeout, $http, $rootScope, Resource, ENV) {
     var FormDataObject = function(data) {
       var fd = new FormData();
       angular.forEach(data, function(value, key) {
@@ -52,8 +49,6 @@ angular.module('cmsApp')
     };
 
     $scope.uploadFiles = function(files, successCallback) {
-      console.log(files);
-
       angular.forEach(files, function(file){
         file['_id'] = randomHash();
 
@@ -83,8 +78,4 @@ angular.module('cmsApp')
           });
       });
     };
-
-    $scope.$on('upload-file', function() {
-      $scope.done = $scope.done + 1;
-    });
   });

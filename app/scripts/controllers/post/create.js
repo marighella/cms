@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, TagsUtil, PromiseUtil, ENV) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, PromiseUtil, ENV) {
 
     $scope.cleanAlerts();
     $scope.state = 'default';
@@ -15,7 +15,6 @@ angular.module('cmsApp')
     $scope.files = [];
     $scope.relatedPosts = [];
     $scope.suggestedPosts = [];
-    $scope.tags = new TagsUtil();
     $scope.videoField = undefined;
     $scope.currentNavItem = 'metadata';
     $scope.id = undefined;
