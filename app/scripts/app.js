@@ -33,6 +33,10 @@ angular
         templateUrl: 'views/post/create.html',
         controller: 'PostCreateCtrl'
       })
+      .when('/logout', {
+        template: '',
+        controller: 'LogoutCtrl',
+      })
       .otherwise({
         redirectTo: '/auth'
       });
@@ -43,6 +47,15 @@ angular
       scope: ['public_repo', 'user:email'],
     });
 
+  })
+  .controller('LogoutCtrl', function($rootScope, $location){
+    delete $rootScope.user;
+    $rootScope.user = {
+      logged: false,
+    };
+    localStorage.clear();
+
+    $location.path('/auth').replace();
   })
   .run(['$rootScope', '$location', '$http', '$mdToast', 'ENV', function ($rootScope, $location, $http, $mdToast, ENV) {
     $rootScope.alerts = [];
