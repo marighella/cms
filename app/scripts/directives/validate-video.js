@@ -11,7 +11,7 @@ angular.module('cmsApp').
         if(!formCtrl){
           return;
         }
-        formCtrl[inputName].$setValidity('video-url-format',valid);
+        formCtrl[inputName].$setValidity('required',valid);
       };
       var getValidYoutubeUrl = function(url){
         return YoutubeLinkUtil.link(url).getValidUrl();
@@ -37,6 +37,10 @@ angular.module('cmsApp').
 
       el.bind('blur', function() {
         var url = el.val();
+        if( ( url || "" ).trim().length === 0 ) {
+          return;
+        }
+
         var inputName = el.attr('name');
         var validYoutube = checkPatternYoutube(url);
         var validVimeo   = checkPatternVimeo(url);

@@ -115,7 +115,7 @@ angular.module('cmsApp')
 
         var message = 'Os campos: ' + inputNames.join(', ') + ' precisam ser preenchidos.';
 
-        $scope.addWarning(message);
+        $scope.showError(message);
       }
     };
 
