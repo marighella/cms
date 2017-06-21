@@ -8,7 +8,7 @@ angular.module('cmsApp')
     $scope.entity = {
       date: new Date(),
       tags: [],
-      title: 'Titulo da notícia'
+      title: ''
     };
     $scope.body = '';
     $scope.fields = [];
