@@ -1,7 +1,6 @@
 <div layout="row"
   layout-align="center center"
-  ng-repeat="field in fields"
-  ng-if="field.type.view !== 'cover'">
+  ng-repeat="field in fields" >
   <md-input-container
     class="md-block"
     flex-gt-xs
@@ -23,6 +22,14 @@
       md-maxlength="{{ field.limit }}"
       ng-attr-id="{{ field.name }}"
       ng-if="field.type.view === 'text'"
+      dynamic-field="field"
+      placeholder="{{ field.placeholder }}" />
+
+    <input
+      name="{{ field.name }}"
+      ng-model="entity[field.name]"
+      ng-attr-id="{{ field.name }}"
+      ng-if="field.type.view === 'cover'"
       dynamic-field="field"
       placeholder="{{ field.placeholder }}" />
 
