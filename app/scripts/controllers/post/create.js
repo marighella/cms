@@ -48,17 +48,6 @@ angular.module('cmsApp')
       });
     });
 
-    $scope.removeImage = function (imageIndex){
-      if(window.confirm('Deseja realmente remover este item?')){
-         $scope.files.splice(imageIndex, 1);
-      }
-    };
-
-    $scope.imageToCover = function (imageIndex){
-      var cover = $scope.files[imageIndex];
-      $scope.$broadcast('imageToBeCover', cover.link);
-    };
-
     var getVideoUrl = function(){
       var field = $scope.videoField;
 
