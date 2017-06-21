@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('cmsApp')
-  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, PromiseUtil, ENV) {
+  .controller('PostCreateCtrl', function ($rootScope, $scope, $location, $routeParams, _, PostUtil, PromiseUtil, ENV, TagsUtil) {
 
     $scope.cleanAlerts();
     $scope.state = 'default';
@@ -19,6 +19,7 @@ angular.module('cmsApp')
     $scope.currentNavItem = 'metadata';
     $scope.id = undefined;
     $scope.filename = '';
+    $scope.tagsUtil = new TagsUtil();
 
     $scope.fields.forEach(function(element){
       if(element.type.view === 'video'){

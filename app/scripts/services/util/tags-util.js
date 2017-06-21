@@ -27,7 +27,9 @@ angular.module('cmsApp')
         search: search,
         getRelatedPosts: getRelatedPosts,
         transformChip: function(chip) {
-          return chip;
+          return {
+            tag: chip,
+          };
         },
       };
     };

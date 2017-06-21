@@ -57,12 +57,12 @@
     <md-chips
       name="{{ field.name }}"
       ng-model="entity[field.name]"
-      md-transform-chip="tags.transformChip($chip)"
+      md-transform-chip="tagsUtil.transformChip($chip)"
       md-autocomplete-snap
       ng-if="field.type.view === 'tagging'">
       <md-autocomplete
         md-selected-item=""
-        md-items="item in tags.search(queryText)"
+        md-items="item in tagsUtil.search(queryText)"
         md-search-text="queryText"
         md-item-text="item.tag">
         <span>{{ item.tag }}</span>
