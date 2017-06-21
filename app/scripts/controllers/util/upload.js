@@ -50,7 +50,7 @@ angular.module('cmsApp')
 
     $scope.uploadFiles = function(files, successCallback) {
       angular.forEach(files, function(file){
-        file['_id'] = randomHash();
+        file['file_id'] = randomHash();
 
         const reader = new FileReader();
         reader.onload = (event) => {

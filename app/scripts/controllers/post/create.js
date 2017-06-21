@@ -39,10 +39,10 @@ angular.module('cmsApp')
     });
 
     $scope.$on('upload-file', function(event, args) {
-      const _id = args.file;
+      const uploaded = args.file;
       angular.forEach($scope.files, function(file) {
-        if(file._id === _id){
-          file.uploaded = file.uploaded;
+        if(file.file_id === uploaded.file_id){
+          file.uploaded = uploaded.uploaded;
           delete file.preview;
         }
       });

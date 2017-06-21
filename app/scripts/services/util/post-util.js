@@ -67,6 +67,14 @@ angular.module('cmsApp')
     this.formatName = function(title){
       return getSlug(title);
     };
+
+    this.removePreviewFromFiles = function(files){
+      return ( files || [] ).map(function(file){
+         delete file.preview;
+         return file;
+      });
+    };
+
     this.preparePost = function(metadata, body, filename, files, toPublish, videoUrl){
       /*jshint camelcase: false */
       var deferred = $q.defer();
@@ -80,7 +88,7 @@ angular.module('cmsApp')
 
       post.filename = this.generateFileName(post);
       post.metadata.layout = 'post';
-      post.metadata.files = files;
+      post.metadata.files = this.removePreviewFromFiles(files);
       post.metadata.created_date =  post.metadata.created_date || DateUtil.toISO8601(new Date());
       post.metadata.published = (toPublish === true);
 
